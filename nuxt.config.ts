@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
+    '@nuxt/icon',
   ],
 
   // Content module configuration

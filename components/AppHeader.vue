@@ -3,16 +3,11 @@
     class="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50"
   >
     <nav class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-      <NuxtLink to="/" class="text-xl font-semibold text-gray-900 dark:text-white transition">
-        <a
-          href="https://github.com/Nag729"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-primary-600 dark:hover:text-primary-400"
-        >
-          Nag729
-        </a>
-        <span class="text-gray-500 dark:text-gray-400"> - artifacts</span>
+      <NuxtLink
+        to="/"
+        class="text-xl font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition"
+      >
+        Nag729 - artifacts
       </NuxtLink>
 
       <div class="flex items-center gap-4">
@@ -22,6 +17,15 @@
         >
           タグ
         </NuxtLink>
+        <a
+          href="https://github.com/Nag729"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition p-2"
+          aria-label="GitHub"
+        >
+          <Icon name="mdi:github" class="w-5 h-5 flex-shrink-0" />
+        </a>
         <ColorModeToggle />
       </div>
     </nav>
