@@ -150,13 +150,10 @@ T (Try):     Goalを満たすための仮説</code></pre>
 
       <CheckList>
         <CheckItem type="good" label="Try 出しの時間"> Try 出しの時間が減ったか </CheckItem>
-
         <CheckItem type="good" label="投票のスムーズさ"> 投票がスムーズになったか </CheckItem>
-
         <CheckItem type="good" label="対応関係の明確さ">
           Try と Problem の対応が明確になったか
         </CheckItem>
-
         <CheckItem type="good" label="納得感"> チーム全体で納得感のある Try を選べたか </CheckItem>
       </CheckList>
 

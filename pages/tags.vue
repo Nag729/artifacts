@@ -3,7 +3,7 @@
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">タグ一覧</h1>
 
     <div v-if="pending" class="text-center py-12">
-      <p class="text-gray-500 dark:text-gray-400">読み込み中...</p>
+      <p class="text-gray-500 dark:text-gray-400">Now Loading...</p>
     </div>
 
     <div v-else class="space-y-8">
@@ -55,7 +55,5 @@ const allTags = getAllTags()
 const pending = false
 
 // タグで記事をフィルタリング
-const getArticlesByTag = (tag: string) => {
-  return getArticlesByTagFromData(tag)
-}
+const getArticlesByTag = (tag: string) => getArticlesByTagFromData(tag)
 </script>

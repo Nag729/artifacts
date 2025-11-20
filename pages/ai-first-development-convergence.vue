@@ -17,9 +17,7 @@
 
       <StepFlow>
         <Step number="1" title="AI が提案"> AI が複数の方針・設計案を提案 </Step>
-
         <Step number="2" title="人間が判断"> 人間が採用・不採用を判断 </Step>
-
         <Step number="3" title="AI が実装"> AI が自律的に実装・テスト・デプロイまで完了 </Step>
       </StepFlow>
 
