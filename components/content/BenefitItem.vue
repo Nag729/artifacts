@@ -1,12 +1,8 @@
 <template>
-  <div
-    class="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 mb-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-  >
+  <div class="component-card component-card-hover p-6 mb-4">
     <!-- Icon & Title -->
     <div class="flex items-start gap-4">
-      <div
-        class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-600 dark:to-purple-700 flex items-center justify-center shadow-lg shadow-indigo-500/30"
-      >
+      <div class="component-icon-badge component-icon-badge-purple">
         <Icon :name="icon || 'mdi:check-circle'" class="w-6 h-6 text-white" />
       </div>
 

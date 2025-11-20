@@ -16,12 +16,13 @@ artifacts/
 │   │   ├── CheckList.vue
 │   │   ├── Diagram.vue
 │   │   ├── InfoCard.vue
-│   │   ├── KeyPoints.vue
 │   │   ├── Step.vue
 │   │   └── StepFlow.vue
 │   ├── AppHeader.vue
 │   ├── ArticleCard.vue
 │   └── ColorModeToggle.vue
+├── composables/          # Composables
+│   └── useComponentVariants.ts  # カラーバリエーション管理
 ├── content/              # Markdown 記事
 ├── pages/                # Nuxt ページ
 └── assets/css/           # グローバルスタイル
@@ -73,6 +74,7 @@ artifacts/
 **Props**:
 
 - `type`: `"info" | "success" | "warning" | "danger"` (default: "info")
+- `icon`: カスタムアイコン名（オプション、未指定時は type に応じたデフォルトアイコン）
 
 ---
 
@@ -194,35 +196,7 @@ Try とのつながりがイメージできる
 
 ---
 
-### 6. **KeyPoints** - まとめポイント
-
-**用途**: 記事のまとめ、重要ポイントの強調
-
-**使い方**:
-
-```markdown
-::key-points{title="3点セットで得られる効果"}
-
-- 本当に対処すべき問題が明確になる
-- 優先順位を付けやすくなる
-- 「べき論」に振り回されない
-- チームで納得感のある判断ができる
-
-::
-```
-
-**特徴**:
-
-- リスト項目に自動でチェックマーク（✓）が付く
-- グリーン系のグラデーション背景
-
-**Props**:
-
-- `title`: セクションタイトル (default: "ポイント")
-
----
-
-### 7. **Diagram** - 図表・コードブロック
+### 6. **Diagram** - 図表・コードブロック
 
 **用途**: フレームワークの構造、概念図を視覚化
 
@@ -245,7 +219,7 @@ T (Try): Goalを満たすための仮説
 
 ---
 
-### 8. **BenefitList & BenefitItem** - メリット一覧
+### 7. **BenefitList & BenefitItem** - メリット一覧
 
 **用途**: 手法の効果、メリットをカード形式で列挙
 
@@ -279,7 +253,6 @@ T (Try): Goalを満たすための仮説
 | Before/After の比較        | `BeforeAfter`                 |
 | 手順・プロセス             | `StepFlow` + `Step`           |
 | 良い例・悪い例             | `CheckList` + `CheckItem`     |
-| まとめポイント             | `KeyPoints`                   |
 | 構造図・コードブロック     | `Diagram`                     |
 | メリット列挙               | `BenefitList` + `BenefitItem` |
 
@@ -334,7 +307,7 @@ date: 2025-11-20
 - **注意点**: `Alert` で強調
 - **手順**: `StepFlow` でプロセスを視覚化
 - **比較**: `BeforeAfter` で対比
-- **まとめ**: `KeyPoints` で要点を列挙
+- **メリット**: `BenefitList` で効果を列挙
 
 ### 4. 視覚的な工夫
 
@@ -375,14 +348,26 @@ npm run typecheck
 5. **Props**: TypeScript の interface で型定義
 6. **アイコン**: `<Icon>` コンポーネントを使用
 
+### 共通スタイルクラス
+
+`assets/css/tailwind.css` で定義されている共通クラス：
+
+- `.component-card`: 基本的なカード（白背景、hover 効果）
+- `.component-card-hover`: ホバー時の上昇アニメーション
+- `.component-gradient-box`: グラデーション背景のボックス
+- `.component-icon-badge`: アイコンバッジ（基本）
+- `.component-icon-badge-primary`: 青色のアイコンバッジ
+- `.component-icon-badge-purple`: 紫色のアイコンバッジ
+- `.component-decoration-blur`: ぼかし装飾（基本）
+- `.component-decoration-blur-top`: 右上のぼかし装飾
+- `.component-decoration-blur-bottom`: 左下のぼかし装飾
+
 ### テンプレート
 
 ```vue
 <template>
   <div class="my-8 not-prose">
-    <div
-      class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-50/50 dark:from-gray-800 dark:via-gray-800/90 dark:to-gray-900 border border-gray-200/60 dark:border-gray-700/50 shadow-sm p-8"
-    >
+    <div class="component-gradient-box p-8">
       <slot />
     </div>
   </div>
@@ -399,6 +384,28 @@ defineProps<Props>()
 <style scoped>
 /* カスタムスタイル */
 </style>
+```
+
+## 🎨 カラーバリエーション管理
+
+`composables/useComponentVariants.ts` で統一管理されています。
+
+### 使い方
+
+```vue
+<script setup lang="ts">
+import type { ColorVariant } from '~/composables/useComponentVariants'
+
+interface Props {
+  type?: ColorVariant // 'info' | 'success' | 'warning' | 'danger'
+}
+
+const props = defineProps<Props>()
+const { getVariant } = useComponentVariants()
+const variant = computed(() => getVariant(props.type))
+
+// variant.bg, variant.border, variant.text, variant.icon, variant.defaultIcon
+</script>
 ```
 
 ## 📚 参考リンク
