@@ -1,349 +1,383 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KPGTふりかえり手法の提案</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 2em;
-            margin-bottom: 0.5em;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 0.3em;
-        }
-        
-        h2 {
-            font-size: 1.5em;
-            margin-top: 1.5em;
-            margin-bottom: 0.8em;
-            color: #2c3e50;
-            border-left: 4px solid #3498db;
-            padding-left: 12px;
-        }
-        
-        h3 {
-            font-size: 1.2em;
-            margin-top: 1.2em;
-            margin-bottom: 0.6em;
-            color: #34495e;
-        }
-        
-        p {
-            margin-bottom: 1em;
-        }
-        
-        ul {
-            margin-left: 1.5em;
-            margin-bottom: 1em;
-        }
-        
-        li {
-            margin-bottom: 0.5em;
-        }
-        
-        code {
-            background: #f8f9fa;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-        
-        pre {
-            background: #f8f9fa;
-            padding: 16px;
-            border-radius: 4px;
-            overflow-x: auto;
-            margin-bottom: 1em;
-            border-left: 3px solid #3498db;
-        }
-        
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        
-        .new-badge {
-            display: inline-block;
-            background: #e74c3c;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-left: 8px;
-        }
-        
-        .check, .cross {
-            display: inline-block;
-            width: 1.2em;
-            font-weight: bold;
-        }
-        
-        .check {
-            color: #27ae60;
-        }
-        
-        .cross {
-            color: #e74c3c;
-        }
-        
-        .flow-step {
-            background: #ecf0f1;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-            border-radius: 4px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .flow-step strong {
-            color: #2c3e50;
-        }
-        
-        .time {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            float: right;
-        }
-        
-        .benefit {
-            background: #d5f4e6;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-            border-radius: 4px;
-            border-left: 4px solid #27ae60;
-        }
-        
-        .summary {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 2em;
-            border-left: 4px solid #3498db;
-        }
-        
-        .summary h2 {
-            margin-top: 0;
-            border-left: none;
-            padding-left: 0;
-        }
-        
-        hr {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 2em 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>KPGTふりかえり手法の提案</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>KPGTふりかえり手法の提案</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-        <h2>KPTの課題</h2>
-        <p>現在のKPTふりかえりには、以下の構造的な課題があります：</p>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+                line-height: 1.8;
+                color: #333;
+                background: #f5f5f5;
+                padding: 20px;
+            }
 
-        <h3>1. TRYが思い浮かばないことが多い</h3>
-        <p>Keep, Problemを出した後、「で、何をする？」となり、Tryが出にくい場面がある。</p>
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: white;
+                padding: 40px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
 
-        <h3>2. TryとKeep, Problemの対応関係が不明確</h3>
-        <p>TryとKeep, Problemの対応がFigJamに明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。</p>
+            h1 {
+                font-size: 2em;
+                margin-bottom: 0.5em;
+                color: #2c3e50;
+                border-bottom: 3px solid #3498db;
+                padding-bottom: 0.3em;
+            }
 
-        <h3>3. 本当に最優先のゴールか曖昧</h3>
-        <p>Tryの後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。</p>
+            h2 {
+                font-size: 1.5em;
+                margin-top: 1.5em;
+                margin-bottom: 0.8em;
+                color: #2c3e50;
+                border-left: 4px solid #3498db;
+                padding-left: 12px;
+            }
 
-        <hr>
+            h3 {
+                font-size: 1.2em;
+                margin-top: 1.2em;
+                margin-bottom: 0.6em;
+                color: #34495e;
+            }
 
-        <h2>根本原因：評価基準（Goal）が後回しになっている</h2>
-        <p>KPTの構造を整理すると：</p>
-        <ul>
-            <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
-            <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
-            <li><strong>欠けているもの</strong> = <span class="highlight">達成したい状態（Goal）</span></li>
-        </ul>
-        <p>ゴールが明確でないと、適切なTryを考えるのが難しく、優先順位も付けづらい。</p>
+            p {
+                margin-bottom: 1em;
+            }
 
-        <hr>
+            ul {
+                margin-left: 1.5em;
+                margin-bottom: 1em;
+            }
 
-        <h2>解決策：KPGTへの拡張</h2>
-        <p>KPTに <strong>G (Goal)</strong> を追加し、順序を変更します：</p>
-        <pre>K (Keep):    うまくいった事実
+            li {
+                margin-bottom: 0.5em;
+            }
+
+            code {
+                background: #f8f9fa;
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-family: "Courier New", monospace;
+                font-size: 0.9em;
+            }
+
+            pre {
+                background: #f8f9fa;
+                padding: 16px;
+                border-radius: 4px;
+                overflow-x: auto;
+                margin-bottom: 1em;
+                border-left: 3px solid #3498db;
+            }
+
+            .highlight {
+                background: #fff3cd;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+
+            .new-badge {
+                display: inline-block;
+                background: #e74c3c;
+                color: white;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                font-weight: bold;
+                margin-left: 8px;
+            }
+
+            .check,
+            .cross {
+                display: inline-block;
+                width: 1.2em;
+                font-weight: bold;
+            }
+
+            .check {
+                color: #27ae60;
+            }
+
+            .cross {
+                color: #e74c3c;
+            }
+
+            .flow-step {
+                background: #ecf0f1;
+                padding: 12px 16px;
+                margin-bottom: 12px;
+                border-radius: 4px;
+                border-left: 4px solid #3498db;
+            }
+
+            .flow-step strong {
+                color: #2c3e50;
+            }
+
+            .time {
+                color: #7f8c8d;
+                font-size: 0.9em;
+                float: right;
+            }
+
+            .benefit {
+                background: #d5f4e6;
+                padding: 12px 16px;
+                margin-bottom: 12px;
+                border-radius: 4px;
+                border-left: 4px solid #27ae60;
+            }
+
+            .summary {
+                background: #e8f4f8;
+                padding: 20px;
+                border-radius: 4px;
+                margin-top: 2em;
+                border-left: 4px solid #3498db;
+            }
+
+            .summary h2 {
+                margin-top: 0;
+                border-left: none;
+                padding-left: 0;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid #ddd;
+                margin: 2em 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>KPGTふりかえり手法の提案</h1>
+
+            <h2>KPTの課題</h2>
+            <p>現在のKPTふりかえりには、以下の構造的な課題があります：</p>
+
+            <h3>1. TRYが思い浮かばないことが多い</h3>
+            <p>Keep, Problemを出した後、「で、何をする？」となり、Tryが出にくい場面がある。</p>
+
+            <h3>2. TryとKeep, Problemの対応関係が不明確</h3>
+            <p>
+                TryとKeep,
+                Problemの対応がFigJamに明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。
+            </p>
+
+            <h3>3. 本当に最優先のゴールか曖昧</h3>
+            <p>
+                Tryの後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。
+            </p>
+
+            <hr />
+
+            <h2>根本原因：評価基準（Goal）が後回しになっている</h2>
+            <p>KPTの構造を整理すると：</p>
+            <ul>
+                <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
+                <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
+                <li>
+                    <strong>欠けているもの</strong> =
+                    <span class="highlight">達成したい状態（Goal）</span>
+                </li>
+            </ul>
+            <p>ゴールが明確でないと、適切なTryを考えるのが難しく、優先順位も付けづらい。</p>
+
+            <hr />
+
+            <h2>解決策：KPGTへの拡張</h2>
+            <p>KPTに <strong>G (Goal)</strong> を追加し、順序を変更します：</p>
+            <pre>
+K (Keep):    うまくいった事実
 P (Problem): うまくいかなかった事実
 G (Goal):    そもそも何を達成したいのか ← NEW!
-T (Try):     Goalを満たすための仮説</pre>
+T (Try):     Goalを満たすための仮説</pre
+            >
 
-        <hr>
+            <hr />
 
-        <h2>新しいふりかえりフロー</h2>
+            <h2>新しいふりかえりフロー</h2>
 
-        <div class="flow-step">
-            <strong>1. できごとを思い出す</strong>
-            <span class="time">10分</span>
-            <p style="margin-top: 8px;">これまで通り、期間中の出来事を振り返る。</p>
-        </div>
+            <div class="flow-step">
+                <strong>1. できごとを思い出す</strong>
+                <span class="time">10分</span>
+                <p style="margin-top: 8px">これまで通り、期間中の出来事を振り返る。</p>
+            </div>
 
-        <div class="flow-step">
-            <strong>2. Keep, Problemを出す</strong>
-            <span class="time">10分</span>
-            <ul style="margin-top: 8px;">
-                <li>Keep: うまくいったこと</li>
-                <li>Problem: うまくいかなかったこと</li>
-            </ul>
-        </div>
+            <div class="flow-step">
+                <strong>2. Keep, Problemを出す</strong>
+                <span class="time">10分</span>
+                <ul style="margin-top: 8px">
+                    <li>Keep: うまくいったこと</li>
+                    <li>Problem: うまくいかなかったこと</li>
+                </ul>
+            </div>
 
-        <div class="flow-step" style="border-left-color: #e74c3c;">
-            <strong>3. Goal（達成したい状態）を確認・言語化</strong>
-            <span class="new-badge">NEW!</span>
-            <span class="time">10分</span>
-            <p style="margin-top: 8px;">Keep, Problemを見ながら：</p>
+            <div class="flow-step" style="border-left-color: #e74c3c">
+                <strong>3. Goal（達成したい状態）を確認・言語化</strong>
+                <span class="new-badge">NEW!</span>
+                <span class="time">10分</span>
+                <p style="margin-top: 8px">Keep, Problemを見ながら：</p>
+                <ul>
+                    <li>「このProblemって、どういう状態になれば解決？」</li>
+                    <li>「複数のProblemに共通するテーマは？」</li>
+                    <li>「そもそも私たちは何を達成したいんだっけ？」</li>
+                </ul>
+                <p>を話し合い、達成したいゴールを言語化する。</p>
+            </div>
+
+            <div class="flow-step" style="border-left-color: #e74c3c">
+                <strong>4. 投票して解決するGoalを決める</strong>
+                <span class="new-badge">NEW!</span>
+                <span class="time">5分</span>
+                <p style="margin-top: 8px">
+                    出されたGoalの中から、今期取り組むGoalを投票で選ぶ。<br />（≒取り組むKeep,
+                    Problemを決める）
+                </p>
+            </div>
+
+            <div class="flow-step">
+                <strong>5. Tryを出す</strong>
+                <span class="time">10分</span>
+                <p style="margin-top: 8px">
+                    <strong>選ばれたGoalを満たすための仮説</strong
+                    >として、Tryを考える。<br />この時点で、TryとGoalの対応関係が明確になっている。
+                </p>
+            </div>
+
+            <div class="flow-step">
+                <strong>6. 投票してTryを決める</strong>
+                <span class="time">5分</span>
+                <p style="margin-top: 8px">Goalへの寄与度を基準に、実施するTryを投票で選ぶ。</p>
+            </div>
+
+            <div class="flow-step">
+                <strong>7. SMARTな目標にする</strong>
+                <span class="time">10分</span>
+                <p style="margin-top: 8px">
+                    選ばれたTryを、SMART（具体的・測定可能・達成可能・関連性・期限）な目標に落とし込む。
+                </p>
+            </div>
+
+            <p style="text-align: right; color: #7f8c8d; margin-top: 12px">
+                <strong>合計：60分</strong>
+            </p>
+            <p style="font-size: 0.9em; color: #7f8c8d">
+                ※Goalに時間をかけても、Try出しが効率化するため総時間は変わらない
+            </p>
+
+            <hr />
+
+            <h2>KPGTの効果</h2>
+
+            <div class="benefit">
+                <h3 style="margin-top: 0">1. Tryが出しやすくなる</h3>
+                <p>「何をする？」ではなく「このGoalを達成するには？」という明確な問いに変わる。</p>
+            </div>
+
+            <div class="benefit">
+                <h3 style="margin-top: 0">2. TryとProblemの対応が明確</h3>
+                <p>どのGoalのためのTryなのかが構造的に明確になり、FigJam上でも可視化しやすい。</p>
+            </div>
+
+            <div class="benefit">
+                <h3 style="margin-top: 0">3. 優先度を間違えない</h3>
+                <p>
+                    最優先のGoalが先に決まっているため、本質的でないTryを選んでしまうリスクが減る。
+                </p>
+            </div>
+
+            <div class="benefit">
+                <h3 style="margin-top: 0">4. 投票が2段階になり判断しやすい</h3>
+                <ul style="margin-bottom: 0">
+                    <li>第1段階：Goal選択（何を達成したいか）</li>
+                    <li>第2段階：Try選択（どう達成するか）</li>
+                </ul>
+                <p>判断基準が明確になり、投票しやすい。</p>
+            </div>
+
+            <div class="benefit">
+                <h3 style="margin-top: 0">5. 次回の評価がしやすい</h3>
+                <p>次のふりかえりで「前回のGoalは達成できたか？」を基準に評価できる。</p>
+            </div>
+
+            <hr />
+
+            <h2>Goalを出すときのコツ</h2>
+
+            <h3>問いかけ例</h3>
             <ul>
                 <li>「このProblemって、どういう状態になれば解決？」</li>
                 <li>「複数のProblemに共通するテーマは？」</li>
                 <li>「そもそも私たちは何を達成したいんだっけ？」</li>
             </ul>
-            <p>を話し合い、達成したいゴールを言語化する。</p>
-        </div>
 
-        <div class="flow-step" style="border-left-color: #e74c3c;">
-            <strong>4. 投票して解決するGoalを決める</strong>
-            <span class="new-badge">NEW!</span>
-            <span class="time">5分</span>
-            <p style="margin-top: 8px;">出されたGoalの中から、今期取り組むGoalを投票で選ぶ。<br>（≒取り組むKeep, Problemを決める）</p>
-        </div>
-
-        <div class="flow-step">
-            <strong>5. Tryを出す</strong>
-            <span class="time">10分</span>
-            <p style="margin-top: 8px;"><strong>選ばれたGoalを満たすための仮説</strong>として、Tryを考える。<br>この時点で、TryとGoalの対応関係が明確になっている。</p>
-        </div>
-
-        <div class="flow-step">
-            <strong>6. 投票してTryを決める</strong>
-            <span class="time">5分</span>
-            <p style="margin-top: 8px;">Goalへの寄与度を基準に、実施するTryを投票で選ぶ。</p>
-        </div>
-
-        <div class="flow-step">
-            <strong>7. SMARTな目標にする</strong>
-            <span class="time">10分</span>
-            <p style="margin-top: 8px;">選ばれたTryを、SMART（具体的・測定可能・達成可能・関連性・期限）な目標に落とし込む。</p>
-        </div>
-
-        <p style="text-align: right; color: #7f8c8d; margin-top: 12px;"><strong>合計：60分</strong></p>
-        <p style="font-size: 0.9em; color: #7f8c8d;">※Goalに時間をかけても、Try出しが効率化するため総時間は変わらない</p>
-
-        <hr>
-
-        <h2>KPGTの効果</h2>
-
-        <div class="benefit">
-            <h3 style="margin-top: 0;">1. Tryが出しやすくなる</h3>
-            <p>「何をする？」ではなく「このGoalを達成するには？」という明確な問いに変わる。</p>
-        </div>
-
-        <div class="benefit">
-            <h3 style="margin-top: 0;">2. TryとProblemの対応が明確</h3>
-            <p>どのGoalのためのTryなのかが構造的に明確になり、FigJam上でも可視化しやすい。</p>
-        </div>
-
-        <div class="benefit">
-            <h3 style="margin-top: 0;">3. 優先度を間違えない</h3>
-            <p>最優先のGoalが先に決まっているため、本質的でないTryを選んでしまうリスクが減る。</p>
-        </div>
-
-        <div class="benefit">
-            <h3 style="margin-top: 0;">4. 投票が2段階になり判断しやすい</h3>
-            <ul style="margin-bottom: 0;">
-                <li>第1段階：Goal選択（何を達成したいか）</li>
-                <li>第2段階：Try選択（どう達成するか）</li>
-            </ul>
-            <p>判断基準が明確になり、投票しやすい。</p>
-        </div>
-
-        <div class="benefit">
-            <h3 style="margin-top: 0;">5. 次回の評価がしやすい</h3>
-            <p>次のふりかえりで「前回のGoalは達成できたか？」を基準に評価できる。</p>
-        </div>
-
-        <hr>
-
-        <h2>Goalを出すときのコツ</h2>
-
-        <h3>問いかけ例</h3>
-        <ul>
-            <li>「このProblemって、どういう状態になれば解決？」</li>
-            <li>「複数のProblemに共通するテーマは？」</li>
-            <li>「そもそも私たちは何を達成したいんだっけ？」</li>
-        </ul>
-
-        <h3>良いGoalの例</h3>
-        <p><span class="check">✅</span> <strong>測定可能</strong>（状態を確認できる）</p>
-        <ul>
-            <li>「全員が週次でリリースできる状態を保つ」</li>
-            <li>「新メンバーが2週間で自走できる」</li>
-            <li>「本番障害をゼロにする」</li>
-        </ul>
-        <p><span class="check">✅</span> <strong>具体的</strong>（Tryとのつながりがイメージできる）</p>
-
-        <h3>悪いGoalの例</h3>
-        <p><span class="cross">❌</span> <strong>抽象的すぎる</strong></p>
-        <ul>
-            <li>「チームを良くする」</li>
-            <li>「生産性を上げる」</li>
-        </ul>
-        <p style="margin-left: 1.5em;">→ これではTryを考えにくく、評価もできない</p>
-
-        <hr>
-
-        <h2>まずは実験として</h2>
-        <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
-
-        <h3>測定ポイント</h3>
-        <ul>
-            <li>Try出しの時間が減ったか</li>
-            <li>投票がスムーズになったか</li>
-            <li>TryとProblemの対応が明確になったか</li>
-            <li>チーム全体で納得感のあるTryを選べたか</li>
-        </ul>
-
-        <hr>
-
-        <div class="summary">
-            <h2>まとめ</h2>
-            <p>KPTに <strong>Goal</strong> を追加し、<strong>Goal → Try</strong> の順序で考えることで：</p>
+            <h3>良いGoalの例</h3>
+            <p><span class="check">✅</span> <strong>測定可能</strong>（状態を確認できる）</p>
             <ul>
-                <li>何を達成したいかが明確になる</li>
-                <li>Tryが出しやすくなる</li>
-                <li>優先度を間違えない</li>
-                <li>評価しやすくなる</li>
+                <li>「全員が週次でリリースできる状態を保つ」</li>
+                <li>「新メンバーが2週間で自走できる」</li>
+                <li>「本番障害をゼロにする」</li>
             </ul>
-            <p style="margin-bottom: 0;">という効果が期待できます。</p>
-            <p style="margin-top: 1em; font-weight: bold;">まずは1回、実験的に試してみませんか？</p>
+            <p>
+                <span class="check">✅</span>
+                <strong>具体的</strong>（Tryとのつながりがイメージできる）
+            </p>
+
+            <h3>悪いGoalの例</h3>
+            <p><span class="cross">❌</span> <strong>抽象的すぎる</strong></p>
+            <ul>
+                <li>「チームを良くする」</li>
+                <li>「生産性を上げる」</li>
+            </ul>
+            <p style="margin-left: 1.5em">→ これではTryを考えにくく、評価もできない</p>
+
+            <hr />
+
+            <h2>まずは実験として</h2>
+            <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
+
+            <h3>測定ポイント</h3>
+            <ul>
+                <li>Try出しの時間が減ったか</li>
+                <li>投票がスムーズになったか</li>
+                <li>TryとProblemの対応が明確になったか</li>
+                <li>チーム全体で納得感のあるTryを選べたか</li>
+            </ul>
+
+            <hr />
+
+            <div class="summary">
+                <h2>まとめ</h2>
+                <p>
+                    KPTに <strong>Goal</strong> を追加し、<strong>Goal → Try</strong>
+                    の順序で考えることで：
+                </p>
+                <ul>
+                    <li>何を達成したいかが明確になる</li>
+                    <li>Tryが出しやすくなる</li>
+                    <li>優先度を間違えない</li>
+                    <li>評価しやすくなる</li>
+                </ul>
+                <p style="margin-bottom: 0">という効果が期待できます。</p>
+                <p style="margin-top: 1em; font-weight: bold">
+                    まずは1回、実験的に試してみませんか？
+                </p>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
