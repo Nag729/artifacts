@@ -20,8 +20,8 @@
         <div class="grid gap-4">
           <NuxtLink
             v-for="article in getArticlesByTag(tag)"
-            :key="article._path"
-            :to="article._path"
+            :key="article.slug"
+            :to="`/${article.slug}`"
             class="block p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition"
           >
             <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
@@ -42,14 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
-interface Article extends ParsedContent {
-  title: string
-  description: string
-  tags?: string[]
-  date: string
-}
+import { getAllTags, getArticlesByTag as getArticlesByTagFromData } from '~/data/articles'
 
 // SEO設定
 useHead({
@@ -57,31 +50,12 @@ useHead({
   meta: [{ name: 'description', content: 'タグごとの記事一覧' }],
 })
 
-// 記事取得
-const { data: articles, pending } = await useAsyncData('all-articles', () =>
-  queryContent<Article>('/').find()
-)
-
-// 全タグを抽出
-const allTags = computed(() => {
-  if (!articles.value) return []
-
-  const tags = new Set<string>()
-  articles.value.forEach((article: Article) => {
-    if (article.tags) {
-      article.tags.forEach((tag: string) => tags.add(tag))
-    }
-  })
-
-  return Array.from(tags).sort()
-})
+// 全タグを取得
+const allTags = getAllTags()
+const pending = false
 
 // タグで記事をフィルタリング
 const getArticlesByTag = (tag: string) => {
-  if (!articles.value) return []
-
-  return articles.value
-    .filter((article: Article) => article.tags && article.tags.includes(tag))
-    .sort((a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return getArticlesByTagFromData(tag)
 }
 </script>

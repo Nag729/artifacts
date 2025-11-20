@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="article._path"
+    :to="`/${article.slug}`"
     class="card block p-6 hover:scale-[1.02] transition-transform duration-200"
   >
     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
@@ -24,14 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
-interface Article extends ParsedContent {
-  title: string
-  description: string
-  tags: string[]
-  date: string
-}
+import type { Article } from '~/types/article'
 
 defineProps<{
   article: Article

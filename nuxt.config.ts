@@ -9,32 +9,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxt/content',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
     '@nuxt/icon',
   ],
-
-  // Content module configuration
-  content: {
-    highlight: {
-      theme: {
-        default: 'github-light',
-        dark: 'github-dark',
-      },
-    },
-    markdown: {
-      toc: {
-        depth: 3,
-        searchDepth: 3,
-      },
-    },
-    experimental: {
-      clientDB: true,
-    },
-  },
 
   // Components configuration
   components: [

@@ -19,7 +19,7 @@
       </div>
 
       <div v-else-if="articles && articles.length > 0" class="grid gap-6">
-        <ArticleCard v-for="article in articles" :key="article._path" :article="article" />
+        <ArticleCard v-for="article in articles" :key="article.slug" :article="article" />
       </div>
 
       <div v-else class="text-center py-12">
@@ -30,14 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
-
-interface Article extends ParsedContent {
-  title: string
-  description: string
-  tags: string[]
-  date: string
-}
+import { getArticlesSortedByDate } from '~/data/articles'
+import type { Article } from '~/types/article'
 
 // SEO設定
 useHead({
@@ -51,7 +45,6 @@ useHead({
 })
 
 // 記事取得
-const { data: articles, pending } = await useAsyncData('articles', () =>
-  queryContent<Article>('/').sort({ date: -1 }).find()
-)
+const articles = getArticlesSortedByDate()
+const pending = false
 </script>

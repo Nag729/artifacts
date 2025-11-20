@@ -1,0 +1,146 @@
+<template>
+  <article class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      「それ、本当に困ってる？」を見極める3点セット
+    </h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+      ふりかえりで出てくる問題が本当に対処すべきものなのかを判断する3つの観点
+    </p>
+
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <h2>3 点セット</h2>
+
+      <InfoCard title="3点セット" icon="mdi:format-list-checks">
+        <p>問題を評価するための 3 つの観点：</p>
+
+        <h3>🧑 誰が</h3>
+        <ul>
+          <li>ユーザー</li>
+          <li>開発者</li>
+          <li>レビュアー</li>
+          <li>運用者</li>
+          <li>CS 担当</li>
+          <li>営業</li>
+        </ul>
+
+        <h3>⏰ どんなときに</h3>
+        <ul>
+          <li>機能を使う</li>
+          <li>問い合わせる</li>
+          <li>実装する</li>
+          <li>テストする</li>
+          <li>レビューする</li>
+          <li>デプロイする</li>
+          <li>障害対応する</li>
+          <li>オンボーディングする</li>
+        </ul>
+
+        <h3>📊 どれくらい</h3>
+        <ul>
+          <li><strong>時間</strong>: 分/時間/日</li>
+          <li><strong>頻度</strong>: 毎回/週 N 回/月 N 回</li>
+          <li><strong>件数</strong>: 月 N 件</li>
+        </ul>
+      </InfoCard>
+
+      <h2>使い方</h2>
+      <Alert type="success">
+        ✍️ <strong>Problem が出たらこの 3 点で説明してみる</strong><br /><br />
+        埋められないなら「気になること」として保留し、本当に困るまで待つ
+      </Alert>
+
+      <h2>「べき論」と実害のギャップに注意</h2>
+      <Alert type="warning">
+        「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。<br /><br />
+
+        これらに照らすと「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。<br /><br />
+
+        Problem
+        が出たら「一般的には良くないとされているが、この文脈で本当に困っているか？」を確認しましょう。
+      </Alert>
+
+      <h2>実例で確認</h2>
+
+      <h3>実は影響が大きい例 🔥</h3>
+      <BeforeAfter>
+        <template #before> 「問い合わせ対応が手作業で面倒」 </template>
+        <template #after>
+          「<strong>ユーザーが</strong>、問い合わせ後に、<strong>回答まで平均 3 日待っている</strong
+          >（<strong>月 50 件</strong>）」<br /><br />
+          → 誰が・どんなときに・どれくらいが明確で、影響が大きいことがわかる
+        </template>
+      </BeforeAfter>
+
+      <h3>実は影響が小さい例 🤔</h3>
+      <BeforeAfter>
+        <template #before> 「この機能のコードが古い書き方のまま」 </template>
+        <template #after>
+          「<strong>年 1 回の更新時</strong> しか触らず、動作も安定しているので実害なし →
+          <strong>保留</strong>」<br /><br />
+          → 頻度が低く、実害がないため優先度は低い
+        </template>
+      </BeforeAfter>
+
+      <h2>まとめ</h2>
+      <div
+        class="my-8 p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800"
+      >
+        <h3
+          class="text-xl font-bold text-green-900 dark:text-green-100 mb-4 flex items-center gap-2"
+        >
+          <Icon name="mdi:check-circle" class="w-6 h-6" />
+          3点セットで得られる効果
+        </h3>
+        <ul class="space-y-2">
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check"
+              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+            />
+            <span>本当に対処すべき問題が明確になる</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check"
+              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+            />
+            <span>優先順位を付けやすくなる</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check"
+              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+            />
+            <span>「べき論」に振り回されない</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon
+              name="mdi:check"
+              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+            />
+            <span>チームで納得感のある判断ができる</span>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="my-8" />
+      <p class="text-sm text-gray-500 dark:text-gray-400 italic">問題評価ガイドとして作成 / 2025</p>
+    </div>
+  </article>
+</template>
+
+<script setup lang="ts">
+import { getArticleBySlug } from '~/data/articles'
+
+const article = getArticleBySlug('problem-evaluation-guide')
+
+useHead({
+  title: article?.title,
+  meta: [
+    {
+      name: 'description',
+      content: article?.description,
+    },
+  ],
+})
+</script>
