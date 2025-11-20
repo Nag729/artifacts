@@ -80,6 +80,9 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
+.output
+.nitro
+.data
 dist
 
 # Gatsby files
@@ -139,3 +142,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 .DS_Store
+
+# Old docs directory
+docs/
