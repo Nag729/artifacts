@@ -31,7 +31,18 @@ export default defineNuxtConfig({
         searchDepth: 3,
       },
     },
+    experimental: {
+      clientDB: true,
+    },
   },
+
+  // Components configuration
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
 
   // Color mode configuration for dark mode
   colorMode: {
