@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Artifacts - ドキュメント一覧</title>
+        <title>Nag729 - Artifacts</title>
         <style>
             * {
                 margin: 0;
@@ -14,41 +14,43 @@
             body {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                     "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-                line-height: 1.8;
-                color: #333;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                line-height: 1.7;
+                color: #1d1d1f;
+                background: #f5f5f7;
                 min-height: 100vh;
                 padding: 2rem;
             }
 
             .container {
-                max-width: 800px;
+                max-width: 980px;
                 margin: 0 auto;
-                background: rgba(255, 255, 255, 0.95);
-                border-radius: 20px;
-                padding: 2rem;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(10px);
+                background: #ffffff;
+                border-radius: 18px;
+                padding: 3rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(0, 0, 0, 0.08);
             }
 
             header {
                 text-align: center;
-                margin-bottom: 3rem;
-                padding-bottom: 2rem;
-                border-bottom: 3px solid #6366f1;
+                margin-bottom: 4rem;
+                padding-bottom: 3rem;
+                border-bottom: 1px solid #d2d2d7;
             }
 
             h1 {
-                font-size: 2.5rem;
-                color: #2d3748;
-                margin-bottom: 0.5rem;
-                font-weight: 700;
+                font-size: 3rem;
+                color: #1d1d1f;
+                margin-bottom: 0.75rem;
+                font-weight: 600;
+                letter-spacing: -0.015em;
             }
 
             .subtitle {
-                font-size: 1.1rem;
-                color: #718096;
+                font-size: 1.25rem;
+                color: #86868b;
                 margin-bottom: 1rem;
+                font-weight: 400;
             }
 
             .document-grid {
@@ -58,100 +60,79 @@
             }
 
             .document-card {
-                background: white;
-                border-radius: 15px;
-                padding: 2rem;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-                border-left: 5px solid #6366f1;
+                display: block;
+                background: #ffffff;
+                border-radius: 16px;
+                padding: 2.5rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                border: 1px solid #f0f0f0;
                 position: relative;
                 overflow: hidden;
+                text-decoration: none;
+                color: inherit;
+                cursor: pointer;
             }
 
             .document-card::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 3px;
-                background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+                display: none;
             }
 
             .document-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+                transform: translateY(-4px);
+                box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15);
+                border-color: #d0d0d0;
+            }
+
+            .document-card:active {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             }
 
             .document-title {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 font-weight: 600;
-                color: #2d3748;
-                margin-bottom: 1rem;
-                line-height: 1.4;
+                color: #1d1d1f;
+                margin-bottom: 1.25rem;
+                line-height: 1.3;
+                letter-spacing: -0.01em;
             }
 
             .document-description {
-                color: #4a5568;
-                margin-bottom: 1.5rem;
-                font-size: 0.95rem;
-            }
-
-            .document-link {
-                display: inline-flex;
-                align-items: center;
-                background: #6366f1;
-                color: white;
-                text-decoration: none;
-                padding: 0.75rem 1.5rem;
-                border-radius: 8px;
-                font-weight: 500;
-                transition: all 0.3s ease;
-                font-size: 0.9rem;
-            }
-
-            .document-link:hover {
-                background: #4f46e5;
-                transform: translateX(2px);
-            }
-
-            .document-link::after {
-                content: "→";
-                margin-left: 0.5rem;
-                transition: transform 0.3s ease;
-            }
-
-            .document-link:hover::after {
-                transform: translateX(3px);
+                color: #515154;
+                margin-bottom: 2rem;
+                font-size: 1rem;
+                line-height: 1.6;
             }
 
             .meta-info {
-                margin-top: 1rem;
-                font-size: 0.85rem;
-                color: #718096;
-                border-top: 1px solid #e2e8f0;
-                padding-top: 1rem;
+                margin-top: 1.5rem;
+                font-size: 0.875rem;
+                color: #86868b;
+                border-top: 1px solid #f0f0f0;
+                padding-top: 1.5rem;
             }
 
             .tag {
                 display: inline-block;
-                background: #f7fafc;
-                color: #4a5568;
-                padding: 0.25rem 0.75rem;
-                border-radius: 15px;
-                font-size: 0.8rem;
-                margin-right: 0.5rem;
+                background: #f5f5f7;
+                color: #515154;
+                padding: 0.375rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8125rem;
+                margin-right: 0.75rem;
                 margin-top: 0.5rem;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #e5e5e7;
+                font-weight: 500;
             }
 
             footer {
                 text-align: center;
-                margin-top: 3rem;
-                padding-top: 2rem;
-                border-top: 1px solid #e2e8f0;
-                color: #718096;
-                font-size: 0.9rem;
+                margin-top: 4rem;
+                padding-top: 2.5rem;
+                border-top: 1px solid #d2d2d7;
+                color: #86868b;
+                font-size: 0.9375rem;
             }
 
             @media (max-width: 768px) {
@@ -176,57 +157,49 @@
     <body>
         <div class="container">
             <header>
-                <h1>📚 Artifacts</h1>
-                <p class="subtitle">開発手法とプロセスに関するドキュメント集</p>
+                <h1>📚 Nag729 - Artifacts</h1>
+                <p class="subtitle">生成AIと作ったドキュメント集</p>
             </header>
 
             <div class="document-grid">
-                <div class="document-card">
+                <a href="ai-first-development-convergence.html" class="document-card">
                     <h2 class="document-title">生成AIファーストなソフトウェア開発の収束状態</h2>
                     <p class="document-description">
                         AIの能力が成熟し、枠組みが整ったとき、開発はどう変わるか。エンジニアの役割の変化、開発プロセスの進化、そして未来の開発現場について考察します。
                     </p>
-                    <a href="ai-first-development-convergence.html" class="document-link">
-                        ドキュメントを読む
-                    </a>
                     <div class="meta-info">
                         <div class="tag">AI開発</div>
-                        <div class="tag">未来予測</div>
+                        <div class="tag">思考実験</div>
                         <div class="tag">開発プロセス</div>
                     </div>
-                </div>
+                </a>
 
-                <div class="document-card">
+                <a href="kpgt-retrospective.html" class="document-card">
                     <h2 class="document-title">KPGTふりかえり手法の提案</h2>
                     <p class="document-description">
                         従来のKPTふりかえりの課題を解決する新しい手法「KPGT」を提案。ゴール設定を先行させることで、より効果的なふりかえりを実現します。
                     </p>
-                    <a href="kpgt-retrospective.html" class="document-link"> ドキュメントを読む </a>
                     <div class="meta-info">
                         <div class="tag">ふりかえり</div>
                         <div class="tag">チーム運営</div>
                         <div class="tag">手法改善</div>
                     </div>
-                </div>
+                </a>
 
-                <div class="document-card">
+                <a href="problem-evaluation-guide.html" class="document-card">
                     <h2 class="document-title">「それ、本当に困ってる？」を見極める3点セット</h2>
                     <p class="document-description">
                         ふりかえりで出てくる問題が本当に対処すべきものなのかを判断するための3つの観点。「誰が」「どんなとき」「どれくらい」で痛みを具体化します。
                     </p>
-                    <a href="problem-evaluation-guide.html" class="document-link">
-                        ドキュメントを読む
-                    </a>
                     <div class="meta-info">
                         <div class="tag">問題分析</div>
                         <div class="tag">優先順位</div>
                         <div class="tag">意思決定</div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <footer>
-                <p>🚀 継続的な学習と改善のために</p>
                 <p>Updated: <span id="last-updated"></span></p>
             </footer>
         </div>
@@ -235,11 +208,7 @@
             // 最終更新日を自動で表示
             document.getElementById("last-updated").textContent = new Date().toLocaleDateString(
                 "ja-JP",
-                {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                },
+                { year: "numeric", month: "long", day: "numeric" },
             );
         </script>
     </body>
