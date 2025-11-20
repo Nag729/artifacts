@@ -21,10 +21,10 @@
           href="https://github.com/Nag729"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition p-2"
+          class="flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
           aria-label="GitHub"
         >
-          <Icon name="mdi:github" class="w-5 h-5 flex-shrink-0" />
+          <Icon name="mdi:github" class="w-6 h-6" />
         </a>
         <ColorModeToggle />
       </div>
