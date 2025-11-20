@@ -5,99 +5,132 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>KPGTふりかえり手法の提案</title>
         <style>
+            :root {
+                --bg-primary: #f5f5f7;
+                --bg-secondary: #ffffff;
+                --bg-accent: #f5f5f7;
+                --text-primary: #1d1d1f;
+                --text-secondary: #515154;
+                --text-muted: #86868b;
+                --accent: #007aff;
+                --accent-light: #007aff;
+                --border: #d2d2d7;
+                --shadow: rgba(0, 0, 0, 0.08);
+            }
+
             * {
+                box-sizing: border-box;
                 margin: 0;
                 padding: 0;
-                box-sizing: border-box;
             }
 
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-                line-height: 1.8;
-                color: #333;
-                background: #f5f5f5;
-                padding: 20px;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+                    "Noto Sans JP", sans-serif;
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                line-height: 1.7;
+                padding: 2rem 1rem;
             }
 
             .container {
                 max-width: 800px;
                 margin: 0 auto;
-                background: white;
-                padding: 40px;
-                border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
-            h1 {
-                font-size: 2em;
-                margin-bottom: 0.5em;
-                color: #2c3e50;
-                border-bottom: 3px solid #3498db;
-                padding-bottom: 0.3em;
+            header {
+                text-align: center;
+                margin-bottom: 4rem;
+                padding: 4rem 2rem;
+                background: var(--bg-secondary);
+                border-radius: 18px;
+                border: 1px solid var(--border);
+                box-shadow: 0 8px 32px var(--shadow);
+            }
+
+            header h1 {
+                font-size: 2.25rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+                letter-spacing: -0.015em;
+                color: var(--text-primary);
+            }
+
+            header p {
+                font-size: 1.125rem;
+                color: var(--text-secondary);
+            }
+
+            section {
+                margin-bottom: 3rem;
             }
 
             h2 {
-                font-size: 1.5em;
-                margin-top: 1.5em;
-                margin-bottom: 0.8em;
-                color: #2c3e50;
-                border-left: 4px solid #3498db;
-                padding-left: 12px;
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: var(--accent);
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 2px solid var(--border);
             }
 
             h3 {
-                font-size: 1.2em;
-                margin-top: 1.2em;
-                margin-bottom: 0.6em;
-                color: #34495e;
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin: 1.5rem 0 0.75rem;
             }
 
             p {
-                margin-bottom: 1em;
+                color: var(--text-secondary);
+                margin-bottom: 1rem;
             }
 
             ul {
-                margin-left: 1.5em;
-                margin-bottom: 1em;
+                margin-left: 1.5rem;
+                margin-bottom: 1rem;
             }
 
             li {
-                margin-bottom: 0.5em;
+                margin-bottom: 0.5rem;
+                color: var(--text-secondary);
             }
 
             code {
-                background: #f8f9fa;
-                padding: 2px 6px;
-                border-radius: 3px;
-                font-family: "Courier New", monospace;
+                background: var(--bg-accent);
+                padding: 0.25rem 0.5rem;
+                border-radius: 6px;
+                font-family: "SF Mono", "Courier New", monospace;
                 font-size: 0.9em;
+                color: var(--text-secondary);
             }
 
             pre {
-                background: #f8f9fa;
-                padding: 16px;
-                border-radius: 4px;
+                background: var(--bg-secondary);
+                padding: 1.5rem;
+                border-radius: 12px;
                 overflow-x: auto;
-                margin-bottom: 1em;
-                border-left: 3px solid #3498db;
+                margin-bottom: 1.5rem;
+                border-left: 4px solid var(--accent);
+                border: 1px solid var(--border);
+                box-shadow: 0 4px 20px var(--shadow);
             }
 
             .highlight {
                 background: #fff3cd;
-                padding: 2px 4px;
-                border-radius: 3px;
+                padding: 0.25rem 0.5rem;
+                border-radius: 6px;
             }
 
             .new-badge {
                 display: inline-block;
-                background: #e74c3c;
+                background: var(--accent);
                 color: white;
-                padding: 2px 8px;
-                border-radius: 3px;
-                font-size: 0.8em;
-                font-weight: bold;
-                margin-left: 8px;
+                padding: 0.25rem 0.75rem;
+                border-radius: 12px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                margin-left: 0.5rem;
             }
 
             .check,
@@ -116,252 +149,301 @@
             }
 
             .flow-step {
-                background: #ecf0f1;
-                padding: 12px 16px;
-                margin-bottom: 12px;
-                border-radius: 4px;
-                border-left: 4px solid #3498db;
+                background: var(--bg-secondary);
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                box-shadow: 0 4px 20px var(--shadow);
+                position: relative;
             }
 
             .flow-step strong {
-                color: #2c3e50;
+                color: var(--text-primary);
+                display: block;
+                margin-bottom: 0.5rem;
             }
 
             .time {
-                color: #7f8c8d;
-                font-size: 0.9em;
+                color: var(--text-muted);
+                font-size: 0.875rem;
                 float: right;
+                font-weight: 500;
             }
 
             .benefit {
-                background: #d5f4e6;
-                padding: 12px 16px;
-                margin-bottom: 12px;
-                border-radius: 4px;
-                border-left: 4px solid #27ae60;
+                background: var(--bg-secondary);
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+                border-radius: 16px;
+                border: 1px solid var(--border);
+                border-left: 4px solid #34c759;
+                box-shadow: 0 4px 20px var(--shadow);
+            }
+
+            .benefit h3 {
+                margin-top: 0;
             }
 
             .summary {
-                background: #e8f4f8;
-                padding: 20px;
-                border-radius: 4px;
-                margin-top: 2em;
-                border-left: 4px solid #3498db;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 3rem;
+                margin-top: 3rem;
+                box-shadow: 0 8px 32px var(--shadow);
             }
 
             .summary h2 {
-                margin-top: 0;
-                border-left: none;
-                padding-left: 0;
+                border-bottom: none;
+                padding-bottom: 0;
             }
 
-            hr {
-                border: none;
-                border-top: 1px solid #ddd;
-                margin: 2em 0;
+            .summary p:last-child {
+                margin-bottom: 0;
+            }
+
+            footer {
+                text-align: center;
+                margin-top: 3rem;
+                padding-top: 2rem;
+                border-top: 1px solid var(--border);
+                color: var(--text-muted);
+                font-size: 0.875rem;
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding: 1rem;
+                }
+
+                header {
+                    padding: 2rem 1rem;
+                }
+
+                header h1 {
+                    font-size: 1.75rem;
+                }
+
+                .flow-step {
+                    padding: 1rem;
+                }
+
+                .time {
+                    float: none;
+                    display: block;
+                    margin-top: 0.5rem;
+                }
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>KPGTふりかえり手法の提案</h1>
+            <header>
+                <h1>KPGTふりかえり手法の提案</h1>
+                <p>従来のKPTふりかえりの課題を解決する新しいアプローチ</p>
+            </header>
 
-            <h2>KPTの課題</h2>
-            <p>現在のKPTふりかえりには、以下の構造的な課題があります：</p>
+            <section>
+                <h2>KPTの課題</h2>
+                <p>現在のKPTふりかえりには、以下の構造的な課題があります：</p>
 
-            <h3>1. TRYが思い浮かばないことが多い</h3>
-            <p>Keep, Problemを出した後、「で、何をする？」となり、Tryが出にくい場面がある。</p>
+                <h3>1. TRYが思い浮かばないことが多い</h3>
+                <p>Keep, Problemを出した後、「で、何をする？」となり、Tryが出にくい場面がある。</p>
 
-            <h3>2. TryとKeep, Problemの対応関係が不明確</h3>
-            <p>
-                TryとKeep,
-                Problemの対応がFigJamに明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。
-            </p>
+                <h3>2. TryとKeep, Problemの対応関係が不明確</h3>
+                <p>
+                    TryとKeep,
+                    Problemの対応がFigJamに明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。
+                </p>
 
-            <h3>3. 本当に最優先のゴールか曖昧</h3>
-            <p>
-                Tryの後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。
-            </p>
+                <h3>3. 本当に最優先のゴールか曖昧</h3>
+                <p>
+                    Tryの後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。
+                </p>
+            </section>
 
-            <hr />
+            <section>
+                <h2>根本原因：評価基準（Goal）が後回しになっている</h2>
+                <p>KPTの構造を整理すると：</p>
+                <ul>
+                    <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
+                    <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
+                    <li>
+                        <strong>欠けているもの</strong> =
+                        <span class="highlight">達成したい状態（Goal）</span>
+                    </li>
+                </ul>
+                <p>ゴールが明確でないと、適切なTryを考えるのが難しく、優先順位も付けづらい。</p>
+            </section>
 
-            <h2>根本原因：評価基準（Goal）が後回しになっている</h2>
-            <p>KPTの構造を整理すると：</p>
-            <ul>
-                <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
-                <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
-                <li>
-                    <strong>欠けているもの</strong> =
-                    <span class="highlight">達成したい状態（Goal）</span>
-                </li>
-            </ul>
-            <p>ゴールが明確でないと、適切なTryを考えるのが難しく、優先順位も付けづらい。</p>
-
-            <hr />
-
-            <h2>解決策：KPGTへの拡張</h2>
-            <p>KPTに <strong>G (Goal)</strong> を追加し、順序を変更します：</p>
-            <pre>
+            <section>
+                <h2>解決策：KPGTへの拡張</h2>
+                <p>KPTに <strong>G (Goal)</strong> を追加し、順序を変更します：</p>
+                <pre>
 K (Keep):    うまくいった事実
 P (Problem): うまくいかなかった事実
 G (Goal):    そもそも何を達成したいのか ← NEW!
 T (Try):     Goalを満たすための仮説</pre
-            >
+                >
+            </section>
 
-            <hr />
+            <section>
+                <h2>新しいふりかえりフロー</h2>
 
-            <h2>新しいふりかえりフロー</h2>
+                <div class="flow-step">
+                    <strong>1. できごとを思い出す</strong>
+                    <span class="time">10分</span>
+                    <p>これまで通り、期間中の出来事を振り返る。</p>
+                </div>
 
-            <div class="flow-step">
-                <strong>1. できごとを思い出す</strong>
-                <span class="time">10分</span>
-                <p style="margin-top: 8px">これまで通り、期間中の出来事を振り返る。</p>
-            </div>
+                <div class="flow-step">
+                    <strong>2. Keep, Problemを出す</strong>
+                    <span class="time">10分</span>
+                    <ul>
+                        <li>Keep: うまくいったこと</li>
+                        <li>Problem: うまくいかなかったこと</li>
+                    </ul>
+                </div>
 
-            <div class="flow-step">
-                <strong>2. Keep, Problemを出す</strong>
-                <span class="time">10分</span>
-                <ul style="margin-top: 8px">
-                    <li>Keep: うまくいったこと</li>
-                    <li>Problem: うまくいかなかったこと</li>
-                </ul>
-            </div>
+                <div class="flow-step">
+                    <strong>3. Goal（達成したい状態）を確認・言語化</strong>
+                    <span class="new-badge">NEW!</span>
+                    <span class="time">10分</span>
+                    <p>Keep, Problemを見ながら：</p>
+                    <ul>
+                        <li>「このProblemって、どういう状態になれば解決？」</li>
+                        <li>「複数のProblemに共通するテーマは？」</li>
+                        <li>「そもそも私たちは何を達成したいんだっけ？」</li>
+                    </ul>
+                    <p>を話し合い、達成したいゴールを言語化する。</p>
+                </div>
 
-            <div class="flow-step" style="border-left-color: #e74c3c">
-                <strong>3. Goal（達成したい状態）を確認・言語化</strong>
-                <span class="new-badge">NEW!</span>
-                <span class="time">10分</span>
-                <p style="margin-top: 8px">Keep, Problemを見ながら：</p>
+                <div class="flow-step">
+                    <strong>4. 投票して解決するGoalを決める</strong>
+                    <span class="new-badge">NEW!</span>
+                    <span class="time">5分</span>
+                    <p>
+                        出されたGoalの中から、今期取り組むGoalを投票で選ぶ。<br />（≒取り組むKeep,
+                        Problemを決める）
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <strong>5. Tryを出す</strong>
+                    <span class="time">10分</span>
+                    <p>
+                        <strong>選ばれたGoalを満たすための仮説</strong
+                        >として、Tryを考える。<br />この時点で、TryとGoalの対応関係が明確になっている。
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <strong>6. 投票してTryを決める</strong>
+                    <span class="time">5分</span>
+                    <p>Goalへの寄与度を基準に、実施するTryを投票で選ぶ。</p>
+                </div>
+
+                <div class="flow-step">
+                    <strong>7. SMARTな目標にする</strong>
+                    <span class="time">10分</span>
+                    <p>
+                        選ばれたTryを、SMART（具体的・測定可能・達成可能・関連性・期限）な目標に落とし込む。
+                    </p>
+                </div>
+
+                <p style="text-align: right; color: var(--text-muted); margin-top: 1rem">
+                    <strong>合計：60分</strong>
+                </p>
+                <p style="font-size: 0.9em; color: var(--text-muted)">
+                    ※Goalに時間をかけても、Try出しが効率化するため総時間は変わらない
+                </p>
+            </section>
+
+            <section>
+                <h2>KPGTの効果</h2>
+
+                <div class="benefit">
+                    <h3>1. Tryが出しやすくなる</h3>
+                    <p>
+                        「何をする？」ではなく「このGoalを達成するには？」という明確な問いに変わる。
+                    </p>
+                </div>
+
+                <div class="benefit">
+                    <h3>2. TryとProblemの対応が明確</h3>
+                    <p>
+                        どのGoalのためのTryなのかが構造的に明確になり、FigJam上でも可視化しやすい。
+                    </p>
+                </div>
+
+                <div class="benefit">
+                    <h3>3. 優先度を間違えない</h3>
+                    <p>
+                        最優先のGoalが先に決まっているため、本質的でないTryを選んでしまうリスクが減る。
+                    </p>
+                </div>
+
+                <div class="benefit">
+                    <h3>4. 投票が2段階になり判断しやすい</h3>
+                    <ul>
+                        <li>第1段階：Goal選択（何を達成したいか）</li>
+                        <li>第2段階：Try選択（どう達成するか）</li>
+                    </ul>
+                    <p>判断基準が明確になり、投票しやすい。</p>
+                </div>
+
+                <div class="benefit">
+                    <h3>5. 次回の評価がしやすい</h3>
+                    <p>次のふりかえりで「前回のGoalは達成できたか？」を基準に評価できる。</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Goalを出すときのコツ</h2>
+
+                <h3>問いかけ例</h3>
                 <ul>
                     <li>「このProblemって、どういう状態になれば解決？」</li>
                     <li>「複数のProblemに共通するテーマは？」</li>
                     <li>「そもそも私たちは何を達成したいんだっけ？」</li>
                 </ul>
-                <p>を話し合い、達成したいゴールを言語化する。</p>
-            </div>
 
-            <div class="flow-step" style="border-left-color: #e74c3c">
-                <strong>4. 投票して解決するGoalを決める</strong>
-                <span class="new-badge">NEW!</span>
-                <span class="time">5分</span>
-                <p style="margin-top: 8px">
-                    出されたGoalの中から、今期取り組むGoalを投票で選ぶ。<br />（≒取り組むKeep,
-                    Problemを決める）
-                </p>
-            </div>
-
-            <div class="flow-step">
-                <strong>5. Tryを出す</strong>
-                <span class="time">10分</span>
-                <p style="margin-top: 8px">
-                    <strong>選ばれたGoalを満たすための仮説</strong
-                    >として、Tryを考える。<br />この時点で、TryとGoalの対応関係が明確になっている。
-                </p>
-            </div>
-
-            <div class="flow-step">
-                <strong>6. 投票してTryを決める</strong>
-                <span class="time">5分</span>
-                <p style="margin-top: 8px">Goalへの寄与度を基準に、実施するTryを投票で選ぶ。</p>
-            </div>
-
-            <div class="flow-step">
-                <strong>7. SMARTな目標にする</strong>
-                <span class="time">10分</span>
-                <p style="margin-top: 8px">
-                    選ばれたTryを、SMART（具体的・測定可能・達成可能・関連性・期限）な目標に落とし込む。
-                </p>
-            </div>
-
-            <p style="text-align: right; color: #7f8c8d; margin-top: 12px">
-                <strong>合計：60分</strong>
-            </p>
-            <p style="font-size: 0.9em; color: #7f8c8d">
-                ※Goalに時間をかけても、Try出しが効率化するため総時間は変わらない
-            </p>
-
-            <hr />
-
-            <h2>KPGTの効果</h2>
-
-            <div class="benefit">
-                <h3 style="margin-top: 0">1. Tryが出しやすくなる</h3>
-                <p>「何をする？」ではなく「このGoalを達成するには？」という明確な問いに変わる。</p>
-            </div>
-
-            <div class="benefit">
-                <h3 style="margin-top: 0">2. TryとProblemの対応が明確</h3>
-                <p>どのGoalのためのTryなのかが構造的に明確になり、FigJam上でも可視化しやすい。</p>
-            </div>
-
-            <div class="benefit">
-                <h3 style="margin-top: 0">3. 優先度を間違えない</h3>
-                <p>
-                    最優先のGoalが先に決まっているため、本質的でないTryを選んでしまうリスクが減る。
-                </p>
-            </div>
-
-            <div class="benefit">
-                <h3 style="margin-top: 0">4. 投票が2段階になり判断しやすい</h3>
-                <ul style="margin-bottom: 0">
-                    <li>第1段階：Goal選択（何を達成したいか）</li>
-                    <li>第2段階：Try選択（どう達成するか）</li>
+                <h3>良いGoalの例</h3>
+                <p><span class="check">✅</span> <strong>測定可能</strong>（状態を確認できる）</p>
+                <ul>
+                    <li>「全員が週次でリリースできる状態を保つ」</li>
+                    <li>「新メンバーが2週間で自走できる」</li>
+                    <li>「本番障害をゼロにする」</li>
                 </ul>
-                <p>判断基準が明確になり、投票しやすい。</p>
-            </div>
+                <p>
+                    <span class="check">✅</span>
+                    <strong>具体的</strong>（Tryとのつながりがイメージできる）
+                </p>
 
-            <div class="benefit">
-                <h3 style="margin-top: 0">5. 次回の評価がしやすい</h3>
-                <p>次のふりかえりで「前回のGoalは達成できたか？」を基準に評価できる。</p>
-            </div>
+                <h3>悪いGoalの例</h3>
+                <p><span class="cross">❌</span> <strong>抽象的すぎる</strong></p>
+                <ul>
+                    <li>「チームを良くする」</li>
+                    <li>「生産性を上げる」</li>
+                </ul>
+                <p style="margin-left: 1.5em">→ これではTryを考えにくく、評価もできない</p>
+            </section>
 
-            <hr />
+            <section>
+                <h2>まずは実験として</h2>
+                <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
 
-            <h2>Goalを出すときのコツ</h2>
+                <h3>測定ポイント</h3>
+                <ul>
+                    <li>Try出しの時間が減ったか</li>
+                    <li>投票がスムーズになったか</li>
+                    <li>TryとProblemの対応が明確になったか</li>
+                    <li>チーム全体で納得感のあるTryを選べたか</li>
+                </ul>
+            </section>
 
-            <h3>問いかけ例</h3>
-            <ul>
-                <li>「このProblemって、どういう状態になれば解決？」</li>
-                <li>「複数のProblemに共通するテーマは？」</li>
-                <li>「そもそも私たちは何を達成したいんだっけ？」</li>
-            </ul>
-
-            <h3>良いGoalの例</h3>
-            <p><span class="check">✅</span> <strong>測定可能</strong>（状態を確認できる）</p>
-            <ul>
-                <li>「全員が週次でリリースできる状態を保つ」</li>
-                <li>「新メンバーが2週間で自走できる」</li>
-                <li>「本番障害をゼロにする」</li>
-            </ul>
-            <p>
-                <span class="check">✅</span>
-                <strong>具体的</strong>（Tryとのつながりがイメージできる）
-            </p>
-
-            <h3>悪いGoalの例</h3>
-            <p><span class="cross">❌</span> <strong>抽象的すぎる</strong></p>
-            <ul>
-                <li>「チームを良くする」</li>
-                <li>「生産性を上げる」</li>
-            </ul>
-            <p style="margin-left: 1.5em">→ これではTryを考えにくく、評価もできない</p>
-
-            <hr />
-
-            <h2>まずは実験として</h2>
-            <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
-
-            <h3>測定ポイント</h3>
-            <ul>
-                <li>Try出しの時間が減ったか</li>
-                <li>投票がスムーズになったか</li>
-                <li>TryとProblemの対応が明確になったか</li>
-                <li>チーム全体で納得感のあるTryを選べたか</li>
-            </ul>
-
-            <hr />
-
-            <div class="summary">
+            <section class="summary">
                 <h2>まとめ</h2>
                 <p>
                     KPTに <strong>Goal</strong> を追加し、<strong>Goal → Try</strong>
@@ -377,7 +459,9 @@ T (Try):     Goalを満たすための仮説</pre
                 <p style="margin-top: 1em; font-weight: bold">
                     まずは1回、実験的に試してみませんか？
                 </p>
-            </div>
+            </section>
+
+            <footer>手法提案として作成 / 2025</footer>
         </div>
     </body>
 </html>
