@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artifacts - ドキュメント一覧</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        line-height: 1.8;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 3px solid #6366f1;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        color: #718096;
+        margin-bottom: 1rem;
+      }
+
+      .document-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .document-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 5px solid #6366f1;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .document-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+      }
+
+      .document-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .document-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .document-description {
+        color: #4a5568;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .document-link {
+        display: inline-flex;
+        align-items: center;
+        background: #6366f1;
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .document-link:hover {
+        background: #4f46e5;
+        transform: translateX(2px);
+      }
+
+      .document-link::after {
+        content: "→";
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+      }
+
+      .document-link:hover::after {
+        transform: translateX(3px);
+      }
+
+      .meta-info {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: #718096;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 1rem;
+      }
+
+      .tag {
+        display: inline-block;
+        background: #f7fafc;
+        color: #4a5568;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
+        border: 1px solid #e2e8f0;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e2e8f0;
+        color: #718096;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .container {
+          padding: 1.5rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .document-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📚 Artifacts</h1>
+        <p class="subtitle">開発手法とプロセスに関するドキュメント集</p>
+      </header>
+
+      <div class="document-grid">
+        <div class="document-card">
+          <h2 class="document-title">
+            生成AIファーストなソフトウェア開発の収束状態
+          </h2>
+          <p class="document-description">
+            AIの能力が成熟し、枠組みが整ったとき、開発はどう変わるか。エンジニアの役割の変化、開発プロセスの進化、そして未来の開発現場について考察します。
+          </p>
+          <a href="ai-first-development-convergence.html" class="document-link">
+            ドキュメントを読む
+          </a>
+          <div class="meta-info">
+            <div class="tag">AI開発</div>
+            <div class="tag">未来予測</div>
+            <div class="tag">開発プロセス</div>
+          </div>
+        </div>
+
+        <div class="document-card">
+          <h2 class="document-title">KPGTふりかえり手法の提案</h2>
+          <p class="document-description">
+            従来のKPTふりかえりの課題を解決する新しい手法「KPGT」を提案。ゴール設定を先行させることで、より効果的なふりかえりを実現します。
+          </p>
+          <a href="kpgt-retrospective.html" class="document-link">
+            ドキュメントを読む
+          </a>
+          <div class="meta-info">
+            <div class="tag">ふりかえり</div>
+            <div class="tag">チーム運営</div>
+            <div class="tag">手法改善</div>
+          </div>
+        </div>
+
+        <div class="document-card">
+          <h2 class="document-title">
+            「それ、本当に困ってる？」を見極める3点セット
+          </h2>
+          <p class="document-description">
+            ふりかえりで出てくる問題が本当に対処すべきものなのかを判断するための3つの観点。「誰が」「どんなとき」「どれくらい」で痛みを具体化します。
+          </p>
+          <a href="problem-evaluation-guide.html" class="document-link">
+            ドキュメントを読む
+          </a>
+          <div class="meta-info">
+            <div class="tag">問題分析</div>
+            <div class="tag">優先順位</div>
+            <div class="tag">意思決定</div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>🚀 継続的な学習と改善のために</p>
+        <p>Updated: <span id="last-updated"></span></p>
+      </footer>
+    </div>
+
+    <script>
+      // 最終更新日を自動で表示
+      document.getElementById("last-updated").textContent =
+        new Date().toLocaleDateString("ja-JP", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+    </script>
+  </body>
+</html>

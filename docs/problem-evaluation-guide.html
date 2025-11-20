@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「それ、本当に困ってる？」を見極める3点セット</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fafafa;
+            color: #333;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+        
+        .intro {
+            background-color: #fff;
+            border-left: 4px solid #2563eb;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .intro p {
+            margin: 0.5rem 0;
+        }
+        
+        .three-points {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .point {
+            margin-bottom: 1.5rem;
+        }
+        
+        .point:last-child {
+            margin-bottom: 0;
+        }
+        
+        .point-label {
+            font-weight: bold;
+            color: #2563eb;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .option {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .usage {
+            background-color: #f0fdf4;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .usage p {
+            margin: 0.5rem 0;
+        }
+        
+        .example {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .before-after {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .before, .after {
+            padding: 1rem;
+            border-radius: 6px;
+        }
+        
+        .before {
+            background-color: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .after {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+        }
+        
+        .label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .before .label {
+            color: #dc2626;
+        }
+        
+        .after .label {
+            color: #16a34a;
+        }
+        
+        .content {
+            margin: 0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #e5e5e5;
+            }
+            
+            h1 {
+                border-bottom-color: #3b82f6;
+            }
+            
+            h2 {
+                color: #60a5fa;
+            }
+            
+            .intro {
+                background-color: #262626;
+                border-left-color: #3b82f6;
+            }
+            
+            .three-points {
+                background-color: #262626;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            
+            .point-label {
+                color: #60a5fa;
+            }
+            
+            .option {
+                background-color: #3730a3;
+                color: #e0e7ff;
+            }
+            
+            .usage {
+                background-color: #14532d;
+            }
+            
+            .example {
+                background-color: #262626;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            
+            .before {
+                background-color: #451a1a;
+                border-left-color: #f87171;
+            }
+            
+            .after {
+                background-color: #14532d;
+                border-left-color: #4ade80;
+            }
+            
+            .before .label {
+                color: #f87171;
+            }
+            
+            .after .label {
+                color: #4ade80;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>「それ、本当に困ってる？」を見極める3点セット</h1>
+    
+    <div class="intro">
+        <p>ふりかえりで出てくるProblemは、すべてが今すぐ対処すべきものとは限りません。</p>
+        <p>「痛み」を具体化して、取り組む優先度を判断しましょう。</p>
+    </div>
+    
+    <h2>3点セット</h2>
+    <div class="three-points">
+        <div class="point">
+            <span class="point-label">誰が</span>
+            <div class="options">
+                <span class="option">ユーザー</span>
+                <span class="option">開発者</span>
+                <span class="option">レビュアー</span>
+                <span class="option">運用者</span>
+                <span class="option">CS担当</span>
+                <span class="option">営業</span>
+            </div>
+        </div>
+        <div class="point">
+            <span class="point-label">何をするときに</span>
+            <div class="options">
+                <span class="option">機能を使う</span>
+                <span class="option">問い合わせる</span>
+                <span class="option">実装する</span>
+                <span class="option">テストする</span>
+                <span class="option">レビューする</span>
+                <span class="option">デプロイする</span>
+                <span class="option">障害対応する</span>
+                <span class="option">オンボーディングする</span>
+            </div>
+        </div>
+        <div class="point">
+            <span class="point-label">どのくらい困る</span>
+            <div class="options">
+                <span class="option">時間（分/時間/日）</span>
+                <span class="option">頻度（毎回/週N回/月N回）</span>
+                <span class="option">件数（月N件）</span>
+            </div>
+        </div>
+    </div>
+    
+    <h2>使い方</h2>
+    <div class="usage">
+        <p>✍️ Problemが出たらこの3点で説明してみる</p>
+        <p>埋められないなら「気になること」として保留し、本当に困るまで待つ</p>
+    </div>
+    
+    <h2>「べき論」と実害のギャップに注意 💡</h2>
+    <div class="intro">
+        <p>「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。</p>
+        <p>これらに照らすと「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。</p>
+        <p>Problemが出たら「一般的には良くないとされているが、この文脈で本当に困っているか？」を確認しましょう。</p>
+    </div>
+    
+    <h2>例 📊</h2>
+    <div class="example">
+        <p style="font-weight: bold; margin-bottom: 1rem; color: #2563eb;">実は影響が大きい例 🔥</p>
+        <div class="before-after">
+            <div class="before">
+                <div class="label">Before</div>
+                <p class="content">「問い合わせ対応が手作業で面倒」</p>
+            </div>
+            <div class="after">
+                <div class="label">After</div>
+                <p class="content">「ユーザーが、問い合わせ後に、回答まで平均3日待っている（月50件）」</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="example" style="margin-top: 1rem;">
+        <p style="font-weight: bold; margin-bottom: 1rem; color: #2563eb;">実は影響が小さい例 🤔</p>
+        <div class="before-after">
+            <div class="before">
+                <div class="label">Before</div>
+                <p class="content">「この機能のコードが古い書き方のまま」</p>
+            </div>
+            <div class="after">
+                <div class="label">After</div>
+                <p class="content">「年1回の更新時しか触らず、動作も安定しているので実害なし → 保留」</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
