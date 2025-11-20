@@ -32,13 +32,12 @@ export default {
       },
       fontFamily: {
         sans: [
+          'Outfit',
+          '"M PLUS Rounded 1c"',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
           'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          '"Noto Sans"',
           'sans-serif',
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',

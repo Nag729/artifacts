@@ -60,7 +60,15 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ja',
       },
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/artifacts/favicon.svg' }],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/artifacts/favicon.svg' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Outfit:wght@400;500;600;700&display=swap',
+        },
+      ],
       meta: [
         { name: 'format-detection', content: 'telephone=no' },
         {
