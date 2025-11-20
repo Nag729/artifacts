@@ -67,9 +67,31 @@
                 letter-spacing: -0.015em;
             }
 
+            .github-link {
+                color: #515154;
+                text-decoration: underline;
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                padding: 0.2rem 0.4rem;
+                border-radius: 8px;
+            }
+
+            .github-link:hover {
+                color: #007aff;
+                background: rgba(0, 122, 255, 0.08);
+            }
+
             @media (prefers-color-scheme: dark) {
                 h1 {
                     color: #ffffff;
+                }
+
+                .github-link {
+                    color: #ebebf5;
+                }
+
+                .github-link:hover {
+                    color: #0a84ff;
+                    background: rgba(10, 132, 255, 0.12);
                 }
             }
 
@@ -247,7 +269,17 @@
     <body>
         <div class="container">
             <header>
-                <h1>📚 Nag729 - Artifacts</h1>
+                <h1>
+                    📚
+                    <a
+                        href="https://github.com/Nag729"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-link"
+                        >Nag729</a
+                    >
+                    - Artifacts
+                </h1>
                 <p class="subtitle">生成AIと作ったドキュメント集</p>
             </header>
 
