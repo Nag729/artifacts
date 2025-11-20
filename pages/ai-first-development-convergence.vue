@@ -101,53 +101,15 @@
       </BeforeAfter>
 
       <h2>残り続けるもの</h2>
-      <div
-        class="my-8 p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800"
-      >
-        <h3
-          class="text-xl font-bold text-green-900 dark:text-green-100 mb-4 flex items-center gap-2"
-        >
-          <Icon name="mdi:check-circle" class="w-6 h-6" />
-          AIに置き換わらない人間の価値
-        </h3>
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>課題の本質を見極める力</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>外部システムとの統合判断</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>ドメイン知識の妥当性検証</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>トレードオフの意思決定</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>判断の説明責任</span>
-          </li>
+      <BenefitBox title="AIに置き換わらない人間の価値">
+        <ul>
+          <li>課題の本質を見極める力</li>
+          <li>外部システムとの統合判断</li>
+          <li>ドメイン知識の妥当性検証</li>
+          <li>トレードオフの意思決定</li>
+          <li>判断の説明責任</li>
         </ul>
-      </div>
+      </BenefitBox>
 
       <h2>結論</h2>
       <Alert type="info">

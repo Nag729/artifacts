@@ -82,46 +82,14 @@
       </BeforeAfter>
 
       <h2>まとめ</h2>
-      <div
-        class="my-8 p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800"
-      >
-        <h3
-          class="text-xl font-bold text-green-900 dark:text-green-100 mb-4 flex items-center gap-2"
-        >
-          <Icon name="mdi:check-circle" class="w-6 h-6" />
-          3点セットで得られる効果
-        </h3>
-        <ul class="space-y-2">
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>本当に対処すべき問題が明確になる</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>優先順位を付けやすくなる</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>「べき論」に振り回されない</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <Icon
-              name="mdi:check"
-              class="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
-            />
-            <span>チームで納得感のある判断ができる</span>
-          </li>
+      <BenefitBox title="3点セットで得られる効果">
+        <ul>
+          <li>本当に対処すべき問題が明確になる</li>
+          <li>優先順位を付けやすくなる</li>
+          <li>「べき論」に振り回されない</li>
+          <li>チームで納得感のある判断ができる</li>
         </ul>
-      </div>
+      </BenefitBox>
 
       <hr class="my-8" />
       <p class="text-sm text-gray-500 dark:text-gray-400 italic">問題評価ガイドとして作成 / 2025</p>
