@@ -133,8 +133,16 @@
 
             .highlight {
                 background: #fff3cd;
+                color: #856404;
                 padding: 0.25rem 0.5rem;
                 border-radius: 6px;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .highlight {
+                    background: rgba(255, 193, 7, 0.2);
+                    color: #ffc107;
+                }
             }
 
             .new-badge {
@@ -146,6 +154,7 @@
                 font-size: 0.75rem;
                 font-weight: 600;
                 margin-left: 0.5rem;
+                vertical-align: middle;
             }
 
             .check,
@@ -173,10 +182,23 @@
                 position: relative;
             }
 
+            .flow-step-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+
+            .flow-step-title {
+                display: flex;
+                align-items: center;
+            }
+
             .flow-step strong {
                 color: var(--text-primary);
-                display: block;
+                display: inline-block;
                 margin-bottom: 0.5rem;
+                margin-right: 0.5rem;
             }
 
             .time {
