@@ -9,17 +9,19 @@ date: 2025-11-20
 
 現在の KPT ふりかえりには、以下の構造的な課題があります：
 
-### 1. TRY が思い浮かばないことが多い
-
+::check-list
+::check-item{type="bad" label="TRY が思い浮かばない"}
 Keep, Problem を出した後、「で、何をする？」となり、Try が出にくい場面がある。
+::
 
-### 2. Try と Keep, Problem の対応関係が不明確
-
+::check-item{type="bad" label="対応関係が不明確"}
 Try と Keep, Problem の対応が FigJam に明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。
+::
 
-### 3. 本当に最優先のゴールか曖昧
-
+::check-item{type="bad" label="最優先のゴールが曖昧"}
 Try の後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。
+::
+::
 
 ## 根本原因：評価基準（Goal）が後回しになっている
 
@@ -33,14 +35,14 @@ KPT の構造を整理すると：
 
 ## 解決策：KPGT への拡張
 
-KPT に **G (Goal)** を追加し、順序を変更します：
-
+::diagram{title="KPT に Goal を追加"}
 ```
 K (Keep):    うまくいった事実
 P (Problem): うまくいかなかった事実
 G (Goal):    そもそも何を達成したいのか ← NEW!
 T (Try):     Goalを満たすための仮説
 ```
+::
 
 ## 新しいふりかえりフロー
 
@@ -91,28 +93,30 @@ Goal への寄与度を基準に、実施する Try を投票で選ぶ。
 
 ## KPGT の効果
 
-### 1. Try が出しやすくなる
-
+::benefit-list
+::benefit-item{title="Try が出しやすくなる" icon="mdi:lightbulb-on"}
 「何をする？」ではなく「この Goal を達成するには？」という明確な問いに変わる。
+::
 
-### 2. Try と Problem の対応が明確
-
+::benefit-item{title="Try と Problem の対応が明確" icon="mdi:link-variant"}
 どの Goal のための Try なのかが構造的に明確になり、FigJam 上でも可視化しやすい。
+::
 
-### 3. 優先度を間違えない
-
+::benefit-item{title="優先度を間違えない" icon="mdi:arrow-up-bold"}
 最優先の Goal が先に決まっているため、本質的でない Try を選んでしまうリスクが減る。
+::
 
-### 4. 投票が 2 段階になり判断しやすい
-
-- **第 1 段階**: Goal 選択（何を達成したいか）
-- **第 2 段階**: Try 選択（どう達成するか）
+::benefit-item{title="投票が2段階になり判断しやすい" icon="mdi:vote"}
+**第1段階**: Goal 選択（何を達成したいか）
+**第2段階**: Try 選択（どう達成するか）
 
 判断基準が明確になり、投票しやすい。
+::
 
-### 5. 次回の評価がしやすい
-
+::benefit-item{title="次回の評価がしやすい" icon="mdi:chart-line"}
 次のふりかえりで「前回の Goal は達成できたか？」を基準に評価できる。
+::
+::
 
 ## Goal を出すときのコツ
 
@@ -149,23 +153,32 @@ Try を考えにくく、評価もできない
 
 次回のふりかえりで試してみて、効果を測定しましょう：
 
-### 測定ポイント
+::check-list
+::check-item{type="good" label="Try 出しの時間"}
+Try 出しの時間が減ったか
+::
 
-- Try 出しの時間が減ったか
-- 投票がスムーズになったか
-- Try と Problem の対応が明確になったか
-- チーム全体で納得感のある Try を選べたか
+::check-item{type="good" label="投票のスムーズさ"}
+投票がスムーズになったか
+::
+
+::check-item{type="good" label="対応関係の明確さ"}
+Try と Problem の対応が明確になったか
+::
+
+::check-item{type="good" label="納得感"}
+チーム全体で納得感のある Try を選べたか
+::
+::
 
 ## まとめ
 
-KPT に **Goal** を追加し、**Goal → Try** の順序で考えることで：
-
+::key-points{title="KPGT で得られる効果"}
 - 何を達成したいかが明確になる
 - Try が出しやすくなる
 - 優先度を間違えない
 - 評価しやすくなる
-
-という効果が期待できます。
+::
 
 ---
 
