@@ -12,11 +12,7 @@
     </p>
 
     <div class="flex flex-wrap gap-2 mb-3">
-      <span
-        v-for="tag in article.tags"
-        :key="tag"
-        class="tag"
-      >
+      <span v-for="tag in article.tags" :key="tag" class="tag">
         {{ tag }}
       </span>
     </div>
@@ -28,8 +24,9 @@
 </template>
 
 <script setup lang="ts">
-interface Article {
-  _path: string
+import type { ParsedContent } from '@nuxt/content'
+
+interface Article extends ParsedContent {
   title: string
   description: string
   tags: string[]
@@ -45,7 +42,7 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 </script>

@@ -1,62 +1,77 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    future: {
-        compatibilityVersion: 4,
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  compatibilityDate: '2024-11-01',
+
+  devtools: { enabled: true },
+
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/sitemap',
+    '@nuxt/eslint',
+  ],
+
+  // Content module configuration
+  content: {
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
     },
+    markdown: {
+      toc: {
+        depth: 3,
+        searchDepth: 3,
+      },
+    },
+  },
 
-    compatibilityDate: "2024-11-01",
+  // Color mode configuration for dark mode
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+  },
 
-    devtools: { enabled: true },
+  // Tailwind CSS configuration
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: 'tailwind.config.js',
+  },
 
-    modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxtjs/sitemap"],
+  // Static site generation
+  ssr: true,
 
-    // Content module configuration
-    content: {
-        highlight: {
-            theme: {
-                default: "github-light",
-                dark: "github-dark",
-            },
+  // App configuration
+  app: {
+    baseURL: '/artifacts/',
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: 'Nag729 - artifacts',
+      titleTemplate: '%s | Nag729 - artifacts',
+      htmlAttrs: {
+        lang: 'ja',
+      },
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      meta: [
+        { name: 'format-detection', content: 'telephone=no' },
+        {
+          name: 'description',
+          content: '開発・チーム運営に関する思考や手法をまとめたドキュメントサイト',
         },
-        markdown: {
-            toc: {
-                depth: 3,
-                searchDepth: 3,
-            },
-        },
+      ],
     },
+  },
 
-    // Color mode configuration for dark mode
-    colorMode: {
-        classSuffix: "",
-        preference: "system",
-        fallback: "light",
-    },
-
-    // Tailwind CSS configuration
-    tailwindcss: {
-        cssPath: "~/assets/css/tailwind.css",
-        configPath: "tailwind.config.js",
-    },
-
-    // Static site generation
-    ssr: true,
-
-    // App configuration
-    app: {
-        head: {
-            charset: "utf-8",
-            viewport: "width=device-width, initial-scale=1",
-            htmlAttrs: {
-                lang: "ja",
-            },
-            link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-            meta: [{ name: "format-detection", content: "telephone=no" }],
-        },
-    },
-
-    // Sitemap configuration
-    site: {
-        url: "https://nag729.github.io/artifacts/",
-    },
-});
+  // Sitemap configuration
+  site: {
+    url: 'https://nag729.github.io',
+  },
+})

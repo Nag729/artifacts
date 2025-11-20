@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.nuxt
+.output
+.nitro
+dist
+
+# Cache
+.cache
+
+# Misc
+.DS_Store

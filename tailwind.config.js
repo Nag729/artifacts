@@ -7,7 +7,7 @@ export default {
     './app/**/*.{js,vue,ts}',
     './plugins/**/*.{js,ts}',
     './app.vue',
-    './error.vue'
+    './error.vue',
   ],
   darkMode: 'class',
   theme: {
@@ -25,7 +25,7 @@ export default {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
-        }
+        },
       },
       borderRadius: {
         '2xl': '18px',
@@ -43,12 +43,10 @@ export default {
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
-          '"Noto Color Emoji"'
-        ]
-      }
-    }
+          '"Noto Color Emoji"',
+        ],
+      },
+    },
   },
-  plugins: [
-    require('@tailwindcss/typography')
-  ]
+  plugins: [require('@tailwindcss/typography')],
 }

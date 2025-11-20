@@ -14,11 +14,7 @@
         <div class="flex flex-wrap items-center gap-4">
           <!-- タグ -->
           <div class="flex flex-wrap gap-2">
-            <span
-              v-for="tag in page?.tags"
-              :key="tag"
-              class="tag"
-            >
+            <span v-for="tag in page?.tags" :key="tag" class="tag">
               {{ tag }}
             </span>
           </div>
@@ -41,7 +37,12 @@
         class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
         </svg>
         記事一覧に戻る
       </NuxtLink>
@@ -61,7 +62,7 @@ const { data: page } = await useAsyncData('page-' + route.path, () =>
 if (!page.value) {
   throw createError({
     statusCode: 404,
-    message: 'ページが見つかりません'
+    message: 'ページが見つかりません',
   })
 }
 
@@ -72,8 +73,8 @@ useHead({
     { name: 'description', content: page.value?.description },
     { property: 'og:title', content: page.value?.title },
     { property: 'og:description', content: page.value?.description },
-    { property: 'og:type', content: 'article' }
-  ]
+    { property: 'og:type', content: 'article' },
+  ],
 })
 
 // 日付フォーマット
@@ -83,7 +84,7 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 </script>

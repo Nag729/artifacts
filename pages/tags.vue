@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">
-      タグ一覧
-    </h1>
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8">タグ一覧</h1>
 
     <div v-if="pending" class="text-center py-12">
       <p class="text-gray-500 dark:text-gray-400">読み込み中...</p>
@@ -10,7 +8,9 @@
 
     <div v-else class="space-y-8">
       <div v-for="tag in allTags" :key="tag" class="card p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+        <h2
+          class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-3"
+        >
           <span class="tag">{{ tag }}</span>
           <span class="text-base text-gray-500 dark:text-gray-400">
             ({{ getArticlesByTag(tag).length }}件)
@@ -42,18 +42,24 @@
 </template>
 
 <script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content'
+
+interface Article extends ParsedContent {
+  title: string
+  description: string
+  tags?: string[]
+  date: string
+}
+
 // SEO設定
 useHead({
   title: 'タグ一覧',
-  meta: [
-    { name: 'description', content: 'タグごとの記事一覧' }
-  ]
+  meta: [{ name: 'description', content: 'タグごとの記事一覧' }],
 })
 
 // 記事取得
 const { data: articles, pending } = await useAsyncData('all-articles', () =>
-  queryContent('/')
-    .find()
+  queryContent<Article>('/').find()
 )
 
 // 全タグを抽出
@@ -61,7 +67,7 @@ const allTags = computed(() => {
   if (!articles.value) return []
 
   const tags = new Set<string>()
-  articles.value.forEach((article: any) => {
+  articles.value.forEach((article: Article) => {
     if (article.tags) {
       article.tags.forEach((tag: string) => tags.add(tag))
     }
@@ -75,7 +81,7 @@ const getArticlesByTag = (tag: string) => {
   if (!articles.value) return []
 
   return articles.value
-    .filter((article: any) => article.tags && article.tags.includes(tag))
-    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .filter((article: Article) => article.tags && article.tags.includes(tag))
+    .sort((a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 </script>
