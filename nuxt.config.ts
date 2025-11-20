@@ -60,6 +60,15 @@ export default defineNuxtConfig({
   // Static site generation
   ssr: true,
 
+  // Nitro configuration for full SSG
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/'],
+      failOnError: false,
+    },
+  },
+
   // App configuration
   app: {
     baseURL: '/artifacts/',
