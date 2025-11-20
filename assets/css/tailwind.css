@@ -21,4 +21,32 @@
   .prose-custom {
     @apply prose dark:prose-invert max-w-none;
   }
+
+  /* 見出しのデフォルトアンダーラインを削除 */
+  .prose-custom h2 {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* リンクのアンダーラインアニメーション */
+  .prose-custom a {
+    text-decoration: none !important;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .prose-custom a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  .prose-custom a:hover::after {
+    width: 100%;
+  }
 }

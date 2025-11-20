@@ -60,7 +60,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ja',
       },
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/artifacts/favicon.svg' }],
       meta: [
         { name: 'format-detection', content: 'telephone=no' },
         {

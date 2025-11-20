@@ -5,14 +5,9 @@
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
         Nag729 - artifacts
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
         開発・チーム運営に関する思考や手法をまとめています
       </p>
-
-      <!-- 検索ボックス -->
-      <div class="max-w-2xl mx-auto">
-        <SearchBox />
-      </div>
     </section>
 
     <!-- 記事一覧 -->
