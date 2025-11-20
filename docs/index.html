@@ -21,6 +21,13 @@
                 padding: 2rem;
             }
 
+            @media (prefers-color-scheme: dark) {
+                body {
+                    color: #ffffff;
+                    background: #000000;
+                }
+            }
+
             .container {
                 max-width: 980px;
                 margin: 0 auto;
@@ -31,11 +38,25 @@
                 border: 1px solid rgba(0, 0, 0, 0.08);
             }
 
+            @media (prefers-color-scheme: dark) {
+                .container {
+                    background: #1c1c1e;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    border: 1px solid #38383a;
+                }
+            }
+
             header {
                 text-align: center;
                 margin-bottom: 4rem;
                 padding-bottom: 3rem;
                 border-bottom: 1px solid #d2d2d7;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                header {
+                    border-bottom: 1px solid #38383a;
+                }
             }
 
             h1 {
@@ -46,11 +67,23 @@
                 letter-spacing: -0.015em;
             }
 
+            @media (prefers-color-scheme: dark) {
+                h1 {
+                    color: #ffffff;
+                }
+            }
+
             .subtitle {
                 font-size: 1.25rem;
                 color: #86868b;
                 margin-bottom: 1rem;
                 font-weight: 400;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .subtitle {
+                    color: #8e8e93;
+                }
             }
 
             .document-grid {
@@ -74,6 +107,14 @@
                 cursor: pointer;
             }
 
+            @media (prefers-color-scheme: dark) {
+                .document-card {
+                    background: #2c2c2e;
+                    border: 1px solid #38383a;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                }
+            }
+
             .document-card::before {
                 display: none;
             }
@@ -84,9 +125,22 @@
                 border-color: #d0d0d0;
             }
 
+            @media (prefers-color-scheme: dark) {
+                .document-card:hover {
+                    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.3);
+                    border-color: #48484a;
+                }
+            }
+
             .document-card:active {
                 transform: translateY(-2px);
                 box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .document-card:active {
+                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+                }
             }
 
             .document-title {
@@ -98,11 +152,23 @@
                 letter-spacing: -0.01em;
             }
 
+            @media (prefers-color-scheme: dark) {
+                .document-title {
+                    color: #ffffff;
+                }
+            }
+
             .document-description {
                 color: #515154;
                 margin-bottom: 2rem;
                 font-size: 1rem;
                 line-height: 1.6;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .document-description {
+                    color: #ebebf5;
+                }
             }
 
             .meta-info {
@@ -111,6 +177,13 @@
                 color: #86868b;
                 border-top: 1px solid #f0f0f0;
                 padding-top: 1.5rem;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .meta-info {
+                    color: #8e8e93;
+                    border-top: 1px solid #38383a;
+                }
             }
 
             .tag {
@@ -143,6 +216,13 @@
                 border-top: 1px solid #d2d2d7;
                 color: #86868b;
                 font-size: 0.9375rem;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                footer {
+                    border-top: 1px solid #38383a;
+                    color: #8e8e93;
+                }
             }
 
             @media (max-width: 768px) {
