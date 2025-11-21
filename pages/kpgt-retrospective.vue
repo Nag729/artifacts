@@ -6,30 +6,41 @@
     </p>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
+      <AnchorH2 id="what-is-kpt">KPT とは</AnchorH2>
+      <p>
+        KPT
+        は、<strong>Keep（続けること）</strong>・<strong>Problem（問題点）</strong>・<strong>Try（試すこと）</strong>の3つの観点でふりかえりを行うフレームワークです。
+        シンプルで導入しやすいため、多くのチームで採用されています。
+      </p>
+      <Diagram title="従来の KPT の流れ">
+        <pre><code>1. Keep / Problem を出す（過去の振り返り）
+2. Try を出す（次のアクション）
+3. 投票して Try を決める</code></pre>
+      </Diagram>
+
       <AnchorH2 id="kpt-issues">KPT の課題</AnchorH2>
-      <p>現在の KPT ふりかえりには、以下の構造的な課題があります：</p>
+      <p>しかし、KPT には以下のような構造的な課題があります：</p>
 
       <CheckList>
-        <CheckItem type="bad" label="TRY が思い浮かばない">
-          Keep, Problem を出した後、「で、何をする？」となり、Try が出にくい場面がある。
+        <CheckItem type="bad" label="TRY が対症療法になりがち">
+          Problem を裏返しただけの Try になり、根本原因が解決されない。
         </CheckItem>
 
-        <CheckItem type="bad" label="対応関係が不明確">
-          Try と Keep, Problem の対応が FigJam
-          に明文化されず、口頭で確認・脳内で関連付けが必要になっている。フレームワークとして構造的な問題がある。
+        <CheckItem type="bad" label="TRY と Problem の関連が曖昧">
+          どの Problem に対する Try なのかが明確でなく、実は解決したい課題が食い違うことも。
         </CheckItem>
 
         <CheckItem type="bad" label="最優先のゴールが曖昧">
-          Try の後にゴールを整理しているため、本当にそれが最優先のゴールだったのか曖昧になっている。
+          Try だけを見ていると、本当に重要な課題に取り組めているのか分からない。
         </CheckItem>
       </CheckList>
 
-      <AnchorH2 id="root-cause">根本原因：評価基準（Goal）が後回しになっている</AnchorH2>
+      <AnchorH2 id="root-cause">根本原因：評価基準（Goal）が明確になっていない</AnchorH2>
       <p>KPT の構造を整理すると：</p>
       <ul>
         <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
         <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
-        <li><strong>欠けているもの</strong> = <strong>達成したい状態（Goal）</strong></li>
+        <li><Badge type="warning">欠けているもの</Badge> <strong>Goal</strong> = 達成したい状態</li>
       </ul>
       <p>ゴールが明確でないと、適切な Try を考えるのが難しく、優先順位も付けづらい。</p>
 
@@ -43,19 +54,19 @@ T (Try):     Goalを満たすための仮説</code></pre>
 
       <AnchorH2 id="new-flow">新しいふりかえりフロー</AnchorH2>
       <StepFlow>
-        <Step number="1" title="できごとを思い出す" duration="10分">
+        <Step number="1" title="できごとを思い出す">
           これまで通り、期間中の出来事を振り返る。
         </Step>
 
-        <Step number="2" title="Keep, Problem を出す" duration="10分">
+        <Step number="2" title="Keep, Problem を出す">
           <ul>
             <li><strong>Keep</strong>: うまくいったこと</li>
             <li><strong>Problem</strong>: うまくいかなかったこと</li>
           </ul>
         </Step>
 
-        <Step number="3" title="Goal（達成したい状態）を確認・言語化" duration="10分">
-          <Badge>NEW</Badge>
+        <Step number="3" title="Goal（達成したい状態）を確認・言語化">
+          <Badge type="info">NEW</Badge>
           Keep, Problem を見ながら：
           <ul>
             <li>「この Problem って、どういう状態になれば解決？」</li>
@@ -65,28 +76,28 @@ T (Try):     Goalを満たすための仮説</code></pre>
           を話し合い、達成したいゴールを言語化する。
         </Step>
 
-        <Step number="4" title="投票して解決する Goal を決める" duration="5分">
-          <Badge>NEW</Badge>
+        <Step number="4" title="投票して解決する Goal を決める">
+          <Badge type="info">NEW</Badge>
           出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br />
           （≒ 取り組む Keep, Problem を決める）
         </Step>
 
-        <Step number="5" title="Try を出す" duration="10分">
+        <Step number="5" title="Try を出す">
           <strong>選ばれた Goal を満たすための仮説</strong> として、Try を考える。<br />
           この時点で、Try と Goal の対応関係が明確になっている。
         </Step>
 
-        <Step number="6" title="投票して Try を決める" duration="5分">
+        <Step number="6" title="投票して Try を決める">
           Goal への寄与度を基準に、実施する Try を投票で選ぶ。
         </Step>
 
-        <Step number="7" title="SMART な目標にする" duration="10分">
+        <Step number="7" title="SMART な目標にする">
           選ばれた Try を、SMART（具体的・測定可能・達成可能・関連性・期限）な目標に落とし込む。
         </Step>
       </StepFlow>
 
       <Alert type="info" title="合計：60 分">
-        ※Goal に時間をかけても、Try 出しが効率化するため総時間は変わらない
+        Goal のステップを追加しても、Try 出しが効率化するため総時間は大きく延びない（はず）
       </Alert>
 
       <AnchorH2 id="benefits">KPGT の効果</AnchorH2>
@@ -96,7 +107,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </BenefitItem>
 
         <BenefitItem title="Try と Problem の対応が明確" icon="mdi:link-variant">
-          どの Goal のための Try なのかが構造的に明確になり、FigJam 上でも可視化しやすい。
+          どの Goal のための Try なのかが構造的に明確になり、ふりかえりツール上でも可視化しやすい。
         </BenefitItem>
 
         <BenefitItem title="優先度を間違えない" icon="mdi:arrow-up-bold">
@@ -168,7 +179,10 @@ T (Try):     Goalを満たすための仮説</code></pre>
       </BenefitBox>
 
       <hr class="my-8" />
-      <p class="text-sm text-gray-500 dark:text-gray-400 italic">手法提案として作成 / 2025</p>
+      <p class="text-sm text-gray-500 dark:text-gray-400 italic">
+        KPT に Goal を加えることで、より本質的なふりかえりを実現する KPGT。<br />
+        一度チームで試してみましょう。
+      </p>
     </div>
   </article>
 </template>
