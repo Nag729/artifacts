@@ -8,7 +8,7 @@
     </p>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
-      <h2>3 点セット</h2>
+      <AnchorH2 id="three-points">3 点セット</AnchorH2>
 
       <InfoCard title="3点セット" icon="mdi:format-list-checks">
         <p>問題を評価するための 3 つの観点：</p>
@@ -43,13 +43,13 @@
         </ul>
       </InfoCard>
 
-      <h2>使い方</h2>
+      <AnchorH2 id="how-to-use">使い方</AnchorH2>
       <Alert type="success">
         ✍️ <strong>Problem が出たらこの 3 点で説明してみる</strong><br /><br />
         埋められないなら「気になること」として保留し、本当に困るまで待つ
       </Alert>
 
-      <h2>「べき論」と実害のギャップに注意</h2>
+      <AnchorH2 id="should-vs-reality">「べき論」と実害のギャップに注意</AnchorH2>
       <Alert type="warning">
         「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。<br /><br />
 
@@ -59,9 +59,9 @@
         が出たら「一般的には良くないとされているが、この文脈で本当に困っているか？」を確認しましょう。
       </Alert>
 
-      <h2>実例で確認</h2>
+      <AnchorH2 id="examples">実例で確認</AnchorH2>
 
-      <h3>実は影響が大きい例 🔥</h3>
+      <AnchorH3 id="high-impact">実は影響が大きい例 🔥</AnchorH3>
       <BeforeAfter>
         <template #before> 「問い合わせ対応が手作業で面倒」 </template>
         <template #after>
@@ -71,7 +71,7 @@
         </template>
       </BeforeAfter>
 
-      <h3>実は影響が小さい例 🤔</h3>
+      <AnchorH3 id="low-impact">実は影響が小さい例 🤔</AnchorH3>
       <BeforeAfter>
         <template #before> 「この機能のコードが古い書き方のまま」 </template>
         <template #after>
@@ -81,7 +81,7 @@
         </template>
       </BeforeAfter>
 
-      <h2>まとめ</h2>
+      <AnchorH2 id="summary">まとめ</AnchorH2>
       <BenefitBox title="3点セットで得られる効果">
         <ul>
           <li>本当に対処すべき問題が明確になる</li>

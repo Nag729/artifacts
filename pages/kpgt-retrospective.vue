@@ -6,7 +6,7 @@
     </p>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
-      <h2>KPT の課題</h2>
+      <AnchorH2 id="kpt-issues">KPT の課題</AnchorH2>
       <p>現在の KPT ふりかえりには、以下の構造的な課題があります：</p>
 
       <CheckList>
@@ -24,7 +24,7 @@
         </CheckItem>
       </CheckList>
 
-      <h2>根本原因：評価基準（Goal）が後回しになっている</h2>
+      <AnchorH2 id="root-cause">根本原因：評価基準（Goal）が後回しになっている</AnchorH2>
       <p>KPT の構造を整理すると：</p>
       <ul>
         <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
@@ -33,7 +33,7 @@
       </ul>
       <p>ゴールが明確でないと、適切な Try を考えるのが難しく、優先順位も付けづらい。</p>
 
-      <h2>解決策：KPGT への拡張</h2>
+      <AnchorH2 id="solution">解決策：KPGT への拡張</AnchorH2>
       <Diagram title="KPT に Goal を追加">
         <pre><code>K (Keep):    うまくいった事実
 P (Problem): うまくいかなかった事実
@@ -41,7 +41,7 @@ G (Goal):    そもそも何を達成したいのか ← NEW!
 T (Try):     Goalを満たすための仮説</code></pre>
       </Diagram>
 
-      <h2>新しいふりかえりフロー</h2>
+      <AnchorH2 id="new-flow">新しいふりかえりフロー</AnchorH2>
       <StepFlow>
         <Step number="1" title="できごとを思い出す" duration="10分">
           これまで通り、期間中の出来事を振り返る。
@@ -88,7 +88,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         ※Goal に時間をかけても、Try 出しが効率化するため総時間は変わらない
       </Alert>
 
-      <h2>KPGT の効果</h2>
+      <AnchorH2 id="benefits">KPGT の効果</AnchorH2>
       <BenefitList>
         <BenefitItem title="Try が出しやすくなる" icon="mdi:lightbulb-on">
           「何をする？」ではなく「この Goal を達成するには？」という明確な問いに変わる。
@@ -114,7 +114,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </BenefitItem>
       </BenefitList>
 
-      <h2>Goal を出すときのコツ</h2>
+      <AnchorH2 id="goal-tips">Goal を出すときのコツ</AnchorH2>
       <Alert type="info">
         <h3 class="text-lg font-bold mb-2">問いかけ例</h3>
         <ul>
@@ -145,7 +145,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </CheckItem>
       </CheckList>
 
-      <h2>まずは実験として</h2>
+      <AnchorH2 id="experiment">まずは実験として</AnchorH2>
       <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
 
       <CheckList>
@@ -157,7 +157,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         <CheckItem type="good" label="納得感"> チーム全体で納得感のある Try を選べたか </CheckItem>
       </CheckList>
 
-      <h2>まとめ</h2>
+      <AnchorH2 id="summary">まとめ</AnchorH2>
       <BenefitBox title="KPGT で得られる効果">
         <ul>
           <li>何を達成したいかが明確になる</li>
