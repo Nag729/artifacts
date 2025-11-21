@@ -89,13 +89,13 @@
       <h2>収束状態の多様性</h2>
       <p>収束状態は一つではなく、プロダクト特性によって異なる姿になる。</p>
 
-      <BeforeAfter beforeTitle="高信頼性領域" afterTitle="迅速な試行錯誤領域">
+      <BeforeAfter before-title="高信頼性領域" after-title="迅速な試行錯誤領域">
         <template #before>
-          <strong>医療・防災・金融など</strong><br /><br />
+          <strong>医療・防災・金融など</strong><br ><br >
           人間によるレビューと承認が多く残り、デプロイ前確認が必須。
         </template>
         <template #after>
-          <strong>コンシューマアプリ・プロトタイプなど</strong><br /><br />
+          <strong>コンシューマアプリ・プロトタイプなど</strong><br ><br >
           AI への委譲度が高く、自律デプロイも許容される。
         </template>
       </BeforeAfter>
@@ -115,14 +115,14 @@
       <Alert type="info">
         収束状態において、エンジニアの本質的な価値は
         <strong>「What（何を作るか）」</strong> と
-        <strong>「Why（なぜそう判断したか）」</strong> に集約される。<br /><br />
+        <strong>「Why（なぜそう判断したか）」</strong> に集約される。<br ><br >
 
         この変化は技術的にはすでに実現可能な段階にあり、枠組みが整うのを待っている状態かもしれない。今から
         AI
         ファーストなワークフローを探求し、「判断者」としてのスキルを磨くことが、その波に乗るための準備となる。
       </Alert>
 
-      <hr class="my-8" />
+      <hr class="my-8" >
       <p class="text-sm text-gray-500 dark:text-gray-400 italic">思考実験として作成 / 2025</p>
     </div>
   </article>

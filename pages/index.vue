@@ -31,7 +31,6 @@
 
 <script setup lang="ts">
 import { getArticlesSortedByDate } from '~/data/articles'
-import type { Article } from '~/types/article'
 
 // SEO設定
 useHead({
