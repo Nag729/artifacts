@@ -1,5 +1,5 @@
 <template>
-  <div v-if="src">
+  <div>
     <img
       :src="resolvedSrc"
       :alt="alt"
@@ -37,8 +37,8 @@
 import { ref, computed } from 'vue'
 
 interface Props {
-  src?: string
-  alt?: string
+  src: string
+  alt: string
   thumbnailClass?: string
 }
 
@@ -48,10 +48,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { imagePath } = useAssetPath()
 
-const resolvedSrc = computed(() => {
-  if (!props.src) return undefined
-  return imagePath(props.src)
-})
+const resolvedSrc = computed(() => imagePath(props.src))
 
 const isModalOpen = ref(false)
 
