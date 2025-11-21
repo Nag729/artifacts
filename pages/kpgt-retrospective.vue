@@ -27,10 +27,10 @@
         </CheckItem>
 
         <CheckItem type="bad" label="TRY と Problem の関連が曖昧">
-          どの Problem に対する Try なのかが明確でなく、実は解決したい課題が食い違うことも。
+          どの Problem に対する Try なのかが明確でなく、別々の課題を思い浮かべていることも。
         </CheckItem>
 
-        <CheckItem type="bad" label="最優先のゴールが曖昧">
+        <CheckItem type="bad" label="適切なゴールなのかが曖昧">
           Try だけを見ていると、本当に重要な課題に取り組めているのか分からない。
         </CheckItem>
       </CheckList>
