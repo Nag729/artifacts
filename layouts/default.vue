@@ -22,3 +22,7 @@
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+setupAnchorScroll()
+</script>

@@ -8,9 +8,9 @@
     </p>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
-      <h2>エンジニアの役割の変化</h2>
+      <AnchorH2 id="engineer-role">エンジニアの役割の変化</AnchorH2>
 
-      <h3>「実装者」から「意思決定者」へ</h3>
+      <AnchorH3 id="implementer-to-decision-maker">「実装者」から「意思決定者」へ</AnchorH3>
       <p>
         収束状態において、エンジニアはコードを書く人から、判断を下す人へと移行する。ワークフローは以下のようになる。
       </p>
@@ -25,14 +25,14 @@
         従来の「発注者とベンダー」に似ているが、フィードバックが数秒〜数分で返るため、要求を対話的に詰めていくスタイルが有効になる。
       </Alert>
 
-      <h2>人間と AI の役割分担</h2>
+      <AnchorH2 id="human-ai-roles">人間と AI の役割分担</AnchorH2>
 
-      <h3>機能要件 → 人間がレビュー</h3>
+      <AnchorH3 id="functional-requirements">機能要件 → 人間がレビュー</AnchorH3>
       <p>
         「何をすべきか」はドメイン知識と意思決定の問題。人間が振る舞いの定義（より読みやすい形式のテスト）をレビューする。
       </p>
 
-      <h3>非機能要件 → AI が自律的に最適化</h3>
+      <AnchorH3 id="non-functional-requirements">非機能要件 → AI が自律的に最適化</AnchorH3>
       <p>
         パフォーマンス、セキュリティ、可用性は明確なメトリクスで定義できるため、AI が計測 → 評価 →
         改善のループを自律的に回せる。
@@ -65,9 +65,9 @@
         </tbody>
       </table>
 
-      <h2>現状と収束状態のギャップ</h2>
+      <AnchorH2 id="gap">現状と収束状態のギャップ</AnchorH2>
 
-      <h3>能力はある、枠組みがない</h3>
+      <AnchorH3 id="capability-without-framework">能力はある、枠組みがない</AnchorH3>
       <p>現在の生成 AI は個別タスクを高精度でこなせる。不足しているのは以下の枠組みである。</p>
 
       <InfoCard title="不足している3つの枠組み" icon="mdi:puzzle">
@@ -86,7 +86,7 @@
         が既存技術を一気に普及させたように、決定版となるツールが登場すれば業界標準になる。
       </Alert>
 
-      <h2>収束状態の多様性</h2>
+      <AnchorH2 id="diversity">収束状態の多様性</AnchorH2>
       <p>収束状態は一つではなく、プロダクト特性によって異なる姿になる。</p>
 
       <BeforeAfter before-title="高信頼性領域" after-title="迅速な試行錯誤領域">
@@ -100,7 +100,7 @@
         </template>
       </BeforeAfter>
 
-      <h2>残り続けるもの</h2>
+      <AnchorH2 id="what-remains">残り続けるもの</AnchorH2>
       <BenefitBox title="AIに置き換わらない人間の価値">
         <ul>
           <li>課題の本質を見極める力</li>
@@ -111,7 +111,7 @@
         </ul>
       </BenefitBox>
 
-      <h2>結論</h2>
+      <AnchorH2 id="conclusion">結論</AnchorH2>
       <Alert type="info">
         収束状態において、エンジニアの本質的な価値は
         <strong>「What（何を作るか）」</strong> と
