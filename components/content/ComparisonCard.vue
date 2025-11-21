@@ -16,7 +16,7 @@
     <!-- Image (clickable for modal) -->
     <div v-if="image" class="mb-4">
       <img
-        :src="image"
+        :src="resolvedImage"
         :alt="imageAlt || title"
         class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
         @click="openModal"
@@ -48,7 +48,7 @@
             <Icon name="mdi:close" class="w-8 h-8" />
           </button>
           <img
-            :src="image"
+            :src="resolvedImage"
             :alt="imageAlt || title"
             class="max-w-full max-h-[85vh] object-contain rounded-lg bg-white p-4 shadow-2xl"
           />
@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Props {
   title: string
@@ -70,7 +70,14 @@ interface Props {
   imageAlt?: string
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const { imagePath } = useAssetPath()
+
+const resolvedImage = computed(() => {
+  if (!props.image) return undefined
+  return imagePath(props.image)
+})
 
 const isModalOpen = ref(false)
 

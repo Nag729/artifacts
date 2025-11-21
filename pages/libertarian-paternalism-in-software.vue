@@ -23,27 +23,65 @@
           <tr>
             <th>アプローチ</th>
             <th>説明</th>
-            <th>ソフトウェアでの例</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>リバタリアニズム</strong></td>
             <td>個人の自由を最大限尊重。強制しない</td>
-            <td>すべての設定を手動で行う高機能エディタ</td>
           </tr>
           <tr>
             <td><strong>パターナリズム</strong></td>
             <td>本人の利益のために介入する</td>
-            <td>特定の操作を禁止・強制するシステム</td>
           </tr>
           <tr>
             <td><strong>リバタリアンパターナリズム</strong></td>
             <td>より良い方向へ誘導しつつ、最終的な選択の自由は残す</td>
-            <td>デフォルト値を推奨設定にしつつ、変更可能にする</td>
           </tr>
         </tbody>
       </table>
+
+      <AnchorH3 id="analogy">アナロジーで理解する：富士山登山ルート</AnchorH3>
+      <p>富士山の登山ルートを例に、3つのアプローチの違いを見てみましょう。</p>
+
+      <ComparisonCards>
+        <ComparisonCard
+          title="リバタリアニズム"
+          icon="🗺️"
+          description="詳細な地図と情報を提供し、登山者が完全に自由にルートを選択します。"
+          image="/images/libertarian-paternalism/libertarianism.png"
+          image-alt="リバタリアニズム：すべてのルートを等しく提示"
+        >
+          <ComparisonPoint type="neutral">すべての選択肢を等しく提示</ComparisonPoint>
+          <ComparisonPoint type="neutral">判断は完全にユーザーに委ねる</ComparisonPoint>
+          <ComparisonPoint type="negative">初心者には判断が難しい</ComparisonPoint>
+        </ComparisonCard>
+
+        <ComparisonCard
+          title="パターナリズム"
+          icon="🚌"
+          description="登山ルート・休憩場所・宿泊場所まですべて決まったツアーを提供します。"
+          image="/images/libertarian-paternalism/paternalism.png"
+          image-alt="パターナリズム：決まったツアーのみ"
+        >
+          <ComparisonPoint type="positive">安全性が高い</ComparisonPoint>
+          <ComparisonPoint type="negative">ユーザーに選択の余地がない</ComparisonPoint>
+          <ComparisonPoint type="negative">柔軟性がない</ComparisonPoint>
+        </ComparisonCard>
+
+        <ComparisonCard
+          title="リバタリアンパターナリズム"
+          icon="🥾"
+          description="主要ルートと登山客の割合を示して推奨をナッジしつつ、最終的な選択は自由です。"
+          image="/images/libertarian-paternalism/libertarian-paternalism.png"
+          image-alt="リバタリアンパターナリズム：推奨を示しつつ選択は自由"
+          :highlighted="true"
+        >
+          <ComparisonPoint type="positive">「70%がこのルートを選択」と表示</ComparisonPoint>
+          <ComparisonPoint type="positive">他のルートも選択可能</ComparisonPoint>
+          <ComparisonPoint type="positive">情報を提供しつつ自由を尊重</ComparisonPoint>
+        </ComparisonCard>
+      </ComparisonCards>
 
       <p>
         では、リバタリアンパターナリズムの思想を実現するにはどうすればいいのでしょうか？
@@ -111,49 +149,6 @@
         例えば「解約ボタンを見つけにくくする」「余計なオプションをデフォルトでONにする」などはダークパターンです。
         ナッジは常に<strong>ユーザーの利益を第一</strong>に考える必要があります。
       </Alert>
-
-      <AnchorH2 id="analogy">アナロジーで理解する：富士山登山ルート</AnchorH2>
-      <p>富士山の登山ルートを例に、3つのアプローチの違いを見てみましょう。</p>
-
-      <!-- 画像は public/images/libertarian-paternalism/ に配置 -->
-      <ComparisonCards>
-        <ComparisonCard
-          title="リバタリアニズム的"
-          icon="🗺️"
-          description="詳細な地図と情報を提供し、登山者が完全に自由にルートを選択します。"
-          image="/images/libertarian-paternalism/libertarianism.png"
-          image-alt="リバタリアニズム的：すべてのルートを等しく提示"
-        >
-          <ComparisonPoint type="neutral">すべての選択肢を等しく提示</ComparisonPoint>
-          <ComparisonPoint type="neutral">判断は完全にユーザーに委ねる</ComparisonPoint>
-          <ComparisonPoint type="negative">初心者には判断が難しい</ComparisonPoint>
-        </ComparisonCard>
-
-        <ComparisonCard
-          title="パターナリズム的"
-          icon="🚌"
-          description="登山ルート・休憩場所・宿泊場所まですべて決まったツアーを提供します。"
-          image="/images/libertarian-paternalism/paternalism.png"
-          image-alt="パターナリズム的：決まったツアーのみ"
-        >
-          <ComparisonPoint type="positive">安全性が高い</ComparisonPoint>
-          <ComparisonPoint type="negative">ユーザーに選択の余地がない</ComparisonPoint>
-          <ComparisonPoint type="negative">柔軟性がない</ComparisonPoint>
-        </ComparisonCard>
-
-        <ComparisonCard
-          title="リバタリアンパターナリズム的"
-          icon="🥾"
-          description="主要ルートと登山客の割合を示して推奨をナッジしつつ、最終的な選択は自由です。"
-          image="/images/libertarian-paternalism/libertarian-paternalism.png"
-          image-alt="リバタリアンパターナリズム的：推奨を示しつつ選択は自由"
-          :highlighted="true"
-        >
-          <ComparisonPoint type="positive">「70%がこのルートを選択」と表示</ComparisonPoint>
-          <ComparisonPoint type="positive">他のルートも選択可能</ComparisonPoint>
-          <ComparisonPoint type="positive">情報を提供しつつ自由を尊重</ComparisonPoint>
-        </ComparisonCard>
-      </ComparisonCards>
 
       <AnchorH2 id="patterns">ソフトウェアへの適用パターン</AnchorH2>
 
@@ -322,7 +317,7 @@
       <Alert type="info" title="結論">
         リバタリアンパターナリズムは、<strong>「ユーザーの自由」</strong>と<strong>「システムによる支援」</strong>のバランスを取るための有効なフレームワークです。
         <br /><br />
-        「銀の弾丸」ではありませんが、「運用でカバー」や「システムによる強制」を減らして「ナッジ」を増やしていくことで、<strong>現場で役に立つシステム</strong>を作る助けになります。
+        常に最適な「銀の弾丸」ではありませんが、「運用でカバー」や「システムによる強制」を減らして「ナッジ」を増やしていくことで、<strong>現場で役に立つシステム</strong>を作る助けになります。
       </Alert>
 
       <hr class="my-8" />
