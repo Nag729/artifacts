@@ -16,7 +16,7 @@
           >
             Nag729
           </a>
-          - artifacts. Built with Nuxt Content.
+          - artifacts. Built with Generative AI.
         </p>
       </div>
     </footer>
