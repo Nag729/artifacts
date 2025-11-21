@@ -5,6 +5,14 @@ import type { Article } from '~/types/article'
  */
 export const articles: Article[] = [
   {
+    slug: 'sync-sandwich',
+    title: '同期サンドイッチ - ミーティングの進め方',
+    description:
+      '分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成',
+    tags: ['ミーティング', '非同期コミュニケーション'],
+    date: '2025-11-21',
+  },
+  {
     slug: 'kpgt-retrospective',
     title: 'KPGTふりかえり手法の提案',
     description: '従来のKPTふりかえりの課題を解決する新しいアプローチ',
