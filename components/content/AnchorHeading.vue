@@ -16,8 +16,8 @@ const props = defineProps<{
 }>()
 
 const handleClick = () => {
-  // URL を更新（ブラウザ履歴に追加）
-  history.pushState(null, '', `#${props.id}`)
+  // URL を更新（履歴には追加しない）
+  history.replaceState(null, '', `#${props.id}`)
 
   // 自前でスクロール（headerOffset を考慮するため）
   scrollToElement(props.id)
