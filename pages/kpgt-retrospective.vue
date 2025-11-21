@@ -55,7 +55,8 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
 
         <Step number="3" title="Goal（達成したい状態）を確認・言語化" duration="10分">
-          🆕 Keep, Problem を見ながら：
+          <Badge>NEW</Badge>
+          Keep, Problem を見ながら：
           <ul>
             <li>「この Problem って、どういう状態になれば解決？」</li>
             <li>「複数の Problem に共通するテーマは？」</li>
@@ -65,7 +66,8 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
 
         <Step number="4" title="投票して解決する Goal を決める" duration="5分">
-          🆕 出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br />
+          <Badge>NEW</Badge>
+          出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br />
           （≒ 取り組む Keep, Problem を決める）
         </Step>
 
@@ -83,8 +85,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
       </StepFlow>
 
-      <Alert type="info">
-        <strong>合計：60 分</strong><br />
+      <Alert type="info" title="合計：60 分">
         ※Goal に時間をかけても、Try 出しが効率化するため総時間は変わらない
       </Alert>
 
@@ -115,8 +116,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
       </BenefitList>
 
       <AnchorH2 id="goal-tips">Goal を出すときのコツ</AnchorH2>
-      <Alert type="info">
-        <h3 class="text-lg font-bold mb-2">問いかけ例</h3>
+      <Alert type="info" title="問いかけ例">
         <ul>
           <li>「この Problem って、どういう状態になれば解決？」</li>
           <li>「複数の Problem に共通するテーマは？」</li>

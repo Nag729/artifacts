@@ -44,16 +44,15 @@
       </InfoCard>
 
       <AnchorH2 id="how-to-use">使い方</AnchorH2>
-      <Alert type="success">
-        ✍️ <strong>Problem が出たらこの 3 点で説明してみる</strong><br /><br />
+      <Alert type="success" title="Problem が出たらこの 3 点で説明してみる">
         埋められないなら「気になること」として保留し、本当に困るまで待つ
       </Alert>
 
       <AnchorH2 id="should-vs-reality">「べき論」と実害のギャップに注意</AnchorH2>
-      <Alert type="warning">
+      <Alert type="warning" title="べき論と実害のギャップ">
         「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。<br /><br />
 
-        これらに照らすと「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。<br /><br />
+        これらに照らすと一見「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。<br /><br />
 
         Problem
         が出たら「一般的には良くないとされているが、この文脈で本当に困っているか？」を確認しましょう。

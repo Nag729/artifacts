@@ -21,7 +21,7 @@
         <Step number="3" title="AI が実装"> AI が自律的に実装・テスト・デプロイまで完了 </Step>
       </StepFlow>
 
-      <Alert type="info">
+      <Alert type="info" title="ポイント">
         従来の「発注者とベンダー」に似ているが、フィードバックが数秒〜数分で返るため、要求を対話的に詰めていくスタイルが有効になる。
       </Alert>
 
@@ -81,7 +81,7 @@
         <p>「ここまでは自律実行、ここからは人間に確認」という境界の宣言的な定義方法</p>
       </InfoCard>
 
-      <Alert type="success">
+      <Alert type="success" title="変化のタイミング">
         枠組みが整った瞬間、変化は急速に進む可能性がある。iPhone
         が既存技術を一気に普及させたように、決定版となるツールが登場すれば業界標準になる。
       </Alert>
@@ -112,7 +112,7 @@
       </BenefitBox>
 
       <AnchorH2 id="conclusion">結論</AnchorH2>
-      <Alert type="info">
+      <Alert type="info" title="結論">
         収束状態において、エンジニアの本質的な価値は
         <strong>「What（何を作るか）」</strong> と
         <strong>「Why（なぜそう判断したか）」</strong> に集約される。<br /><br />
