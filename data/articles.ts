@@ -5,6 +5,13 @@ import type { Article } from '~/types/article'
  */
 export const articles: Article[] = [
   {
+    slug: 'libertarian-paternalism-in-software',
+    title: 'ソフトウェア設計にリバタリアンパターナリズムを持ち込む',
+    description: 'ユーザーの自由を尊重しながら、より良い行動へ導くUX設計の考え方',
+    tags: ['UX設計', '行動経済学', 'プロダクトデザイン'],
+    date: '2025-11-21',
+  },
+  {
     slug: 'sync-sandwich',
     title: '同期サンドイッチ - ミーティングの進め方',
     description:
