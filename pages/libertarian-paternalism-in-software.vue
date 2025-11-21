@@ -45,6 +45,11 @@
         </tbody>
       </table>
 
+      <p>
+        では、リバタリアンパターナリズムの思想を実現するにはどうすればいいのでしょうか？
+        そこで登場するのが<strong>「ナッジ」</strong>という手法です。
+      </p>
+
       <AnchorH3 id="nudge">ナッジ（Nudge）とは</AnchorH3>
       <InfoCard title="📚 ナッジの定義">
         選択を禁止したり経済的インセンティブを大きく変えることなく、人々の行動を予測可能な形で変える<strong>「選択アーキテクチャー」</strong>のあらゆる要素のことです。
@@ -56,7 +61,7 @@
         重要な条件として、ナッジは<strong>「簡単に回避可能」</strong>でなければなりません。
         ユーザーが望めば、システムの提案を無視して別の選択ができることが前提です。
         <br /><br />
-        ポイントは<strong>「強制ではなく、自然と良い方向へ導く設計」</strong>です。
+        💡 ポイントは<strong>「強制ではなく、自然と良い方向へ導く設計」</strong>です。
       </InfoCard>
 
       <AnchorH3 id="cognitive-biases">なぜナッジは効くのか：認知バイアス</AnchorH3>
@@ -113,11 +118,11 @@
       <!-- 画像は public/images/libertarian-paternalism/ に配置 -->
       <ComparisonCards>
         <ComparisonCard
-          title="リバタリアニズム"
+          title="リバタリアニズム的"
           icon="🗺️"
           description="詳細な地図と情報を提供し、登山者が完全に自由にルートを選択します。"
           image="/images/libertarian-paternalism/libertarianism.png"
-          image-alt="リバタリアニズム：すべてのルートを等しく提示"
+          image-alt="リバタリアニズム的：すべてのルートを等しく提示"
         >
           <ComparisonPoint type="neutral">すべての選択肢を等しく提示</ComparisonPoint>
           <ComparisonPoint type="neutral">判断は完全にユーザーに委ねる</ComparisonPoint>
@@ -125,11 +130,11 @@
         </ComparisonCard>
 
         <ComparisonCard
-          title="パターナリズム"
+          title="パターナリズム的"
           icon="🚌"
           description="登山ルート・休憩場所・宿泊場所まですべて決まったツアーを提供します。"
           image="/images/libertarian-paternalism/paternalism.png"
-          image-alt="パターナリズム：決まったツアーのみ"
+          image-alt="パターナリズム的：決まったツアーのみ"
         >
           <ComparisonPoint type="positive">安全性が高い</ComparisonPoint>
           <ComparisonPoint type="negative">ユーザーに選択の余地がない</ComparisonPoint>
@@ -137,11 +142,11 @@
         </ComparisonCard>
 
         <ComparisonCard
-          title="リバタリアンパターナリズム"
+          title="リバタリアンパターナリズム的"
           icon="🥾"
           description="主要ルートと登山客の割合を示して推奨をナッジしつつ、最終的な選択は自由です。"
           image="/images/libertarian-paternalism/libertarian-paternalism.png"
-          image-alt="リバタリアンパターナリズム：推奨を示しつつ選択は自由"
+          image-alt="リバタリアンパターナリズム的：推奨を示しつつ選択は自由"
           :highlighted="true"
         >
           <ComparisonPoint type="positive">「70%がこのルートを選択」と表示</ComparisonPoint>
@@ -214,14 +219,14 @@
         </tbody>
       </table>
 
-      <AnchorH2 id="guidelines">適用判断のガイドライン</AnchorH2>
+      <AnchorH2 id="extreme-approaches">極端なアプローチの問題点</AnchorH2>
 
       <AnchorH3 id="when-libertarianism">⚠️ リバタリアニズム一辺倒だと何が問題か</AnchorH3>
       <ul>
         <li>
-          業務系システムの開発で「運用が想定されないから後で修正しなくていいように」といった事情でリバタリアニズム的な設計になりがち
+          業務系システムの開発では、「運用が分からないから何でもできるように」といった発想でリバタリアニズム的な設計になりがち
         </li>
-        <li>「現場が分かっておらず、使いづらい」と言われる原因の一つ</li>
+        <li>「複雑で使いづらいシステム」認定される</li>
       </ul>
 
       <AnchorH3 id="when-paternalism">⚠️ パターナリズム一辺倒だと何が問題か</AnchorH3>
@@ -229,6 +234,8 @@
         <li>強制的な介入は、イレギュラーな運用や想定外の状況が出てきた時に柔軟性がない</li>
         <li>「融通が利かないシステム」認定される</li>
       </ul>
+
+      <AnchorH2 id="guidelines">適用判断のガイドライン</AnchorH2>
 
       <TwoColumnCompare
         left-title="リバタリアニズム寄りが適するケース"
@@ -263,8 +270,7 @@
       <AnchorH2 id="east-framework">EASTフレームワーク</AnchorH2>
       <p>
         イギリスの行動インサイトチーム（BIT）が提唱した <strong>EAST</strong> は、
-        効果的なナッジを設計するための実践的なフレームワークです。
-        ソフトウェア設計・開発のチェックリストとして活用できます。
+        効果的なナッジを設計するための実践的なフレームワークで、ソフトウェア設計・開発のチェックリストとしても活用できます。
       </p>
 
       <BenefitList>
