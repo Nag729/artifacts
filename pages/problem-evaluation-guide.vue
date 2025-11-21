@@ -45,15 +45,15 @@
 
       <h2>使い方</h2>
       <Alert type="success">
-        ✍️ <strong>Problem が出たらこの 3 点で説明してみる</strong><br ><br >
+        ✍️ <strong>Problem が出たらこの 3 点で説明してみる</strong><br /><br />
         埋められないなら「気になること」として保留し、本当に困るまで待つ
       </Alert>
 
       <h2>「べき論」と実害のギャップに注意</h2>
       <Alert type="warning">
-        「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。<br ><br >
+        「コードは新しい書き方であるべき」「手作業は自動化すべき」「テストカバレッジは高くあるべき」など、一般的なベストプラクティスや理想像があります。<br /><br />
 
-        これらに照らすと「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。<br ><br >
+        これらに照らすと「問題」に見えても、実際の文脈では頻度・影響・安定性を考慮すると実害がないこともあります。<br /><br />
 
         Problem
         が出たら「一般的には良くないとされているが、この文脈で本当に困っているか？」を確認しましょう。
@@ -66,7 +66,7 @@
         <template #before> 「問い合わせ対応が手作業で面倒」 </template>
         <template #after>
           「<strong>ユーザーが</strong>、問い合わせ後に、<strong>回答まで平均 3 日待っている</strong
-          >（<strong>月 50 件</strong>）」<br ><br >
+          >（<strong>月 50 件</strong>）」<br /><br />
           → 誰が・どんなときに・どれくらいが明確で、影響が大きいことがわかる
         </template>
       </BeforeAfter>
@@ -76,7 +76,7 @@
         <template #before> 「この機能のコードが古い書き方のまま」 </template>
         <template #after>
           「<strong>年 1 回の更新時</strong> しか触らず、動作も安定しているので実害なし →
-          <strong>保留</strong>」<br ><br >
+          <strong>保留</strong>」<br /><br />
           → 頻度が低く、実害がないため優先度は低い
         </template>
       </BeforeAfter>
@@ -91,7 +91,7 @@
         </ul>
       </BenefitBox>
 
-      <hr class="my-8" >
+      <hr class="my-8" />
       <p class="text-sm text-gray-500 dark:text-gray-400 italic">問題評価ガイドとして作成 / 2025</p>
     </div>
   </article>

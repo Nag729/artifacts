@@ -6,15 +6,5 @@
   "trailingComma": "es5",
   "arrowParens": "always",
   "endOfLine": "lf",
-  "proseWrap": "preserve",
-  "overrides": [
-    {
-      "files": "*.md",
-      "options": {
-        "parser": "markdown",
-        "proseWrap": "preserve",
-        "htmlWhitespaceSensitivity": "ignore"
-      }
-    }
-  ]
+  "proseWrap": "preserve"
 }

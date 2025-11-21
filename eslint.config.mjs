@@ -1,5 +1,6 @@
 // @ts-check
 import withNuxt from './.nuxt/eslint.config.mjs'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default withNuxt(
   {
@@ -17,5 +18,6 @@ export default withNuxt(
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'warn'
     }
-  }
+  },
+  eslintConfigPrettier // Prettier と競合するルールを無効化
 )

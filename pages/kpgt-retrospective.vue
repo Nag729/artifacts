@@ -65,12 +65,12 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
 
         <Step number="4" title="投票して解決する Goal を決める" duration="5分">
-          🆕 出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br >
+          🆕 出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br />
           （≒ 取り組む Keep, Problem を決める）
         </Step>
 
         <Step number="5" title="Try を出す" duration="10分">
-          <strong>選ばれた Goal を満たすための仮説</strong> として、Try を考える。<br >
+          <strong>選ばれた Goal を満たすための仮説</strong> として、Try を考える。<br />
           この時点で、Try と Goal の対応関係が明確になっている。
         </Step>
 
@@ -84,7 +84,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
       </StepFlow>
 
       <Alert type="info">
-        <strong>合計：60 分</strong><br >
+        <strong>合計：60 分</strong><br />
         ※Goal に時間をかけても、Try 出しが効率化するため総時間は変わらない
       </Alert>
 
@@ -103,9 +103,9 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </BenefitItem>
 
         <BenefitItem title="投票が2段階になり判断しやすい" icon="mdi:vote">
-          <strong>第1段階</strong>: Goal 選択（何を達成したいか）<br >
-          <strong>第2段階</strong>: Try 選択（どう達成するか）<br >
-          <br >
+          <strong>第1段階</strong>: Goal 選択（何を達成したいか）<br />
+          <strong>第2段階</strong>: Try 選択（どう達成するか）<br />
+          <br />
           判断基準が明確になり、投票しやすい。
         </BenefitItem>
 
@@ -167,7 +167,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </ul>
       </BenefitBox>
 
-      <hr class="my-8" >
+      <hr class="my-8" />
       <p class="text-sm text-gray-500 dark:text-gray-400 italic">手法提案として作成 / 2025</p>
     </div>
   </article>
