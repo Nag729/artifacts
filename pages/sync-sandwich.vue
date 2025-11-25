@@ -8,6 +8,25 @@
     </p>
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
+      <AnchorH2 id="sync-async-definition">💡 「同期」と「非同期」とは？</AnchorH2>
+      <p>
+        このドキュメントでは「同期」と「非同期」という言葉を使用します。まずはこの2つの違いを簡単に説明します。
+      </p>
+      <TwoColumnCompare
+        left-title="同期（リアルタイム）"
+        right-title="非同期（時間をずらして）"
+        left-icon="🤝"
+        right-icon="📝"
+      >
+        <template #left>
+          <p class="mb-2">全員が同じ時間に集まってコミュニケーションする</p>
+          <p class="text-xs">例：ミーティング、電話、ビデオ通話</p>
+        </template>
+        <template #right>
+          <p class="mb-2">それぞれが自分のタイミングでやり取りする</p>
+          <p class="text-xs">例：メール、Slack、ドキュメント共有</p>
+        </template>
+      </TwoColumnCompare>
       <AnchorH2 id="what-is-sync-sandwich">同期サンドイッチとは</AnchorH2>
       <p>
         分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合は、「<strong>同期サンドイッチ</strong>」構成のミーティングを設定しましょう。
