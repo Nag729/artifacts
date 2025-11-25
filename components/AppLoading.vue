@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 bg-gray-50 dark:bg-gray-900 z-[9998] flex flex-col animate-pulse">
+  <div class="fixed inset-0 bg-gray-50 dark:bg-gray-900 z-[9998] flex flex-col">
     <!-- Header Skeleton -->
     <header class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800">
       <nav class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
