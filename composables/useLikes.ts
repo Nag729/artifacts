@@ -159,10 +159,12 @@ export const useLikes = (articleSlug: string) => {
     }
   }
 
-  // Initialize on mount
+  // Initialize asynchronously (non-blocking)
   onMounted(() => {
-    fetchLikes()
-    checkHasLiked()
+    // Run in background without blocking render
+    Promise.all([fetchLikes(), checkHasLiked()]).catch((err) => {
+      console.error('Failed to initialize likes:', err)
+    })
   })
 
   return {
