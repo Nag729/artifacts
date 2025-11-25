@@ -54,9 +54,7 @@ T (Try):     Goalを満たすための仮説</code></pre>
 
       <AnchorH2 id="new-flow">新しいふりかえりフロー</AnchorH2>
       <StepFlow>
-        <Step number="1" title="できごとを思い出す">
-          これまで通り、期間中の出来事を振り返る。
-        </Step>
+        <Step number="1" title="できごとを思い出す">期間中の出来事を振り返る。</Step>
 
         <Step number="2" title="Keep, Problem を出す">
           <ul>
