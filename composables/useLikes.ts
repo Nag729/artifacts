@@ -34,7 +34,7 @@ export const useLikes = (articleSlug: string) => {
         .from('article_likes')
         .select('like_count')
         .eq('article_slug', articleSlug)
-        .single()
+        .maybeSingle()
 
       if (fetchError) {
         // If no likes found, it's not an error, just return 0
@@ -61,7 +61,7 @@ export const useLikes = (articleSlug: string) => {
         .select('id')
         .eq('article_slug', articleSlug)
         .eq('ip_address', ip)
-        .single()
+        .maybeSingle()
 
       if (checkError) {
         // PGRST116 means no rows found, which means hasn't liked
