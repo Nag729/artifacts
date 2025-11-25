@@ -3,9 +3,11 @@
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       ソフトウェア設計にリバタリアンパターナリズムを持ち込む
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       ユーザーの自由を尊重しながら、より良い行動へ導くUX設計の考え方
     </p>
+
+    <LikeButton article-slug="libertarian-paternalism-in-software" />
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="introduction">はじめに</AnchorH2>

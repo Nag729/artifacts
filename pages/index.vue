@@ -21,12 +21,12 @@
             :class="[
               'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
               currentSort === 'likes'
-                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
+                ? 'bg-white dark:bg-gray-700 text-pink-600 dark:text-pink-400 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400',
             ]"
             @click="handleSort('likes')"
           >
-            <Icon name="mdi:fire" class="inline-block mr-1" />
+            <Icon name="mdi:heart" class="inline-block mr-1" />
             いいね順
           </button>
           <button

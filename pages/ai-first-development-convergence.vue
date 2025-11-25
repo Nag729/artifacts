@@ -3,9 +3,11 @@
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       生成AIファーストなソフトウェア開発の収束状態
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       AIの能力が成熟し、枠組みが整ったとき、開発はどう変わるか
     </p>
+
+    <LikeButton article-slug="ai-first-development-convergence" />
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="engineer-role">エンジニアの役割の変化</AnchorH2>

@@ -87,7 +87,7 @@ export const useLikes = (articleSlug: string) => {
 
   // Add a like
   const addLike = async () => {
-    if (hasLiked.value || isLoading.value) return
+    if (isLoading.value) return
 
     try {
       isLoading.value = true
@@ -120,6 +120,45 @@ export const useLikes = (articleSlug: string) => {
     }
   }
 
+  // Remove a like
+  const removeLike = async () => {
+    if (isLoading.value) return
+
+    try {
+      isLoading.value = true
+      error.value = null
+
+      const ip = await getClientIp()
+
+      const { error: deleteError } = await $supabase
+        .from('likes')
+        .delete()
+        .eq('article_slug', articleSlug)
+        .eq('ip_address', ip)
+
+      if (deleteError) {
+        throw deleteError
+      }
+
+      hasLiked.value = false
+      likes.value = Math.max(0, likes.value - 1)
+    } catch (err) {
+      console.error('Failed to remove like:', err)
+      error.value = 'いいねの削除に失敗しました'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  // Toggle like
+  const toggleLike = async () => {
+    if (hasLiked.value) {
+      await removeLike()
+    } else {
+      await addLike()
+    }
+  }
+
   // Initialize on mount
   onMounted(() => {
     fetchLikes()
@@ -131,7 +170,9 @@ export const useLikes = (articleSlug: string) => {
     hasLiked: readonly(hasLiked),
     isLoading: readonly(isLoading),
     error: readonly(error),
+    toggleLike,
     addLike,
+    removeLike,
     refreshLikes: fetchLikes,
   }
 }

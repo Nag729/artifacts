@@ -21,25 +21,38 @@
     </NuxtLink>
 
     <!-- Like button -->
-    <button
-      :disabled="hasLiked || isLoading"
-      :title="hasLiked ? 'いいね済み' : 'いいね'"
-      class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200"
-      :class="[
-        hasLiked
-          ? 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400'
-          : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:text-pink-500',
-        isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
-      ]"
-      @click.prevent="handleLike"
-    >
-      <Icon
-        :name="hasLiked ? 'mdi:heart' : 'mdi:heart-outline'"
-        class="text-lg"
-        :class="{ 'animate-pulse': isLoading }"
-      />
-      <span class="text-sm font-medium">{{ likes }}</span>
-    </button>
+    <div class="absolute top-4 right-4">
+      <!-- Loading skeleton -->
+      <div
+        v-if="isLoading && likes === 0 && !hasLiked"
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"
+      >
+        <div class="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        <div class="w-6 h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
+      </div>
+
+      <!-- Like button -->
+      <button
+        v-else
+        :disabled="isLoading"
+        :title="hasLiked ? 'いいねを取り消す' : 'いいね'"
+        class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200"
+        :class="[
+          hasLiked
+            ? 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:text-pink-500',
+          isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105',
+        ]"
+        @click.prevent="handleLike"
+      >
+        <Icon
+          :name="hasLiked ? 'mdi:heart' : 'mdi:heart-outline'"
+          class="text-lg transition-transform"
+          :class="{ 'scale-125': isAnimating }"
+        />
+        <span class="text-sm font-medium">{{ likes }}</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -50,7 +63,8 @@ const props = defineProps<{
   article: Article
 }>()
 
-const { likes, hasLiked, isLoading, addLike } = useLikes(props.article.slug)
+const { likes, hasLiked, isLoading, toggleLike } = useLikes(props.article.slug)
+const isAnimating = ref(false)
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)
@@ -62,6 +76,12 @@ const formatDate = (dateString: string) => {
 }
 
 const handleLike = async () => {
-  await addLike()
+  isAnimating.value = true
+  await toggleLike()
+
+  // Quick scale animation
+  setTimeout(() => {
+    isAnimating.value = false
+  }, 200)
 }
 </script>

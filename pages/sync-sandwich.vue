@@ -3,9 +3,11 @@
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       同期サンドイッチ - ミーティングの進め方
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成
     </p>
+
+    <LikeButton article-slug="sync-sandwich" />
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="sync-async-definition">💡 「同期」と「非同期」とは？</AnchorH2>

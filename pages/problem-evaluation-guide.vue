@@ -3,9 +3,11 @@
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       「それ、本当に困ってる？」を見極める3点セット
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       ふりかえりで出てくる問題が本当に対処すべきものなのかを判断する3つの観点
     </p>
+
+    <LikeButton article-slug="problem-evaluation-guide" />
 
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="three-points">3 点セット</AnchorH2>
