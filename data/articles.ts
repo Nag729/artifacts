@@ -13,10 +13,10 @@ export const articles: Article[] = [
   },
   {
     slug: 'sync-sandwich',
-    title: '同期サンドイッチ - ミーティングの進め方',
+    title: '同期サンドイッチ - 同期時間を最大活用するミーティングの進め方',
     description:
       '分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成',
-    tags: ['ミーティング', '非同期コミュニケーション'],
+    tags: ['ミーティング', 'コミュニケーション'],
     date: '2025-11-21',
   },
   {
@@ -44,13 +44,27 @@ export const articles: Article[] = [
 
 /**
  * 全タグの一覧を取得
+ * 記事数の多い順にソート
  */
 export const getAllTags = (): string[] => {
   const tagSet = new Set<string>()
   articles.forEach((article) => {
     article.tags.forEach((tag) => tagSet.add(tag))
   })
-  return Array.from(tagSet).sort()
+
+  // 各タグの記事数をカウント
+  const tagCounts = new Map<string, number>()
+  Array.from(tagSet).forEach((tag) => {
+    const count = articles.filter((article) => article.tags.includes(tag)).length
+    tagCounts.set(tag, count)
+  })
+
+  // 記事数の多い順にソート(同数の場合はアルファベット順)
+  return Array.from(tagSet).sort((a, b) => {
+    const countDiff = (tagCounts.get(b) ?? 0) - (tagCounts.get(a) ?? 0)
+    if (countDiff !== 0) return countDiff
+    return a.localeCompare(b)
+  })
 }
 
 /**
