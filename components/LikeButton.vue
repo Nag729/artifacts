@@ -4,10 +4,11 @@
     <div
       v-if="isLoading && likes === 0 && !hasLiked"
       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"
+      style="min-width: 140px; height: 48px"
     >
-      <div class="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
-      <div class="w-8 h-6 bg-gray-300 dark:bg-gray-600 rounded"></div>
-      <div class="w-16 h-6 bg-gray-300 dark:bg-gray-600 rounded"></div>
+      <div class="w-6 h-6 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+      <div class="w-6 h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
+      <div class="w-12 h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
     </div>
 
     <!-- Like button -->

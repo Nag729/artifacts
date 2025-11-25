@@ -19,26 +19,26 @@
         <div class="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
           <button
             :class="[
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
+              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
               currentSort === 'likes'
                 ? 'bg-white dark:bg-gray-700 text-pink-600 dark:text-pink-400 shadow-sm'
                 : 'text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400',
             ]"
             @click="handleSort('likes')"
           >
-            <Icon name="mdi:heart" class="inline-block mr-1" />
+            <Icon name="mdi:heart" class="mr-1" />
             いいね順
           </button>
           <button
             :class="[
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
+              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
               currentSort === 'date'
                 ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
             ]"
             @click="handleSort('date')"
           >
-            <Icon name="mdi:clock-outline" class="inline-block mr-1" />
+            <Icon name="mdi:clock-outline" class="mr-1" />
             最新順
           </button>
         </div>
