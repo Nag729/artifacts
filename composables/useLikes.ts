@@ -1,12 +1,7 @@
 interface LikeData {
   article_slug: string
-  ip_address: string
+  user_id: string
   created_at?: string
-}
-
-interface ArticleLike {
-  article_slug: string
-  like_count: number
 }
 
 export const useLikes = (articleSlug: string) => {
@@ -16,51 +11,53 @@ export const useLikes = (articleSlug: string) => {
   const isLoading = ref<boolean>(false)
   const error = ref<string | null>(null)
 
-  // Get client IP address
-  const getClientIp = async (): Promise<string> => {
-    try {
-      const response = await $fetch<{ ip: string }>('/api/client-ip')
-      return response.ip
-    } catch (err) {
-      console.error('Failed to get client IP:', err)
-      return '127.0.0.1'
+  // Get or create user ID from localStorage
+  const getUserId = (): string => {
+    if (import.meta.client) {
+      const stored = localStorage.getItem('artifacts_user_id')
+      if (stored) {
+        return stored
+      }
+
+      // Generate new UUID and store it
+      const newId = crypto.randomUUID()
+      localStorage.setItem('artifacts_user_id', newId)
+      return newId
     }
+
+    // Fallback for SSR (won't be used in practice)
+    return 'ssr-fallback'
   }
 
-  // Fetch like count for the article
+  // Fetch like count for the article by counting rows
   const fetchLikes = async (): Promise<number> => {
     try {
-      const { data, error: fetchError } = await $supabase
-        .from('article_likes')
-        .select('like_count')
+      const { count, error: fetchError } = await $supabase
+        .from('likes')
+        .select('*', { count: 'exact', head: true })
         .eq('article_slug', articleSlug)
-        .maybeSingle()
 
       if (fetchError) {
-        // If no likes found, it's not an error, just return 0
-        if (fetchError.code === 'PGRST116') {
-          return 0
-        }
         throw fetchError
       }
 
-      return (data as ArticleLike)?.like_count || 0
+      return count || 0
     } catch (err) {
       console.error('Failed to fetch likes:', err)
       throw err
     }
   }
 
-  // Check if current IP has already liked this article
+  // Check if current user has already liked this article
   const checkHasLiked = async (): Promise<boolean> => {
     try {
-      const ip = await getClientIp()
+      const userId = getUserId()
 
       const { data, error: checkError } = await $supabase
         .from('likes')
         .select('id')
         .eq('article_slug', articleSlug)
-        .eq('ip_address', ip)
+        .eq('user_id', userId)
         .maybeSingle()
 
       if (checkError) {
@@ -86,11 +83,11 @@ export const useLikes = (articleSlug: string) => {
       isLoading.value = true
       error.value = null
 
-      const ip = await getClientIp()
+      const userId = getUserId()
 
       const { error: insertError } = await $supabase.from('likes').insert({
         article_slug: articleSlug,
-        ip_address: ip,
+        user_id: userId,
       } as LikeData)
 
       if (insertError) {
@@ -121,13 +118,13 @@ export const useLikes = (articleSlug: string) => {
       isLoading.value = true
       error.value = null
 
-      const ip = await getClientIp()
+      const userId = getUserId()
 
       const { error: deleteError } = await $supabase
         .from('likes')
         .delete()
         .eq('article_slug', articleSlug)
-        .eq('ip_address', ip)
+        .eq('user_id', userId)
 
       if (deleteError) {
         throw deleteError
