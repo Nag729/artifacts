@@ -1,6 +1,6 @@
 <template>
   <div class="card p-6 hover:scale-[1.02] transition-transform duration-200 relative">
-    <NuxtLink :to="`/${article.slug}`" class="block pr-16 sm:pr-0">
+    <NuxtLink :to="`/${article.slug}`" class="block">
       <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">
         {{ article.title }}
       </h2>
@@ -9,7 +9,7 @@
         {{ article.description }}
       </p>
 
-      <div class="flex flex-wrap gap-2 mb-3">
+      <div class="flex flex-wrap gap-2 mb-4">
         <span v-for="tag in article.tags" :key="tag" class="tag">
           {{ tag }}
         </span>
@@ -21,7 +21,7 @@
     </NuxtLink>
 
     <!-- Like button -->
-    <div class="absolute top-4 right-4 sm:top-auto sm:bottom-4 sm:right-4">
+    <div class="absolute bottom-5 right-5">
       <!-- Loading skeleton -->
       <div
         v-if="isLoading && likes === 0 && !hasLiked"
