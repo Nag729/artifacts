@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
     '@nuxt/icon',
+    'dayjs-nuxt',
   ],
 
   // Components configuration

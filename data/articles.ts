@@ -1,4 +1,5 @@
 import type { Article } from '~/types/article'
+import dayjs from 'dayjs'
 
 /**
  * 全記事のメタデータ
@@ -85,5 +86,5 @@ export const getArticlesByTag = (tag: string): Article[] => {
  * 日付順（新しい順）に記事を取得
  */
 export const getArticlesSortedByDate = (): Article[] => {
-  return [...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return [...articles].sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf())
 }

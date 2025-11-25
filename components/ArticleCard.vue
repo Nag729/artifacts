@@ -65,14 +65,10 @@ const props = defineProps<{
 
 const { likes, hasLiked, isLoading, toggleLike } = useLikes(props.article.slug)
 const isAnimating = ref(false)
+const dayjs = useDayjs()
 
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  return dayjs(dateString).locale('ja').format('YYYY年M月D日')
 }
 
 const handleLike = async () => {

@@ -9,6 +9,7 @@ interface ArticleWithLikes extends Article {
 
 export const useArticles = () => {
   const { $supabase } = useNuxtApp()
+  const dayjs = useDayjs()
   const sortedArticles = ref<ArticleWithLikes[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
@@ -64,12 +65,12 @@ export const useArticles = () => {
           if (b.likeCount !== a.likeCount) {
             return b.likeCount - a.likeCount
           }
-          return new Date(b.date).getTime() - new Date(a.date).getTime()
+          return dayjs(b.date).valueOf() - dayjs(a.date).valueOf()
         })
       } else {
         // Sort by date (newest first)
         sortedArticles.value = articlesWithLikes.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf()
         )
       }
     } catch (err) {
