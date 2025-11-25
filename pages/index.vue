@@ -12,9 +12,39 @@
 
     <!-- 記事一覧 -->
     <section>
-      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">最新の記事</h2>
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">記事一覧</h2>
 
-      <div v-if="pending" class="text-center py-12">
+        <!-- Sort toggle -->
+        <div class="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+          <button
+            :class="[
+              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
+              currentSort === 'likes'
+                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
+            ]"
+            @click="handleSort('likes')"
+          >
+            <Icon name="mdi:fire" class="inline-block mr-1" />
+            いいね順
+          </button>
+          <button
+            :class="[
+              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200',
+              currentSort === 'date'
+                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
+            ]"
+            @click="handleSort('date')"
+          >
+            <Icon name="mdi:clock-outline" class="inline-block mr-1" />
+            最新順
+          </button>
+        </div>
+      </div>
+
+      <div v-if="isLoading" class="text-center py-12">
         <p class="text-gray-500 dark:text-gray-400">読み込み中...</p>
       </div>
 
@@ -30,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { getArticlesSortedByDate } from '~/data/articles'
+import type { SortOrder } from '~/composables/useArticles'
 
 // SEO設定
 useHead({
@@ -43,7 +73,10 @@ useHead({
   ],
 })
 
-// 記事取得
-const articles = getArticlesSortedByDate()
-const pending = false
+// 記事取得とソート管理
+const { articles, isLoading, currentSort, sortArticles } = useArticles()
+
+const handleSort = (order: SortOrder) => {
+  sortArticles(order)
+}
 </script>

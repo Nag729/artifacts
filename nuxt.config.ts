@@ -83,4 +83,12 @@ export default defineNuxtConfig({
   site: {
     url: 'https://nag729.github.io',
   },
+
+  // Runtime config for Supabase
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
+      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY || '',
+    },
+  },
 })
