@@ -1,7 +1,7 @@
 <template>
   <article class="max-w-4xl mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-      同期サンドイッチ - ミーティングの進め方
+      同期サンドイッチ - 同期時間を最大活用するミーティングの進め方
     </h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成
