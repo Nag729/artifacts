@@ -28,11 +28,8 @@ export const useLikes = (articleSlug: string) => {
   }
 
   // Fetch like count for the article
-  const fetchLikes = async () => {
+  const fetchLikes = async (): Promise<number> => {
     try {
-      isLoading.value = true
-      error.value = null
-
       const { data, error: fetchError } = await $supabase
         .from('article_likes')
         .select('like_count')
@@ -42,23 +39,20 @@ export const useLikes = (articleSlug: string) => {
       if (fetchError) {
         // If no likes found, it's not an error, just return 0
         if (fetchError.code === 'PGRST116') {
-          likes.value = 0
-          return
+          return 0
         }
         throw fetchError
       }
 
-      likes.value = (data as ArticleLike)?.like_count || 0
+      return (data as ArticleLike)?.like_count || 0
     } catch (err) {
       console.error('Failed to fetch likes:', err)
-      error.value = 'いいね数の取得に失敗しました'
-    } finally {
-      isLoading.value = false
+      throw err
     }
   }
 
   // Check if current IP has already liked this article
-  const checkHasLiked = async () => {
+  const checkHasLiked = async (): Promise<boolean> => {
     try {
       const ip = await getClientIp()
 
@@ -72,16 +66,15 @@ export const useLikes = (articleSlug: string) => {
       if (checkError) {
         // PGRST116 means no rows found, which means hasn't liked
         if (checkError.code === 'PGRST116') {
-          hasLiked.value = false
-          return
+          return false
         }
         throw checkError
       }
 
-      hasLiked.value = !!data
+      return !!data
     } catch (err) {
       console.error('Failed to check like status:', err)
-      hasLiked.value = false
+      throw err
     }
   }
 
@@ -159,12 +152,28 @@ export const useLikes = (articleSlug: string) => {
     }
   }
 
+  // Refresh likes data
+  const refreshLikes = async () => {
+    try {
+      isLoading.value = true
+      error.value = null
+
+      // 両方の通信が終わってからまとめてUIを更新
+      const [likeCount, liked] = await Promise.all([fetchLikes(), checkHasLiked()])
+
+      likes.value = likeCount
+      hasLiked.value = liked
+    } catch (err) {
+      console.error('Failed to refresh likes:', err)
+      error.value = 'いいね情報の取得に失敗しました'
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   // Initialize asynchronously (non-blocking)
   onMounted(() => {
-    // Run in background without blocking render
-    Promise.all([fetchLikes(), checkHasLiked()]).catch((err) => {
-      console.error('Failed to initialize likes:', err)
-    })
+    refreshLikes()
   })
 
   return {
@@ -175,6 +184,6 @@ export const useLikes = (articleSlug: string) => {
     toggleLike,
     addLike,
     removeLike,
-    refreshLikes: fetchLikes,
+    refreshLikes,
   }
 }
