@@ -44,8 +44,8 @@
         </div>
       </div>
 
-      <div v-if="isLoading" class="text-center py-12">
-        <p class="text-gray-500 dark:text-gray-400">読み込み中...</p>
+      <div v-if="isLoading" class="grid gap-6">
+        <ArticleCardSkeleton v-for="i in 3" :key="i" />
       </div>
 
       <div v-else-if="articles && articles.length > 0" class="grid gap-6">
