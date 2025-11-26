@@ -11,8 +11,7 @@ export interface ArticleWithLikes extends Article {
 }
 
 export const useArticlesStore = defineStore('articles', () => {
-  const nuxtApp = useNuxtApp()
-  const dayjs = nuxtApp.$dayjs
+  const dayjs = useDayjs()
   const likesStore = useLikesStore()
 
   const sortedArticles = ref<ArticleWithLikes[]>([])
