@@ -29,19 +29,20 @@ export const useLikes = (articleSlug: string) => {
     return 'ssr-fallback'
   }
 
-  // Fetch like count for the article by counting rows
+  // Fetch like count for the article
   const fetchLikes = async (): Promise<number> => {
     try {
-      const { count, error: fetchError } = await $supabase
-        .from('likes')
-        .select('*', { count: 'exact', head: true })
+      const { data, error: fetchError } = await $supabase
+        .from('like_counts')
+        .select('like_count')
         .eq('article_slug', articleSlug)
+        .maybeSingle()
 
       if (fetchError) {
         throw fetchError
       }
 
-      return count || 0
+      return data?.like_count || 0
     } catch (err) {
       console.error('Failed to fetch likes:', err)
       throw err
