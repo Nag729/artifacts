@@ -228,10 +228,6 @@ export const useLikesStore = defineStore('likes', () => {
   }
 
   return {
-    // State
-    likeCounts: readonly(likeCounts),
-    likedArticles: readonly(likedArticles),
-
     // Getters
     getLikeCount,
     hasLiked,
@@ -241,9 +237,6 @@ export const useLikesStore = defineStore('likes', () => {
     fetchAllLikeCounts,
     checkHasLiked,
     fetchUserLikes,
-    addLike,
-    removeLike,
     toggleLike,
-    getUserId,
   }
 })

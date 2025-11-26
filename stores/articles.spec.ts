@@ -130,7 +130,6 @@ describe('useArticlesStore', () => {
       expect(store.sortedArticles.length).toBeGreaterThan(0)
       expect(store.sortedArticles.every((a) => a.likeCount === 0)).toBe(true)
       expect(store.sortedArticles.every((a) => a.hasLiked === false)).toBe(true)
-      expect(store.error).toBe('記事の取得に失敗しました')
     })
   })
 

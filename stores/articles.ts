@@ -92,7 +92,6 @@ export const useArticlesStore = defineStore('articles', () => {
   return {
     sortedArticles,
     isLoading,
-    error,
     currentSort,
     sortArticles,
     toggleLike,

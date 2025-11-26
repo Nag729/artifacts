@@ -41,31 +41,6 @@ describe('useLikesStore', () => {
     localStorageMock.clear()
   })
 
-  describe('getUserId', () => {
-    it('should return existing user ID from localStorage', () => {
-      // Given: User ID exists in localStorage
-      localStorageMock.setItem('artifacts_user_id', 'existing-user-id')
-
-      // When: Get user ID
-      const store = useLikesStore()
-      const userId = store.getUserId()
-
-      // Then: Should return existing ID
-      expect(userId).toBe('existing-user-id')
-    })
-
-    it('should create and store new user ID if not exists', () => {
-      // Given: No user ID in localStorage
-      // When: Get user ID
-      const store = useLikesStore()
-      const userId = store.getUserId()
-
-      // Then: Should create and store new ID
-      expect(userId).toBeTruthy()
-      expect(localStorageMock.getItem('artifacts_user_id')).toBe(userId)
-    })
-  })
-
   describe('fetchLikeCount', () => {
     it('should fetch and cache like count for an article', async () => {
       // Given: Supabase returns like count
@@ -273,178 +248,6 @@ describe('useLikesStore', () => {
     })
   })
 
-  describe('addLike', () => {
-    it('should add like and update state', async () => {
-      // Given: User hasn't liked the article
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: null,
-        }),
-      }))
-
-      // When: Add like
-      const store = useLikesStore()
-      const result = await store.addLike('test-article')
-
-      // Then: Should update state
-      expect(result).toBe(true)
-      expect(store.hasLiked('test-article')).toBe(true)
-      expect(store.getLikeCount('test-article')).toBe(1)
-    })
-
-    it('should handle duplicate like attempts', async () => {
-      // Given: Insert returns duplicate key error
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: { code: '23505', message: 'Duplicate key' },
-        }),
-      }))
-
-      // When: Add like
-      const store = useLikesStore()
-      const result = await store.addLike('test-article')
-
-      // Then: Should mark as liked without incrementing count
-      expect(result).toBe(true)
-      expect(store.hasLiked('test-article')).toBe(true)
-    })
-
-    it('should handle other errors', async () => {
-      // Given: Insert returns different error
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: { code: 'OTHER_ERROR', message: 'Some error' },
-        }),
-      }))
-
-      // When: Add like
-      const store = useLikesStore()
-      const result = await store.addLike('test-article')
-
-      // Then: Should return false
-      expect(result).toBe(false)
-    })
-  })
-
-  describe('removeLike', () => {
-    it('should remove like and update state', async () => {
-      // Given: User has liked the article
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-
-      // First add a like to set up initial state
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: null,
-        }),
-      }))
-
-      const store = useLikesStore()
-      await store.addLike('test-article')
-
-      // Setup for multiple likes to make count = 5
-      mockSupabase.from.mockImplementation(() => ({
-        select: () => ({
-          eq: () => ({
-            maybeSingle: () => ({
-              data: { like_count: 5 },
-              error: null,
-            }),
-          }),
-        }),
-      }))
-      await store.fetchLikeCount('test-article')
-
-      // Now setup delete mock
-      mockSupabase.from.mockImplementation(() => ({
-        delete: () => ({
-          eq: () => ({
-            eq: () => ({
-              error: null,
-            }),
-          }),
-        }),
-      }))
-
-      // When: Remove like
-      const result = await store.removeLike('test-article')
-
-      // Then: Should update state
-      expect(result).toBe(true)
-      expect(store.hasLiked('test-article')).toBe(false)
-      expect(store.getLikeCount('test-article')).toBe(4)
-    })
-
-    it('should not go below 0 likes', async () => {
-      // Given: Article has 0 likes but user has liked it
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-
-      // First add a like
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: null,
-        }),
-      }))
-
-      const store = useLikesStore()
-      await store.addLike('test-article')
-
-      // Now fetch count as 0 (edge case)
-      mockSupabase.from.mockImplementation(() => ({
-        select: () => ({
-          eq: () => ({
-            maybeSingle: () => ({
-              data: { like_count: 0 },
-              error: null,
-            }),
-          }),
-        }),
-      }))
-      await store.fetchLikeCount('test-article')
-
-      // Setup delete mock
-      mockSupabase.from.mockImplementation(() => ({
-        delete: () => ({
-          eq: () => ({
-            eq: () => ({
-              error: null,
-            }),
-          }),
-        }),
-      }))
-
-      // When: Remove like
-      const result = await store.removeLike('test-article')
-
-      // Then: Should stay at 0
-      expect(result).toBe(true)
-      expect(store.getLikeCount('test-article')).toBe(0)
-    })
-
-    it('should handle delete errors', async () => {
-      // Given: Delete returns error
-      localStorageMock.setItem('artifacts_user_id', 'test-user')
-      mockSupabase.from.mockImplementation(() => ({
-        delete: () => ({
-          eq: () => ({
-            eq: () => ({
-              error: { message: 'Delete error' },
-            }),
-          }),
-        }),
-      }))
-
-      // When: Remove like
-      const store = useLikesStore()
-      const result = await store.removeLike('test-article')
-
-      // Then: Should return false
-      expect(result).toBe(false)
-    })
-  })
-
   describe('toggleLike', () => {
     beforeEach(() => {
       localStorageMock.setItem('artifacts_user_id', 'test-user')
@@ -477,7 +280,7 @@ describe('useLikesStore', () => {
       }))
 
       const store = useLikesStore()
-      await store.addLike('test-article')
+      await store.toggleLike('test-article')
 
       // Now setup delete mock
       mockSupabase.from.mockImplementation(() => ({
@@ -548,7 +351,7 @@ describe('useLikesStore', () => {
       }))
 
       const store = useLikesStore()
-      await store.addLike('test-article')
+      await store.toggleLike('test-article')
 
       // When: Check has liked
       const result = store.hasLiked('test-article')
