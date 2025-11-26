@@ -14,6 +14,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,ts,vue,css,md,json}\"",
     "format:check": "prettier --check \"**/*.{js,ts,vue,css,md,json}\"",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "precommit": "npm run typecheck && npm run lint && npm run format",
     "prepare": "husky"
   },
@@ -32,16 +35,21 @@
     "@nuxt/devtools": "latest",
     "@nuxt/eslint": "^1.10.0",
     "@nuxt/icon": "^2.1.0",
+    "@nuxt/test-utils": "^3.20.1",
     "@nuxtjs/sitemap": "^6.1.1",
+    "@pinia/testing": "^1.0.3",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22.0.0",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.5.1",
+    "happy-dom": "^20.0.10",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.4"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
