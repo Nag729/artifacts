@@ -22,23 +22,12 @@
 
     <!-- Like button -->
     <div class="absolute bottom-5 right-5">
-      <!-- Loading skeleton -->
-      <div
-        v-if="isLoading && likes === 0 && !hasLiked"
-        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"
-      >
-        <div class="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
-        <div class="w-6 h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
-      </div>
-
-      <!-- Like button -->
       <button
-        v-else
         :disabled="isLoading"
-        :title="hasLiked ? 'いいねを取り消す' : 'いいね'"
+        :title="article.hasLiked ? 'いいねを取り消す' : 'いいね'"
         class="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200"
         :class="[
-          hasLiked
+          article.hasLiked
             ? 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400'
             : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:text-pink-500',
           isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105',
@@ -46,24 +35,25 @@
         @click.prevent="handleLike"
       >
         <Icon
-          :name="hasLiked ? 'mdi:heart' : 'mdi:heart-outline'"
+          :name="article.hasLiked ? 'mdi:heart' : 'mdi:heart-outline'"
           class="text-lg transition-transform"
           :class="{ 'scale-125': isAnimating }"
         />
-        <span class="text-sm font-medium">{{ likes }}</span>
+        <span class="text-sm font-medium">{{ article.likeCount }}</span>
       </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Article } from '~/types/article'
+import type { ArticleWithLikes } from '~/stores/articles'
 
 const props = defineProps<{
-  article: Article
+  article: ArticleWithLikes
 }>()
 
-const { likes, hasLiked, isLoading, toggleLike } = useLikes(props.article.slug)
+const articlesStore = useArticlesStore()
+const isLoading = ref(false)
 const isAnimating = ref(false)
 const dayjs = useDayjs()
 
@@ -72,10 +62,14 @@ const formatDate = (dateString: string) => {
 }
 
 const handleLike = async () => {
-  isAnimating.value = true
-  await toggleLike()
+  if (isLoading.value) return
 
-  // Quick scale animation
+  isLoading.value = true
+  isAnimating.value = true
+
+  await articlesStore.toggleLike(props.article.slug)
+
+  isLoading.value = false
   setTimeout(() => {
     isAnimating.value = false
   }, 200)

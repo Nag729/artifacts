@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/icon',
     'dayjs-nuxt',
+    '@pinia/nuxt',
   ],
 
   // Components configuration

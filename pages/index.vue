@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SortOrder } from '~/composables/useArticles'
+import type { SortOrder } from '~/stores/articles'
 
 // SEO設定
 useHead({
@@ -74,9 +74,15 @@ useHead({
 })
 
 // 記事取得とソート管理
-const { articles, isLoading, currentSort, sortArticles } = useArticles()
+const articlesStore = useArticlesStore()
+const { sortedArticles: articles, isLoading, currentSort } = storeToRefs(articlesStore)
 
 const handleSort = (order: SortOrder) => {
-  sortArticles(order)
+  articlesStore.sortArticles(order)
 }
+
+// Initialize on mount
+onMounted(() => {
+  articlesStore.sortArticles('likes')
+})
 </script>
