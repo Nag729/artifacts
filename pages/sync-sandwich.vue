@@ -116,13 +116,16 @@ import { getArticleBySlug } from '~/data/articles'
 
 const article = getArticleBySlug('sync-sandwich')
 
-useHead({
-  title: article?.title,
-  meta: [
-    {
-      name: 'description',
-      content: article?.description,
+if (article) {
+  useSeo({
+    title: article.title,
+    description: article.description,
+    type: 'article',
+    article: {
+      publishedTime: article.date,
+      author: 'Nag729',
+      tags: article.tags,
     },
-  ],
-})
+  })
+}
 </script>

@@ -45,9 +45,10 @@
 import { getAllTags, getArticlesByTag as getArticlesByTagFromData } from '~/data/articles'
 
 // SEO設定
-useHead({
+useSeo({
   title: 'タグ一覧',
-  meta: [{ name: 'description', content: 'タグごとの記事一覧' }],
+  description: 'タグごとの記事一覧',
+  type: 'website',
 })
 
 // 全タグを取得

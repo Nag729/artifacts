@@ -77,6 +77,10 @@ export default defineNuxtConfig({
           name: 'description',
           content: '開発・チーム運営に関する思考や手法をまとめたドキュメントサイト',
         },
+        {
+          name: 'google-site-verification',
+          content: 'ViuR1uP2Q4Yr5b2nk8nhKSWy5DF3Y9Gqvbx8NwxFK0w',
+        },
       ],
     },
   },

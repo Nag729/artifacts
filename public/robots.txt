@@ -1,0 +1,6 @@
+# robots.txt for Nag729 Artifacts
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://nag729.github.io/artifacts/sitemap.xml

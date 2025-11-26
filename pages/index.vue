@@ -63,14 +63,10 @@
 import type { SortOrder } from '~/stores/articles'
 
 // SEO設定
-useHead({
+useSeo({
   title: 'ホーム',
-  meta: [
-    {
-      name: 'description',
-      content: '開発・チーム運営に関する思考や手法をまとめたドキュメントサイト',
-    },
-  ],
+  description: '開発・チーム運営に関する思考や手法をまとめたドキュメントサイト',
+  type: 'website',
 })
 
 // 記事取得とソート管理
