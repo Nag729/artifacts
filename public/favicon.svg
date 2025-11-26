@@ -10,12 +10,12 @@
   <!-- Background Circle -->
   <circle cx="50" cy="50" r="48" fill="url(#bgGradient)"/>
 
-  <!-- Letter "N" - Clean and bold, larger size -->
+  <!-- Letter "N" - bold and geometric -->
   <text
     x="50"
     y="50"
-    font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
-    font-size="72"
+    font-family="'Arial Rounded MT Bold', 'Century Gothic', 'Futura', sans-serif"
+    font-size="76"
     font-weight="700"
     fill="white"
     text-anchor="middle"
