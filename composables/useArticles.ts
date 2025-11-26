@@ -23,7 +23,7 @@ export const useArticles = () => {
 
     try {
       const { data, error: fetchError } = await $supabase
-        .from('article_likes')
+        .from('like_counts')
         .select('article_slug, like_count')
 
       if (fetchError) throw fetchError
