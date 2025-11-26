@@ -29,10 +29,17 @@
           <p class="text-xs">例：メール、Slack、ドキュメント共有</p>
         </template>
       </TwoColumnCompare>
+
       <AnchorH2 id="what-is-sync-sandwich">同期サンドイッチとは</AnchorH2>
       <p>
         分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合は、「<strong>同期サンドイッチ</strong>」構成のミーティングを設定しましょう。
       </p>
+
+      <ImageWithModal
+        src="/images/sync-sandwich/synchronous-sandwich.webp"
+        alt="同期サンドイッチのイメージ図"
+        thumbnail-class="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+      />
 
       <InfoCard title="📚 出典">
         <a
