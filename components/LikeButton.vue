@@ -41,14 +41,31 @@ const props = defineProps<{
   articleSlug: string
 }>()
 
-const { likes, hasLiked, isLoading, toggleLike } = useLikes(props.articleSlug)
+const likesStore = useLikesStore()
+const isLoading = ref(false)
 const isAnimating = ref(false)
 
-const handleLike = async () => {
-  isAnimating.value = true
-  await toggleLike()
+// Reactive getters from store
+const likes = computed(() => likesStore.getLikeCount(props.articleSlug))
+const hasLiked = computed(() => likesStore.hasLiked(props.articleSlug))
 
-  // Quick scale animation
+// Initialize on mount
+onMounted(async () => {
+  isLoading.value = true
+  await likesStore.fetchLikeCount(props.articleSlug)
+  await likesStore.checkHasLiked(props.articleSlug)
+  isLoading.value = false
+})
+
+const handleLike = async () => {
+  if (isLoading.value) return
+
+  isLoading.value = true
+  isAnimating.value = true
+
+  await likesStore.toggleLike(props.articleSlug)
+
+  isLoading.value = false
   setTimeout(() => {
     isAnimating.value = false
   }, 200)

@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 import { useArticlesStore } from './articles'
+import { useLikesStore } from './likes'
 
 // Mock Supabase client
 const mockSupabase = {
@@ -45,6 +46,29 @@ Object.defineProperty(globalThis, 'localStorage', {
   writable: true,
 })
 
+// Helper to setup likes store mock
+const setupLikesStoreMock = (likeCounts: Record<string, number>, userLikes: string[]) => {
+  const likesStore = useLikesStore()
+
+  // Mock fetchAllLikeCounts
+  vi.spyOn(likesStore, 'fetchAllLikeCounts').mockResolvedValue(new Map(Object.entries(likeCounts)))
+
+  // Mock fetchUserLikes
+  vi.spyOn(likesStore, 'fetchUserLikes').mockResolvedValue(new Set(userLikes))
+
+  // Mock getLikeCount
+  vi.spyOn(likesStore, 'getLikeCount').mockImplementation((slug: string) => {
+    return likeCounts[slug] || 0
+  })
+
+  // Mock hasLiked
+  vi.spyOn(likesStore, 'hasLiked').mockImplementation((slug: string) => {
+    return userLikes.includes(slug)
+  })
+
+  return likesStore
+}
+
 describe('useArticlesStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
@@ -54,26 +78,14 @@ describe('useArticlesStore', () => {
 
   describe('sortArticles', () => {
     it('should fetch and sort articles by likes in descending order', async () => {
-      // Given: Mock Supabase responses
-      const mockLikeCounts = [
-        { article_slug: 'sync-sandwich', like_count: 5 },
-        { article_slug: 'kpgt-retrospective', like_count: 3 },
-      ]
-
-      const mockUserLikes = [{ article_slug: 'sync-sandwich' }]
-
-      mockSupabase.from.mockImplementation((_table: string) => ({
-        select: (_columns: string) => {
-          if (_table === 'like_counts') {
-            return { data: mockLikeCounts, error: null }
-          } else if (_table === 'likes') {
-            return {
-              eq: () => ({ data: mockUserLikes, error: null }),
-            }
-          }
-          return { data: [], error: null }
+      // Given: Mock likes store
+      setupLikesStoreMock(
+        {
+          'sync-sandwich': 5,
+          'kpgt-retrospective': 3,
         },
-      }))
+        ['sync-sandwich']
+      )
 
       // When: Sort articles by likes
       const store = useArticlesStore()
@@ -90,19 +102,8 @@ describe('useArticlesStore', () => {
     })
 
     it('should sort articles by date when order is "date"', async () => {
-      // Given: Mock Supabase responses
-      mockSupabase.from.mockImplementation((_table: string) => ({
-        select: () => {
-          if (_table === 'like_counts') {
-            return { data: [], error: null }
-          } else if (_table === 'likes') {
-            return {
-              eq: () => ({ data: [], error: null }),
-            }
-          }
-          return { data: [], error: null }
-        },
-      }))
+      // Given: Mock likes store with no likes
+      setupLikesStoreMock({}, [])
 
       // When: Sort articles by date
       const store = useArticlesStore()
@@ -113,58 +114,40 @@ describe('useArticlesStore', () => {
       expect(store.currentSort).toBe('date')
     })
 
-    it('should handle Supabase errors gracefully', async () => {
-      // Given: Supabase returns an error
-      const errorObj = { message: 'Database error', code: 'PGRST301' }
-      mockSupabase.from.mockImplementation(() => ({
-        select: () => ({
-          eq: () => ({ data: null, error: errorObj }),
-        }),
-      }))
+    it('should handle likes store errors gracefully', async () => {
+      // Given: Likes store throws an error
+      const likesStore = useLikesStore()
+      vi.spyOn(likesStore, 'fetchAllLikeCounts').mockRejectedValue(new Error('Database error'))
+      vi.spyOn(likesStore, 'fetchUserLikes').mockRejectedValue(new Error('Database error'))
+      vi.spyOn(likesStore, 'getLikeCount').mockReturnValue(0)
+      vi.spyOn(likesStore, 'hasLiked').mockReturnValue(false)
 
       // When: Sort articles
       const store = useArticlesStore()
       await store.sortArticles('likes')
 
-      // Then: Should still return articles with 0 likes (no error message set)
-      // fetchLikesData catches the error internally
+      // Then: Should still return articles with 0 likes and error message
       expect(store.sortedArticles.length).toBeGreaterThan(0)
       expect(store.sortedArticles.every((a) => a.likeCount === 0)).toBe(true)
       expect(store.sortedArticles.every((a) => a.hasLiked === false)).toBe(true)
+      expect(store.error).toBe('記事の取得に失敗しました')
     })
   })
 
   describe('toggleLike', () => {
-    beforeEach(async () => {
-      // Setup: Initialize store with mock data
-      const mockLikeCounts = [{ article_slug: 'sync-sandwich', like_count: 2 }]
-      const mockUserLikes: Array<{ article_slug: string }> = []
-
-      mockSupabase.from.mockImplementation((_table: string) => ({
-        select: () => {
-          if (_table === 'like_counts') {
-            return { data: mockLikeCounts, error: null }
-          } else if (_table === 'likes') {
-            return {
-              eq: () => ({ data: mockUserLikes, error: null }),
-            }
-          }
-          return { data: [], error: null }
-        },
-      }))
+    it('should add a like when user has not liked', async () => {
+      // Given: Mock likes store and initialize articles
+      const likesStore = setupLikesStoreMock({ 'sync-sandwich': 2 }, [])
 
       const store = useArticlesStore()
       await store.sortArticles('likes')
-    })
 
-    it('should add a like when user has not liked', async () => {
-      // Given: User hasn't liked the article
-      mockSupabase.from.mockImplementation((_table: string) => ({
-        insert: () => ({ error: null }),
-      }))
-
-      const store = useArticlesStore()
       const initialCount = store.sortedArticles[0]?.likeCount ?? 0
+
+      // Mock toggleLike to succeed and update counts
+      vi.spyOn(likesStore, 'toggleLike').mockResolvedValue(true)
+      vi.spyOn(likesStore, 'getLikeCount').mockReturnValue(initialCount + 1)
+      vi.spyOn(likesStore, 'hasLiked').mockReturnValue(true)
 
       // When: Toggle like
       const result = await store.toggleLike('sync-sandwich')
@@ -176,22 +159,18 @@ describe('useArticlesStore', () => {
     })
 
     it('should remove a like when user has already liked', async () => {
-      // Given: User has already liked the article
-      const store = useArticlesStore()
-      const firstArticle = store.sortedArticles[0]
-      if (firstArticle) {
-        firstArticle.hasLiked = true
-      }
+      // Given: Mock likes store with user having liked the article
+      const likesStore = setupLikesStoreMock({ 'sync-sandwich': 3 }, ['sync-sandwich'])
 
-      mockSupabase.from.mockImplementation((_table: string) => ({
-        delete: () => ({
-          eq: () => ({
-            eq: () => ({ error: null }),
-          }),
-        }),
-      }))
+      const store = useArticlesStore()
+      await store.sortArticles('likes')
 
       const initialCount = store.sortedArticles[0]?.likeCount ?? 0
+
+      // Mock toggleLike to succeed and update counts
+      vi.spyOn(likesStore, 'toggleLike').mockResolvedValue(true)
+      vi.spyOn(likesStore, 'getLikeCount').mockReturnValue(initialCount - 1)
+      vi.spyOn(likesStore, 'hasLiked').mockReturnValue(false)
 
       // When: Toggle like
       const result = await store.toggleLike('sync-sandwich')
@@ -199,61 +178,37 @@ describe('useArticlesStore', () => {
       // Then: Like count should decrease
       expect(result).toBe(true)
       expect(store.sortedArticles[0]?.hasLiked).toBe(false)
-      expect(store.sortedArticles[0]?.likeCount).toBe(Math.max(0, initialCount - 1))
+      expect(store.sortedArticles[0]?.likeCount).toBe(initialCount - 1)
     })
 
-    it('should handle duplicate like attempts', async () => {
-      // Given: Insert returns duplicate key error
-      mockSupabase.from.mockImplementation(() => ({
-        insert: () => ({
-          error: { code: '23505', message: 'Duplicate key' },
-        }),
-      }))
+    it('should handle toggle like failure', async () => {
+      // Given: Mock likes store and toggleLike to fail
+      const likesStore = setupLikesStoreMock({ 'sync-sandwich': 2 }, [])
 
       const store = useArticlesStore()
+      await store.sortArticles('likes')
+
+      vi.spyOn(likesStore, 'toggleLike').mockResolvedValue(false)
 
       // When: Toggle like
       const result = await store.toggleLike('sync-sandwich')
 
-      // Then: Should mark as liked without incrementing count
-      expect(result).toBe(true)
-      expect(store.sortedArticles[0]?.hasLiked).toBe(true)
+      // Then: Should return false and not update state
+      expect(result).toBe(false)
     })
 
     it('should return false for non-existent article', async () => {
-      // Given: Article doesn't exist
+      // Given: Mock likes store and initialize articles
+      setupLikesStoreMock({ 'sync-sandwich': 2 }, [])
+
       const store = useArticlesStore()
+      await store.sortArticles('likes')
 
       // When: Toggle like for non-existent article
       const result = await store.toggleLike('non-existent-slug')
 
       // Then: Should return false
       expect(result).toBe(false)
-    })
-  })
-
-  describe('getUserId', () => {
-    it('should return existing user ID from localStorage', () => {
-      // Given: User ID exists in localStorage
-      localStorageMock.setItem('artifacts_user_id', 'existing-user-id')
-
-      // When: Get user ID
-      const store = useArticlesStore()
-      const userId = store.getUserId()
-
-      // Then: Should return existing ID
-      expect(userId).toBe('existing-user-id')
-    })
-
-    it('should create and store new user ID if not exists', () => {
-      // Given: No user ID in localStorage
-      // When: Get user ID
-      const store = useArticlesStore()
-      const userId = store.getUserId()
-
-      // Then: Should create and store new ID
-      expect(userId).toBeTruthy()
-      expect(localStorageMock.getItem('artifacts_user_id')).toBe(userId)
     })
   })
 })
