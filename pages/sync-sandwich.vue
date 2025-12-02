@@ -1,5 +1,11 @@
 <template>
   <article class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      :items="[
+        { label: 'ホーム', path: '/' },
+        { label: '同期サンドイッチ', path: '/sync-sandwich', current: true },
+      ]"
+    />
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       同期サンドイッチ - 同期時間を最大活用するミーティングの進め方
     </h1>
@@ -36,8 +42,8 @@
       </p>
 
       <ImageWithModal
-        src="/images/sync-sandwich/synchronous-sandwich.webp"
-        alt="同期サンドイッチのイメージ図"
+        src="/artifacts/images/sync-sandwich/synchronous-sandwich.webp"
+        alt="同期サンドイッチ - 非同期の事前準備、同期ミーティング、非同期のまとめという3つのステップを示すイメージ図。分散チームでの効果的なミーティング手法を視覚的に表現"
         thumbnail-class="w-full max-w-2xl mx-auto rounded-lg shadow-md"
       />
 

@@ -1,5 +1,12 @@
 <template>
   <article class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      :items="[
+        { label: 'ホーム', path: '/' },
+        { label: 'KPGTふりかえり手法の提案', path: '/kpgt-retrospective', current: true },
+      ]"
+    />
+
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">KPGTふりかえり手法の提案</h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       従来のKPTふりかえりの課題を解決する新しいアプローチ

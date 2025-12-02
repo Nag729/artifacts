@@ -1,5 +1,16 @@
 <template>
   <article class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      :items="[
+        { label: 'ホーム', path: '/' },
+        {
+          label: '「それ、本当に困ってる？」を見極める3点セット',
+          path: '/problem-evaluation-guide',
+          current: true,
+        },
+      ]"
+    />
+
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       「それ、本当に困ってる？」を見極める3点セット
     </h1>

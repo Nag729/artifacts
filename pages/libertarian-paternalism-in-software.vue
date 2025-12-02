@@ -1,5 +1,16 @@
 <template>
   <article class="max-w-4xl mx-auto px-4 py-8">
+    <Breadcrumb
+      :items="[
+        { label: 'ホーム', path: '/' },
+        {
+          label: 'ソフトウェア設計にリバタリアンパターナリズムを持ち込む',
+          path: '/libertarian-paternalism-in-software',
+          current: true,
+        },
+      ]"
+    />
+
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       ソフトウェア設計にリバタリアンパターナリズムを持ち込む
     </h1>

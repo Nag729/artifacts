@@ -36,11 +36,16 @@ export const useSeo = (options: WebsiteSeoOptions | ArticleSeoOptions) => {
   const currentUrl = `${siteUrl}${route.path}`
 
   // 基本的なSEOメタタグ
+  const keywords =
+    type === 'article'
+      ? `${options.article.tags.join(',')},開発,チーム運営,エンジニアリング,ドキュメント`
+      : '開発,チーム運営,エンジニアリング,ドキュメント'
+
   useHead({
     title: options.title,
     meta: [
       { name: 'description', content: description },
-      { name: 'keywords', content: '開発,チーム運営,エンジニアリング,ドキュメント' },
+      { name: 'keywords', content: keywords },
     ],
   })
 
