@@ -85,9 +85,14 @@ export default defineNuxtConfig({
     },
   },
 
-  // Sitemap configuration
+  // Site configuration
   site: {
     url: 'https://nag729.github.io',
+  },
+
+  // Sitemap configuration
+  sitemap: {
+    xsl: false, // XSL スタイルシート参照を無効化
   },
 
   // Runtime config for Supabase
