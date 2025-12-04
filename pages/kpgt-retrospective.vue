@@ -48,8 +48,8 @@
       <p>KPT の構造を整理すると：</p>
       <ul>
         <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
-        <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
         <li><Badge type="warning">欠けているもの</Badge> <strong>Goal</strong> = 達成したい状態</li>
+        <li><strong>Try</strong> = 次に取る行動（未来にやること）</li>
       </ul>
       <p>ゴールが明確でないと、適切な Try を考えるのが難しく、優先順位も付けづらい。</p>
 
@@ -72,30 +72,40 @@ T (Try):     Goalを満たすための仮説</code></pre>
           </ul>
         </Step>
 
-        <Step number="3" title="Goal（達成したい状態）を確認・言語化">
+        <Step number="3" title="Goal（達成したい状態）を各自でアイデア出し">
           <Badge type="info">NEW</Badge>
-          Keep, Problem を見ながら：
+          Keep, Problem を見ながら、各自が以下の 3 要素で Goal のアイデアを出す：
           <ul>
-            <li>「この Problem って、どういう状態になれば解決？」</li>
-            <li>「複数の Problem に共通するテーマは？」</li>
-            <li>「そもそも私たちは何を達成したいんだっけ？」</li>
+            <li><strong>現在の運用</strong>：今どうなっているか（事実）</li>
+            <li><strong>期待違反</strong>：何が期待と違うのか（ギャップ）</li>
+            <li><strong>大きなゴール</strong>：最終的にどうなりたいか（理想）</li>
           </ul>
-          を話し合い、達成したいゴールを言語化する。
+          <Alert type="info" title="例：リリース頻度の改善">
+            <strong>現在の運用</strong>：本番リリースは月1回、手動デプロイ<br />
+            <strong>期待違反</strong>：機能追加から本番反映まで平均3週間かかっている<br />
+            <strong>大きなゴール</strong>：開発完了から3日以内に本番リリースできる状態
+          </Alert>
         </Step>
 
-        <Step number="4" title="投票して解決する Goal を決める">
+        <Step number="4" title="Goal を整理・統合して投票">
           <Badge type="info">NEW</Badge>
-          出された Goal の中から、今期取り組む Goal を投票で選ぶ。<br />
-          （≒ 取り組む Keep, Problem を決める）
+          各自が出した Goal を似たものでグルーピングし、このスプリントで取り組む Goal
+          を投票で選ぶ。<br />
+          （≒ 集中する Keep, Problem を決める）
         </Step>
 
         <Step number="5" title="Try を出す">
-          <strong>選ばれた Goal を満たすための仮説</strong> として、Try を考える。<br />
+          <strong>選ばれた Goal を達成するためのアイデア</strong> として、Try を考える。<br />
           この時点で、Try と Goal の対応関係が明確になっている。
         </Step>
 
-        <Step number="6" title="投票して Try を決める">
-          Goal への寄与度を基準に、実施する Try を投票で選ぶ。
+        <Step number="6" title="各 Try の実施可否を決める">
+          挙がった Try それぞれに対して、チーム全員で
+          <strong>Yes / No（このスプリントで実施するか）</strong> を決める。
+          <ul>
+            <li><strong>Yes</strong>：Goal への寄与度が高く、実現可能</li>
+            <li><strong>No</strong>：効果が不明確、リソース不足、タイミングが悪い、etc...</li>
+          </ul>
         </Step>
 
         <Step number="7" title="SMART な目標にする">
@@ -103,33 +113,20 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
       </StepFlow>
 
-      <Alert type="info" title="合計：60 分">
-        Goal のステップを追加しても、Try 出しが効率化するため総時間は大きく延びない（はず）
-      </Alert>
-
       <AnchorH2 id="benefits">KPGT の効果</AnchorH2>
       <BenefitList>
         <BenefitItem title="Try が出しやすくなる" icon="mdi:lightbulb-on">
-          「何をする？」ではなく「この Goal を達成するには？」という明確な問いに変わる。
-        </BenefitItem>
-
-        <BenefitItem title="Try と Problem の対応が明確" icon="mdi:link-variant">
-          どの Goal のための Try なのかが構造的に明確になり、ふりかえりツール上でも可視化しやすい。
+          「何をする？」ではなく「この Goal を達成するには？」という明確な問いに変わる。 どの Goal
+          のための Try なのかが構造的に明確になり、ふりかえりツール上でも可視化しやすい。
         </BenefitItem>
 
         <BenefitItem title="優先度を間違えない" icon="mdi:arrow-up-bold">
           最優先の Goal が先に決まっているため、本質的でない Try を選んでしまうリスクが減る。
         </BenefitItem>
 
-        <BenefitItem title="投票が2段階になり判断しやすい" icon="mdi:vote">
-          <strong>第1段階</strong>: Goal 選択（何を達成したいか）<br />
-          <strong>第2段階</strong>: Try 選択（どう達成するか）<br />
-          <br />
-          判断基準が明確になり、投票しやすい。
-        </BenefitItem>
-
-        <BenefitItem title="次回の評価がしやすい" icon="mdi:chart-line">
-          次のふりかえりで「前回の Goal は達成できたか？」を基準に評価できる。
+        <BenefitItem title="アウトカムで評価できる" icon="mdi:chart-line">
+          「Try を実施したか」ではなく「Goal
+          を達成できたか」で評価する。アウトプット（何をしたか）ではなく、アウトカム（何が変わったか）で振り返れる。
         </BenefitItem>
       </BenefitList>
 
