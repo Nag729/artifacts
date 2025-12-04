@@ -21,7 +21,7 @@
         は、<strong>Keep（続けること）</strong>・<strong>Problem（問題点）</strong>・<strong>Try（試すこと）</strong>の3つの観点でふりかえりを行うフレームワークです。
         シンプルで導入しやすいため、多くのチームで採用されています。
       </p>
-      <Diagram title="従来の KPT の流れ">
+      <Diagram title="従来の KPT の流れ（一例）">
         <pre><code>1. Keep / Problem を出す（過去の振り返り）
 2. Try を出す（次のアクション）
 3. 投票して Try を決める</code></pre>
@@ -44,7 +44,7 @@
         </CheckItem>
       </CheckList>
 
-      <AnchorH2 id="root-cause">根本原因：評価基準（Goal）が明確になっていない</AnchorH2>
+      <AnchorH2 id="root-cause">根本原因：達成したい状態（Goal）が明確になっていない</AnchorH2>
       <p>KPT の構造を整理すると：</p>
       <ul>
         <li><strong>Keep, Problem</strong> = 観測された事実（過去に起きたこと）</li>
@@ -113,6 +113,11 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
       </StepFlow>
 
+      <p>
+        <strong>Goal を明確に</strong
+        >すれば、チームの議論が変わります。「何を達成したいんだっけ?」の共通認識があれば、表面的な問題の羅列ではなく、<strong>本質的な課題に集中した深い議論</strong>ができるようになります。
+      </p>
+
       <AnchorH2 id="benefits">KPGT の効果</AnchorH2>
       <BenefitList>
         <BenefitItem title="Try が出しやすくなる" icon="mdi:lightbulb-on">
@@ -160,32 +165,23 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </CheckItem>
       </CheckList>
 
-      <AnchorH2 id="experiment">まずは実験として</AnchorH2>
-      <p>次回のふりかえりで試してみて、効果を測定しましょう：</p>
-
-      <CheckList>
-        <CheckItem type="good" label="Try 出しの時間"> Try 出しの時間が減ったか </CheckItem>
-        <CheckItem type="good" label="投票のスムーズさ"> 投票がスムーズになったか </CheckItem>
-        <CheckItem type="good" label="対応関係の明確さ">
-          Try と Problem の対応が明確になったか
-        </CheckItem>
-        <CheckItem type="good" label="納得感"> チーム全体で納得感のある Try を選べたか </CheckItem>
-      </CheckList>
-
       <AnchorH2 id="summary">まとめ</AnchorH2>
+      <p>
+        KPT に <strong>Goal</strong> を加えることで、ふりかえりの質が変わります。
+        「何を達成したいのか」を先に明確にすれば、チームの議論は表面的な問題の列挙から、本質的な課題への深い探求へと変化します。
+      </p>
       <BenefitBox title="KPGT で得られる効果">
         <ul>
-          <li>何を達成したいかが明確になる</li>
-          <li>Try が出しやすくなる</li>
-          <li>優先度を間違えない</li>
-          <li>評価しやすくなる</li>
+          <li><strong>議論の深さ</strong> - 本質的な課題に集中できる</li>
+          <li><strong>優先度の明確さ</strong> - 何が重要かをチーム全体で合意できる</li>
+          <li><strong>納得感のある意思決定</strong> - 根拠を持って Try を選べる</li>
         </ul>
       </BenefitBox>
 
       <hr class="my-8" />
       <p class="text-sm text-gray-500 dark:text-gray-400 italic">
         KPT に Goal を加えることで、より本質的なふりかえりを実現する KPGT。<br />
-        一度チームで試してみましょう。
+        一度チームで試してみてはいかがでしょうか？
       </p>
     </div>
   </article>
