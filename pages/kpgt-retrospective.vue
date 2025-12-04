@@ -113,11 +113,6 @@ T (Try):     Goalを満たすための仮説</code></pre>
         </Step>
       </StepFlow>
 
-      <p>
-        <strong>Goal を明確に</strong
-        >すれば、チームの議論が変わります。「何を達成したいんだっけ?」の共通認識があれば、表面的な問題の羅列ではなく、<strong>本質的な課題に集中した深い議論</strong>ができるようになります。
-      </p>
-
       <AnchorH2 id="benefits">KPGT の効果</AnchorH2>
       <BenefitList>
         <BenefitItem title="Try が出しやすくなる" icon="mdi:lightbulb-on">
