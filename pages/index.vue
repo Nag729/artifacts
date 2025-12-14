@@ -20,18 +20,6 @@
           <button
             :class="[
               'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
-              currentSort === 'likes'
-                ? 'bg-white dark:bg-gray-700 text-pink-600 dark:text-pink-400 shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400',
-            ]"
-            @click="handleSort('likes')"
-          >
-            <Icon name="mdi:heart" class="mr-1" />
-            いいね順
-          </button>
-          <button
-            :class="[
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
               currentSort === 'date'
                 ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
@@ -40,6 +28,18 @@
           >
             <Icon name="mdi:clock-outline" class="mr-1" />
             最新順
+          </button>
+          <button
+            :class="[
+              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
+              currentSort === 'likes'
+                ? 'bg-white dark:bg-gray-700 text-pink-600 dark:text-pink-400 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400',
+            ]"
+            @click="handleSort('likes')"
+          >
+            <Icon name="mdi:heart" class="mr-1" />
+            いいね順
           </button>
         </div>
       </div>
@@ -79,6 +79,6 @@ const handleSort = (order: SortOrder) => {
 
 // Initialize on mount
 onMounted(() => {
-  articlesStore.sortArticles('likes')
+  articlesStore.sortArticles('date')
 })
 </script>
