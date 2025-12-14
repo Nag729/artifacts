@@ -6,6 +6,13 @@ import dayjs from 'dayjs'
  */
 export const articles: Article[] = [
   {
+    slug: 'passing-trunk-to-ai',
+    title: '生成AIに「幹」を渡す',
+    description: 'なぜ同じツールを使っても、成果に差が出るのか',
+    tags: ['生成AI', 'プロンプト', '思考整理'],
+    date: '2025-12-14',
+  },
+  {
     slug: 'libertarian-paternalism-in-software',
     title: 'ソフトウェア設計にリバタリアンパターナリズムを持ち込む',
     description: 'ユーザーの自由を尊重しながら、より良い行動へ導くUX設計の考え方',
