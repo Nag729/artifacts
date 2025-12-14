@@ -35,7 +35,61 @@
         生成AIへの指示は<strong>「制約を与える」</strong>行為です。AIが生成できる無数の可能性から、条件によって範囲を絞り込む。AIはその制約の中で成果物を生成します。
       </p>
 
-      <!-- TODO: 生成AIへ制約を渡して、アウトプットされるまでのフローの図 -->
+      <Diagram>
+        <div class="flex flex-col md:flex-row items-stretch justify-between gap-4">
+          <!-- 完成イメージ -->
+          <div class="w-full md:flex-1 text-center">
+            <div
+              class="bg-blue-50 dark:bg-blue-950 rounded-lg p-6 md:p-8 border-2 border-blue-300 dark:border-blue-700 h-full flex flex-col justify-center"
+            >
+              <p class="text-4xl mb-3">💭</p>
+              <p class="font-bold text-blue-900 dark:text-blue-100 text-lg mb-2">完成イメージ</p>
+              <p class="text-sm text-blue-600 dark:text-blue-400">構成・表現・具体例...</p>
+            </div>
+          </div>
+
+          <!-- 圧縮 -->
+          <div class="flex flex-col items-center justify-center gap-1">
+            <p class="text-xl">🧑‍💻</p>
+            <p class="text-xs text-blue-600 dark:text-blue-400 font-semibold">圧縮</p>
+            <div class="text-3xl text-gray-400 rotate-90 md:rotate-0">→</div>
+          </div>
+
+          <!-- プロンプト -->
+          <div class="w-full md:flex-1 text-center">
+            <div
+              class="bg-purple-50 dark:bg-purple-950 rounded-lg p-6 md:p-8 border-2 border-purple-400 dark:border-purple-600 h-full flex flex-col justify-center"
+            >
+              <p class="text-3xl mb-2">📝</p>
+              <p class="font-bold text-purple-900 dark:text-purple-100 text-lg mb-2">プロンプト</p>
+              <p class="text-sm text-purple-600 dark:text-purple-400">抽象化された制約</p>
+            </div>
+          </div>
+
+          <!-- 展開 -->
+          <div class="flex flex-col items-center justify-center gap-1">
+            <p class="text-xl">🤖</p>
+            <p class="text-xs text-green-600 dark:text-green-400 font-semibold">展開</p>
+            <div class="text-3xl text-gray-400 rotate-90 md:rotate-0">→</div>
+          </div>
+
+          <!-- 成果物 -->
+          <div class="w-full md:flex-1 text-center">
+            <div
+              class="bg-green-50 dark:bg-green-950 rounded-lg p-6 md:p-8 border-2 border-green-300 dark:border-green-700 h-full flex flex-col justify-center"
+            >
+              <p class="text-4xl mb-3">✨</p>
+              <p class="font-bold text-green-900 dark:text-green-100 text-lg mb-2">成果物</p>
+              <p class="text-sm text-green-600 dark:text-green-400">構成・表現・具体例...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 補足説明 -->
+        <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+          人間が脳内の完成イメージを抽象化された制約に圧縮 → 生成AIが制約から詳細を展開
+        </div>
+      </Diagram>
 
       <p
         class="text-xl text-gray-900 dark:text-white font-medium mb-6 pl-4 border-l-4 border-green-500"
@@ -54,32 +108,75 @@
       <AnchorH2 id="trunk-not-branches">種・幹・枝葉</AnchorH2>
       <p>では、最適な制約とは何か。これを3つのゾーンで整理します。</p>
 
-      <!-- TODO: ←抽象 具体→の直線上の概念であることがわかるように可視化する -->
+      <Diagram>
+        <div class="space-y-4 md:space-y-6">
+          <!-- 軸ライン（デスクトップ: 横、モバイル: 縦） -->
+          <div class="flex md:hidden flex-col items-center">
+            <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">抽象</span>
+            <div class="w-0.5 h-12 bg-gray-300 dark:bg-gray-600"></div>
+            <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2">具体</span>
+          </div>
+          <div class="hidden md:flex items-center justify-between">
+            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">抽象</span>
+            <div class="flex-1 h-0.5 bg-gray-300 dark:bg-gray-600 mx-4"></div>
+            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">具体</span>
+          </div>
 
-      <ComparisonCards>
-        <ComparisonCard title="種" description="制約が少なすぎる" icon="🌱">
-          <p class="text-sm mb-2">方向性はあるが、判断基準にはならない。</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 italic">
-            「わかりやすく」「いい感じに」
-          </p>
-        </ComparisonCard>
+          <!-- 3つのゾーン -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- 種 -->
+            <div class="text-center">
+              <div
+                class="bg-red-50 dark:bg-red-900/30 rounded-lg p-4 border-2 border-red-200 dark:border-red-800 mb-3"
+              >
+                <p class="text-3xl mb-2">🌱</p>
+                <p class="font-bold text-red-900 dark:text-red-200 mb-1">種</p>
+                <p class="text-xs text-red-700 dark:text-red-300">制約が少なすぎる</p>
+              </div>
+              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
+                方向性はあるが、判断基準にはならない。
+              </div>
+              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
+                「わかりやすく」「いい感じに」
+              </div>
+            </div>
 
-        <ComparisonCard title="幹" description="最適な制約" icon="🌳" :highlighted="true">
-          <p class="text-sm mb-2">
-            判断の分岐点を規定する。これがあれば、残りは論理的に導出できる。
-          </p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 italic">
-            「技術知識のない決裁者が、5分で投資判断できる資料」
-          </p>
-        </ComparisonCard>
+            <!-- 幹 -->
+            <div class="text-center">
+              <div
+                class="bg-green-50 dark:bg-green-900/30 rounded-lg p-4 border-2 border-green-500 shadow-lg mb-3"
+              >
+                <p class="text-3xl mb-2">🌳</p>
+                <p class="font-bold text-green-900 dark:text-green-200 mb-1">幹</p>
+                <p class="text-xs text-green-700 dark:text-green-300">最適な制約</p>
+              </div>
+              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
+                判断の分岐点を規定する。これがあれば、残りは論理的に導出できる。
+              </div>
+              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
+                「技術知識のない決裁者が、5分で投資判断できる資料」
+              </div>
+            </div>
 
-        <ComparisonCard title="枝葉" description="制約が多すぎる" icon="🍃">
-          <p class="text-sm mb-2">幹が決まれば自然と導出される領域。</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 italic">
-            「箇条書きは5項目で」「グラフは棒グラフで」
-          </p>
-        </ComparisonCard>
-      </ComparisonCards>
+            <!-- 枝葉 -->
+            <div class="text-center">
+              <div
+                class="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-4 border-2 border-orange-200 dark:border-orange-800 mb-3"
+              >
+                <p class="text-3xl mb-2">🍃</p>
+                <p class="font-bold text-orange-900 dark:text-orange-200 mb-1">枝葉</p>
+                <p class="text-xs text-orange-700 dark:text-orange-300">制約が多すぎる</p>
+              </div>
+              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
+                幹が決まれば自然と導出される領域。
+              </div>
+              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
+                「箇条書きは5項目で」「グラフは棒グラフで」
+              </div>
+            </div>
+          </div>
+        </div>
+      </Diagram>
 
       <p>
         <strong>幹</strong
@@ -124,9 +221,8 @@
       </p>
 
       <AnchorH3 id="conceptual-structure">概念構造を持っていない</AnchorH3>
-      <!-- TODO: 「軸」という言葉がわかりにくい、「知識」とかの方が自然？ -->
       <p>
-        詳しくない領域では、「何が重要な分岐点か」を判断する軸がない。専門用語の背後には、その領域の<strong>「分解の軸」</strong>があります。たとえば「KPI」を本当に理解している人は、「先行指標と遅行指標」「計測可能性と操作可能性」といった軸も持っている。この軸があるから、曖昧な要求を構成要素に分解でき、幹が見えてきます。
+        詳しくない領域では、「何が重要な分岐点か」を判断する知識がない。専門用語の背後には、その領域特有の<strong>「構造的な理解」</strong>があります。たとえば「KPI」を本当に理解している人は、「先行指標と遅行指標」「計測可能性と操作可能性」といった観点も持っている。こうした構造的な理解があるから、曖昧な要求を構成要素に分解でき、幹が見えてきます。
       </p>
 
       <p>いずれの場合も、AIの出力を手がかりに幹を発見できます。</p>
@@ -144,7 +240,7 @@
 
         <h3>3. AIに尋ねる</h3>
         <p>
-          「これを作るために確認すべきことを質問して」と頼めば、AIが聞いてくる項目がそのまま幹の候補になります。詳しくない領域では「品質を左右する重要な観点は?」と聞いて、分解の軸を教えてもらうこともできます。
+          「これを作るために確認すべきことを質問して」と頼めば、AIが聞いてくる項目がそのまま幹の候補になります。詳しくない領域では「品質を左右する重要な観点は?」と聞いて、構造的な理解を教えてもらうこともできます。
         </p>
       </InfoCard>
 
@@ -224,7 +320,7 @@
         AIが進化しても、この力の重要性は変わりません。幹を見つける、幹を使う、幹を育てる、幹を見極める——フェーズは変わっても、幹を理解している人間が価値を生み出す構造は同じです。
       </p>
 
-      <div class="bg-gray-900 dark:bg-gray-800 text-white rounded-xl p-6 text-center my-8">
+      <div class="bg-gray-900 dark:bg-gray-800 text-white rounded-xl p-4 text-center my-8">
         <p class="text-lg font-medium">何が幹かを見極める目を持つこと。</p>
         <p class="text-lg font-medium">それが、人間に求められる力になる。</p>
       </div>
