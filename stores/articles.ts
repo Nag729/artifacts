@@ -17,12 +17,12 @@ export const useArticlesStore = defineStore('articles', () => {
   const sortedArticles = ref<ArticleWithLikes[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
-  const currentSort = ref<SortOrder>('likes')
+  const currentSort = ref<SortOrder>('date')
 
   /**
    * Sort articles by the specified order
    */
-  const sortArticles = async (order: SortOrder = 'likes') => {
+  const sortArticles = async (order: SortOrder) => {
     isLoading.value = true
     error.value = null
     currentSort.value = order

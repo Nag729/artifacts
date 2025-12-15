@@ -110,7 +110,7 @@ describe('useArticlesStore', () => {
       await store.sortArticles('date')
 
       // Then: Articles should be sorted by date (newest first)
-      expect(store.sortedArticles[0]?.date).toBe('2025-11-21')
+      expect(store.sortedArticles[0]?.date).toBe('2025-12-14')
       expect(store.currentSort).toBe('date')
     })
 
