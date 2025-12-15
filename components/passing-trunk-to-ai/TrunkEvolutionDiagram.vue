@@ -1,9 +1,9 @@
 <template>
   <Diagram>
     <div class="relative">
-      <!-- 縦軸（抽象↔具体） -->
+      <!-- 縦軸（抽象↔具体）デスクトップのみ表示 -->
       <div
-        class="absolute left-0 top-0 bottom-0 flex flex-col justify-between items-center w-12 md:w-16"
+        class="hidden md:flex absolute left-0 top-0 bottom-0 flex-col justify-between items-center w-12 md:w-16"
       >
         <span class="text-xs font-medium text-gray-600 dark:text-gray-400">抽象</span>
         <div class="flex-1 w-0.5 bg-gray-300 dark:bg-gray-600 my-2"></div>
@@ -11,10 +11,10 @@
       </div>
 
       <!-- メインコンテンツ -->
-      <div class="ml-12 md:ml-16 pl-4">
-        <!-- 時間軸ラベル -->
+      <div class="md:ml-16 md:pl-4">
+        <!-- 時間軸ラベル（デスクトップのみ） -->
         <div
-          class="flex items-center justify-between mb-6 pb-2 border-b-2 border-gray-300 dark:border-gray-600"
+          class="hidden md:flex items-center justify-between mb-6 pb-2 border-b-2 border-gray-300 dark:border-gray-600"
         >
           <span class="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-400">過去</span>
           <div class="text-gray-400">→</div>
@@ -24,11 +24,10 @@
         </div>
 
         <!-- 3つの時点での幹の位置 -->
-        <div class="relative" style="min-height: 320px">
+        <div class="flex flex-col space-y-6 md:space-y-0 md:relative md:min-h-[320px]">
           <!-- 過去の幹（具体寄り・グレーアウト） -->
           <div
-            class="absolute left-0 md:left-[8%] flex flex-col items-center opacity-50"
-            style="top: 200px; max-width: 160px"
+            class="flex flex-col items-center opacity-70 md:opacity-50 md:absolute md:left-[8%] md:top-[200px] w-full md:max-w-[160px]"
           >
             <div
               class="bg-gray-100 dark:bg-gray-800 rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border-2 border-gray-400 dark:border-gray-600 mb-2"
@@ -45,8 +44,7 @@
 
           <!-- 現在の幹（中間・強調） -->
           <div
-            class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
-            style="top: 100px; max-width: 180px"
+            class="flex flex-col items-center md:absolute md:left-1/2 md:-translate-x-1/2 md:top-[100px] w-full md:max-w-[180px]"
           >
             <div
               class="bg-green-50 dark:bg-green-900/30 rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center border-3 border-green-500 shadow-lg mb-2"
@@ -65,8 +63,7 @@
 
           <!-- 未来の幹（抽象寄り・点線） -->
           <div
-            class="absolute right-0 md:right-[8%] flex flex-col items-center"
-            style="top: 0px; max-width: 160px"
+            class="flex flex-col items-center md:absolute md:right-[8%] md:top-0 w-full md:max-w-[160px]"
           >
             <div
               class="bg-blue-50/50 dark:bg-blue-900/20 rounded-full w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border-2 border-dashed border-blue-400 dark:border-blue-600 mb-2"
@@ -83,9 +80,9 @@
             </p>
           </div>
 
-          <!-- 移動を示す矢印（SVG） -->
+          <!-- 移動を示す矢印（SVG・デスクトップのみ） -->
           <svg
-            class="absolute inset-0 w-full h-full pointer-events-none"
+            class="hidden md:block absolute inset-0 w-full h-full pointer-events-none"
             style="z-index: -1"
             xmlns="http://www.w3.org/2000/svg"
           >
