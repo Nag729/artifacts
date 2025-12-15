@@ -42,7 +42,7 @@
             <p class="text-xs text-green-700 dark:text-green-300">最適な制約</p>
           </div>
           <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
-            判断の分岐点を規定する。これがあれば、残りは論理的に導出できる。
+            判断の分岐点を規定する。これがあれば、残りは生成AIが導出できる。
           </div>
           <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
             「技術知識のない決裁者が、5分で投資判断できる資料」
@@ -75,10 +75,11 @@
 
         <!-- 説明 -->
         <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>
+          <p class="mb-1">
             <strong class="text-green-600 dark:text-green-400">幹</strong
             >は、制約と品質のスイートスポット
           </p>
+          <p class="text-xs">制約が少なすぎると発散し、多すぎるとAIの能力を活かせず品質が下がる</p>
         </div>
       </div>
     </div>
@@ -104,13 +105,28 @@ import {
 // Chart.js コンポーネント登録
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
-// シグモイド関数でデータポイント生成（変曲点を左にシフト・急勾配）
+// 品質曲線を生成（滑らかな非対称ガウス曲線）
 const generateSigmoidData = () => {
   const points = []
-  for (let x = 0; x <= 100; x += 2) {
-    // シグモイド関数: 1 / (1 + e^(-(x-35)/8))
-    // 変曲点を x=35、勾配を急に（係数を12→8に）
-    const y = 100 / (1 + Math.exp(-(x - 35) / 8))
+  const peakX = 50 // 幹のピーク位置
+  const peakY = 100 // 最高品質
+  const baselineLeft = 0 // 左端の最低値（種）
+  const baselineRight = 68 // 右端の値（枝葉、種より高い）
+
+  for (let x = 0; x <= 100; x += 1) {
+    // 非対称ガウス関数: 左右で異なる標準偏差
+    let y
+    if (x < peakX) {
+      // 左側（種→幹）: 急上昇（標準偏差を小さく）
+      const sigma = 18 // 小さいほど急
+      const normalized = Math.exp(-Math.pow(x - peakX, 2) / (2 * Math.pow(sigma, 2)))
+      y = baselineLeft + (peakY - baselineLeft) * normalized
+    } else {
+      // 右側（幹→枝葉）: 緩やかに下降（標準偏差を大きく）
+      const sigma = 35 // 大きいほど緩やか
+      const normalized = Math.exp(-Math.pow(x - peakX, 2) / (2 * Math.pow(sigma, 2)))
+      y = baselineRight + (peakY - baselineRight) * normalized
+    }
     points.push({ x, y })
   }
   return points
@@ -129,15 +145,20 @@ const chartData = computed<ChartData<'line'>>(() => ({
       backgroundColor: 'rgba(59, 130, 246, 0.1)',
       borderWidth: 3,
       pointRadius: 0,
-      tension: 0,
+      tension: 0.4, // 滑らかな曲線にする
       fill: false,
       order: 2, // 後ろに描画
     },
     // マーカーを後から描画（前面に来る）
-    // 種のポイント
+    // 種のポイント（左端に近く）
     {
       label: '種',
-      data: [{ x: 15, y: 100 / (1 + Math.exp(-(15 - 35) / 8)) }],
+      data: [
+        {
+          x: 15,
+          y: 0 + (100 - 0) * Math.exp(-Math.pow(15 - 50, 2) / (2 * Math.pow(18, 2))),
+        },
+      ],
       borderColor: '#f43f5e',
       backgroundColor: '#f43f5e',
       pointRadius: 8,
@@ -145,10 +166,15 @@ const chartData = computed<ChartData<'line'>>(() => ({
       showLine: false,
       order: 1, // 前面に描画
     },
-    // 幹のポイント（中心に配置）
+    // 幹のポイント（中心・ピーク）
     {
-      label: '幹（変曲点）',
-      data: [{ x: 50, y: 100 / (1 + Math.exp(-(50 - 35) / 8)) }],
+      label: '幹（最適点）',
+      data: [
+        {
+          x: 50,
+          y: 100,
+        },
+      ],
       borderColor: '#10b981',
       backgroundColor: '#10b981',
       pointRadius: 10,
@@ -156,10 +182,15 @@ const chartData = computed<ChartData<'line'>>(() => ({
       showLine: false,
       order: 1, // 前面に描画
     },
-    // 枝葉のポイント（右に配置）
+    // 枝葉のポイント（右端に近く）
     {
       label: '枝葉',
-      data: [{ x: 85, y: 100 / (1 + Math.exp(-(85 - 35) / 8)) }],
+      data: [
+        {
+          x: 85,
+          y: 68 + (100 - 68) * Math.exp(-Math.pow(85 - 50, 2) / (2 * Math.pow(35, 2))),
+        },
+      ],
       borderColor: '#f59e0b',
       backgroundColor: '#f59e0b',
       pointRadius: 8,
@@ -200,7 +231,7 @@ const chartOptions = computed<ChartOptions<'line'>>(() => ({
       type: 'linear',
       title: {
         display: true,
-        text: 'AIに与える制約の量',
+        text: '制約',
         color: 'rgb(107, 114, 128)',
         font: {
           size: 13,
@@ -218,6 +249,8 @@ const chartOptions = computed<ChartOptions<'line'>>(() => ({
       },
     },
     y: {
+      min: 0,
+      max: 110,
       title: {
         display: true,
         text: '品質',
