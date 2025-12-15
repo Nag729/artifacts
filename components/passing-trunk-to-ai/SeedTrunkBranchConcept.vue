@@ -69,7 +69,7 @@
 
       <!-- Chart.js グラフ -->
       <div class="pt-4">
-        <div class="w-full max-w-[500px] mx-auto">
+        <div class="w-full max-w-[640px] mx-auto">
           <Line :data="chartData" :options="chartOptions" />
         </div>
 
@@ -137,33 +137,33 @@ const chartData = computed<ChartData<'line'>>(() => ({
     // 種のポイント
     {
       label: '種',
-      data: [{ x: 12, y: 100 / (1 + Math.exp(-(12 - 35) / 8)) }],
-      borderColor: 'rgb(239, 68, 68)',
-      backgroundColor: 'rgb(239, 68, 68)',
+      data: [{ x: 15, y: 100 / (1 + Math.exp(-(15 - 35) / 8)) }],
+      borderColor: '#f43f5e',
+      backgroundColor: '#f43f5e',
+      pointRadius: 8,
+      pointHoverRadius: 10,
+      showLine: false,
+      order: 1, // 前面に描画
+    },
+    // 幹のポイント（中心に配置）
+    {
+      label: '幹（変曲点）',
+      data: [{ x: 50, y: 100 / (1 + Math.exp(-(50 - 35) / 8)) }],
+      borderColor: '#10b981',
+      backgroundColor: '#10b981',
       pointRadius: 10,
       pointHoverRadius: 12,
       showLine: false,
       order: 1, // 前面に描画
     },
-    // 幹のポイント（変曲点・高めの位置）
-    {
-      label: '幹（変曲点）',
-      data: [{ x: 46, y: 100 / (1 + Math.exp(-(46 - 35) / 8)) }],
-      borderColor: 'rgb(34, 197, 94)',
-      backgroundColor: 'rgb(34, 197, 94)',
-      pointRadius: 12,
-      pointHoverRadius: 14,
-      showLine: false,
-      order: 1, // 前面に描画
-    },
-    // 枝葉のポイント
+    // 枝葉のポイント（右に配置）
     {
       label: '枝葉',
       data: [{ x: 85, y: 100 / (1 + Math.exp(-(85 - 35) / 8)) }],
-      borderColor: 'rgb(249, 115, 22)',
-      backgroundColor: 'rgb(249, 115, 22)',
-      pointRadius: 10,
-      pointHoverRadius: 12,
+      borderColor: '#f59e0b',
+      backgroundColor: '#f59e0b',
+      pointRadius: 8,
+      pointHoverRadius: 10,
       showLine: false,
       order: 1, // 前面に描画
     },
@@ -174,7 +174,6 @@ const chartData = computed<ChartData<'line'>>(() => ({
 const chartOptions = computed<ChartOptions<'line'>>(() => ({
   responsive: true,
   maintainAspectRatio: true,
-  aspectRatio: 1.5, // モバイルで縦を大きく
   plugins: {
     legend: {
       display: true,
