@@ -39,7 +39,7 @@
               過去の幹
             </p>
             <p class="text-xs text-gray-600 dark:text-gray-500 text-center leading-tight">
-              「引数は3つで...」「try-catchで...」
+              「スライドは10枚で...」「グラフは棒グラフで...」
             </p>
           </div>
 
@@ -79,7 +79,7 @@
               未来の幹
             </p>
             <p class="text-xs text-gray-600 dark:text-gray-400 text-center leading-tight">
-              「次の機能を提案して」
+              「ユーザー満足度を...」「企業全体の成長を...」
             </p>
           </div>
 
