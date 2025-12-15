@@ -111,75 +111,7 @@
       <AnchorH2 id="trunk-not-branches">種・幹・枝葉</AnchorH2>
       <p>では、最適な制約とは何か。この記事では、「種・幹・枝葉」の3つのゾーンで整理します。</p>
 
-      <Diagram>
-        <div class="space-y-4 md:space-y-6">
-          <!-- 軸ライン（デスクトップ: 横、モバイル: 縦） -->
-          <div class="flex md:hidden flex-col items-center">
-            <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mb-2">抽象</span>
-            <div class="w-0.5 h-12 bg-gray-300 dark:bg-gray-600"></div>
-            <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2">具体</span>
-          </div>
-          <div class="hidden md:flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">抽象</span>
-            <div class="flex-1 h-0.5 bg-gray-300 dark:bg-gray-600 mx-4"></div>
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">具体</span>
-          </div>
-
-          <!-- 3つのゾーン -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- 種 -->
-            <div class="text-center">
-              <div
-                class="bg-red-50 dark:bg-red-900/30 rounded-lg p-4 border-2 border-red-200 dark:border-red-800 mb-3"
-              >
-                <p class="text-3xl mb-2">🌱</p>
-                <p class="font-bold text-red-900 dark:text-red-200 mb-1">種</p>
-                <p class="text-xs text-red-700 dark:text-red-300">制約が少なすぎる</p>
-              </div>
-              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
-                方向性はあるが、解釈の余地が大きすぎる。
-              </div>
-              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
-                「わかりやすく」「いい感じに」
-              </div>
-            </div>
-
-            <!-- 幹 -->
-            <div class="text-center">
-              <div
-                class="bg-green-50 dark:bg-green-900/30 rounded-lg p-4 border-2 border-green-500 shadow-lg mb-3"
-              >
-                <p class="text-3xl mb-2">🌳</p>
-                <p class="font-bold text-green-900 dark:text-green-200 mb-1">幹</p>
-                <p class="text-xs text-green-700 dark:text-green-300">最適な制約</p>
-              </div>
-              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
-                判断の分岐点を規定する。これがあれば、残りは論理的に導出できる。
-              </div>
-              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
-                「技術知識のない決裁者が、5分で投資判断できる資料」
-              </div>
-            </div>
-
-            <!-- 枝葉 -->
-            <div class="text-center">
-              <div
-                class="bg-orange-50 dark:bg-orange-900/30 rounded-lg p-4 border-2 border-orange-200 dark:border-orange-800 mb-3"
-              >
-                <p class="text-3xl mb-2">🍃</p>
-                <p class="font-bold text-orange-900 dark:text-orange-200 mb-1">枝葉</p>
-                <p class="text-xs text-orange-700 dark:text-orange-300">制約が多すぎる</p>
-              </div>
-              <div class="text-xs md:text-sm text-gray-700 dark:text-gray-300 mb-2">
-                幹から論理的に導ける情報や、AIが学習済みの慣習。
-              </div>
-              <div class="text-xs md:text-xs text-gray-500 dark:text-gray-400 italic">
-                「箇条書きは5項目で」「グラフは棒グラフで」
-              </div>
-            </div>
-          </div>
-        </div>
-      </Diagram>
+      <SeedTrunkBranchConcept />
 
       <p>
         <strong>幹</strong
