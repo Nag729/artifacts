@@ -12,8 +12,6 @@
       従来のKPTふりかえりの課題を解決する新しいアプローチ
     </p>
 
-    <LikeButton article-slug="kpgt-retrospective" />
-
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="what-is-kpt">KPT とは</AnchorH2>
       <p>

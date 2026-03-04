@@ -12,43 +12,9 @@
 
     <!-- 記事一覧 -->
     <section>
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">記事一覧</h2>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">記事一覧</h2>
 
-        <!-- Sort toggle -->
-        <div class="flex gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
-          <button
-            :class="[
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
-              currentSort === 'date'
-                ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white',
-            ]"
-            @click="handleSort('date')"
-          >
-            <Icon name="mdi:clock-outline" class="mr-1" />
-            最新順
-          </button>
-          <button
-            :class="[
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center',
-              currentSort === 'likes'
-                ? 'bg-white dark:bg-gray-700 text-pink-600 dark:text-pink-400 shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400',
-            ]"
-            @click="handleSort('likes')"
-          >
-            <Icon name="mdi:heart" class="mr-1" />
-            いいね順
-          </button>
-        </div>
-      </div>
-
-      <div v-if="isLoading" class="grid gap-6">
-        <ArticleCardSkeleton v-for="i in 3" :key="i" />
-      </div>
-
-      <div v-else-if="articles && articles.length > 0" class="grid gap-6">
+      <div v-if="articles && articles.length > 0" class="grid gap-6">
         <ArticleCard v-for="article in articles" :key="article.slug" :article="article" />
       </div>
 
@@ -60,8 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import type { SortOrder } from '~/stores/articles'
-
 // SEO設定
 useSeo({
   title: 'ホーム',
@@ -69,16 +33,7 @@ useSeo({
   type: 'website',
 })
 
-// 記事取得とソート管理
+// 記事取得
 const articlesStore = useArticlesStore()
-const { sortedArticles: articles, isLoading, currentSort } = storeToRefs(articlesStore)
-
-const handleSort = (order: SortOrder) => {
-  articlesStore.sortArticles(order)
-}
-
-// Initialize on mount
-onMounted(() => {
-  articlesStore.sortArticles('date')
-})
+const { sortedArticles: articles } = storeToRefs(articlesStore)
 </script>

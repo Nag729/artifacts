@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-Nuxt 4 + TypeScript + Pinia で構築されたドキュメントサイト。記事を Vue コンポーネントで執筆し、Supabase でいいね機能を提供する。
+Nuxt 4 + TypeScript + Pinia で構築されたドキュメントサイト。記事を Vue コンポーネントで執筆する。
 
 ## 開発コマンド
 
@@ -48,16 +48,7 @@ npm run test:coverage  # カバレッジ
 
 ### ステート管理 (Pinia)
 
-- **`stores/articles.ts`** - 記事一覧の表示・ソート・いいねのトグル
-- **`stores/likes.ts`** - Supabase との通信・いいね状態管理・ユーザー ID 管理
-
-`ArticlesStore` は `LikesStore` に依存。記事にいいね数と hasLiked 状態をマージして `ArticleWithLikes` 型を作る。
-
-### いいね機能の設計
-
-- **ユーザー識別**: localStorage に保存された UUID (`artifacts_user_id`)
-- **キャッシュ戦略**: `likeCounts` (Map) と `likedArticles` (Set) でクライアント側にキャッシュ
-- **楽観的 UI**: トグル時に即座に状態更新、失敗時はロールバックなし (シンプル設計)
+- **`stores/articles.ts`** - 記事一覧の日付順表示
 
 ### SEO 最適化
 
@@ -82,25 +73,12 @@ npm run test:coverage  # カバレッジ
 
 これらを組み合わせて記事を構成する。
 
-### 環境変数
-
-Supabase 接続には以下の環境変数が必要:
-
-```bash
-NUXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NUXT_PUBLIC_SUPABASE_KEY=your-supabase-anon-key
-```
-
-テストでは `vitest.config.ts` でモック値を設定済み。
-
 ## テスト
 
 Vitest + `@nuxt/test-utils` + happy-dom を使用。
 
 - **Store のテスト**: `stores/*.spec.ts` で Pinia Testing を活用
 - **Nuxt 環境**: `vitest.config.ts` で `environment: 'nuxt'` を設定
-
-テスト実行時は Supabase のモッククライアントを使うこと。
 
 ## デプロイ
 

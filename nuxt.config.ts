@@ -94,12 +94,4 @@ export default defineNuxtConfig({
   sitemap: {
     xsl: false, // XSL スタイルシート参照を無効化
   },
-
-  // Runtime config for Supabase
-  runtimeConfig: {
-    public: {
-      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
-      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY || '',
-    },
-  },
 })

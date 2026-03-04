@@ -18,14 +18,6 @@
 
     <!-- Date skeleton -->
     <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
-
-    <!-- Like button skeleton -->
-    <div class="absolute bottom-5 right-5">
-      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-200 dark:bg-gray-700">
-        <div class="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
-        <div class="w-6 h-4 bg-gray-300 dark:bg-gray-600 rounded"></div>
-      </div>
-    </div>
   </div>
 </template>
 

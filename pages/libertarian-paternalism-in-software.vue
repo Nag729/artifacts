@@ -18,8 +18,6 @@
       ユーザーの自由を尊重しながら、より良い行動へ導くUX設計の考え方
     </p>
 
-    <LikeButton article-slug="libertarian-paternalism-in-software" />
-
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="introduction">はじめに</AnchorH2>
       <p>

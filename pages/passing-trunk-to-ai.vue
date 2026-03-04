@@ -16,8 +16,6 @@
       なぜ同じツールを使っても、成果に差が出るのか
     </p>
 
-    <LikeButton article-slug="passing-trunk-to-ai" />
-
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <!-- リード文 -->
       <p>

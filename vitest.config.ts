@@ -6,14 +6,6 @@ export default defineVitestConfig({
     environmentOptions: {
       nuxt: {
         domEnvironment: 'happy-dom',
-        overrides: {
-          runtimeConfig: {
-            public: {
-              supabaseUrl: 'https://test.supabase.co',
-              supabaseKey: 'test-key',
-            },
-          },
-        },
       },
     },
   },
