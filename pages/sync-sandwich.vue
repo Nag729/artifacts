@@ -13,6 +13,8 @@
       分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成
     </p>
 
+    <ArticleDate v-if="article" :date="article.date" />
+
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="sync-async-definition">💡 「同期」と「非同期」とは？</AnchorH2>
       <p>

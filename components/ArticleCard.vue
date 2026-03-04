@@ -15,7 +15,8 @@
         </span>
       </div>
 
-      <time class="text-sm text-gray-500 dark:text-gray-400">
+      <time class="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
+        <Icon name="mdi:calendar-outline" size="16" />
         {{ formatDate(article.date) }}
       </time>
     </NuxtLink>

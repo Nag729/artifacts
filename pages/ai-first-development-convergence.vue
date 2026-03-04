@@ -18,6 +18,8 @@
       AIの能力が成熟し、枠組みが整ったとき、開発はどう変わるか
     </p>
 
+    <ArticleDate v-if="article" :date="article.date" />
+
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="engineer-role">エンジニアの役割の変化</AnchorH2>
 

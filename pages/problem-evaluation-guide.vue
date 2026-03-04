@@ -18,6 +18,8 @@
       ふりかえりで出てくる問題が本当に対処すべきものなのかを判断する3つの観点
     </p>
 
+    <ArticleDate v-if="article" :date="article.date" />
+
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <AnchorH2 id="three-points">3 点セット</AnchorH2>
 

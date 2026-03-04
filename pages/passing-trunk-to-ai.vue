@@ -16,6 +16,8 @@
       なぜ同じツールを使っても、成果に差が出るのか
     </p>
 
+    <ArticleDate v-if="article" :date="article.date" />
+
     <div class="prose prose-lg dark:prose-invert max-w-none">
       <!-- リード文 -->
       <p>
