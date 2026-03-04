@@ -11,6 +11,7 @@
       ]"
     />
 
+    <ArticleIcon v-if="article" :icon="article.icon" />
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       生成AIファーストなソフトウェア開発の収束状態
     </h1>

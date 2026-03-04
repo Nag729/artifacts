@@ -6,6 +6,7 @@ export interface Article {
   title: string
   description: string
   date: string
+  icon: string
   tags: readonly string[]
 }
 

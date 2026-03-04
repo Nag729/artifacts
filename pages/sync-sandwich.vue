@@ -6,6 +6,7 @@
         { label: '同期サンドイッチ', path: '/sync-sandwich', current: true },
       ]"
     />
+    <ArticleIcon v-if="article" :icon="article.icon" />
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
       同期サンドイッチ - 同期時間を最大活用するミーティングの進め方
     </h1>

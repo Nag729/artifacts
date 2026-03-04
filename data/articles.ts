@@ -11,6 +11,7 @@ export const articles: Article[] = [
     description: 'なぜ同じツールを使っても、成果に差が出るのか',
     tags: ['生成AI', 'プロンプト', '思考整理'],
     date: '2025-12-14',
+    icon: 'streamline-emojis:palm-tree',
   },
   {
     slug: 'libertarian-paternalism-in-software',
@@ -18,6 +19,7 @@ export const articles: Article[] = [
     description: 'ユーザーの自由を尊重しながら、より良い行動へ導くUX設計の考え方',
     tags: ['UX設計', '行動経済学', 'プロダクトデザイン'],
     date: '2025-11-21',
+    icon: 'streamline-emojis:globe-showing-americas',
   },
   {
     slug: 'sync-sandwich',
@@ -26,6 +28,7 @@ export const articles: Article[] = [
       '分散チームで重要な作成物を完成させたり重要な判断を下したりする必要がある場合のミーティング構成',
     tags: ['ミーティング', 'コミュニケーション', '分散チーム', 'リモートワーク'],
     date: '2025-11-21',
+    icon: 'streamline-emojis:hamburger-1',
   },
   {
     slug: 'kpgt-retrospective',
@@ -33,6 +36,7 @@ export const articles: Article[] = [
     description: '従来のKPTふりかえりの課題を解決する新しいアプローチ',
     tags: ['ふりかえり', 'KPT'],
     date: '2025-11-20',
+    icon: 'streamline-emojis:recycling-symbol',
   },
   {
     slug: 'problem-evaluation-guide',
@@ -40,6 +44,7 @@ export const articles: Article[] = [
     description: 'ふりかえりで出てくる問題が本当に対処すべきものなのかを判断する3つの観点',
     tags: ['問題分析', 'ふりかえり'],
     date: '2025-11-20',
+    icon: 'streamline-emojis:magnifying-glass-tilted-left',
   },
   {
     slug: 'ai-first-development-convergence',
@@ -47,6 +52,7 @@ export const articles: Article[] = [
     description: 'AIの能力が成熟し、枠組みが整ったとき、開発はどう変わるか',
     tags: ['生成AI', '思考実験', '開発プロセス'],
     date: '2025-11-20',
+    icon: 'streamline-emojis:rocket',
   },
 ]
 

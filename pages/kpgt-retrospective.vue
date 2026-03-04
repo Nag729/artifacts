@@ -7,6 +7,7 @@
       ]"
     />
 
+    <ArticleIcon v-if="article" :icon="article.icon" />
     <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">KPGTふりかえり手法の提案</h1>
     <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
       従来のKPTふりかえりの課題を解決する新しいアプローチ
