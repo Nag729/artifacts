@@ -3,7 +3,7 @@
     <!-- ヒーローセクション -->
     <section class="mb-16 py-12 px-4 card">
       <div class="flex items-center justify-center gap-6">
-        <Icon name="streamline-emojis:open-book" size="100" class="shrink-0" />
+        <Icon name="fluent-emoji:open-book" size="100" class="shrink-0" />
         <div>
           <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
             Nag729 - artifacts
