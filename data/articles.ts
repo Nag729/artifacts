@@ -6,6 +6,14 @@ import dayjs from 'dayjs'
  */
 export const articles: Article[] = [
   {
+    slug: 'code-review-in-ai-era',
+    title: 'AI時代のコードレビュー再設計',
+    description: 'AIによってコード量が爆発した今、レビューの「読み方の順序」を再設計する',
+    tags: ['生成AI', 'コードレビュー', '開発プロセス'],
+    date: '2026-05-08',
+    icon: 'fluent-emoji:detective',
+  },
+  {
     slug: 'passing-trunk-to-ai',
     title: '生成AIに「幹」を渡す',
     description: 'なぜ同じツールを使っても、成果に差が出るのか',
