@@ -47,7 +47,7 @@ interface RailNode {
 
 const nodes: readonly RailNode[] = [
   { label: '指示', caption: 'プロンプト' },
-  { label: '行動\n空間', caption: 'ハーネス' },
+  { label: '実行\n環境', caption: 'ハーネス' },
   { label: '工程と\n検証', caption: 'ループ', status: 'now' },
   { label: '記憶', caption: '永続メモリ' },
   { label: '世界\nモデル', caption: 'デジタルツイン', status: 'goal' },

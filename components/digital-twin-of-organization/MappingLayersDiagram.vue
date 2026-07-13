@@ -1,5 +1,5 @@
 <template>
-  <Diagram title="写像する3つのレイヤー">
+  <Diagram title="写像する3つの領域">
     <div class="flex flex-col items-center">
       <!-- 頂点: プロダクト -->
       <div
@@ -46,7 +46,7 @@
 
       <p class="m-0 mt-4 text-center text-[10px] text-gray-500 dark:text-gray-400">
         3つを合わせて組織の現実を写像する。最も模倣困難なのが
-        <span class="font-semibold text-amber-600 dark:text-amber-400">顧客レイヤー</span>
+        <span class="font-semibold text-amber-600 dark:text-amber-400">顧客領域</span>
       </p>
     </div>
   </Diagram>
