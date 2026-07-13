@@ -6,6 +6,15 @@ import dayjs from 'dayjs'
  */
 export const articles: Article[] = [
   {
+    slug: 'digital-twin-of-organization',
+    title: 'AI開発の現在地から組織のデジタルツインへ',
+    description:
+      'モデルの進化で全員が速くなる時代に、差がつくのは組織固有の現実をどれだけ写像できているか',
+    tags: ['生成AI', '思考実験', 'ナレッジマネジメント'],
+    date: '2026-07-13',
+    icon: 'fluent-emoji:mirror',
+  },
+  {
     slug: 'code-review-in-ai-era',
     title: 'AI時代のコードレビュー再設計',
     description: 'AIによってコード量が爆発した今、レビューの「読み方の順序」を再設計する',

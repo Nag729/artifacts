@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useArticlesStore } from './articles'
+import { articles as allArticles } from '~/data/articles'
 
 describe('useArticlesStore', () => {
   beforeEach(() => {
@@ -33,7 +34,7 @@ describe('useArticlesStore', () => {
       const articles = store.sortedArticles
 
       // Then
-      expect(articles.length).toBe(6)
+      expect(articles.length).toBe(allArticles.length)
       expect(articles.map((a) => a.slug)).toContain('passing-trunk-to-ai')
       expect(articles.map((a) => a.slug)).toContain('sync-sandwich')
     })
