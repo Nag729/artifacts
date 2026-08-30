@@ -1,0 +1,2709 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SUWARO（スワロ）— 企画書</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.4/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <style>
+      /* ========== Reset & Base ========== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --green-900: #1e3932;
+        --green-700: #00704a;
+        --green-500: #1c9d6f;
+        --green-200: #b8ded0;
+        --green-100: #d4e9e2;
+        --green-50: #edf5f0;
+        --cream: #f9f6f1;
+        --cream-dark: #f0ebe3;
+        --gold: #c8a97e;
+        --gold-light: #e8d9bf;
+        --white: #ffffff;
+        --text: #2d2d2d;
+        --text-light: #6b6b6b;
+        --text-lighter: #999999;
+        --border: #e5e5e5;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --radius-xl: 28px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family:
+          "Noto Sans JP",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        background: var(--white);
+        line-height: 1.8;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ========== Typography ========== */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: var(--green-900);
+        line-height: 1.4;
+        font-weight: 700;
+      }
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+      p {
+        margin-bottom: 1rem;
+      }
+      strong {
+        font-weight: 700;
+      }
+      a {
+        color: var(--green-700);
+        text-decoration: none;
+      }
+
+      /* ========== Navigation ========== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 2rem;
+      }
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+      }
+      .nav-logo {
+        font-weight: 900;
+        font-size: 1.1rem;
+        color: var(--green-900);
+        letter-spacing: 0.08em;
+      }
+      .nav-links {
+        display: flex;
+        gap: 0.25rem;
+      }
+      .nav-links a {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--text-light);
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        transition: all 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--green-700);
+        background: var(--green-50);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      /* ========== Layout ========== */
+      .section {
+        padding: 5rem 2rem;
+      }
+      .section--alt {
+        background: var(--cream);
+      }
+      .section-inner {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .section-wide {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--green-700);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 0.75rem;
+      }
+      .section-label i {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* ========== Hero ========== */
+      .hero {
+        background: linear-gradient(160deg, var(--green-900) 0%, #2d5a4b 100%);
+        color: var(--white);
+        padding: 6rem 2rem 5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(
+            circle at 30% 70%,
+            rgba(0, 112, 74, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 70% 30%,
+            rgba(200, 169, 126, 0.15) 0%,
+            transparent 50%
+          );
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .hero-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.35rem 1rem;
+        border-radius: 999px;
+        margin-bottom: 2rem;
+        letter-spacing: 0.05em;
+      }
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: var(--white);
+        letter-spacing: 0.15em;
+        margin-bottom: 0.5rem;
+      }
+      .hero-sub {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 2rem;
+        letter-spacing: 0.02em;
+      }
+      .hero-tagline {
+        font-size: 1.35rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+      }
+      .hero-meta {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ========== Cards ========== */
+      .card {
+        background: var(--white);
+        border-radius: var(--radius-md);
+        padding: 1.75rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
+      }
+
+      /* ========== Quote / Blockquote ========== */
+      .experience-quote {
+        background: var(--cream);
+        border-left: 4px solid var(--gold);
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        padding: 1.5rem 2rem;
+        font-size: 0.95rem;
+        color: var(--text);
+        line-height: 2;
+        margin-bottom: 1.5rem;
+      }
+      .experience-result {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        padding-left: 1.5rem;
+        border-left: 3px solid var(--border);
+        margin-bottom: 2rem;
+      }
+
+      /* ========== Tables ========== */
+      .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin: 1.5rem 0;
+      }
+      .styled-table thead th {
+        background: var(--green-900);
+        color: var(--white);
+        padding: 0.85rem 1.25rem;
+        text-align: left;
+        font-weight: 500;
+        font-size: 0.82rem;
+        letter-spacing: 0.03em;
+      }
+      .styled-table thead th:first-child {
+        border-radius: var(--radius-sm) 0 0 0;
+      }
+      .styled-table thead th:last-child {
+        border-radius: 0 var(--radius-sm) 0 0;
+      }
+      .styled-table tbody td {
+        padding: 0.85rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      .styled-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      .styled-table tbody tr:nth-child(even) {
+        background: var(--cream);
+      }
+
+      .risk-badge {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+      }
+      .risk-badge--tech {
+        background: #e3f0ff;
+        color: #1a5fb4;
+      }
+      .risk-badge--supply {
+        background: #e2f1ea;
+        color: #1c7a54;
+      }
+      .risk-badge--demand {
+        background: #f3e8f9;
+        color: #813d9c;
+      }
+      .risk-badge--rev {
+        background: #fff3e0;
+        color: #c66900;
+      }
+
+      /* ========== Principle Cards ========== */
+      .principles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 768px) {
+        .principles {
+          grid-template-columns: 1fr;
+        }
+      }
+      .principle {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .principle-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: var(--green-100);
+        color: var(--green-700);
+        font-weight: 700;
+        font-size: 0.9rem;
+        border-radius: 50%;
+        margin-bottom: 0.75rem;
+      }
+      .principle h4 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+      }
+      .principle p {
+        font-size: 0.82rem;
+        color: var(--text-light);
+        margin-bottom: 0;
+        line-height: 1.7;
+      }
+
+      /* ========== Insight / Highlight ========== */
+      .insight-box {
+        background: linear-gradient(135deg, var(--green-900) 0%, #2d5a4b 100%);
+        color: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem;
+        margin: 2rem 0;
+      }
+      .insight-box p {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      /* ========== Before/After Table ========== */
+      .ba-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+      }
+      .ba-table td {
+        padding: 1.25rem 1.5rem;
+        font-size: 0.95rem;
+        vertical-align: middle;
+      }
+      .ba-table tr {
+        border-bottom: 1px solid var(--border);
+      }
+      .ba-table tr:last-child {
+        border-bottom: none;
+      }
+      .ba-table .ba-before {
+        background: var(--cream);
+        color: var(--text-light);
+        width: 45%;
+      }
+      .ba-table .ba-arrow {
+        text-align: center;
+        width: 10%;
+        color: var(--green-700);
+      }
+      .ba-table .ba-after {
+        background: var(--green-50);
+        color: var(--green-900);
+        font-weight: 700;
+        width: 45%;
+      }
+
+      /* ========== Timeline / Roadmap ========== */
+      .roadmap {
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
+        margin: 2rem 0;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+      .roadmap-step {
+        flex: 1;
+        min-width: 180px;
+        text-align: center;
+        position: relative;
+        padding: 0 0.5rem;
+      }
+      .roadmap-step::after {
+        content: "";
+        position: absolute;
+        top: 22px;
+        right: -50%;
+        width: 100%;
+        height: 2px;
+        background: var(--green-200);
+      }
+      .roadmap-step:last-child::after {
+        display: none;
+      }
+      .roadmap-dot {
+        width: 44px;
+        height: 44px;
+        background: var(--green-100);
+        border: 3px solid var(--green-700);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.85rem;
+        color: var(--green-700);
+        margin-bottom: 0.75rem;
+        position: relative;
+        z-index: 1;
+      }
+      .roadmap-step h4 {
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+      }
+      .roadmap-step p {
+        font-size: 0.78rem;
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* ========== Callout ========== */
+      .callout {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        border-radius: var(--radius-md);
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+      }
+      .callout--info {
+        background: var(--green-50);
+        border: 1px solid var(--green-200);
+        color: var(--green-900);
+      }
+      .callout--warn {
+        background: #fff8e1;
+        border: 1px solid var(--gold-light);
+        color: #5d4e37;
+      }
+      .callout i {
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      /* ========== Bullet List ========== */
+      .check-list {
+        list-style: none;
+        margin: 1rem 0;
+      }
+      .check-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        font-size: 0.9rem;
+      }
+      .check-list li i {
+        flex-shrink: 0;
+        color: var(--green-700);
+        margin-top: 0.25rem;
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ========== Phone Prototype ========== */
+      .proto-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        flex-wrap: wrap;
+        padding: 3rem 0;
+      }
+      .proto-text {
+        max-width: 380px;
+      }
+      .proto-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .proto-text p {
+        color: var(--text-light);
+        font-size: 0.92rem;
+      }
+      .proto-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.78rem;
+        color: var(--text-lighter);
+        margin-top: 1rem;
+        background: var(--cream);
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+      }
+
+      .phone {
+        width: 320px;
+        height: 640px;
+        background: #1a1a1a;
+        border-radius: 44px;
+        padding: 12px;
+        box-shadow:
+          var(--shadow-lg),
+          0 0 0 2px #333;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        background: var(--white);
+        border-radius: 34px;
+        overflow: hidden;
+        position: relative;
+      }
+      .phone-status {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 10;
+        color: var(--green-900);
+      }
+      .phone-status-icons {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+      .phone-dynamic-island {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 28px;
+        background: #1a1a1a;
+        border-radius: 20px;
+        z-index: 20;
+      }
+      .phone-home-indicator {
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 4px;
+        background: #ccc;
+        border-radius: 4px;
+        z-index: 10;
+      }
+
+      .proto-screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 28px 40px;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+      }
+      .proto-screen.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .screen-home {
+        background: var(--white);
+      }
+      .screen-home .logo-mark {
+        width: 64px;
+        height: 64px;
+        background: var(--green-700);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-weight: 900;
+        font-size: 22px;
+        letter-spacing: 0.05em;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 16px rgba(0, 112, 74, 0.3);
+      }
+      .screen-home h2 {
+        font-size: 18px;
+        color: var(--green-900);
+        margin-bottom: 6px;
+        text-align: center;
+      }
+      .screen-home .tagline {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-bottom: 32px;
+        text-align: center;
+      }
+      .screen-home .location {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-light);
+        margin-bottom: 24px;
+      }
+      .screen-home .location i {
+        width: 16px;
+        height: 16px;
+        color: var(--green-700);
+      }
+
+      .btn-proto {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--green-700);
+        color: var(--white);
+        border: none;
+        border-radius: 14px;
+        padding: 14px 40px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        width: 100%;
+      }
+      .btn-proto:hover {
+        background: var(--green-900);
+      }
+      .btn-proto:active {
+        transform: scale(0.97);
+      }
+      .btn-proto--ghost {
+        background: transparent;
+        color: var(--green-700);
+        border: none;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-family: inherit;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background 0.2s;
+      }
+      .btn-proto--ghost:hover {
+        background: var(--green-50);
+      }
+
+      .screen-count {
+        background: var(--white);
+      }
+      .screen-count h2 {
+        font-size: 20px;
+        color: var(--green-900);
+        margin-bottom: 32px;
+      }
+      .count-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 32px;
+      }
+      .count-btn {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--green-900);
+        background: var(--green-50);
+        border: 2px solid transparent;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .count-btn:hover,
+      .count-btn.selected {
+        border-color: var(--green-700);
+        background: var(--green-100);
+      }
+
+      .screen-search {
+        background: var(--green-50);
+      }
+      .search-pulse {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--green-700);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        position: relative;
+      }
+      .search-pulse i {
+        color: var(--white);
+        width: 32px;
+        height: 32px;
+      }
+      .search-pulse::before,
+      .search-pulse::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid var(--green-700);
+        animation: pulse-ring 1.8s ease-out infinite;
+      }
+      .search-pulse::after {
+        animation-delay: 0.6s;
+      }
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+      }
+      .screen-search p {
+        font-size: 14px;
+        color: var(--green-900);
+        font-weight: 500;
+        text-align: center;
+      }
+      .search-sub {
+        font-size: 12px !important;
+        color: var(--text-light) !important;
+        font-weight: 400 !important;
+        margin-top: 8px;
+      }
+
+      .screen-feedback {
+        background: var(--white);
+      }
+      .screen-feedback h2 {
+        font-size: 20px;
+        color: var(--green-900);
+        margin-bottom: 8px;
+      }
+      .screen-feedback .sub {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-bottom: 32px;
+      }
+      .feedback-btns {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+      }
+      .feedback-btn {
+        flex: 1;
+        padding: 16px;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition: transform 0.15s;
+      }
+      .feedback-btn:active {
+        transform: scale(0.96);
+      }
+      .feedback-btn--yes {
+        background: var(--green-700);
+        color: var(--white);
+      }
+      .feedback-btn--no {
+        background: var(--cream);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      .screen-success {
+        background: var(--white);
+      }
+      .success-check {
+        width: 72px;
+        height: 72px;
+        background: var(--green-100);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .success-check i {
+        color: var(--green-700);
+        width: 36px;
+        height: 36px;
+      }
+      .screen-success h2 {
+        font-size: 20px;
+        color: var(--green-900);
+        margin-bottom: 8px;
+      }
+      .screen-success p {
+        font-size: 13px;
+        color: var(--text-light);
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      /* Screen: QR Scan */
+      .screen-qr {
+        background: var(--white);
+      }
+      .screen-qr h2 {
+        font-size: 18px;
+        color: var(--green-900);
+        margin-bottom: 8px;
+      }
+      .screen-qr > p {
+        font-size: 13px;
+        color: var(--text-light);
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .qr-viewfinder {
+        width: 180px;
+        height: 180px;
+        border: 3px solid var(--green-700);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        position: relative;
+        background: var(--green-50);
+      }
+      .qr-viewfinder::before,
+      .qr-viewfinder::after {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-color: var(--green-700);
+        border-style: solid;
+      }
+      .qr-viewfinder::before {
+        top: 12px;
+        left: 12px;
+        border-width: 3px 0 0 3px;
+        border-radius: 4px 0 0 0;
+      }
+      .qr-viewfinder::after {
+        bottom: 12px;
+        right: 12px;
+        border-width: 0 3px 3px 0;
+        border-radius: 0 0 4px 0;
+      }
+      .qr-viewfinder i {
+        color: var(--green-700);
+        opacity: 0.5;
+      }
+      .qr-scanning-line {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        height: 2px;
+        background: var(--green-700);
+        animation: qrScan 2s ease-in-out infinite;
+      }
+      @keyframes qrScan {
+        0%,
+        100% {
+          top: 20%;
+          opacity: 0.3;
+        }
+        50% {
+          top: 75%;
+          opacity: 1;
+        }
+      }
+
+      .screen-coupon {
+        background: var(--white);
+      }
+      .screen-coupon h2 {
+        font-size: 18px;
+        color: var(--green-900);
+        margin-bottom: 8px;
+      }
+      .screen-coupon > p {
+        font-size: 13px;
+        color: var(--text-light);
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .coupon-card {
+        width: 100%;
+        background: linear-gradient(135deg, var(--gold) 0%, #d4b896 100%);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: center;
+        color: var(--white);
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .coupon-card::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+      }
+      .coupon-card i {
+        margin-bottom: 8px;
+      }
+      .coupon-card h3 {
+        font-size: 16px;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+      .coupon-card p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0;
+      }
+
+      /* ========== Insurance Points ========== */
+      .insurance-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 768px) {
+        .insurance-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .insurance-item {
+        text-align: center;
+        padding: 2rem 1.5rem;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .insurance-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--green-50);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .insurance-icon i {
+        color: var(--green-700);
+      }
+      .insurance-item h4 {
+        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
+      }
+      .insurance-item p {
+        font-size: 0.82rem;
+        color: var(--text-light);
+        margin-bottom: 0;
+        line-height: 1.7;
+      }
+
+      /* ========== Phase 0 Validation ========== */
+      .validation-box {
+        background: var(--white);
+        border: 2px solid var(--green-200);
+        border-radius: var(--radius-md);
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+      .validation-box h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* ========== Footer ========== */
+      .footer {
+        background: var(--green-900);
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+        padding: 2.5rem 2rem;
+        font-size: 0.82rem;
+      }
+
+      /* ========== Motion（控えめ・読み手の体験優先） ========== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* カードのやわらかいホバー */
+      .principle,
+      .insurance-item,
+      .admin-item {
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .principle:hover,
+      .insurance-item:hover,
+      .admin-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Hero の入場 */
+      .hero-badge,
+      .hero h1,
+      .hero-sub,
+      .hero-tagline,
+      .hero-meta {
+        animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .hero h1 {
+        animation-delay: 0.08s;
+      }
+      .hero-sub {
+        animation-delay: 0.16s;
+      }
+      .hero-tagline {
+        animation-delay: 0.24s;
+      }
+      .hero-meta {
+        animation-delay: 0.34s;
+      }
+      @keyframes heroIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .hero-badge,
+        .hero h1,
+        .hero-sub,
+        .hero-tagline,
+        .hero-meta {
+          animation: none !important;
+        }
+        * {
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* ========== Admin（カメラなし店の参加） ========== */
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      @media (max-width: 600px) {
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .admin-item {
+        text-align: center;
+        padding: 1.75rem 1.5rem;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+      .admin-ic {
+        width: 48px;
+        height: 48px;
+        background: var(--green-50);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+      }
+      .admin-ic i {
+        color: var(--green-700);
+      }
+      .admin-item h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      .admin-item p {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin: 0;
+      }
+
+      /* ========== Prototype: 写真から選ぶ（店名・地図なし） ========== */
+      .screen-select {
+        background: var(--white);
+        padding-top: 52px !important;
+        justify-content: flex-start !important;
+      }
+      .select-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--green-100);
+        color: var(--green-700);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 6px;
+      }
+      .select-hint {
+        font-size: 12.5px !important;
+        color: var(--text-light) !important;
+        margin-bottom: 16px !important;
+        text-align: center;
+      }
+      .photo-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+      .photo-card {
+        position: relative;
+        width: 100%;
+        height: 124px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        overflow: hidden;
+        padding: 0;
+        font-family: inherit;
+        background-color: var(--green-50);
+        background-size: cover;
+        background-position: center 45%;
+        box-shadow: var(--shadow-sm);
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+        opacity: 0;
+        animation: photoIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .screen-select.active .photo-card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .screen-select.active .photo-card:nth-child(2) {
+        animation-delay: 0.13s;
+      }
+      .screen-select.active .photo-card:nth-child(3) {
+        animation-delay: 0.21s;
+      }
+      @keyframes photoIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .photo-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(120deg, rgba(255, 255, 255, 0.2), transparent 45%),
+          linear-gradient(0deg, rgba(0, 0, 0, 0.12), transparent 55%);
+      }
+      .photo-card:hover,
+      .photo-card:active {
+        transform: translateY(-2px) scale(1.012);
+        box-shadow: var(--shadow-md);
+      }
+      /* ========== Prototype: 経路案内 ========== */
+      .screen-nav {
+        background: var(--green-50);
+        padding-top: 52px !important;
+        justify-content: flex-start !important;
+        gap: 16px;
+      }
+      .nav-map {
+        width: 100%;
+        height: 210px;
+        border-radius: 18px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--green-200);
+        background:
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 27px,
+            rgba(30, 57, 50, 0.045) 27px 28px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent 0 27px,
+            rgba(30, 57, 50, 0.045) 27px 28px
+          ),
+          var(--white);
+      }
+      .nav-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .nav-path-bg {
+        fill: none;
+        stroke: var(--green-100);
+        stroke-width: 7;
+        stroke-linecap: round;
+      }
+      .nav-path-fg {
+        fill: none;
+        stroke: var(--green-700);
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-dasharray: 340;
+        stroke-dashoffset: 340;
+      }
+      .screen-nav.active .nav-path-fg {
+        animation: navDraw 1.6s ease-out 0.2s forwards;
+      }
+      @keyframes navDraw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .nav-pin {
+        position: absolute;
+        z-index: 2;
+      }
+      .nav-pin--start {
+        left: 26px;
+        bottom: 26px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--green-700);
+        box-shadow: 0 0 0 4px rgba(0, 112, 74, 0.18);
+      }
+      .nav-pin--start::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 2px solid var(--green-700);
+        animation: pulse-ring 1.8s ease-out infinite;
+      }
+      .nav-pin--end {
+        right: 22px;
+        top: 16px;
+        width: 34px;
+        height: 34px;
+        background: var(--green-700);
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-md);
+      }
+      .nav-pin--end i {
+        transform: rotate(45deg);
+        color: var(--white);
+        width: 16px;
+        height: 16px;
+      }
+      .nav-card {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 14px 16px;
+      }
+      .nav-eta {
+        display: flex;
+        align-items: baseline;
+        gap: 2px;
+        color: var(--green-700);
+        flex-shrink: 0;
+      }
+      .nav-eta-num {
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 1;
+      }
+      .nav-eta-unit {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .nav-dest-info {
+        text-align: left;
+      }
+      .nav-dest-info h3 {
+        font-size: 16px;
+        margin-bottom: 2px;
+        color: var(--green-900);
+      }
+      .nav-dest-info p {
+        font-size: 12px;
+        color: var(--text-light);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .nav-dest-info p i {
+        width: 13px;
+        height: 13px;
+      }
+      .nav-reveal-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--green-700);
+        background: var(--green-50);
+        padding: 3px 9px;
+        border-radius: 999px;
+        margin-bottom: 2px;
+      }
+      .nav-reveal-tag i {
+        width: 12px;
+        height: 12px;
+      }
+
+      /* ========== Figure（イラスト） ========== */
+      .figure {
+        max-width: 540px;
+        margin: 1.75rem auto;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--cream);
+        box-shadow: var(--shadow-sm);
+      }
+      .figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .figure figcaption {
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-light);
+        font-weight: 500;
+        padding: 0.75rem 1rem;
+        background: var(--white);
+        border-top: 1px solid var(--border);
+      }
+      .section--alt .figure {
+        background: var(--white);
+      }
+
+      /* ========== Cycle diagram（悪循環 / 好循環）縦フロー＋戻り線 ========== */
+      .cycle {
+        max-width: 420px;
+        margin: 1.75rem auto;
+      }
+      .cycle-track {
+        position: relative;
+        padding-left: 44px;
+      }
+      .cycle-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .cycle-node {
+        padding: 0.7rem 1rem;
+        border-radius: var(--radius-md);
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+        line-height: 1.45;
+        border: 1px solid var(--border);
+        background: var(--white);
+      }
+      .cycle-down {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 22px;
+      }
+      .cycle-down i {
+        width: 18px;
+        height: 18px;
+      }
+      /* 末尾 → 先頭へ戻る左側のブラケット矢印（循環の可視化） */
+      .cycle-rail {
+        position: absolute;
+        left: 10px;
+        top: 22px;
+        bottom: 22px;
+        width: 24px;
+        border: 2px solid var(--border);
+        border-right: none;
+        border-radius: 14px 0 0 14px;
+      }
+      .cycle-rail::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        right: -9px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 9px solid var(--border);
+      }
+      .cycle-caption {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        margin: 1rem 0 0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text-light);
+      }
+      .cycle-caption i {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .cycle--bad .cycle-node {
+        background: #fff8f6;
+        border-color: #e8cccc;
+        color: #8a3b2e;
+      }
+      .cycle--bad .cycle-down {
+        color: #d9a79c;
+      }
+      .cycle--bad .cycle-rail {
+        border-color: #d9a79c;
+      }
+      .cycle--bad .cycle-rail::after {
+        border-left-color: #d9a79c;
+      }
+      .cycle--bad .cycle-caption {
+        color: #c0392b;
+      }
+      .cycle--good .cycle-node {
+        background: var(--green-50);
+        border-color: var(--green-200);
+        color: var(--green-900);
+      }
+      .cycle--good .cycle-down {
+        color: var(--green-500);
+      }
+      .cycle--good .cycle-rail {
+        border-color: var(--green-500);
+      }
+      .cycle--good .cycle-rail::after {
+        border-left-color: var(--green-500);
+      }
+      .cycle--good .cycle-caption {
+        color: var(--green-700);
+      }
+
+      /* ========== Business model diagram ========== */
+      .biz {
+        display: flex;
+        align-items: stretch;
+        gap: 0.5rem;
+        margin: 1.75rem 0;
+      }
+      .biz-side {
+        flex: 0 0 96px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        text-align: center;
+      }
+      .biz-ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--green-100);
+        color: var(--green-700);
+        font-weight: 900;
+        font-size: 1.1rem;
+      }
+      .biz-side span {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--green-900);
+      }
+      .biz-arrows {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+      }
+      .biz-arrow {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+      }
+      .biz-arrow::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        right: 6px;
+        top: 50%;
+        height: 2px;
+        background: var(--green-200);
+        transform: translateY(-50%);
+      }
+      .biz-arrow::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+      }
+      .biz-arrow.to-right::after {
+        right: 2px;
+        border-left: 8px solid var(--green-500);
+      }
+      .biz-arrow.to-left::after {
+        left: 2px;
+        border-right: 8px solid var(--green-500);
+      }
+      .biz-arrow .lbl {
+        position: relative;
+        z-index: 1;
+        background: var(--white);
+        padding: 0.25rem 0.7rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        text-align: center;
+      }
+      .biz-arrow.hl::before {
+        background: var(--green-500);
+        height: 3px;
+      }
+      .biz-arrow.hl::after {
+        border-left-color: var(--green-700);
+      }
+      .biz-arrow.hl .lbl {
+        background: var(--green-50);
+        border-color: var(--green-500);
+        color: var(--green-700);
+        font-weight: 700;
+      }
+      .section--alt .biz-side,
+      .section--alt .biz-arrow .lbl {
+        background: var(--white);
+      }
+      @media (max-width: 560px) {
+        .biz-side {
+          flex-basis: 76px;
+        }
+        .biz-arrow .lbl {
+          font-size: 0.72rem;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef, useCallback } = React;
+
+      /* ===== Lucide hydration hook ===== */
+      const useLucide = () => {
+        useEffect(() => {
+          if (typeof lucide !== "undefined") lucide.createIcons();
+        });
+      };
+
+      /* ===== Scroll reveal hook（控えめなフェードアップ） ===== */
+      const useScrollReveal = () => {
+        useEffect(() => {
+          const els = document.querySelectorAll(".reveal:not(.is-visible)");
+          const reduce =
+            window.matchMedia &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (reduce || typeof IntersectionObserver === "undefined") {
+            els.forEach((el) => el.classList.add("is-visible"));
+            return;
+          }
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("is-visible");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+          );
+          els.forEach((el) => io.observe(el));
+          return () => io.disconnect();
+        }, []);
+      };
+
+      /* ===== Figure（イラスト） ===== */
+      const Figure = ({ src, alt, caption }) => (
+        <figure className="figure">
+          <img src={src} alt={alt || ""} loading="lazy" />
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      );
+
+      /* ===== CycleDiagram（悪循環 / 好循環）縦フロー＋戻り線 ===== */
+      const CycleDiagram = ({ steps, loop, tone }) => (
+        <div className={"cycle cycle--" + tone}>
+          <div className="cycle-track">
+            <div className="cycle-rail" />
+            <div className="cycle-list">
+              {steps.map((s, i) => (
+                <React.Fragment key={i}>
+                  <div className="cycle-node">{s}</div>
+                  {i < steps.length - 1 && (
+                    <div className="cycle-down">
+                      <i data-lucide="chevron-down" />
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+          <div className="cycle-caption">
+            <i data-lucide={tone === "good" ? "rotate-cw" : "rotate-ccw"} />
+            {loop}
+          </div>
+        </div>
+      );
+
+      /* ===== BizDiagram（VACAN × カフェ） ===== */
+      const BizDiagram = () => (
+        <div className="biz">
+          <div className="biz-side">
+            <div className="biz-ic">V</div>
+            <span>VACAN</span>
+          </div>
+          <div className="biz-arrows">
+            <div className="biz-arrow to-right">
+              <span className="lbl">① 混雑を見える化（従来）</span>
+            </div>
+            <div className="biz-arrow to-right hl">
+              <span className="lbl">② 空席に送客（SUWARO で追加）</span>
+            </div>
+            <div className="biz-arrow to-left">
+              <span className="lbl">月額 SaaS ＋ 送客の成果報酬</span>
+            </div>
+          </div>
+          <div className="biz-side">
+            <div className="biz-ic">☕</div>
+            <span>カフェ</span>
+          </div>
+        </div>
+      );
+
+      /* ===== Section ===== */
+      const Section = ({ id, icon, label, title, alt, wide, children }) => (
+        <section className={"section" + (alt ? " section--alt" : "")} id={id}>
+          <div
+            className={(wide ? "section-wide" : "section-inner") + " reveal"}
+          >
+            {label && (
+              <div className="section-label">
+                <i data-lucide={icon} /> {label}
+              </div>
+            )}
+            {title && <h2>{title}</h2>}
+            {children}
+          </div>
+        </section>
+      );
+
+      /* ===== Callout ===== */
+      const Callout = ({ icon, type, children }) => (
+        <div className={"callout callout--" + type}>
+          <i data-lucide={icon} />
+          <div>{children}</div>
+        </div>
+      );
+
+      /* ===== InsightBox ===== */
+      const InsightBox = ({ children, style }) => (
+        <div className="insight-box">
+          <p
+            style={{
+              fontSize: "1.05rem",
+              fontWeight: 500,
+              color: "var(--white)",
+              marginBottom: 0,
+              ...style,
+            }}
+          >
+            {children}
+          </p>
+        </div>
+      );
+
+      /* ===== Prototype ===== */
+      const PHOTOS = [
+        { img: "images/cafe-1.jpg" },
+        { img: "images/cafe-2.jpg" },
+        { img: "images/cafe-3.jpg" },
+      ];
+
+      const Prototype = () => {
+        const [screen, setScreen] = useState("home");
+        const [selected, setSelected] = useState(2);
+        const timerRef = useRef(null);
+
+        const go = useCallback((s) => {
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+          }
+          setScreen(s);
+        }, []);
+
+        const startSearch = useCallback(() => {
+          go("search");
+          timerRef.current = setTimeout(() => go("select"), 2500);
+        }, [go]);
+
+        useEffect(
+          () => () => {
+            if (timerRef.current) clearTimeout(timerRef.current);
+          },
+          []
+        );
+
+        useLucide();
+
+        const screenClass = (name) =>
+          "proto-screen screen-" + name + (screen === name ? " active" : "");
+
+        return (
+          <div className="proto-section">
+            <div className="proto-text">
+              <h3>体験してみてください</h3>
+              <p>
+                入力するのは「人数」だけ。プラットフォームが候補を絞り込み、
+                <strong>写真だけの最大3件</strong>を差し出します。
+              </p>
+              <p>
+                店名も評価も地図も見せません。見せるのは雰囲気だけ。
+                <strong>
+                  迷う材料は消し、"どっちが好き？"の軽い選択だけを残す
+                </strong>
+                ——それがこのプロダクトの設計の核です。
+              </p>
+              <div className="proto-hint">
+                <i data-lucide="pointer" /> 画面をタップして操作できます
+              </div>
+            </div>
+
+            <div className="phone">
+              <div className="phone-dynamic-island" />
+              <div className="phone-screen">
+                <div className="phone-status">
+                  <span>9:41</span>
+                  <div className="phone-status-icons">
+                    <svg
+                      width="16"
+                      height="12"
+                      viewBox="0 0 16 12"
+                      fill="currentColor"
+                    >
+                      <rect
+                        x="0"
+                        y="3"
+                        width="3"
+                        height="9"
+                        rx="1"
+                        opacity="0.3"
+                      />
+                      <rect
+                        x="4.5"
+                        y="2"
+                        width="3"
+                        height="10"
+                        rx="1"
+                        opacity="0.5"
+                      />
+                      <rect
+                        x="9"
+                        y="1"
+                        width="3"
+                        height="11"
+                        rx="1"
+                        opacity="0.7"
+                      />
+                      <rect x="13.5" y="0" width="3" height="12" rx="1" />
+                    </svg>
+                    <svg
+                      width="16"
+                      height="12"
+                      viewBox="0 0 24 12"
+                      fill="currentColor"
+                    >
+                      <rect
+                        x="0"
+                        y="0"
+                        width="22"
+                        height="12"
+                        rx="3"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        fill="none"
+                        opacity="0.4"
+                      />
+                      <rect
+                        x="23"
+                        y="3.5"
+                        width="2"
+                        height="5"
+                        rx="1"
+                        opacity="0.4"
+                      />
+                      <rect x="2" y="2" width="16" height="8" rx="1.5" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="phone-home-indicator" />
+
+                {/* Home */}
+                <div className={screenClass("home")}>
+                  <div className="logo-mark">S</div>
+                  <h2>SUWARO</h2>
+                  <p className="tagline">座りたい場所を見つけよう</p>
+                  <div className="location">
+                    <i data-lucide="map-pin" /> 新宿駅付近
+                  </div>
+                  <button className="btn-proto" onClick={() => go("count")}>
+                    <i data-lucide="search" /> 空席を探す
+                  </button>
+                </div>
+
+                {/* Count */}
+                <div className={screenClass("count")}>
+                  <h2>何名ですか？</h2>
+                  <div className="count-grid">
+                    {[1, 2, 3, "4+"].map((n, i) => (
+                      <button
+                        key={i}
+                        className={
+                          "count-btn" + (selected === i + 1 ? " selected" : "")
+                        }
+                        onClick={() => setSelected(i + 1)}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                  <button className="btn-proto" onClick={startSearch}>
+                    この人数で探す
+                  </button>
+                </div>
+
+                {/* Searching */}
+                <div className={screenClass("search")}>
+                  <div className="search-pulse">
+                    <i data-lucide="search" />
+                  </div>
+                  <p>空いている席を探しています...</p>
+                  <p className="search-sub">周辺の空き状況を分析中</p>
+                </div>
+
+                {/* Select — 写真だけ・最大3件（店名/地図/評価なし） */}
+                <div className={screenClass("select")}>
+                  <div className="select-badge">
+                    <i data-lucide="sparkles" /> 近くで空いてる3つ
+                  </div>
+                  <p className="select-hint">
+                    気になる雰囲気を、ひとつ選んでください
+                  </p>
+                  <div className="photo-stack">
+                    {PHOTOS.map((p, i) => (
+                      <button
+                        key={i}
+                        className="photo-card"
+                        style={{ backgroundImage: `url(${p.img})` }}
+                        onClick={() => go("nav")}
+                        aria-label={"候補 " + (i + 1)}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Nav — 経路案内（選んだ後に店名を開示） */}
+                <div className={screenClass("nav")}>
+                  <div className="nav-map">
+                    <svg
+                      className="nav-svg"
+                      viewBox="0 0 300 210"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        className="nav-path-bg"
+                        d="M38 182 C 90 182, 92 96, 152 96 S 232 44, 264 32"
+                      />
+                      <path
+                        className="nav-path-fg"
+                        d="M38 182 C 90 182, 92 96, 152 96 S 232 44, 264 32"
+                      />
+                    </svg>
+                    <div className="nav-pin nav-pin--start" />
+                    <div className="nav-pin nav-pin--end">
+                      <i data-lucide="coffee" />
+                    </div>
+                  </div>
+                  <div className="nav-card">
+                    <div className="nav-eta">
+                      <span className="nav-eta-num">4</span>
+                      <span className="nav-eta-unit">分</span>
+                    </div>
+                    <div className="nav-dest-info">
+                      <span className="nav-reveal-tag">
+                        <i data-lucide="eye" /> 選んだので店名を開示
+                      </span>
+                      <h3>CAFÉ MORINO</h3>
+                      <p>
+                        <i data-lucide="navigation-2" /> 280m
+                        先・まっすぐ進んで右
+                      </p>
+                    </div>
+                  </div>
+                  <button className="btn-proto" onClick={() => go("feedback")}>
+                    <i data-lucide="flag" /> 到着した
+                  </button>
+                </div>
+
+                {/* Feedback */}
+                <div className={screenClass("feedback")}>
+                  <h2>座れましたか？</h2>
+                  <p className="sub">CAFÉ MORINO での結果を教えてください</p>
+                  <div className="feedback-btns">
+                    <button
+                      className="feedback-btn feedback-btn--yes"
+                      onClick={() => go("success")}
+                    >
+                      ✓ 座れた
+                    </button>
+                    <button
+                      className="feedback-btn feedback-btn--no"
+                      onClick={() => go("qr")}
+                    >
+                      ✗ 座れなかった
+                    </button>
+                  </div>
+                </div>
+
+                {/* Success */}
+                <div className={screenClass("success")}>
+                  <div className="success-check">
+                    <i data-lucide="check" />
+                  </div>
+                  <h2>ありがとうございます！</h2>
+                  <p>このデータが次の改善に活きます</p>
+                  <button
+                    className="btn-proto--ghost"
+                    onClick={() => go("home")}
+                  >
+                    ホームに戻る
+                  </button>
+                </div>
+
+                {/* QR Scan */}
+                <div className={screenClass("qr")}>
+                  <h2>来店証明</h2>
+                  <p>
+                    店舗に設置された QR コードを
+                    <br />
+                    スキャンしてください
+                  </p>
+                  <div className="qr-viewfinder">
+                    <i data-lucide="scan" />
+                    <div className="qr-scanning-line" />
+                  </div>
+                  <button className="btn-proto" onClick={() => go("coupon")}>
+                    <i data-lucide="check" /> スキャン完了
+                  </button>
+                </div>
+
+                {/* Coupon */}
+                <div className={screenClass("coupon")}>
+                  <h2>申し訳ありません</h2>
+                  <p>お詫びにクーポンをお送りします</p>
+                  <div className="coupon-card">
+                    <i data-lucide="gift" />
+                    <h3>ドリンク 1杯 無料クーポン</h3>
+                    <p>CAFÉ MORINO でご利用いただけます</p>
+                  </div>
+                  <button
+                    className="btn-proto--ghost"
+                    onClick={() => go("home")}
+                  >
+                    ホームに戻る
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      /* ===== App ===== */
+      const App = () => {
+        useLucide();
+        useScrollReveal();
+
+        return (
+          <>
+            {/* Navigation */}
+            <nav className="nav">
+              <div className="nav-inner">
+                <div className="nav-logo">SUWARO</div>
+                <div className="nav-links">
+                  <a href="#problem">課題</a>
+                  <a href="#solution">解決策</a>
+                  <a href="#prototype">プロトタイプ</a>
+                  <a href="#mechanism">仕組み</a>
+                  <a href="#revenue">収益モデル</a>
+                  <a href="#rollout">展開計画</a>
+                </div>
+              </div>
+            </nav>
+
+            {/* Hero */}
+            <header className="hero">
+              <div className="hero-inner">
+                <div className="hero-badge">VACAN DX Innovation Award 2026</div>
+                <h1>SUWARO</h1>
+                <div className="hero-sub">スワロ</div>
+                <p className="hero-tagline">
+                  駅のカフェの空席を、
+                  <br />
+                  検索させるのではなく割り当てる。
+                </p>
+                <p className="hero-meta">応募者：Shungo Nagamachi</p>
+              </div>
+            </header>
+
+            {/* 1. 課題 */}
+            <Section
+              id="problem"
+              icon="alert-triangle"
+              label="PROBLEM"
+              title="課題"
+            >
+              <h3>原体験</h3>
+              <div className="experience-quote">
+                計画していた予定の後、新宿駅周辺で「どこかに座って休みたい」となった。カフェを探すが、目立つ店はどこも混んでいそうで、どっちに歩けばいいか分からない。
+                <br />
+                Google Map
+                で「カフェ」と検索すると候補が大量に出てきて、逆に決められない。
+              </div>
+              <p className="experience-result">
+                10分歩き回って、結局いちばん目立つチェーン店の行列に並んだ。
+              </p>
+
+              <Figure
+                src="images/problem-lost.jpg"
+                alt="混雑した街で、大量の候補を前にどこに座るか決められないユーザー"
+                caption="候補はたくさん出る。でも「どこに向かうか」は決まらない"
+              />
+
+              <h3>本当の問題</h3>
+              <p>この状況で足りないのは「空席情報」ではない。</p>
+
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>見かけの問題</th>
+                    <th>実際に起きていること</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>どこも混んでいるように見える</td>
+                    <td>
+                      目立つ店・チェーン店に人が集中しているだけで、裏通りは空いている
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>情報さえあれば選べるはず</td>
+                    <td>
+                      情報があっても、二人で「どこにする？」を決めるコストが大きい
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>リアルタイムの混雑情報がほしい</td>
+                    <td>
+                      移動に5〜10分かかるので、「今の空き」は着く頃には変わっている
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <Callout icon="info" type="info">
+                この場面での目的は「行きたいお店に入ること」ではなく「座って休める／話せること」。
+                <br />
+                <strong>
+                  店へのこだわりより、意思決定の簡単さの方が大事。
+                </strong>
+              </Callout>
+            </Section>
+
+            {/* 2. なぜ表示では解決しないか */}
+            <Section
+              icon="eye"
+              label="INSIGHT"
+              title="なぜ「空席を表示する」では解決しないか"
+              alt
+            >
+              <p>
+                空席情報を全員に等しく見せると、全員が同じ「空いてる店」に向かう。その店は混み、情報は自分自身を無効にする。
+              </p>
+              <p>
+                これは表示するモデルが構造的に抱える問題で、ユーザーが増えるほど悪化する。
+              </p>
+
+              <CycleDiagram
+                tone="bad"
+                loop="一周ごとに悪化し、また最初へ"
+                steps={[
+                  "ユーザーが増える",
+                  "全員が同じ「空いてる店」を見る",
+                  "その店に人が集中",
+                  "表示された情報が偽になる",
+                  "情報の信頼性が落ちる",
+                ]}
+              />
+
+              <Callout icon="alert-triangle" type="warn">
+                既存の VACAN Maps, Pages の混雑表示もこの構造の中にいる。
+                <br />
+                大勢がサービスを利用するほど、各ユーザーの得られる情報価値は相対的に下がる。
+              </Callout>
+            </Section>
+
+            {/* 3. 解決策 */}
+            <Section
+              id="solution"
+              icon="shuffle"
+              label="SOLUTION"
+              title="解決策：表示から割り当てへ"
+            >
+              <p>
+                タクシーが「道で手を挙げて捕まえる」から「アプリで呼ぶ」に変わったのと同じ転換を、カフェの空席に適用する。ユーザーは自分で探し回らない。プラットフォームが探索を肩代わりし、絞り込んだ候補だけを差し出す。
+              </p>
+
+              <Figure
+                src="images/concept-allocation.jpg"
+                alt="スマホに案内され、迷わず1軒のカフェへ向かう人"
+                caption="探し回らせない。行き先はプラットフォームが絞る"
+              />
+
+              <h3>3つの原則</h3>
+              <div className="principles">
+                {[
+                  {
+                    title: "見せるのは写真だけ",
+                    desc: '店名・評価・地図・距離という"比較材料"を隠す。「どこにする？」の交渉が生まれない',
+                  },
+                  {
+                    title: "最大3件・排他的に割り当て",
+                    desc: "大量の候補で迷わせない。同じ店を複数人に割り当てないから需要が分散する",
+                  },
+                  {
+                    title: "外したら補償する",
+                    desc: "予測が外れたコストは、ユーザーではなくプラットフォームが負う",
+                  },
+                ].map((p, i) => (
+                  <div className="principle" key={i}>
+                    <div className="principle-num">{i + 1}</div>
+                    <h4>{p.title}</h4>
+                    <p>{p.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Callout icon="hand" type="info">
+                肝は
+                <strong>選択肢と情報を絞りながら、決定はユーザーに残す</strong>
+                こと。候補が多すぎる「決定疲れ」と、1件固定で"決めつけられる"「押し付け」の、ちょうど中間を狙う。
+              </Callout>
+            </Section>
+
+            {/* Prototype */}
+            <Section
+              id="prototype"
+              icon="smartphone"
+              label="PROTOTYPE"
+              title="プロトタイプ"
+              alt
+              wide
+            >
+              <Prototype />
+            </Section>
+
+            {/* 4. なぜ上手くいくか */}
+            <Section
+              id="mechanism"
+              icon="trending-up"
+              label="MECHANISM"
+              title="なぜこのモデルは上手くいくか"
+              alt
+            >
+              <p>
+                表示モデルはユーザーが増えると壊れる。割り当てモデルはユーザーが増えると強くなる。この違いが事業の伸び方を根本的に変える。
+              </p>
+
+              <h3>データが回るほど強くなる</h3>
+              <p>
+                割り当てるたびに「座れた／座れなかった」という結果が残り、それがそのまま次の予測を磨く材料になる。表示モデルとは逆に、規模がそのまま強みに変わる。
+              </p>
+
+              <CycleDiagram
+                tone="good"
+                loop="一周ごとに強くなる（データフライホイール）"
+                steps={[
+                  "割り当てる",
+                  "結果データが溜まる",
+                  "当たる確率が上がる",
+                  "ユーザーが増える",
+                  "送客が増え、店も増える",
+                ]}
+              />
+            </Section>
+
+            {/* 5. 在庫データ */}
+            <Section
+              icon="camera"
+              label="DATA"
+              title="在庫データ：既存カメラから始める"
+            >
+              <p>
+                空席データをどう集めるかが実務上の最大課題。ここで効くのが VACAN
+                の既存資産。
+              </p>
+              <p>
+                VACAN
+                はすでに多くの駅ナカ・駅周辺のカフェにカメラを設置し、エリアレベルの混雑状況（空き／やや混み／混雑）を取得している。個席単位ではなくエリアの粗さだが、「空いてる店に人を流す」には十分使える。
+              </p>
+
+              <p>
+                初期はカメラデータだけで割り当てる。割り当て結果データが溜まれば「この曜日のこの時間帯はだいたい入れる」をモデルが学習し、カメラの粗さを補完する。
+              </p>
+
+              <h3>カメラがない店は、管理画面から参加する</h3>
+              <p>
+                カメラはエリア混雑を手間ゼロで自動取得できるが、設置済みの店に限られる。カメラのない店には管理画面を用意し、2つの方法で在庫を供給してもらう。
+              </p>
+              <div className="admin-grid">
+                <div className="admin-item">
+                  <div className="admin-ic">
+                    <i data-lucide="hand" />
+                  </div>
+                  <h4>回答</h4>
+                  <p>店員が「今、空いている」を手動で申告</p>
+                </div>
+                <div className="admin-item">
+                  <div className="admin-ic">
+                    <i data-lucide="gavel" />
+                  </div>
+                  <h4>入札</h4>
+                  <p>「今すぐ客がほしい」と送客枠に入札</p>
+                </div>
+              </div>
+              <Callout icon="check" type="info">
+                これで「カメラ設置済みの店」という物理的な制約が外れ、参加できる店舗が大幅に広がる。
+              </Callout>
+
+              <h3>これは "リアル版 Google Ads"</h3>
+              <p>
+                入札の本質は、送客のオークション。Google
+                の広告オークションと並べると分かりやすい。
+              </p>
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>観点</th>
+                    <th>Google Ads</th>
+                    <th>SUWARO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>店が入札するもの</td>
+                    <td>検索キーワードのクリック</td>
+                    <td>送客（実際の来店）</td>
+                  </tr>
+                  <tr>
+                    <td>配分されるもの</td>
+                    <td>広告枠（画面上の表示）</td>
+                    <td>送客枠（アプリ上の割り当て）</td>
+                  </tr>
+                  <tr>
+                    <td>枠が生むもの</td>
+                    <td>クリック＝来るかもしれない関心</td>
+                    <td>実際に座る客＝確実な消費</td>
+                  </tr>
+                </tbody>
+              </table>
+            </Section>
+
+            {/* 6. 空振り保険 */}
+            <Section icon="shield" label="SAFETY NET" title="空振り保険" alt>
+              <p>
+                予約ではないため、席は物理的に押さえられない。だから、外れたらプラットフォームが責任を取る。
+              </p>
+
+              <div className="insurance-grid">
+                {[
+                  {
+                    icon: "ticket",
+                    title: "座れなかったら補償",
+                    desc: "店舗の QR スキャンで来店を確認し、ドリンク券を即時発行",
+                  },
+                  {
+                    icon: "piggy-bank",
+                    title: "成功時だけ課金",
+                    desc: "店は送客が成功したときだけ課金。失敗時の補償はプラットフォームが負う",
+                  },
+                  {
+                    icon: "target",
+                    title: "7割で成立",
+                    desc: "精度100%は不要。7割当たれば空振り保険のコストを吸収できる",
+                  },
+                ].map((item, i) => (
+                  <div className="insurance-item" key={i}>
+                    <div className="insurance-icon">
+                      <i data-lucide={item.icon} />
+                    </div>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Callout icon="lightbulb" type="info">
+                初期の補償コストはデータ取得コストと見なす。100回外しても数万円で、その店の回転パターンが学習できる。カメラの精度を補完する手段としては非常に安い。
+              </Callout>
+
+              <p>
+                店・ユーザーにとっても、失敗体験が「謝罪」ではなく「クーポンがもらえた」というポジティブな体験に変わる。
+              </p>
+            </Section>
+
+            {/* 7. 収益モデルと VACAN シナジー */}
+            <Section
+              id="revenue"
+              icon="bar-chart-3"
+              label="BUSINESS MODEL"
+              title="収益モデルと VACAN シナジー"
+            >
+              <p>
+                ここまではユーザー体験の話。ここからは、この仕組みが VACAN
+                の事業にどう効くか。
+              </p>
+              <p>
+                VACAN
+                が持つ施設との契約網・カメラ網は、後発が数年かけても作れない。SUWARO
+                はその上に「見せる」を「割り当てる」に変えるレイヤーを載せるだけ。ゼロから作る新規事業ではない。
+              </p>
+
+              <InsightBox
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                  textAlign: "center",
+                }}
+              >
+                SUWARO は、VACAN のカメラ導入営業を強化する武器
+              </InsightBox>
+
+              <BizDiagram />
+
+              <h3>カフェへの提案が変わる</h3>
+              <table className="ba-table">
+                <tbody>
+                  <tr>
+                    <td className="ba-before">「混雑状況を表示できます」</td>
+                    <td className="ba-arrow">
+                      <i data-lucide="arrow-right" />
+                    </td>
+                    <td className="ba-after">
+                      「表示に加えて、空いてる時間帯にお客さんを送り込めます」
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ba-before">見える化のツール</td>
+                    <td className="ba-arrow">
+                      <i data-lucide="arrow-right" />
+                    </td>
+                    <td className="ba-after">空席率を下げるツール</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>
+                カメラ導入の ROI
+                が上がるので、導入のハードルが下がり、チャーン抑止も期待できる。
+              </p>
+
+              <h3>収益は3層で積み上がる</h3>
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>層</th>
+                    <th>収益</th>
+                    <th>性質</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>① カメラ SaaS 月額</td>
+                    <td>既存 VACAN の月額</td>
+                    <td>安定・ストック型</td>
+                  </tr>
+                  <tr>
+                    <td>② 送客成果報酬</td>
+                    <td>送客が成功したときだけ課金</td>
+                    <td>変動・成果連動</td>
+                  </tr>
+                  <tr>
+                    <td>③ 送客オークション</td>
+                    <td>店の入札で送客枠を配分・入札額を課金</td>
+                    <td>スケール型（Google Ads 型）</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>
+                ③の送客オークションは、カメラ設置を前提としないため対象店舗に上限がなく、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
+              </p>
+            </Section>
+
+            {/* 8. 展開ステップ */}
+            <Section
+              id="rollout"
+              icon="rocket"
+              label="ROLLOUT"
+              title="展開ステップ"
+              alt
+            >
+              <p>
+                割り当ては在庫密度が命なので、小さな範囲の価値検証から始める。商業施設で
+                VACAN
+                カメラ設置済みの店舗が密集している場所は、最初の検証に最適。
+              </p>
+              <div className="roadmap">
+                {[
+                  {
+                    num: "0",
+                    title: "POC",
+                    desc: "1施設でカメラ起点の割り当て検証（2週間）",
+                  },
+                  { num: "1", title: "MVP", desc: "1駅でカフェ割り当て MVP" },
+                  {
+                    num: "2",
+                    title: "拡大",
+                    desc: "他エリアの既存導入先に展開",
+                  },
+                  {
+                    num: "3",
+                    title: "他業態",
+                    desc: "飲食店・ラウンジ等へ拡張",
+                  },
+                ].map((step, i) => (
+                  <div className="roadmap-step" key={i}>
+                    <div className="roadmap-dot">{step.num}</div>
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <Callout icon="compass" type="info">
+                横展開の余地は広い。飲食店・ラウンジ・シェアオフィスなど「空席＝腐る在庫」を抱える業態は、どれも同じ仕組みで狙える。カメラ導入先が広がるほど割り当て対象も広がる。
+              </Callout>
+            </Section>
+
+            {/* 9. リスクと検証 */}
+            <Section icon="shield-alert" label="RISKS" title="リスクと検証">
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>リスク</th>
+                    <th>種別</th>
+                    <th>対策</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      risk: "ユーザーに習慣化されず需要が根付かない",
+                      type: "demand",
+                      label: "需要",
+                      action:
+                        "「探す・迷う・外れる」の3コストを一括で消す一点特化で差別化。土地勘のない「今すぐ座りたい」シーンに絞り、フェーズ0で再利用率を主要指標にする",
+                    },
+                    {
+                      risk: "在庫密度が足りず割り当てが成立しない",
+                      type: "supply",
+                      label: "供給",
+                      action:
+                        "VACAN カメラ設置済みの店舗が密集する1駅に集中して検証する",
+                    },
+                    {
+                      risk: "SUWARO 経由の送客効果が見えにくい",
+                      type: "rev",
+                      label: "収益",
+                      action:
+                        "カメラ設置店の空席率の変化を計測し、導入前後で比較する",
+                    },
+                    {
+                      risk: "カメラの粗さで割り当て精度が出ない",
+                      type: "tech",
+                      label: "技術",
+                      action:
+                        "空振り保険で吸収。結果データの蓄積で精度を上げる。7割で空振り保険のコストを吸収できる構造にする",
+                    },
+                    {
+                      risk: "空振り保険の不正利用・補償コストが膨らむ",
+                      type: "rev",
+                      label: "収益",
+                      action:
+                        "QR 来店証明で不正を排除。補償は原価の小さいドリンク券でユーザー単位に上限。精度向上とともに発生率が下がる自己収束構造にする",
+                    },
+                  ].map((r, i) => (
+                    <tr key={i}>
+                      <td>{r.risk}</td>
+                      <td>
+                        <span className={"risk-badge risk-badge--" + r.type}>
+                          {r.label}
+                        </span>
+                      </td>
+                      <td>{r.action}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className="validation-box">
+                <h3>
+                  <i data-lucide="flask-conical" /> フェーズ
+                  0：本当に座れるかを確かめる
+                </h3>
+                <p style={{ marginTop: "1rem" }}>
+                  「既存カメラの空き情報で割り当てたとき、実際に座れるか」を測る。
+                </p>
+                <ul className="check-list">
+                  {[
+                    "VACAN カメラ設置済みの1駅・10〜20店舗、2週間",
+                    "カメラが「空き」を示す店へ案内し、結果を記録",
+                    "測る指標：割り当て成功率、空振り率、ユーザーの再利用率",
+                    "既存インフラだけで始められるので、追加の設備投資は不要",
+                  ].map((item, i) => (
+                    <li key={i}>
+                      <i data-lucide="check" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Section>
+
+            {/* Footer */}
+            <footer className="footer">
+              <p>VACAN DX Innovation Award 2026 — Shungo Nagamachi</p>
+            </footer>
+          </>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
