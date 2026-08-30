@@ -235,6 +235,15 @@
       .hero-meta {
         font-size: 0.8rem;
         color: rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+      }
+      .avatar {
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.25);
       }
 
       /* ========== Cards ========== */
@@ -2090,7 +2099,10 @@
                   <br />
                   検索させるのではなく割り当てる。
                 </p>
-                <p className="hero-meta">応募者：Shungo Nagamachi</p>
+                <div className="hero-meta">
+                  <img className="avatar" src="images/avatar.png" alt="" width="32" height="32" />
+                  <span>Shungo Nagamachi</span>
+                </div>
               </div>
             </header>
 
