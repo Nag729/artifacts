@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path | select(endswith(\".ts\") or endswith(\".vue\"))' | xargs -r npx prettier --write"
+            "command": "jq -r '.tool_input.file_path // empty | select(endswith(\".ts\") or endswith(\".vue\") or endswith(\".html\"))' | { read -r f && [ -n \"$f\" ] && ./node_modules/.bin/prettier --write \"$f\"; } 2>/dev/null || true"
           }
         ]
       }
