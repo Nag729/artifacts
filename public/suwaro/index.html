@@ -56,10 +56,10 @@
 
       body {
         font-family:
-          "Noto Sans JP",
+          'Noto Sans JP',
           -apple-system,
           BlinkMacSystemFont,
-          "Segoe UI",
+          'Segoe UI',
           sans-serif;
         color: var(--text);
         background: var(--white);
@@ -185,23 +185,15 @@
         overflow: hidden;
       }
       .hero::before {
-        content: "";
+        content: '';
         position: absolute;
         top: -50%;
         left: -50%;
         width: 200%;
         height: 200%;
         background:
-          radial-gradient(
-            circle at 30% 70%,
-            rgba(0, 112, 74, 0.3) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 70% 30%,
-            rgba(200, 169, 126, 0.15) 0%,
-            transparent 50%
-          );
+          radial-gradient(circle at 30% 70%, rgba(0, 112, 74, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 70% 30%, rgba(200, 169, 126, 0.15) 0%, transparent 50%);
       }
       .hero-inner {
         position: relative;
@@ -439,7 +431,7 @@
         padding: 0 0.5rem;
       }
       .roadmap-step::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 22px;
         right: -50%;
@@ -777,7 +769,7 @@
       }
       .search-pulse::before,
       .search-pulse::after {
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
@@ -916,7 +908,7 @@
       }
       .qr-viewfinder::before,
       .qr-viewfinder::after {
-        content: "";
+        content: '';
         position: absolute;
         width: 24px;
         height: 24px;
@@ -985,7 +977,7 @@
         overflow: hidden;
       }
       .coupon-card::before {
-        content: "";
+        content: '';
         position: absolute;
         top: -20px;
         right: -20px;
@@ -1264,7 +1256,7 @@
         }
       }
       .photo-card::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         background:
@@ -1291,16 +1283,8 @@
         overflow: hidden;
         border: 1px solid var(--green-200);
         background:
-          repeating-linear-gradient(
-            0deg,
-            transparent 0 27px,
-            rgba(30, 57, 50, 0.045) 27px 28px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent 0 27px,
-            rgba(30, 57, 50, 0.045) 27px 28px
-          ),
+          repeating-linear-gradient(0deg, transparent 0 27px, rgba(30, 57, 50, 0.045) 27px 28px),
+          repeating-linear-gradient(90deg, transparent 0 27px, rgba(30, 57, 50, 0.045) 27px 28px),
           var(--white);
       }
       .nav-svg {
@@ -1345,7 +1329,7 @@
         box-shadow: 0 0 0 4px rgba(0, 112, 74, 0.18);
       }
       .nav-pin--start::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: -4px;
         border-radius: 50%;
@@ -1507,7 +1491,7 @@
         border-radius: 14px 0 0 14px;
       }
       .cycle-rail::after {
-        content: "";
+        content: '';
         position: absolute;
         top: -6px;
         right: -9px;
@@ -1620,7 +1604,7 @@
         min-height: 34px;
       }
       .biz-arrow::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 6px;
         right: 6px;
@@ -1630,7 +1614,7 @@
         transform: translateY(-50%);
       }
       .biz-arrow::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -1691,53 +1675,52 @@
     <div id="root"></div>
 
     <script type="text/babel">
-      const { useState, useEffect, useRef, useCallback } = React;
+      const { useState, useEffect, useRef, useCallback } = React
 
       /* ===== Lucide hydration hook ===== */
       const useLucide = () => {
         useEffect(() => {
-          if (typeof lucide !== "undefined") lucide.createIcons();
-        });
-      };
+          if (typeof lucide !== 'undefined') lucide.createIcons()
+        })
+      }
 
       /* ===== Scroll reveal hook（控えめなフェードアップ） ===== */
       const useScrollReveal = () => {
         useEffect(() => {
-          const els = document.querySelectorAll(".reveal:not(.is-visible)");
+          const els = document.querySelectorAll('.reveal:not(.is-visible)')
           const reduce =
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          if (reduce || typeof IntersectionObserver === "undefined") {
-            els.forEach((el) => el.classList.add("is-visible"));
-            return;
+            window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          if (reduce || typeof IntersectionObserver === 'undefined') {
+            els.forEach((el) => el.classList.add('is-visible'))
+            return
           }
           const io = new IntersectionObserver(
             (entries) => {
               entries.forEach((e) => {
                 if (e.isIntersecting) {
-                  e.target.classList.add("is-visible");
-                  io.unobserve(e.target);
+                  e.target.classList.add('is-visible')
+                  io.unobserve(e.target)
                 }
-              });
+              })
             },
-            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-          );
-          els.forEach((el) => io.observe(el));
-          return () => io.disconnect();
-        }, []);
-      };
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          )
+          els.forEach((el) => io.observe(el))
+          return () => io.disconnect()
+        }, [])
+      }
 
       /* ===== Figure（イラスト） ===== */
       const Figure = ({ src, alt, caption }) => (
         <figure className="figure">
-          <img src={src} alt={alt || ""} loading="lazy" />
+          <img src={src} alt={alt || ''} loading="lazy" />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
-      );
+      )
 
       /* ===== CycleDiagram（悪循環 / 好循環）縦フロー＋戻り線 ===== */
       const CycleDiagram = ({ steps, loop, tone }) => (
-        <div className={"cycle cycle--" + tone}>
+        <div className={'cycle cycle--' + tone}>
           <div className="cycle-track">
             <div className="cycle-rail" />
             <div className="cycle-list">
@@ -1754,11 +1737,11 @@
             </div>
           </div>
           <div className="cycle-caption">
-            <i data-lucide={tone === "good" ? "rotate-cw" : "rotate-ccw"} />
+            <i data-lucide={tone === 'good' ? 'rotate-cw' : 'rotate-ccw'} />
             {loop}
           </div>
         </div>
-      );
+      )
 
       /* ===== BizDiagram（VACAN × カフェ） ===== */
       const BizDiagram = () => (
@@ -1783,14 +1766,12 @@
             <span>カフェ</span>
           </div>
         </div>
-      );
+      )
 
       /* ===== Section ===== */
       const Section = ({ id, icon, label, title, alt, wide, children }) => (
-        <section className={"section" + (alt ? " section--alt" : "")} id={id}>
-          <div
-            className={(wide ? "section-wide" : "section-inner") + " reveal"}
-          >
+        <section className={'section' + (alt ? ' section--alt' : '')} id={id}>
+          <div className={(wide ? 'section-wide' : 'section-inner') + ' reveal'}>
             {label && (
               <div className="section-label">
                 <i data-lucide={icon} /> {label}
@@ -1800,24 +1781,24 @@
             {children}
           </div>
         </section>
-      );
+      )
 
       /* ===== Callout ===== */
       const Callout = ({ icon, type, children }) => (
-        <div className={"callout callout--" + type}>
+        <div className={'callout callout--' + type}>
           <i data-lucide={icon} />
           <div>{children}</div>
         </div>
-      );
+      )
 
       /* ===== InsightBox ===== */
       const InsightBox = ({ children, style }) => (
         <div className="insight-box">
           <p
             style={{
-              fontSize: "1.05rem",
+              fontSize: '1.05rem',
               fontWeight: 500,
-              color: "var(--white)",
+              color: 'var(--white)',
               marginBottom: 0,
               ...style,
             }}
@@ -1825,44 +1806,44 @@
             {children}
           </p>
         </div>
-      );
+      )
 
       /* ===== Prototype ===== */
       const PHOTOS = [
-        { img: "images/cafe-1.jpg" },
-        { img: "images/cafe-2.jpg" },
-        { img: "images/cafe-3.jpg" },
-      ];
+        { img: 'images/cafe-1.jpg' },
+        { img: 'images/cafe-2.jpg' },
+        { img: 'images/cafe-3.jpg' },
+      ]
 
       const Prototype = () => {
-        const [screen, setScreen] = useState("home");
-        const [selected, setSelected] = useState(2);
-        const timerRef = useRef(null);
+        const [screen, setScreen] = useState('home')
+        const [selected, setSelected] = useState(2)
+        const timerRef = useRef(null)
 
         const go = useCallback((s) => {
           if (timerRef.current) {
-            clearTimeout(timerRef.current);
-            timerRef.current = null;
+            clearTimeout(timerRef.current)
+            timerRef.current = null
           }
-          setScreen(s);
-        }, []);
+          setScreen(s)
+        }, [])
 
         const startSearch = useCallback(() => {
-          go("search");
-          timerRef.current = setTimeout(() => go("select"), 2500);
-        }, [go]);
+          go('search')
+          timerRef.current = setTimeout(() => go('select'), 2500)
+        }, [go])
 
         useEffect(
           () => () => {
-            if (timerRef.current) clearTimeout(timerRef.current);
+            if (timerRef.current) clearTimeout(timerRef.current)
           },
           []
-        );
+        )
 
-        useLucide();
+        useLucide()
 
         const screenClass = (name) =>
-          "proto-screen screen-" + name + (screen === name ? " active" : "");
+          'proto-screen screen-' + name + (screen === name ? ' active' : '')
 
         return (
           <div className="proto-section">
@@ -1874,9 +1855,7 @@
               </p>
               <p>
                 店名も評価も地図も見せません。見せるのは雰囲気だけ。
-                <strong>
-                  迷う材料は消し、"どっちが好き？"の軽い選択だけを残す
-                </strong>
+                <strong>迷う材料は消し、"どっちが好き？"の軽い選択だけを残す</strong>
                 ——それがこのプロダクトの設計の核です。
               </p>
               <div className="proto-hint">
@@ -1890,44 +1869,13 @@
                 <div className="phone-status">
                   <span>9:41</span>
                   <div className="phone-status-icons">
-                    <svg
-                      width="16"
-                      height="12"
-                      viewBox="0 0 16 12"
-                      fill="currentColor"
-                    >
-                      <rect
-                        x="0"
-                        y="3"
-                        width="3"
-                        height="9"
-                        rx="1"
-                        opacity="0.3"
-                      />
-                      <rect
-                        x="4.5"
-                        y="2"
-                        width="3"
-                        height="10"
-                        rx="1"
-                        opacity="0.5"
-                      />
-                      <rect
-                        x="9"
-                        y="1"
-                        width="3"
-                        height="11"
-                        rx="1"
-                        opacity="0.7"
-                      />
+                    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
+                      <rect x="0" y="3" width="3" height="9" rx="1" opacity="0.3" />
+                      <rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.5" />
+                      <rect x="9" y="1" width="3" height="11" rx="1" opacity="0.7" />
                       <rect x="13.5" y="0" width="3" height="12" rx="1" />
                     </svg>
-                    <svg
-                      width="16"
-                      height="12"
-                      viewBox="0 0 24 12"
-                      fill="currentColor"
-                    >
+                    <svg width="16" height="12" viewBox="0 0 24 12" fill="currentColor">
                       <rect
                         x="0"
                         y="0"
@@ -1939,14 +1887,7 @@
                         fill="none"
                         opacity="0.4"
                       />
-                      <rect
-                        x="23"
-                        y="3.5"
-                        width="2"
-                        height="5"
-                        rx="1"
-                        opacity="0.4"
-                      />
+                      <rect x="23" y="3.5" width="2" height="5" rx="1" opacity="0.4" />
                       <rect x="2" y="2" width="16" height="8" rx="1.5" />
                     </svg>
                   </div>
@@ -1954,28 +1895,26 @@
                 <div className="phone-home-indicator" />
 
                 {/* Home */}
-                <div className={screenClass("home")}>
+                <div className={screenClass('home')}>
                   <div className="logo-mark">S</div>
                   <h2>SUWARO</h2>
                   <p className="tagline">座りたい場所を見つけよう</p>
                   <div className="location">
                     <i data-lucide="map-pin" /> 新宿駅付近
                   </div>
-                  <button className="btn-proto" onClick={() => go("count")}>
+                  <button className="btn-proto" onClick={() => go('count')}>
                     <i data-lucide="search" /> 空席を探す
                   </button>
                 </div>
 
                 {/* Count */}
-                <div className={screenClass("count")}>
+                <div className={screenClass('count')}>
                   <h2>何名ですか？</h2>
                   <div className="count-grid">
-                    {[1, 2, 3, "4+"].map((n, i) => (
+                    {[1, 2, 3, '4+'].map((n, i) => (
                       <button
                         key={i}
-                        className={
-                          "count-btn" + (selected === i + 1 ? " selected" : "")
-                        }
+                        className={'count-btn' + (selected === i + 1 ? ' selected' : '')}
                         onClick={() => setSelected(i + 1)}
                       >
                         {n}
@@ -1988,7 +1927,7 @@
                 </div>
 
                 {/* Searching */}
-                <div className={screenClass("search")}>
+                <div className={screenClass('search')}>
                   <div className="search-pulse">
                     <i data-lucide="search" />
                   </div>
@@ -1997,34 +1936,28 @@
                 </div>
 
                 {/* Select — 写真だけ・最大3件（店名/地図/評価なし） */}
-                <div className={screenClass("select")}>
+                <div className={screenClass('select')}>
                   <div className="select-badge">
                     <i data-lucide="sparkles" /> 近くで空いてる3つ
                   </div>
-                  <p className="select-hint">
-                    気になる雰囲気を、ひとつ選んでください
-                  </p>
+                  <p className="select-hint">気になる雰囲気を、ひとつ選んでください</p>
                   <div className="photo-stack">
                     {PHOTOS.map((p, i) => (
                       <button
                         key={i}
                         className="photo-card"
                         style={{ backgroundImage: `url(${p.img})` }}
-                        onClick={() => go("nav")}
-                        aria-label={"候補 " + (i + 1)}
+                        onClick={() => go('nav')}
+                        aria-label={'候補 ' + (i + 1)}
                       />
                     ))}
                   </div>
                 </div>
 
                 {/* Nav — 経路案内（選んだ後に店名を開示） */}
-                <div className={screenClass("nav")}>
+                <div className={screenClass('nav')}>
                   <div className="nav-map">
-                    <svg
-                      className="nav-svg"
-                      viewBox="0 0 300 210"
-                      preserveAspectRatio="none"
-                    >
+                    <svg className="nav-svg" viewBox="0 0 300 210" preserveAspectRatio="none">
                       <path
                         className="nav-path-bg"
                         d="M38 182 C 90 182, 92 96, 152 96 S 232 44, 264 32"
@@ -2050,53 +1983,46 @@
                       </span>
                       <h3>CAFÉ MORINO</h3>
                       <p>
-                        <i data-lucide="navigation-2" /> 280m
-                        先・まっすぐ進んで右
+                        <i data-lucide="navigation-2" /> 280m 先・まっすぐ進んで右
                       </p>
                     </div>
                   </div>
-                  <button className="btn-proto" onClick={() => go("feedback")}>
+                  <button className="btn-proto" onClick={() => go('feedback')}>
                     <i data-lucide="flag" /> 到着した
                   </button>
                 </div>
 
                 {/* Feedback */}
-                <div className={screenClass("feedback")}>
+                <div className={screenClass('feedback')}>
                   <h2>座れましたか？</h2>
                   <p className="sub">CAFÉ MORINO での結果を教えてください</p>
                   <div className="feedback-btns">
                     <button
                       className="feedback-btn feedback-btn--yes"
-                      onClick={() => go("success")}
+                      onClick={() => go('success')}
                     >
                       ✓ 座れた
                     </button>
-                    <button
-                      className="feedback-btn feedback-btn--no"
-                      onClick={() => go("qr")}
-                    >
+                    <button className="feedback-btn feedback-btn--no" onClick={() => go('qr')}>
                       ✗ 座れなかった
                     </button>
                   </div>
                 </div>
 
                 {/* Success */}
-                <div className={screenClass("success")}>
+                <div className={screenClass('success')}>
                   <div className="success-check">
                     <i data-lucide="check" />
                   </div>
                   <h2>ありがとうございます！</h2>
                   <p>このデータが次の改善に活きます</p>
-                  <button
-                    className="btn-proto--ghost"
-                    onClick={() => go("home")}
-                  >
+                  <button className="btn-proto--ghost" onClick={() => go('home')}>
                     ホームに戻る
                   </button>
                 </div>
 
                 {/* QR Scan */}
-                <div className={screenClass("qr")}>
+                <div className={screenClass('qr')}>
                   <h2>来店証明</h2>
                   <p>
                     店舗に設置された QR コードを
@@ -2107,13 +2033,13 @@
                     <i data-lucide="scan" />
                     <div className="qr-scanning-line" />
                   </div>
-                  <button className="btn-proto" onClick={() => go("coupon")}>
+                  <button className="btn-proto" onClick={() => go('coupon')}>
                     <i data-lucide="check" /> スキャン完了
                   </button>
                 </div>
 
                 {/* Coupon */}
-                <div className={screenClass("coupon")}>
+                <div className={screenClass('coupon')}>
                   <h2>申し訳ありません</h2>
                   <p>お詫びにクーポンをお送りします</p>
                   <div className="coupon-card">
@@ -2121,23 +2047,20 @@
                     <h3>ドリンク 1杯 無料クーポン</h3>
                     <p>CAFÉ MORINO でご利用いただけます</p>
                   </div>
-                  <button
-                    className="btn-proto--ghost"
-                    onClick={() => go("home")}
-                  >
+                  <button className="btn-proto--ghost" onClick={() => go('home')}>
                     ホームに戻る
                   </button>
                 </div>
               </div>
             </div>
           </div>
-        );
-      };
+        )
+      }
 
       /* ===== App ===== */
       const App = () => {
-        useLucide();
-        useScrollReveal();
+        useLucide()
+        useScrollReveal()
 
         return (
           <>
@@ -2172,18 +2095,12 @@
             </header>
 
             {/* 1. 課題 */}
-            <Section
-              id="problem"
-              icon="alert-triangle"
-              label="PROBLEM"
-              title="課題"
-            >
+            <Section id="problem" icon="alert-triangle" label="PROBLEM" title="課題">
               <h3>原体験</h3>
               <div className="experience-quote">
-                計画していた予定の後、新宿駅周辺で「どこかに座って休みたい」となった。カフェを探すが、目立つ店はどこも混んでいそうで、どっちに歩けばいいか分からない。
+                友人との予定を終えた帰り道、新宿駅で「少し座って話したいね」となった。二人でカフェを探すが、目立つ店はどこも混んでいそうで、どっちに歩けばいいか分からない。
                 <br />
-                Google Map
-                で「カフェ」と検索すると候補が大量に出てきて、逆に決められない。
+                Google Map で「カフェ」と検索すると候補が大量に出てきて、逆に決められない。
               </div>
               <p className="experience-result">
                 10分歩き回って、結局いちばん目立つチェーン店の行列に並んだ。
@@ -2208,21 +2125,15 @@
                 <tbody>
                   <tr>
                     <td>どこも混んでいるように見える</td>
-                    <td>
-                      目立つ店・チェーン店に人が集中しているだけで、裏通りは空いている
-                    </td>
+                    <td>目立つ店・チェーン店に人が集中しているだけで、裏通りは空いている</td>
                   </tr>
                   <tr>
                     <td>情報さえあれば選べるはず</td>
-                    <td>
-                      情報があっても、二人で「どこにする？」を決めるコストが大きい
-                    </td>
+                    <td>情報があっても、二人で「どこにする？」を決めるコストが大きい</td>
                   </tr>
                   <tr>
                     <td>リアルタイムの混雑情報がほしい</td>
-                    <td>
-                      移動に5〜10分かかるので、「今の空き」は着く頃には変わっている
-                    </td>
+                    <td>移動に5〜10分かかるので、「今の空き」は着く頃には変わっている</td>
                   </tr>
                 </tbody>
               </table>
@@ -2230,42 +2141,40 @@
               <Callout icon="info" type="info">
                 この場面での目的は「行きたいお店に入ること」ではなく「座って休める／話せること」。
                 <br />
-                <strong>
-                  店へのこだわりより、意思決定の簡単さの方が大事。
-                </strong>
+                <strong>店へのこだわりより、意思決定の簡単さの方が大事。</strong>
               </Callout>
             </Section>
 
             {/* 2. なぜ表示では解決しないか */}
-            <Section
-              icon="eye"
-              label="INSIGHT"
-              title="なぜ「空席を表示する」では解決しないか"
-              alt
-            >
+            <Section icon="eye" label="INSIGHT" title="なぜ「空席を表示する」では解決しないか" alt>
               <p>
-                空席情報を全員に等しく見せると、全員が同じ「空いてる店」に向かう。その店は混み、情報は自分自身を無効にする。
+                空席は椅子の数しかない。だから空席情報の価値は、
+                <strong>同じ情報を見ている人数で薄まる</strong>。
               </p>
               <p>
-                これは表示するモデルが構造的に抱える問題で、ユーザーが増えるほど悪化する。
+                「あの店は美味しい」は、何人が知っても価値が減らない。「あの店が空いている」は、知っている人が増えるほど価値が減る。席が3つの店の空席情報を100人が見れば、座れるのは数人で、残りは無駄足になる。
+              </p>
+              <p>
+                表示するとは、全員に同じ情報を同時に渡すこと。渡す人数が席数を超えたところから、その情報は価値を失っていく。
               </p>
 
               <CycleDiagram
                 tone="bad"
-                loop="一周ごとに悪化し、また最初へ"
+                loop="見た人が多いほど、無駄足も増える"
                 steps={[
-                  "ユーザーが増える",
-                  "全員が同じ「空いてる店」を見る",
-                  "その店に人が集中",
-                  "表示された情報が偽になる",
-                  "情報の信頼性が落ちる",
+                  '「空いている」と表示される',
+                  '見た人が同じ店へ向かう',
+                  '座れるのは最初の数人',
+                  '残りは無駄足。表示は「混雑」に変わる',
+                  '次に「空いている」店でも同じことが起きる',
                 ]}
               />
 
               <Callout icon="alert-triangle" type="warn">
                 既存の VACAN Maps, Pages の混雑表示もこの構造の中にいる。
                 <br />
-                大勢がサービスを利用するほど、各ユーザーの得られる情報価値は相対的に下がる。
+                情報を出すこと自体には価値があるが、その価値は
+                <strong>利用者が増えるほど一人あたりで薄まっていく</strong>。
               </Callout>
             </Section>
 
@@ -2277,7 +2186,10 @@
               title="解決策：表示から割り当てへ"
             >
               <p>
-                タクシーが「道で手を挙げて捕まえる」から「アプリで呼ぶ」に変わったのと同じ転換を、カフェの空席に適用する。ユーザーは自分で探し回らない。プラットフォームが探索を肩代わりし、絞り込んだ候補だけを差し出す。
+                情報の価値を保つには、全員に同じものを見せないこと。人によって違う空席を渡せば、同じ席を奪い合わせずに済む。これが「表示」ではなく「割り当て」に変える理由。
+              </p>
+              <p>
+                ユーザーは自分で店を探し回らない。プラットフォームが探索を肩代わりし、絞り込んだ候補だけを差し出す。
               </p>
 
               <Figure
@@ -2290,16 +2202,16 @@
               <div className="principles">
                 {[
                   {
-                    title: "見せるのは写真だけ",
-                    desc: '店名・評価・地図・距離という"比較材料"を隠す。「どこにする？」の交渉が生まれない',
+                    title: '見せるのは写真だけ',
+                    desc: '店名・評価・地図・距離という"比較材料"を隠す。「どこにする？」が直感で決まる',
                   },
                   {
-                    title: "最大3件・排他的に割り当て",
-                    desc: "大量の候補で迷わせない。同じ店を複数人に割り当てないから需要が分散する",
+                    title: '最大3件・排他的に割り当て',
+                    desc: '大量の候補で迷わせない。人によって違う店を渡すので、同じ席に人が集中しない',
                   },
                   {
-                    title: "外したら補償する",
-                    desc: "予測が外れたコストは、ユーザーではなくプラットフォームが負う",
+                    title: '外したら補償する',
+                    desc: '予測が外れたコストは、ユーザーではなくプラットフォームが負う',
                   },
                 ].map((p, i) => (
                   <div className="principle" key={i}>
@@ -2338,7 +2250,7 @@
               alt
             >
               <p>
-                表示モデルはユーザーが増えると壊れる。割り当てモデルはユーザーが増えると強くなる。この違いが事業の伸び方を根本的に変える。
+                表示モデルは、利用者が増えるほど一人あたりの価値が下がる。割り当てモデルは、利用者が増えるほど予測が当たり、価値が上がる。この違いが事業の伸び方を根本的に変える。
               </p>
 
               <h3>データが回るほど強くなる</h3>
@@ -2350,89 +2262,49 @@
                 tone="good"
                 loop="一周ごとに強くなる（データフライホイール）"
                 steps={[
-                  "割り当てる",
-                  "結果データが溜まる",
-                  "当たる確率が上がる",
-                  "ユーザーが増える",
-                  "送客が増え、店も増える",
+                  '割り当てる',
+                  '成功／失敗が溜まる',
+                  '当たる確率が上がる',
+                  'ユーザーが増える',
+                  '送客が増え、店も増える',
                 ]}
               />
             </Section>
 
             {/* 5. 在庫データ */}
-            <Section
-              icon="camera"
-              label="DATA"
-              title="在庫データ：既存カメラから始める"
-            >
-              <p>
-                空席データをどう集めるかが実務上の最大課題。ここで効くのが VACAN
-                の既存資産。
-              </p>
+            <Section icon="camera" label="DATA" title="在庫データ：既存カメラから始める">
+              <p>空席データをどう集めるかが実務上の最大課題。ここで効くのが VACAN の既存資産。</p>
               <p>
                 VACAN
-                はすでに多くの駅ナカ・駅周辺のカフェにカメラを設置し、エリアレベルの混雑状況（空き／やや混み／混雑）を取得している。個席単位ではなくエリアの粗さだが、「空いてる店に人を流す」には十分使える。
+                はすでに多くの駅ナカ・駅周辺のカフェにカメラを設置し、区画単位の混雑状況（空き／やや混み／混雑）を取得している。個席単位ではない粗さだが、「空いてる店に人を流す」には十分使える。
               </p>
 
+              <h3>カメラがない店は、手動で申告する</h3>
               <p>
-                初期はカメラデータだけで割り当てる。割り当て結果データが溜まれば「この曜日のこの時間帯はだいたい入れる」をモデルが学習し、カメラの粗さを補完する。
-              </p>
-
-              <h3>カメラがない店は、管理画面から参加する</h3>
-              <p>
-                カメラはエリア混雑を手間ゼロで自動取得できるが、設置済みの店に限られる。カメラのない店には管理画面を用意し、2つの方法で在庫を供給してもらう。
+                カメラのない店には管理画面を用意し、同じ「空いている」を手で入力してもらう。在庫の取得経路をもう1本用意することで、プラットフォームへの参加障壁を下げる。
               </p>
               <div className="admin-grid">
                 <div className="admin-item">
                   <div className="admin-ic">
-                    <i data-lucide="hand" />
+                    <i data-lucide="camera" />
                   </div>
-                  <h4>回答</h4>
-                  <p>店員が「今、空いている」を手動で申告</p>
+                  <h4>カメラ（自動）</h4>
+                  <p>設置済みの店は手間ゼロ。区画単位の混雑を常時取得する</p>
                 </div>
                 <div className="admin-item">
                   <div className="admin-ic">
-                    <i data-lucide="gavel" />
+                    <i data-lucide="hand" />
                   </div>
-                  <h4>入札</h4>
-                  <p>「今すぐ客がほしい」と送客枠に入札</p>
+                  <h4>申告（手動）</h4>
+                  <p>「今すぐ客がほしい」を1タップ。押した時刻が記録され、一定時間で失効する</p>
                 </div>
               </div>
-              <Callout icon="check" type="info">
-                これで「カメラ設置済みの店」という物理的な制約が外れ、参加できる店舗が大幅に広がる。
-              </Callout>
-
-              <h3>これは "リアル版 Google Ads"</h3>
               <p>
-                入札の本質は、送客のオークション。Google
-                の広告オークションと並べると分かりやすい。
+                手動の申告はカメラと違って一点の情報なので、時間が経つほど当てにならない。古い申告のまま送客すれば空振りが増え、その補償コストはプラットフォームが負う。だから申告からの経過時間を信頼度の重みとして扱い、時間が経ったものは候補から外す。
               </p>
-              <table className="styled-table">
-                <thead>
-                  <tr>
-                    <th>観点</th>
-                    <th>Google Ads</th>
-                    <th>SUWARO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>店が入札するもの</td>
-                    <td>検索キーワードのクリック</td>
-                    <td>送客（実際の来店）</td>
-                  </tr>
-                  <tr>
-                    <td>配分されるもの</td>
-                    <td>広告枠（画面上の表示）</td>
-                    <td>送客枠（アプリ上の割り当て）</td>
-                  </tr>
-                  <tr>
-                    <td>枠が生むもの</td>
-                    <td>クリック＝来るかもしれない関心</td>
-                    <td>実際に座る客＝確実な消費</td>
-                  </tr>
-                </tbody>
-              </table>
+              <Callout icon="check" type="info">
+                「カメラ」+「手動申告」の2本立てで、空席の在庫データを集める。
+              </Callout>
             </Section>
 
             {/* 6. 空振り保険 */}
@@ -2444,19 +2316,19 @@
               <div className="insurance-grid">
                 {[
                   {
-                    icon: "ticket",
-                    title: "座れなかったら補償",
-                    desc: "店舗の QR スキャンで来店を確認し、ドリンク券を即時発行",
+                    icon: 'ticket',
+                    title: '座れなかったら補償',
+                    desc: '店舗の QR スキャンで来店を確認し、ドリンク券を即時発行',
                   },
                   {
-                    icon: "piggy-bank",
-                    title: "成功時だけ課金",
-                    desc: "店は送客が成功したときだけ課金。失敗時の補償はプラットフォームが負う",
+                    icon: 'piggy-bank',
+                    title: '成功時だけ課金',
+                    desc: '店は送客が成功したときだけ課金。失敗時の補償はプラットフォームが負う',
                   },
                   {
-                    icon: "target",
-                    title: "7割で成立",
-                    desc: "精度100%は不要。7割当たれば空振り保険のコストを吸収できる",
+                    icon: 'target',
+                    title: '7割で成立',
+                    desc: '精度100%は不要。7割当たれば空振り保険のコストを吸収できる',
                   },
                 ].map((item, i) => (
                   <div className="insurance-item" key={i}>
@@ -2470,7 +2342,7 @@
               </div>
 
               <Callout icon="lightbulb" type="info">
-                初期の補償コストはデータ取得コストと見なす。100回外しても数万円で、その店の回転パターンが学習できる。カメラの精度を補完する手段としては非常に安い。
+                初期の補償コストはデータ取得コストと見なす。100回外しても数万円で、その店の回転パターンが学習できる。
               </Callout>
 
               <p>
@@ -2485,21 +2357,17 @@
               label="BUSINESS MODEL"
               title="収益モデルと VACAN シナジー"
             >
+              <p>ここまではユーザー体験の話。ここからは、この仕組みが VACAN の事業にどう効くか。</p>
               <p>
-                ここまではユーザー体験の話。ここからは、この仕組みが VACAN
-                の事業にどう効くか。
-              </p>
-              <p>
-                VACAN
-                が持つ施設との契約網・カメラ網は、後発が数年かけても作れない。SUWARO
-                はその上に「見せる」を「割り当てる」に変えるレイヤーを載せるだけ。ゼロから作る新規事業ではない。
+                VACAN が持つ施設との契約網・カメラ網は、後発が簡単には作れない。SUWARO
+                はその既存資産上で「見せる」を「割り当てる」に変えるレイヤーを載せるだけ。ゼロから作る新規事業ではない。
               </p>
 
               <InsightBox
                 style={{
-                  fontSize: "1.1rem",
+                  fontSize: '1.1rem',
                   fontWeight: 700,
-                  textAlign: "center",
+                  textAlign: 'center',
                 }}
               >
                 SUWARO は、VACAN のカメラ導入営業を強化する武器
@@ -2530,8 +2398,7 @@
               </table>
 
               <p>
-                カメラ導入の ROI
-                が上がるので、導入のハードルが下がり、チャーン抑止も期待できる。
+                カメラ導入の ROI が上がるので、導入のハードルが下がり、チャーン抑止も期待できる。
               </p>
 
               <h3>収益は3層で積み上がる</h3>
@@ -2562,40 +2429,65 @@
                 </tbody>
               </table>
               <p>
-                ③の送客オークションは、カメラ設置を前提としないため対象店舗に上限がなく、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
+                ③の送客オークションでは、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
               </p>
+
+              <h3>これは "リアル版 Google Ads"</h3>
+              <p>
+                入札は有償のオプションで、積極的に客を呼びたい店だけが参加する。その本質は送客のオークションで、Google
+                の広告オークションと比較すると分かりやすい。
+              </p>
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>観点</th>
+                    <th>Google Ads</th>
+                    <th>SUWARO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>店が入札するもの</td>
+                    <td>検索キーワードのクリック</td>
+                    <td>送客（実際の来店）</td>
+                  </tr>
+                  <tr>
+                    <td>配分されるもの</td>
+                    <td>広告枠（画面上の表示）</td>
+                    <td>送客枠（アプリ上の割り当て）</td>
+                  </tr>
+                  <tr>
+                    <td>枠が生むもの</td>
+                    <td>クリック</td>
+                    <td>来店客</td>
+                  </tr>
+                </tbody>
+              </table>
             </Section>
 
             {/* 8. 展開ステップ */}
-            <Section
-              id="rollout"
-              icon="rocket"
-              label="ROLLOUT"
-              title="展開ステップ"
-              alt
-            >
+            <Section id="rollout" icon="rocket" label="ROLLOUT" title="展開ステップ" alt>
               <p>
-                割り当ては在庫密度が命なので、小さな範囲の価値検証から始める。商業施設で
-                VACAN
+                割り当ては在庫密度が命なので、小さな範囲の価値検証から始める。商業施設で VACAN
                 カメラ設置済みの店舗が密集している場所は、最初の検証に最適。
               </p>
               <div className="roadmap">
                 {[
                   {
-                    num: "0",
-                    title: "POC",
-                    desc: "1施設でカメラ起点の割り当て検証（2週間）",
+                    num: '0',
+                    title: 'POC',
+                    desc: '1施設でカメラ起点の割り当て検証',
                   },
-                  { num: "1", title: "MVP", desc: "1駅でカフェ割り当て MVP" },
+                  { num: '1', title: 'MVP', desc: '1駅でカフェ割り当て MVP' },
                   {
-                    num: "2",
-                    title: "拡大",
-                    desc: "他エリアの既存導入先に展開",
+                    num: '2',
+                    title: '拡大',
+                    desc: '他エリアの既存導入先に展開',
                   },
                   {
-                    num: "3",
-                    title: "他業態",
-                    desc: "飲食店・ラウンジ等へ拡張",
+                    num: '3',
+                    title: '他業態',
+                    desc: '飲食店・ラウンジ等へ拡張',
                   },
                 ].map((step, i) => (
                   <div className="roadmap-step" key={i}>
@@ -2623,47 +2515,43 @@
                 <tbody>
                   {[
                     {
-                      risk: "ユーザーに習慣化されず需要が根付かない",
-                      type: "demand",
-                      label: "需要",
+                      risk: 'ユーザーに習慣化されず需要が根付かない',
+                      type: 'demand',
+                      label: '需要',
                       action:
-                        "「探す・迷う・外れる」の3コストを一括で消す一点特化で差別化。土地勘のない「今すぐ座りたい」シーンに絞り、フェーズ0で再利用率を主要指標にする",
+                        '「探す・迷う・外れる」の3コストを一括で消す一点特化で差別化。土地勘のない「今すぐ座りたい」シーンに絞り、POC で再利用率を主要指標にする',
                     },
                     {
-                      risk: "在庫密度が足りず割り当てが成立しない",
-                      type: "supply",
-                      label: "供給",
-                      action:
-                        "VACAN カメラ設置済みの店舗が密集する1駅に集中して検証する",
+                      risk: '在庫密度が足りず割り当てが成立しない',
+                      type: 'supply',
+                      label: '供給',
+                      action: 'VACAN カメラ設置済みの店舗が密集する1施設に集中して検証する',
                     },
                     {
-                      risk: "SUWARO 経由の送客効果が見えにくい",
-                      type: "rev",
-                      label: "収益",
-                      action:
-                        "カメラ設置店の空席率の変化を計測し、導入前後で比較する",
+                      risk: 'SUWARO 経由の送客効果が見えにくい',
+                      type: 'rev',
+                      label: '収益',
+                      action: 'カメラ設置店の空席率の変化を計測し、導入前後で比較する',
                     },
                     {
-                      risk: "カメラの粗さで割り当て精度が出ない",
-                      type: "tech",
-                      label: "技術",
+                      risk: 'カメラの粗さで割り当て精度が出ない',
+                      type: 'tech',
+                      label: '技術',
                       action:
-                        "空振り保険で吸収。結果データの蓄積で精度を上げる。7割で空振り保険のコストを吸収できる構造にする",
+                        '精度100%は前提にしない（7割で成立）。外れた分は空振り保険で吸収し、結果データの蓄積で当たる確率を上げていく',
                     },
                     {
-                      risk: "空振り保険の不正利用・補償コストが膨らむ",
-                      type: "rev",
-                      label: "収益",
+                      risk: '空振り保険の不正利用・補償コストが膨らむ',
+                      type: 'rev',
+                      label: '収益',
                       action:
-                        "QR 来店証明で不正を排除。補償は原価の小さいドリンク券でユーザー単位に上限。精度向上とともに発生率が下がる自己収束構造にする",
+                        'QR 来店証明で不正を排除。補償は原価の小さいドリンク券でユーザー単位に上限。精度向上とともに発生率が下がる自己収束構造にする',
                     },
                   ].map((r, i) => (
                     <tr key={i}>
                       <td>{r.risk}</td>
                       <td>
-                        <span className={"risk-badge risk-badge--" + r.type}>
-                          {r.label}
-                        </span>
+                        <span className={'risk-badge risk-badge--' + r.type}>{r.label}</span>
                       </td>
                       <td>{r.action}</td>
                     </tr>
@@ -2673,18 +2561,17 @@
 
               <div className="validation-box">
                 <h3>
-                  <i data-lucide="flask-conical" /> フェーズ
-                  0：本当に座れるかを確かめる
+                  <i data-lucide="flask-conical" /> POC：本当に座れるかを確かめる
                 </h3>
-                <p style={{ marginTop: "1rem" }}>
+                <p style={{ marginTop: '1rem' }}>
                   「既存カメラの空き情報で割り当てたとき、実際に座れるか」を測る。
                 </p>
                 <ul className="check-list">
                   {[
-                    "VACAN カメラ設置済みの1駅・10〜20店舗、2週間",
-                    "カメラが「空き」を示す店へ案内し、結果を記録",
-                    "測る指標：割り当て成功率、空振り率、ユーザーの再利用率",
-                    "既存インフラだけで始められるので、追加の設備投資は不要",
+                    'VACAN カメラ設置済みの1施設・10〜20店舗、2週間',
+                    'カメラが「空き」を示す店へ案内し、結果を記録',
+                    '測る指標：割り当て成功率、空振り率、ユーザーの再利用率',
+                    '既存インフラだけで始められるので、追加の設備投資は不要',
                   ].map((item, i) => (
                     <li key={i}>
                       <i data-lucide="check" />
@@ -2700,10 +2587,10 @@
               <p>VACAN DX Innovation Award 2026 — Shungo Nagamachi</p>
             </footer>
           </>
-        );
-      };
+        )
+      }
 
-      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />)
     </script>
   </body>
 </html>
