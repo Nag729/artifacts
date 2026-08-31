@@ -122,6 +122,54 @@
         </div>
       )
 
+      /* ===== PositionMap（競合ポジショニング 2軸） ===== */
+      const QUADRANTS = [
+        { axis: '店が目的 × 表示', players: ['食べログ / Google Maps'] },
+        { axis: '店が目的 × 割り当て', players: ['予約サービス（食べログ / ホットペッパー）'] },
+        {
+          axis: '席が目的 × 表示',
+          players: ['VACAN Maps / Pages', 'いいオフィス / BizSPOT'],
+          self: true,
+        },
+        { axis: '席が目的 × 割り当て', players: ['SUWARO'], target: true },
+      ]
+
+      const PositionMap = () => (
+        <div className="posmap">
+          <div className="posmap-yaxis">
+            <span>店が目的</span>
+            <i data-lucide="arrow-down" />
+            <span>席が目的</span>
+          </div>
+          <div className="posmap-main">
+            <div className="posmap-quads">
+              {QUADRANTS.map((q, i) => (
+                <div
+                  className={
+                    'posmap-quad' +
+                    (q.target ? ' posmap-quad--target' : '') +
+                    (q.self ? ' posmap-quad--self' : '')
+                  }
+                  key={i}
+                >
+                  <h4>{q.axis}</h4>
+                  {q.players.map((name, j) => (
+                    <span className="posmap-player" key={j}>
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="posmap-xaxis">
+              <span>表示（全員に同じ情報）</span>
+              <i data-lucide="arrow-right" />
+              <span>割り当て（人ごとに違う席）</span>
+            </div>
+          </div>
+        </div>
+      )
+
       /* ===== Section ===== */
       const Section = ({ id, icon, label, title, alt, wide, children }) => (
         <section className={'section' + (alt ? ' section--alt' : '')} id={id}>
@@ -398,8 +446,8 @@
                   <p>お詫びにクーポンをお送りします</p>
                   <div className="coupon-card">
                     <i data-lucide="gift" />
-                    <h3>ドリンク 1杯 無料クーポン</h3>
-                    <p>CAFÉ MORINO でご利用いただけます</p>
+                    <h3>次回 100円 割引クーポン</h3>
+                    <p>SUWARO が次に案内するお店で使えます</p>
                   </div>
                   <button className="btn-proto--ghost" onClick={() => go('home')}>
                     ホームに戻る
@@ -429,6 +477,7 @@
                   <a href="#solution">解決策</a>
                   <a href="#prototype">プロトタイプ</a>
                   <a href="#mechanism">仕組み</a>
+                  <a href="#positioning">競合</a>
                   <a href="#revenue">収益モデル</a>
                   <a href="#rollout">展開計画</a>
                 </div>
@@ -663,9 +712,6 @@
               <p>
                 手動の申告はカメラと違って一点の情報なので、時間が経つほど当てにならない。古い申告のまま送客すれば空振りが増え、その補償コストはプラットフォームが負う。だから申告からの経過時間を信頼度の重みとして扱い、時間が経ったものは候補から外す。
               </p>
-              <Callout icon="check" type="info">
-                「カメラ」+「手動申告」の2本立てで、空席の在庫データを集める。
-              </Callout>
             </Section>
 
             {/* 6. 空振り保険 */}
@@ -679,7 +725,7 @@
                   {
                     icon: 'ticket',
                     title: '座れなかったら補償',
-                    desc: '店舗の QR スキャンで来店を確認し、ドリンク券を即時発行',
+                    desc: '店舗の QR スキャンで来店を確認し、100円分の割引クーポンを即時発行',
                   },
                   {
                     icon: 'piggy-bank',
@@ -688,8 +734,8 @@
                   },
                   {
                     icon: 'target',
-                    title: '7割で成立',
-                    desc: '精度100%は不要。7割当たれば空振り保険のコストを吸収できる',
+                    title: '8割を目指す',
+                    desc: '精度100%は不要。ただし5回に1回の空振りが、使い続けてもらえる限界',
                   },
                 ].map((item, i) => (
                   <div className="insurance-item" key={i}>
@@ -703,7 +749,7 @@
               </div>
 
               <Callout icon="lightbulb" type="info">
-                初期の補償コストはデータ取得コストと見なす。100回外しても数万円で、その店の回転パターンが学習できる。
+                初期の補償コストはデータ取得コストと見なす。100回外しても1万円で、その店の回転パターンが学習できる。
               </Callout>
 
               <p>
@@ -711,7 +757,34 @@
               </p>
             </Section>
 
-            {/* 7. 収益モデルと VACAN シナジー */}
+            {/* 7. 競合とポジショニング */}
+            <Section
+              id="positioning"
+              icon="crosshair"
+              label="POSITIONING"
+              title="競合とポジショニング"
+            >
+              <p>
+                「座る場所を探す」場面には、すでに多くのサービスがいる。ただし2つの軸で並べ直すと、
+                <strong>空いている席を在庫として一人ずつに割り当てている</strong>
+                プレイヤーはいない。
+              </p>
+              <p>
+                横軸は<strong>情報の配り方</strong>
+                ——全員に同じものを見せる「表示」か、人によって違うものを渡す「割り当て」か。縦軸は
+                <strong>ユーザーの目的</strong>
+                ——特定の店に行きたいのか、座れればどこでもいいのか。
+              </p>
+
+              <PositionMap />
+
+              <h3>なぜ右下が空いているのか</h3>
+              <p>
+                席を確実に押さえる仕組み自体は、予約サービスがすでに持っている。ただし予約はカフェには降りてこない。滞在時間が短く客単価も低いカフェでは、1件ずつ席を確保して管理するコストが売上に見合わないからだ。そのため「座れればいい」ユーザーに残された手段は表示型だけになる。予約ほど重くなく、表示より確実——その中間が空いたままになっている。
+              </p>
+            </Section>
+
+            {/* 8. 収益モデルと VACAN シナジー */}
             <Section
               id="revenue"
               icon="bar-chart-3"
@@ -793,40 +866,99 @@
                 ③の送客オークションでは、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
               </p>
 
-              <h3>これは "リアル版 Google Ads"</h3>
+              <h3>1送客あたりの採算</h3>
               <p>
-                入札は有償のオプションで、積極的に客を呼びたい店だけが参加する。その本質は送客のオークションで、Google
-                の広告オークションと比較すると分かりやすい。
+                ②の単価は、店に残る利益から逆算する。カフェの客単価を700円、原価率を3割とすると、空席がひとつ埋まったときの限界利益は約500円。
+                <strong>その1割にあたる50円</strong>
+                を送客単価に置く。店から見れば「1杯出して50円」で、現場の感覚として通る額。食べログ・ホットペッパーのネット予約送客がランチで50円/人なので、上限としても整合する。
+              </p>
+              <p>
+                送客が成功すれば +50円、空振りすればクーポン原価 −100円。1送客あたりの粗利は
+                <code>50r − 100(1−r)</code>（r は成功率）で表せる。
               </p>
               <table className="styled-table">
                 <thead>
                   <tr>
-                    <th>観点</th>
-                    <th>Google Ads</th>
-                    <th>SUWARO</th>
+                    <th>成功率</th>
+                    <th>1送客あたりの粗利</th>
+                    <th>位置づけ</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>店が入札するもの</td>
-                    <td>検索キーワードのクリック</td>
-                    <td>送客（実際の来店）</td>
+                    <td>67%</td>
+                    <td>0円</td>
+                    <td>採算ライン</td>
                   </tr>
                   <tr>
-                    <td>配分されるもの</td>
-                    <td>広告枠（画面上の表示）</td>
-                    <td>送客枠（アプリ上の割り当て）</td>
+                    <td>80%</td>
+                    <td>20円</td>
+                    <td>目標（体験として許容できる下限）</td>
                   </tr>
                   <tr>
-                    <td>枠が生むもの</td>
-                    <td>クリック</td>
-                    <td>来店客</td>
+                    <td>90%</td>
+                    <td>35円</td>
+                    <td>学習が進んだ状態</td>
                   </tr>
                 </tbody>
               </table>
+              <Callout icon="shield-check" type="info">
+                目標の8割は<strong>体験側から決めた線</strong>で、採算ラインより13ポイント高い。
+                この差が、精度が一時的に落ちても事業が壊れない余裕になる。
+              </Callout>
+
+              <h3>市場規模</h3>
+              <p>
+                カフェ市場そのもの（約1兆円）は分母にしない。SUWARO
+                の収益は飲食売上ではなく送客手数料なので、店舗数から積み上げる。1店あたりの送客手数料は、1日10送客・月300送客として
+                <strong>年18万円</strong>。
+              </p>
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>区分</th>
+                    <th>対象</th>
+                    <th>規模</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TAM</td>
+                    <td>全国の喫茶店 58,669店</td>
+                    <td>約106億円 / 年</td>
+                  </tr>
+                  <tr>
+                    <td>SAM</td>
+                    <td>駅ナカ・駅周辺・商業施設など都市部（約12,000店）</td>
+                    <td>約22億円 / 年</td>
+                  </tr>
+                  <tr>
+                    <td>SOM</td>
+                    <td>3年で到達する1,000店</td>
+                    <td>約1.8億円 / 年</td>
+                  </tr>
+                </tbody>
+              </table>
+              <Callout icon="flag" type="info">
+                いま割り当てにそのまま使えるのは、VACAN のカメラが入っているカフェ
+                <strong>約100店</strong>。ここが POC の起点で、SOM
+                の1,000店は展開ステップの先にある。
+              </Callout>
+
+              <h3>②で儲けるのではない</h3>
+              <p>
+                100店で回しても②の売上は年1,800万円（粗利720万円）で、これ単体は事業の柱にならない。②の本当の役割は、収益そのものではなく
+                <strong>店にとっての ROI を数字で証明すること</strong>にある。
+              </p>
+              <p>
+                月300送客なら店の支払いは15,000円。対して、埋まった空席から店に残る限界利益は約15万円で、10倍になって返ってくる。カメラ
+                SaaS の月額（8,250円）を含めても投資回収は明確——
+                <strong>この計算が成り立つこと自体が①の解約を止め、新規導入を通しやすくする</strong>
+                。そして中長期の伸びは③が担う。
+              </p>
             </Section>
 
-            {/* 8. 展開ステップ */}
+            {/* 9. 展開ステップ */}
             <Section id="rollout" icon="rocket" label="ROLLOUT" title="展開ステップ" alt>
               <p>
                 割り当ては在庫密度が命なので、小さな範囲の価値検証から始める。商業施設で VACAN
@@ -863,7 +995,7 @@
               </Callout>
             </Section>
 
-            {/* 9. リスクと検証 */}
+            {/* 10. リスクと検証 */}
             <Section icon="shield-alert" label="RISKS" title="リスクと検証">
               <table className="styled-table">
                 <thead>
@@ -899,14 +1031,14 @@
                       type: 'tech',
                       label: '技術',
                       action:
-                        '精度100%は前提にしない（7割で成立）。外れた分は空振り保険で吸収し、結果データの蓄積で当たる確率を上げていく',
+                        '精度100%は前提にしない（目標8割・採算ラインは67%）。外れた分は空振り保険で吸収し、結果データの蓄積で当たる確率を上げていく',
                     },
                     {
                       risk: '空振り保険の不正利用・補償コストが膨らむ',
                       type: 'rev',
                       label: '収益',
                       action:
-                        'QR 来店証明で不正を排除。補償は原価の小さいドリンク券でユーザー単位に上限。精度向上とともに発生率が下がる自己収束構造にする',
+                        'QR 来店証明で不正を排除。補償は原価100円の割引クーポンとし、ユーザー単位に上限を設ける。精度向上とともに発生率が下がる自己収束構造にする',
                     },
                   ].map((r, i) => (
                     <tr key={i}>
@@ -930,8 +1062,7 @@
                 <ul className="check-list">
                   {[
                     'VACAN カメラ設置済みの1施設・10〜20店舗、2週間',
-                    'カメラが「空き」を示す店へ案内し、結果を記録',
-                    '測る指標：割り当て成功率、空振り率、ユーザーの再利用率',
+                    'カメラが「空き」を示す店へ案内し、割り当て成功率・空振り率・再利用率を記録',
                     '既存インフラだけで始められるので、追加の設備投資は不要',
                   ].map((item, i) => (
                     <li key={i}>

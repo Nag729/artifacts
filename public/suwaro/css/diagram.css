@@ -451,3 +451,106 @@
     padding: 0.25rem 0.5rem;
   }
 }
+
+/* ========== Position map（競合ポジショニング 2軸） ========== */
+.posmap {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  margin: 1.75rem 0;
+}
+.posmap-yaxis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0 2.25rem;
+  color: var(--text-light);
+}
+.posmap-yaxis span {
+  writing-mode: vertical-rl;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.posmap-yaxis i,
+.posmap-xaxis i {
+  width: 16px;
+  height: 16px;
+  color: var(--green-500);
+  flex-shrink: 0;
+}
+.posmap-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.posmap-quads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.posmap-quad {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 116px;
+  padding: 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.posmap-quad h4 {
+  margin: 0 0 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-lighter);
+}
+.posmap-player {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+}
+.posmap-quad--self {
+  background: var(--green-50);
+  border-color: var(--green-200);
+}
+.posmap-quad--target {
+  background: linear-gradient(135deg, var(--green-900) 0%, #2d5a4b 100%);
+  border-color: var(--green-700);
+  box-shadow: var(--shadow-md);
+}
+.posmap-quad--target h4 {
+  color: rgba(255, 255, 255, 0.55);
+}
+.posmap-quad--target .posmap-player {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+.posmap-xaxis {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 2px solid var(--green-200);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+.section--alt .posmap-quad {
+  background: var(--white);
+}
+@media (max-width: 560px) {
+  .posmap-quad {
+    min-height: 96px;
+    padding: 0.8rem;
+  }
+  .posmap-xaxis {
+    font-size: 0.68rem;
+  }
+}
