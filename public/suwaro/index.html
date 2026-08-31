@@ -106,10 +106,10 @@
           </div>
           <div className="biz-arrows">
             <div className="biz-arrow to-right">
-              <span className="lbl">① 混雑を見える化（従来）</span>
+              <span className="lbl">混雑を見える化（従来）</span>
             </div>
             <div className="biz-arrow to-right hl">
-              <span className="lbl">② 空席に送客（SUWARO で追加）</span>
+              <span className="lbl">空席に送客（SUWARO で追加）</span>
             </div>
             <div className="biz-arrow to-left">
               <span className="lbl">月額 SaaS ＋ 送客の成果報酬</span>
@@ -167,6 +167,95 @@
               <span>割り当て（人ごとに違う席）</span>
             </div>
           </div>
+        </div>
+      )
+
+      /* ===== ProfitLine（成功率と1送客あたりの粗利） =====
+         数直線の左端を50%、右端を100%に取る。採算ライン67%を境に損益が反転する。 */
+      const RATE_MIN = 50
+      const RATE_MAX = 100
+      const ratePos = (rate) => ((rate - RATE_MIN) / (RATE_MAX - RATE_MIN)) * 100
+
+      const PROFIT_MARKS = [
+        { rate: 67, profit: '±0円', note: '採算ライン', kind: 'even' },
+        { rate: 80, profit: '+20円', note: '目標', kind: 'goal' },
+        { rate: 90, profit: '+35円', note: '学習が進んだ状態', kind: 'good' },
+      ]
+
+      const ProfitLine = () => (
+        <div className="pline-scroll">
+          <div className="pline">
+            <div
+              className="pline-gap"
+              style={{
+                left: ratePos(67) + '%',
+                width: ratePos(80) - ratePos(67) + '%',
+              }}
+            >
+              <span>13ポイントの余裕</span>
+            </div>
+            <div className="pline-track">
+              <div className="pline-zone pline-zone--loss" style={{ width: ratePos(67) + '%' }}>
+                赤字
+              </div>
+              <div className="pline-zone pline-zone--gain">黒字</div>
+            </div>
+            {PROFIT_MARKS.map((m) => (
+              <div
+                className={'pline-mark pline-mark--' + m.kind}
+                style={{ left: ratePos(m.rate) + '%' }}
+                key={m.rate}
+              >
+                <span className="pline-profit">{m.profit}</span>
+                <span className="pline-rate">{m.rate}%</span>
+                <span className="pline-note">{m.note}</span>
+              </div>
+            ))}
+            <div className="pline-ends">
+              <span>成功率 {RATE_MIN}%</span>
+              <span>{RATE_MAX}%</span>
+            </div>
+          </div>
+        </div>
+      )
+
+      /* ===== MarketScope（TAM / SAM / SOM） =====
+         円は包含関係を示すためのもので、面積比は金額に比例していない。 */
+      const MARKET = [
+        { key: 'TAM', amount: '約106億円', target: '全国の喫茶店', count: '58,669店' },
+        {
+          key: 'SAM',
+          amount: '約22億円',
+          target: '駅ナカ・駅周辺・商業施設など都市部',
+          count: '約12,000店',
+        },
+        { key: 'SOM', amount: '約1.8億円', target: '3年で到達する', count: '1,000店' },
+      ]
+
+      const MarketScope = () => (
+        <div className="scope">
+          <div className="scope-circles">
+            {MARKET.map((m) => (
+              <div className={'scope-circle scope-circle--' + m.key.toLowerCase()} key={m.key}>
+                <span className="scope-key">{m.key}</span>
+                <span className="scope-amount">{m.amount}</span>
+              </div>
+            ))}
+          </div>
+          <ul className="scope-legend">
+            {MARKET.map((m) => (
+              <li key={m.key}>
+                <span className={'scope-dot scope-dot--' + m.key.toLowerCase()} />
+                <div>
+                  <h4>{m.key}</h4>
+                  <p>
+                    {m.target}
+                    <strong>{m.count}</strong>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       )
 
@@ -846,29 +935,29 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>① カメラ SaaS 月額</td>
+                    <td>①カメラ SaaS 月額</td>
                     <td>既存 VACAN の月額</td>
                     <td>安定・ストック型</td>
                   </tr>
                   <tr>
-                    <td>② 送客成果報酬</td>
+                    <td>②送客成果報酬</td>
                     <td>送客が成功したときだけ課金</td>
                     <td>変動・成果連動</td>
                   </tr>
                   <tr>
-                    <td>③ 送客オークション</td>
+                    <td>③送客オークション</td>
                     <td>店の入札で送客枠を配分・入札額を課金</td>
                     <td>スケール型（Google Ads 型）</td>
                   </tr>
                 </tbody>
               </table>
               <p>
-                ③の送客オークションでは、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
+                ③送客オークションでは、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
               </p>
 
               <h3>1送客あたりの採算</h3>
               <p>
-                ②の単価は、店に残る利益から逆算する。カフェの客単価を700円、原価率を3割とすると、空席がひとつ埋まったときの限界利益は約500円。
+                ②送客成果報酬の単価は、店に残る利益から逆算する。カフェの客単価を700円、原価率を3割とすると、空席がひとつ埋まったときの限界利益は約500円。
                 <strong>その1割にあたる50円</strong>
                 を送客単価に置く。店から見れば「1杯出して50円」で、現場の感覚として通る額。食べログ・ホットペッパーのネット予約送客がランチで50円/人なので、上限としても整合する。
               </p>
@@ -876,32 +965,7 @@
                 送客が成功すれば +50円、空振りすればクーポン原価 −100円。1送客あたりの粗利は
                 <code>50r − 100(1−r)</code>（r は成功率）で表せる。
               </p>
-              <table className="styled-table">
-                <thead>
-                  <tr>
-                    <th>成功率</th>
-                    <th>1送客あたりの粗利</th>
-                    <th>位置づけ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>67%</td>
-                    <td>0円</td>
-                    <td>採算ライン</td>
-                  </tr>
-                  <tr>
-                    <td>80%</td>
-                    <td>20円</td>
-                    <td>目標（体験として許容できる下限）</td>
-                  </tr>
-                  <tr>
-                    <td>90%</td>
-                    <td>35円</td>
-                    <td>学習が進んだ状態</td>
-                  </tr>
-                </tbody>
-              </table>
+              <ProfitLine />
               <Callout icon="shield-check" type="info">
                 目標の8割は<strong>体験側から決めた線</strong>で、採算ラインより13ポイント高い。
                 この差が、精度が一時的に落ちても事業が壊れない余裕になる。
@@ -913,48 +977,25 @@
                 の収益は飲食売上ではなく送客手数料なので、店舗数から積み上げる。1店あたりの送客手数料は、1日10送客・月300送客として
                 <strong>年18万円</strong>。
               </p>
-              <table className="styled-table">
-                <thead>
-                  <tr>
-                    <th>区分</th>
-                    <th>対象</th>
-                    <th>規模</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>TAM</td>
-                    <td>全国の喫茶店 58,669店</td>
-                    <td>約106億円 / 年</td>
-                  </tr>
-                  <tr>
-                    <td>SAM</td>
-                    <td>駅ナカ・駅周辺・商業施設など都市部（約12,000店）</td>
-                    <td>約22億円 / 年</td>
-                  </tr>
-                  <tr>
-                    <td>SOM</td>
-                    <td>3年で到達する1,000店</td>
-                    <td>約1.8億円 / 年</td>
-                  </tr>
-                </tbody>
-              </table>
+              <MarketScope />
               <Callout icon="flag" type="info">
                 いま割り当てにそのまま使えるのは、VACAN のカメラが入っているカフェ
                 <strong>約100店</strong>。ここが POC の起点で、SOM
                 の1,000店は展開ステップの先にある。
               </Callout>
 
-              <h3>②で儲けるのではない</h3>
+              <h3>②送客成果報酬で儲けるのではない</h3>
               <p>
-                100店で回しても②の売上は年1,800万円（粗利720万円）で、これ単体は事業の柱にならない。②の本当の役割は、収益そのものではなく
+                100店で回しても②送客成果報酬の売上は年1,800万円（粗利720万円）で、これ単体は事業の柱にならない。その本当の役割は、収益そのものではなく
                 <strong>店にとっての ROI を数字で証明すること</strong>にある。
               </p>
               <p>
-                月300送客なら店の支払いは15,000円。対して、埋まった空席から店に残る限界利益は約15万円で、10倍になって返ってくる。カメラ
-                SaaS の月額（8,250円）を含めても投資回収は明確——
-                <strong>この計算が成り立つこと自体が①の解約を止め、新規導入を通しやすくする</strong>
-                。そして中長期の伸びは③が担う。
+                月300送客なら店の支払いは15,000円。対して、埋まった空席から店に残る限界利益は約15万円で、10倍になって返ってくる。①カメラ
+                SaaS 月額（8,250円）を含めても投資回収は明確——
+                <strong>
+                  この計算が成り立つこと自体が月額契約の解約を止め、新規導入を通しやすくする
+                </strong>
+                。そして中長期の伸びは③送客オークションが担う。
               </p>
             </Section>
 

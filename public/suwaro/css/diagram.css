@@ -554,3 +554,253 @@
     font-size: 0.68rem;
   }
 }
+
+/* ===== ProfitLine（成功率と1送客あたりの粗利） ===== */
+.pline-scroll {
+  overflow-x: auto;
+  margin: 2.25rem 0 1.5rem;
+}
+.pline {
+  position: relative;
+  min-width: 460px;
+  padding: 3.4rem 0 4rem;
+}
+.pline-track {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pline-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+}
+.pline-zone--loss {
+  background: repeating-linear-gradient(-45deg, #d8b4a0, #d8b4a0 5px, #cfa792 5px, #cfa792 10px);
+}
+.pline-zone--gain {
+  flex: 1;
+  background: linear-gradient(90deg, var(--green-500) 0%, var(--green-700) 100%);
+}
+
+/* 採算ライン(67%)から目標(80%)までの距離＝事業側の余裕を帯で示す */
+.pline-gap {
+  position: absolute;
+  top: 2.15rem;
+  height: 0.75rem;
+  border: 1px solid var(--gold);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+.pline-gap span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--gold);
+}
+
+.pline-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+/* 目盛りの縦線。数直線の帯を貫いて上下のラベルをつなぐ */
+.pline-mark::before {
+  content: '';
+  position: absolute;
+  top: 1.6rem;
+  height: 2.6rem;
+  border-left: 2px solid var(--border);
+}
+.pline-profit {
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text-lighter);
+}
+.pline-rate {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.pline-note {
+  max-width: 6.5em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-light);
+}
+.pline-mark--even::before {
+  border-left-color: var(--gold);
+}
+.pline-mark--goal::before {
+  border-left: 3px solid var(--green-700);
+}
+.pline-mark--goal .pline-profit,
+.pline-mark--goal .pline-rate {
+  color: var(--green-700);
+}
+.pline-mark--goal .pline-note {
+  font-weight: 800;
+  color: var(--green-700);
+}
+.pline-mark--good::before {
+  border-left-color: var(--green-200);
+}
+.pline-mark--good .pline-profit {
+  color: var(--green-500);
+}
+.pline-ends {
+  position: absolute;
+  inset: auto 0 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-lighter);
+}
+
+/* ===== MarketScope（TAM / SAM / SOM） ===== */
+.scope {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0 1.5rem;
+}
+.scope-circles {
+  position: relative;
+  flex: none;
+  width: 260px;
+  height: 260px;
+}
+/* 同心円は下端で揃える。上側に空く帯がそのまま各区分のラベル置き場になる */
+.scope-circle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50%;
+}
+.scope-key {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+.scope-amount {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.scope-circle--tam {
+  width: 260px;
+  height: 260px;
+  padding-top: 0.85rem;
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  color: var(--text-light);
+}
+.scope-circle--sam {
+  width: 184px;
+  height: 184px;
+  padding-top: 0.8rem;
+  background: var(--green-100);
+  border: 1px solid var(--green-200);
+  color: var(--green-900);
+}
+.scope-circle--som {
+  width: 116px;
+  height: 116px;
+  justify-content: center;
+  gap: 0.15rem;
+  background: linear-gradient(135deg, var(--green-900) 0%, #2d5a4b 100%);
+  box-shadow: var(--shadow-md);
+  color: var(--white);
+}
+.scope-circle--som .scope-key {
+  font-size: 0.78rem;
+}
+.scope-circle--som .scope-amount {
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+.scope-legend {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.scope-legend li {
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.scope-legend li:last-child {
+  border-bottom: none;
+}
+.scope-legend h4 {
+  margin: 0 0 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-lighter);
+}
+.scope-legend p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+.scope-legend strong {
+  margin-left: 0.4em;
+  font-weight: 800;
+  color: var(--text);
+}
+.scope-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+}
+.scope-dot--tam {
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+}
+.scope-dot--sam {
+  background: var(--green-100);
+  border: 1px solid var(--green-200);
+}
+.scope-dot--som {
+  background: var(--green-900);
+}
+
+@media (max-width: 640px) {
+  .scope {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .scope-legend {
+    width: 100%;
+  }
+}
