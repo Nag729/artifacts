@@ -72,6 +72,53 @@
         </figure>
       )
 
+      /* ===== ConceptMovieButton（コンセプトムービーを全画面で流す） =====
+         ページ内に動画を置くとヒーローや本文の流れが途切れるので、動画は隠しておき、押したときだけ全画面で再生する */
+      const ConceptMovieButton = () => {
+        const videoRef = useRef(null)
+
+        useEffect(() => {
+          const video = videoRef.current
+          const rewindOnExit = () => {
+            if (document.fullscreenElement === video) return
+            video.pause()
+            video.currentTime = 0
+          }
+          const exitOnEnd = () => {
+            if (document.fullscreenElement === video) document.exitFullscreen()
+          }
+          document.addEventListener('fullscreenchange', rewindOnExit)
+          video.addEventListener('ended', exitOnEnd)
+          return () => {
+            document.removeEventListener('fullscreenchange', rewindOnExit)
+            video.removeEventListener('ended', exitOnEnd)
+          }
+        }, [])
+
+        const play = () => {
+          const video = videoRef.current
+          // iOS Safari は要素の全画面 API を持たず、動画専用の webkitEnterFullscreen だけがある
+          if (video.requestFullscreen) video.requestFullscreen()
+          else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen()
+          video.play()
+        }
+
+        return (
+          <>
+            <button type="button" className="hero-movie" onClick={play}>
+              <i data-lucide="play" /> コンセプトムービー
+            </button>
+            <video
+              ref={videoRef}
+              className="hero-movie-video"
+              src="videos/intro.mp4"
+              controls
+              preload="metadata"
+            />
+          </>
+        )
+      }
+
       /* ===== CycleDiagram（悪循環 / 好循環）縦フロー＋戻り線 ===== */
       const CycleDiagram = ({ steps, loop, tone }) => (
         <div className={'cycle cycle--' + tone}>
@@ -598,10 +645,11 @@
                 </h1>
                 <div className="hero-sub">スワロ</div>
                 <p className="hero-tagline">
-                  「どこかでゆっくり座りたい」に、
+                  「座れる場所」が、
                   <br />
-                  すぐに答える。
+                  すぐに見つかる。
                 </p>
+                <ConceptMovieButton />
                 <div className="hero-meta">
                   <img className="avatar" src="images/avatar.png" alt="" width="32" height="32" />
                   <span>Shungo Nagamachi</span>
@@ -620,7 +668,7 @@
 
               <Figure
                 src="images/problem-lost.jpg"
-                alt="混雑した街で、大量の候補を前にどこに座るか決められないユーザー"
+                alt="スマホを見ながら、駅前に並ぶカフェのどこに入るか決められないユーザー"
                 caption="候補はたくさん出る。でも「どこに向かうか」は決まらない"
               />
 
@@ -660,8 +708,7 @@
             <Section icon="eye" label="INSIGHT" title="なぜ「空席を表示する」では解決しないか" alt>
               <p>
                 空席を表示しても、見た人がみんな同じ店に向かえば、すぐに埋まる。席が3つの店を100人が見れば、座れるのは3人で、残りの97人は無駄足になる。空席の情報は
-                <strong>見る人が増えるほど価値がなくなる</strong>
-                。
+                <strong>見る人が増えるほど価値がなくなる</strong>。
               </p>
 
               <CycleDiagram
@@ -700,7 +747,7 @@
 
               <Figure
                 src="images/concept-allocation.jpg"
-                alt="スマホに案内され、迷わず1軒のカフェへ向かう人"
+                alt="スマホの案内の先で、扉を開けて待っている1軒のカフェ"
                 caption="探し回らせない。行き先はプラットフォームが絞る"
               />
 
@@ -750,8 +797,8 @@
             {/* 4. 最初の顧客 */}
             <Section id="customer" icon="store" label="FIRST CUSTOMER" title="最初の顧客">
               <p>
-                ここからは事業の話。最初に狙うのは、VACAN
-                のカメラがすでに入っている<strong>駅ナカの商業施設</strong>
+                ここからは事業の話。最初に狙うのは、VACAN のカメラがすでに入っている
+                <strong>駅ナカの商業施設</strong>
                 。施設内の飲食テナントへの送客に対して、<strong>1送客50円</strong>
                 の成果報酬を払ってもらう。
               </p>
@@ -782,10 +829,16 @@
             </Section>
 
             {/* 5. 5年後の売上 */}
-            <Section id="revenue" icon="bar-chart-3" label="REVENUE" title="5年後の売上：約5.4億円" alt>
+            <Section
+              id="revenue"
+              icon="bar-chart-3"
+              label="REVENUE"
+              title="5年後の売上：約5.4億円"
+              alt
+            >
               <p>
-                1店あたりの送客手数料は、1日10送客・月300送客として<strong>年18万円</strong>
-                。<strong>3,000店 × 年18万円 ＝ 約5.4億円</strong>が、5年後の売上目標。
+                1店あたりの送客手数料は、1日10送客・月300送客として<strong>年18万円</strong>。
+                <strong>3,000店 × 年18万円 ＝ 約5.4億円</strong>が、5年後の売上目標。
               </p>
 
               <div className="roadmap">
@@ -831,7 +884,8 @@
 
               <h3>既存のカメラ事業も押し上げる</h3>
               <p>
-                5.4億円とは別に、SUWARO は VACAN のカメラ事業そのものを強くする。「混雑を表示できます」が「空いている時間にお客さんを送り込めます」に変わり、カメラ導入の
+                5.4億円とは別に、SUWARO は VACAN
+                のカメラ事業そのものを強くする。「混雑を表示できます」が「空いている時間にお客さんを送り込めます」に変わり、カメラ導入の
                 ROI が上がる。
                 <strong>新規導入を通しやすくし、既存契約の解約を止める</strong>
                 材料になる。
@@ -840,15 +894,8 @@
             </Section>
 
             {/* 6. 強み */}
-            <Section
-              id="strength"
-              icon="castle"
-              label="STRENGTH"
-              title="広まるほど、座れる"
-            >
-              <p>
-                割り当てモデルは、店とユーザーが増えるほど予測が当たり、座れる確率が上がる。
-              </p>
+            <Section id="strength" icon="castle" label="STRENGTH" title="広まるほど、座れる">
+              <p>割り当てモデルは、店とユーザーが増えるほど予測が当たり、座れる確率が上がる。</p>
 
               <h3>AI が担うのは2つ</h3>
               <ul className="check-list">
@@ -912,11 +959,19 @@
               >
                 混雑情報というアウトプットを作ってきた。次は、「座れる」というアウトカムを届けたい。
               </InsightBox>
-              <p>
-                大学ではプラットフォームビジネスを研究していた。入社から3年、混雑状況を配信する基盤 vCore
-                を開発し、配信の全体像を見てきた。防災チームでは AI
-                活用をリードしてきた。プラットフォームの設計、配信の基盤、予測の AI。SUWARO に必要な3つを、すべて経験してきた。
-              </p>
+              <p>SUWARO に必要な3つを、すべて経験してきた。</p>
+              <ul className="check-list">
+                {[
+                  'プラットフォームの設計：大学でプラットフォームビジネスを研究していた',
+                  '配信の基盤：入社から3年、混雑状況を配信する基盤 vCore を開発し、配信の全体像を見てきた',
+                  '予測の AI：防災チームで AI 活用をリードしてきた',
+                ].map((item, i) => (
+                  <li key={i}>
+                    <i data-lucide="check" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </Section>
 
             {/* 付録：競合とポジショニング */}
@@ -927,7 +982,8 @@
               title="競合とポジショニング"
             >
               <p>
-                「座る場所を探す」サービスは多いが、<strong>空いている席を一人ずつに割り当てる</strong>
+                「座る場所を探す」サービスは多いが、
+                <strong>空いている席を一人ずつに割り当てる</strong>
                 プレイヤーはいない。横軸は情報の配り方（全員に同じものを見せる「表示」か、人ごとに渡す「割り当て」か）、縦軸はユーザーの目的（特定の店か、座れればどこでもいいか）。
               </p>
 
@@ -956,7 +1012,8 @@
                     },
                     {
                       risk: '割り当ての精度が出ない',
-                      action: '目標8割・採算ラインは67%。外れた分は補償で吸収し、結果データで精度を上げる',
+                      action:
+                        '目標8割・採算ラインは67%。外れた分は補償で吸収し、結果データで精度を上げる',
                     },
                     {
                       risk: '補償コストが膨らむ',

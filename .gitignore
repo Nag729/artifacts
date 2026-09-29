@@ -33,3 +33,6 @@ dist
 
 # Old docs directory
 docs/
+
+# 作業用
+tmp/

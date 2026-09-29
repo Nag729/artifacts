@@ -145,7 +145,7 @@
   align-items: center;
   height: 22px;
 }
-.cycle-down i {
+.cycle-down svg {
   width: 18px;
   height: 18px;
 }
@@ -181,7 +181,7 @@
   font-weight: 700;
   color: var(--text-light);
 }
-.cycle-caption i {
+.cycle-caption svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
@@ -392,8 +392,8 @@
   font-weight: 700;
   letter-spacing: 0.1em;
 }
-.posmap-yaxis i,
-.posmap-xaxis i {
+.posmap-yaxis svg,
+.posmap-xaxis svg {
   width: 16px;
   height: 16px;
   color: var(--green-500);

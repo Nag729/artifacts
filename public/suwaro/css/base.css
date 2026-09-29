@@ -20,6 +20,9 @@
   --cream-dark: #f0ebe3;
   --gold: #c8a97e;
   --gold-light: #e8d9bf;
+  /* 経路（線と行き先）。緑の UI の中で視線を一番先に集めたいので、ブランドの緑から外したオレンジにする */
+  --route: #e87828;
+  --route-light: #f8e0cc;
   --white: #ffffff;
   --text: #2d2d2d;
   --text-light: #6b6b6b;

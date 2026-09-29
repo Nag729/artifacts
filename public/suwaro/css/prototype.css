@@ -175,7 +175,7 @@
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 24px;
 }
-.screen-home .location i {
+.screen-home .location svg {
   width: 16px;
   height: 16px;
   color: rgba(255, 255, 255, 0.9);
@@ -271,7 +271,7 @@
   margin-bottom: 24px;
   position: relative;
 }
-.search-pulse i {
+.search-pulse svg {
   color: var(--white);
   width: 32px;
   height: 32px;
@@ -371,7 +371,7 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-.success-check i {
+.success-check svg {
   color: var(--green-700);
   width: 36px;
   height: 36px;
@@ -436,7 +436,7 @@
   border-width: 0 3px 3px 0;
   border-radius: 0 0 4px 0;
 }
-.qr-viewfinder i {
+.qr-viewfinder svg {
   color: var(--green-700);
   opacity: 0.5;
 }
@@ -495,7 +495,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
 }
-.coupon-card i {
+.coupon-card svg {
   margin-bottom: 8px;
 }
 .coupon-card h3 {
@@ -618,13 +618,13 @@
 }
 .nav-path-bg {
   fill: none;
-  stroke: var(--green-100);
+  stroke: var(--route-light);
   stroke-width: 7;
   stroke-linecap: round;
 }
 .nav-path-fg {
   fill: none;
-  stroke: var(--green-700);
+  stroke: var(--route);
   stroke-width: 4;
   stroke-linecap: round;
   stroke-dasharray: 340;
@@ -664,7 +664,7 @@
   top: 16px;
   width: 34px;
   height: 34px;
-  background: var(--green-700);
+  background: var(--route);
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   display: flex;
@@ -672,7 +672,7 @@
   justify-content: center;
   box-shadow: var(--shadow-md);
 }
-.nav-pin--end i {
+.nav-pin--end svg {
   transform: rotate(45deg);
   color: var(--white);
   width: 16px;
@@ -720,7 +720,7 @@
   align-items: center;
   gap: 4px;
 }
-.nav-dest-info p i {
+.nav-dest-info p svg {
   width: 13px;
   height: 13px;
 }
@@ -736,7 +736,7 @@
   border-radius: 999px;
   margin-bottom: 2px;
 }
-.nav-reveal-tag i {
+.nav-reveal-tag svg {
   width: 12px;
   height: 12px;
 }

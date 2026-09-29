@@ -30,6 +30,7 @@
 .hero h1,
 .hero-sub,
 .hero-tagline,
+.hero-movie,
 .hero-meta {
   animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -41,6 +42,9 @@
 }
 .hero-tagline {
   animation-delay: 0.24s;
+}
+.hero-movie {
+  animation-delay: 0.29s;
 }
 .hero-meta {
   animation-delay: 0.34s;
@@ -66,6 +70,7 @@
   .hero h1,
   .hero-sub,
   .hero-tagline,
+  .hero-movie,
   .hero-meta {
     animation: none !important;
   }
