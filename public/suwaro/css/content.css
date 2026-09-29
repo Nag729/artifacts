@@ -101,6 +101,10 @@
   align-items: center;
   gap: 0.5rem;
 }
+/* 枠の上下の余白を padding だけにそろえる */
+.validation-box > :last-child {
+  margin-bottom: 0;
+}
 
 /* ========== Figure（イラスト） ========== */
 .figure {

@@ -298,8 +298,9 @@
       )
 
       /* ===== InsightBox ===== */
-      const InsightBox = ({ children, style }) => (
+      const InsightBox = ({ icon, children, style }) => (
         <div className="insight-box">
+          {icon && <i data-lucide={icon} className="insight-box-icon" />}
           <p
             style={{
               fontSize: '1.05rem',
@@ -902,6 +903,7 @@
             {/* 7. なぜ自分か */}
             <Section icon="user" label="WHY ME" title="なぜ自分がやるのか" alt>
               <InsightBox
+                icon="send"
                 style={{
                   fontSize: '1.1rem',
                   fontWeight: 700,

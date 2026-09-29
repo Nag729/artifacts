@@ -51,6 +51,9 @@
   border-radius: 34px;
   overflow: hidden;
   position: relative;
+  /* iOS Safari では、opacity の transition や filter で合成レイヤーになった子要素が
+     overflow: hidden の角丸クリップをはみ出す。新しいスタッキングコンテキストを作って角丸で切らせる */
+  isolation: isolate;
 }
 .phone-status {
   position: absolute;
