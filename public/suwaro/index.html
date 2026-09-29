@@ -97,7 +97,8 @@
         </div>
       )
 
-      /* ===== BizDiagram（VACAN × カフェ） ===== */
+      /* ===== BizDiagram（VACAN × 施設・店舗） =====
+         上段は VACAN → 施設・店舗への提供価値、下段は逆向きの対価。SUWARO で増える分を hl で示す。 */
       const BizDiagram = () => (
         <div className="biz">
           <div className="biz-side">
@@ -105,19 +106,28 @@
             <span>VACAN</span>
           </div>
           <div className="biz-arrows">
-            <div className="biz-arrow to-right">
-              <span className="lbl">混雑を見える化（従来）</span>
+            <div className="biz-flow">
+              <span className="biz-flow-title">提供価値 →</span>
+              <div className="biz-arrow to-right">
+                <span className="lbl">混雑を見える化（従来）</span>
+              </div>
+              <div className="biz-arrow to-right hl">
+                <span className="lbl">空席に送客（SUWARO で追加）</span>
+              </div>
             </div>
-            <div className="biz-arrow to-right hl">
-              <span className="lbl">空席に送客（SUWARO で追加）</span>
-            </div>
-            <div className="biz-arrow to-left">
-              <span className="lbl">月額 SaaS ＋ 送客の成果報酬</span>
+            <div className="biz-flow biz-flow--pay">
+              <span className="biz-flow-title">← 対価</span>
+              <div className="biz-arrow to-left">
+                <span className="lbl">月額 SaaS（従来）</span>
+              </div>
+              <div className="biz-arrow to-left hl">
+                <span className="lbl">送客の成果報酬（SUWARO で追加）</span>
+              </div>
             </div>
           </div>
           <div className="biz-side">
             <div className="biz-ic">☕</div>
-            <span>カフェ</span>
+            <span>施設・店舗</span>
           </div>
         </div>
       )
@@ -222,14 +232,19 @@
       /* ===== MarketScope（TAM / SAM / SOM） =====
          円は包含関係を示すためのもので、面積比は金額に比例していない。 */
       const MARKET = [
-        { key: 'TAM', amount: '約106億円', target: '全国の喫茶店', count: '58,669店' },
+        {
+          key: 'TAM',
+          amount: '約131億円',
+          target: '全国の喫茶店・ハンバーガー店・ファミレス・コワーキング',
+          count: '約73,000店',
+        },
         {
           key: 'SAM',
-          amount: '約22億円',
+          amount: '約27億円',
           target: '駅ナカ・駅周辺・商業施設など都市部',
-          count: '約12,000店',
+          count: '約15,000店',
         },
-        { key: 'SOM', amount: '約1.8億円', target: '3年で到達する', count: '1,000店' },
+        { key: 'SOM', amount: '約5.4億円', target: '5年で到達する', count: '3,000店' },
       ]
 
       const MarketScope = () => (
@@ -565,10 +580,10 @@
                   <a href="#problem">課題</a>
                   <a href="#solution">解決策</a>
                   <a href="#prototype">プロトタイプ</a>
-                  <a href="#mechanism">仕組み</a>
-                  <a href="#positioning">競合</a>
-                  <a href="#revenue">収益モデル</a>
-                  <a href="#rollout">展開計画</a>
+                  <a href="#customer">最初の顧客</a>
+                  <a href="#revenue">売上</a>
+                  <a href="#strength">強み</a>
+                  <a href="#positioning">付録</a>
                 </div>
               </div>
             </nav>
@@ -582,9 +597,9 @@
                 </h1>
                 <div className="hero-sub">スワロ</div>
                 <p className="hero-tagline">
-                  駅のカフェの空席を、
+                  「どこかでゆっくり座りたい」に、
                   <br />
-                  検索させるのではなく割り当てる。
+                  すぐに答える。
                 </p>
                 <div className="hero-meta">
                   <img className="avatar" src="images/avatar.png" alt="" width="32" height="32" />
@@ -595,14 +610,11 @@
 
             {/* 1. 課題 */}
             <Section id="problem" icon="alert-triangle" label="PROBLEM" title="課題">
-              <h3>原体験</h3>
-              <div className="experience-quote">
-                友人との予定を終えた帰り道、新宿駅で「少し座って話したいね」となった。二人でカフェを探すが、目立つ店はどこも混んでいそうで、どっちに歩けばいいか分からない。
-                <br />
-                Google Map で「カフェ」と検索すると候補が大量に出てきて、逆に決められない。
-              </div>
-              <p className="experience-result">
-                10分歩き回って、結局いちばん目立つチェーン店の行列に並んだ。
+              <p>
+                駅で「少し座って話したいね」となっても、目立つ店はどこも混んでいそうで、どっちに歩けばいいか分からない。地図で「カフェ」と検索すれば候補は大量に出るが、逆に決められない。結局、いちばん目立つ店の行列に並ぶ。
+              </p>
+              <p>
+                「バカンで働いている」と話すと、友人からよく「カフェの席がないの、なんとかしてよ」と言われる。困っているのは自分だけではない。
               </p>
 
               <Figure
@@ -611,8 +623,7 @@
                 caption="候補はたくさん出る。でも「どこに向かうか」は決まらない"
               />
 
-              <h3>本当の問題</h3>
-              <p>同じ場面を、見かけと実際で分けて整理する。</p>
+              <p>ただ、起きていることを分解すると、問題は見かけとは違う。</p>
 
               <table className="styled-table">
                 <thead>
@@ -628,7 +639,7 @@
                   </tr>
                   <tr>
                     <td>情報さえあれば選べるはず</td>
-                    <td>情報があっても、二人で「どこにする？」を決めるコストが大きい</td>
+                    <td>情報があっても、「どこにする？」を決めるコストが大きい</td>
                   </tr>
                   <tr>
                     <td>リアルタイムの混雑情報がほしい</td>
@@ -647,14 +658,9 @@
             {/* 2. なぜ表示では解決しないか */}
             <Section icon="eye" label="INSIGHT" title="なぜ「空席を表示する」では解決しないか" alt>
               <p>
-                では、空いている店を表示すればいい——と考えたくなる。しかし空席は椅子の数しかない。だから空席情報の価値は、
-                <strong>同じ情報を見ている人数で薄まる</strong>。
-              </p>
-              <p>
-                「あの店は美味しい」は、何人が知っても価値が減らない。「あの店が空いている」は、知っている人が増えるほど価値が減る。席が3つの店の空席情報を100人が見れば、座れるのは数人で、残りは無駄足になる。
-              </p>
-              <p>
-                表示するとは、全員に同じ情報を同時に渡すこと。渡す人数が席数を超えたところから、その情報は価値を失っていく。
+                空席を表示しても、見た人がみんな同じ店に向かえば、すぐに埋まる。席が3つの店を100人が見れば、座れるのは3人で、残りの97人は無駄足になる。空席の情報は
+                <strong>見る人が増えるほど価値がなくなる</strong>
+                。
               </p>
 
               <CycleDiagram
@@ -710,7 +716,7 @@
                   },
                   {
                     title: '外したら補償する',
-                    desc: '予測が外れたコストは、ユーザーではなくプラットフォームが負う',
+                    desc: '予約ではないので席は押さえられない。座れなかったら、来店を QR で確認して割引クーポンを出す',
                   },
                 ].map((p, i) => (
                   <div className="principle" key={i}>
@@ -740,26 +746,149 @@
               <Prototype />
             </Section>
 
-            {/* 4. なぜ上手くいくか */}
-            <Section
-              id="mechanism"
-              icon="trending-up"
-              label="MECHANISM"
-              title="なぜこのモデルは上手くいくか"
-              alt
-            >
+            {/* 4. 最初の顧客 */}
+            <Section id="customer" icon="store" label="FIRST CUSTOMER" title="最初の顧客">
               <p>
-                表示モデルは、利用者が増えるほど一人あたりの価値が下がる。割り当てモデルは、利用者が増えるほど予測が当たり、価値が上がる。この違いが事業の伸び方を根本的に変える。
+                ここからは事業の話。最初に狙うのは、VACAN
+                のカメラがすでに入っている<strong>駅ナカの商業施設</strong>
+                。施設内の飲食テナントへの送客に対して、<strong>1送客50円</strong>
+                の成果報酬を払ってもらう。
+              </p>
+              <p>
+                施設を最初のターゲットにする。カメラの契約と関係がすでにあり、1契約で施設内の店をまとめて迎えられるので、導入の対応コストが最も低い。
               </p>
 
-              <h3>データが回るほど強くなる</h3>
+              <h3>なぜ50円なら払うのか</h3>
               <p>
-                割り当てるたびに「座れた／座れなかった」という結果が残り、それがそのまま次の予測を磨く材料になる。表示モデルとは逆に、規模がそのまま強みに変わる。
+                カフェの客単価を700円、原価率を3割とすると、空席がひとつ埋まったときに店に残る限界利益は約500円。
+                <strong>その1割</strong>
+                を送客単価に置いた。月300送客なら支払いは15,000円で、埋まった空席から約15万円が戻る。
+                <strong>払った額が10倍になって返ってくる</strong>
+                計算なので、払う理由を数字で示せる。
               </p>
+
+              <h3>その単価で、プラットフォームは儲かるか</h3>
+              <p>
+                送客が成功すれば +50円、空振りすればクーポン原価 −100円。1送客あたりの粗利は
+                <code>50r − 100(1−r)</code>（r は成功率）で表せる。
+              </p>
+              <ProfitLine />
+              <Callout icon="shield-check" type="info">
+                目標の8割は、5回に1回の空振りまでなら使い続けてもらえる、という
+                <strong>体験側から決めた線</strong>
+                。採算ラインより13ポイント高く、精度が一時的に落ちても事業が壊れない。
+              </Callout>
+            </Section>
+
+            {/* 5. 5年後の売上 */}
+            <Section id="revenue" icon="bar-chart-3" label="REVENUE" title="5年後の売上：約5.4億円" alt>
+              <p>
+                1店あたりの送客手数料は、1日10送客・月300送客として<strong>年18万円</strong>
+                。<strong>3,000店 × 年18万円 ＝ 約5.4億円</strong>が、5年後の売上目標。
+              </p>
+
+              <div className="roadmap">
+                {[
+                  { num: '0', title: 'POC', desc: '1施設・10〜20店で、カメラ起点の割り当てを検証' },
+                  {
+                    num: '1',
+                    title: '施設で確立',
+                    desc: 'カメラ導入済みの駅・商業施設へ（約100店）',
+                  },
+                  {
+                    num: '3年',
+                    title: '施設を広げる',
+                    desc: 'カメラの導入営業とセットで施設を増やす（1,000店）',
+                  },
+                  {
+                    num: '5年',
+                    title: '駅周辺へ',
+                    desc: '導入コストが下がったら、カメラのない個人店・他業態へ（3,000店）',
+                  },
+                ].map((step, i) => (
+                  <div className="roadmap-step" key={i}>
+                    <div className="roadmap-dot">{step.num}</div>
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <p>
+                駅周辺の個人店すべてにカメラを置くのは現実的ではないので、管理画面からの「今すぐ座れる」1タップ申告もサポートする。
+              </p>
+
+              <h3>市場規模</h3>
+              <p>
+                カフェ市場そのもの（約1兆円）は分母にしない。SUWARO
+                の収益は飲食売上ではなく送客手数料なので、「ゆっくり座れる」店の数から積み上げる。
+              </p>
+              <MarketScope />
+              <Callout icon="flag" type="info">
+                3,000店は、都市部の「座れる」店の約2割。業態を広げても SAM
+                は約15,000店にとどまるので、店数だけで10億円を描くことはしない。その先は送客単価の上昇と、店の入札で送客枠を配分するオークション型の課金が伸びしろになる。
+              </Callout>
+
+              <h3>既存のカメラ事業も押し上げる</h3>
+              <p>
+                5.4億円とは別に、SUWARO は VACAN のカメラ事業そのものを強くする。「混雑を表示できます」が「空いている時間にお客さんを送り込めます」に変わり、カメラ導入の
+                ROI が上がる。
+                <strong>新規導入を通しやすくし、既存契約の解約を止める</strong>
+                材料になる。
+              </p>
+              <BizDiagram />
+            </Section>
+
+            {/* 6. 強み */}
+            <Section
+              id="strength"
+              icon="castle"
+              label="STRENGTH"
+              title="広まるほど、座れる"
+            >
+              <p>
+                割り当てモデルは、店とユーザーが増えるほど予測が当たり、座れる確率が上がる。
+              </p>
+
+              <h3>AI が担うのは2つ</h3>
+              <ul className="check-list">
+                {[
+                  '5〜10分後の空席予測：「今の空き」ではなく、着いたときの空きを当てる',
+                  '割り当ての最適化：誰にどの3件を渡せば、全員が座れる確率が最も高くなるか',
+                ].map((item, i) => (
+                  <li key={i}>
+                    <i data-lucide="check" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <h3>強くなる仕組みは3層</h3>
+              <div className="principles">
+                {[
+                  {
+                    title: 'カメラ網',
+                    desc: '駅・商業施設にすでにある在庫センサー。後発がすぐには作れない、最初の優位',
+                  },
+                  {
+                    title: '結果データ',
+                    desc: '割り当てると「座れた／座れなかった」が必ず返る。この正解データが蓄積し、空振りさえ学習材料になる',
+                  },
+                  {
+                    title: '店とユーザーの循環',
+                    desc: '店が増えるほど選択肢が増えて当たりやすくなり、ユーザーが増え、さらに店が増える',
+                  },
+                ].map((p, i) => (
+                  <div className="principle" key={i}>
+                    <div className="principle-num">{i + 1}</div>
+                    <h4>{p.title}</h4>
+                    <p>{p.desc}</p>
+                  </div>
+                ))}
+              </div>
 
               <CycleDiagram
                 tone="good"
-                loop="一周ごとに強くなる（データフライホイール）"
+                loop="一周ごとに予測精度の差が開く（データフライホイール）"
                 steps={[
                   '割り当てる',
                   '成功／失敗が溜まる',
@@ -770,125 +899,8 @@
               />
             </Section>
 
-            {/* 5. 在庫データ */}
-            <Section icon="camera" label="DATA" title="在庫データ：既存カメラから始める">
-              <p>空席データをどう集めるかが実務上の最大課題。ここで効くのが VACAN の既存資産。</p>
-              <p>
-                VACAN
-                はすでに多くの駅ナカ・駅周辺のカフェにカメラを設置し、区画単位の混雑状況（空き／やや混み／混雑）を取得している。個席単位ではない粗さだが、「空いてる店に人を流す」には十分使える。
-              </p>
-
-              <h3>カメラがない店は、手動で申告する</h3>
-              <p>
-                カメラのない店には管理画面を用意し、同じ「空いている」を手で入力してもらう。在庫の取得経路をもう1本用意することで、プラットフォームへの参加障壁を下げる。
-              </p>
-              <div className="admin-grid">
-                <div className="admin-item">
-                  <div className="admin-ic">
-                    <i data-lucide="camera" />
-                  </div>
-                  <h4>カメラ（自動）</h4>
-                  <p>設置済みの店は手間ゼロ。区画単位の混雑を常時取得する</p>
-                </div>
-                <div className="admin-item">
-                  <div className="admin-ic">
-                    <i data-lucide="hand" />
-                  </div>
-                  <h4>申告（手動）</h4>
-                  <p>「今すぐ客がほしい」を1タップ。押した時刻が記録され、一定時間で失効する</p>
-                </div>
-              </div>
-              <p>
-                手動の申告はカメラと違って一点の情報なので、時間が経つほど当てにならない。古い申告のまま送客すれば空振りが増え、その補償コストはプラットフォームが負う。だから申告からの経過時間を信頼度の重みとして扱い、時間が経ったものは候補から外す。
-              </p>
-            </Section>
-
-            {/* 6. 空振り保険 */}
-            <Section icon="shield" label="SAFETY NET" title="空振り保険" alt>
-              <p>
-                予約ではないため、席は物理的に押さえられない。だから、外れたらプラットフォームが責任を取る。
-              </p>
-
-              <div className="insurance-grid">
-                {[
-                  {
-                    icon: 'ticket',
-                    title: '座れなかったら補償',
-                    desc: '店舗の QR スキャンで来店を確認し、100円分の割引クーポンを即時発行',
-                  },
-                  {
-                    icon: 'piggy-bank',
-                    title: '成功時だけ課金',
-                    desc: '店は送客が成功したときだけ課金。失敗時の補償はプラットフォームが負う',
-                  },
-                  {
-                    icon: 'target',
-                    title: '8割を目指す',
-                    desc: '精度100%は不要。ただし5回に1回の空振りが、使い続けてもらえる限界',
-                  },
-                ].map((item, i) => (
-                  <div className="insurance-item" key={i}>
-                    <div className="insurance-icon">
-                      <i data-lucide={item.icon} />
-                    </div>
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <Callout icon="lightbulb" type="info">
-                初期の補償コストはデータ取得コストと見なす。100回外しても1万円で、その店の回転パターンが学習できる。
-              </Callout>
-
-              <p>
-                店・ユーザーにとっても、失敗体験が「謝罪」ではなく「クーポンがもらえた」というポジティブな体験に変わる。
-              </p>
-            </Section>
-
-            {/* 7. 競合とポジショニング */}
-            <Section
-              id="positioning"
-              icon="crosshair"
-              label="POSITIONING"
-              title="競合とポジショニング"
-            >
-              <p>
-                ここまではユーザー体験の話。ここからは、事業として成立するかを見る。まずは、そこが勝てる場所なのか。
-              </p>
-              <p>
-                「座る場所を探す」場面には、すでに多くのサービスがいる。ただし2つの軸で並べ直すと、
-                <strong>空いている席を在庫として一人ずつに割り当てている</strong>
-                プレイヤーはいない。
-              </p>
-              <p>
-                横軸は<strong>情報の配り方</strong>
-                ——全員に同じものを見せる「表示」か、人によって違うものを渡す「割り当て」か。縦軸は
-                <strong>ユーザーの目的</strong>
-                ——特定の店に行きたいのか、座れればどこでもいいのか。
-              </p>
-
-              <PositionMap />
-
-              <h3>なぜ右下が空いているのか</h3>
-              <p>
-                席を確実に押さえる仕組み自体は、予約サービスがすでに持っている。ただし予約はカフェには降りてこない。滞在時間が短く客単価も低いカフェでは、1件ずつ席を確保して管理するコストが売上に見合わないからだ。そのため「座れればいい」ユーザーに残された手段は表示型だけになる。予約ほど重くなく、表示より確実——その中間が空いたままになっている。
-              </p>
-            </Section>
-
-            {/* 8. 収益モデルと VACAN シナジー */}
-            <Section
-              id="revenue"
-              icon="bar-chart-3"
-              label="BUSINESS MODEL"
-              title="収益モデルと VACAN シナジー"
-            >
-              <p>
-                狙う場所が決まったら、次は誰がいくら払うのか。VACAN
-                が持つ施設との契約網・カメラ網は、後発が簡単には作れない。SUWARO
-                はその既存資産上で「見せる」を「割り当てる」に変えるレイヤーを載せるだけ。ゼロから作る新規事業ではない。
-              </p>
-
+            {/* 7. なぜ自分か */}
+            <Section icon="user" label="WHY ME" title="なぜ自分がやるのか" alt>
               <InsightBox
                 style={{
                   fontSize: '1.1rem',
@@ -896,203 +908,61 @@
                   textAlign: 'center',
                 }}
               >
-                SUWARO は、VACAN のカメラ導入営業を強化する武器
+                混雑情報というアウトプットを作ってきた。次は、「座れる」というアウトカムを届けたい。
               </InsightBox>
-
-              <BizDiagram />
-
-              <h3>カフェへの提案が変わる</h3>
-              <table className="ba-table">
-                <tbody>
-                  <tr>
-                    <td className="ba-before">「混雑状況を表示できます」</td>
-                    <td className="ba-arrow">
-                      <i data-lucide="arrow-right" />
-                    </td>
-                    <td className="ba-after">
-                      「表示に加えて、空いてる時間帯にお客さんを送り込めます」
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ba-before">見える化のツール</td>
-                    <td className="ba-arrow">
-                      <i data-lucide="arrow-right" />
-                    </td>
-                    <td className="ba-after">空席率を下げるツール</td>
-                  </tr>
-                </tbody>
-              </table>
-
               <p>
-                カメラ導入の ROI が上がるので、導入のハードルが下がり、チャーン抑止も期待できる。
-              </p>
-
-              <h3>収益は3層で積み上がる</h3>
-              <table className="styled-table">
-                <thead>
-                  <tr>
-                    <th>層</th>
-                    <th>収益</th>
-                    <th>性質</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>①カメラ SaaS 月額</td>
-                    <td>既存 VACAN の月額</td>
-                    <td>安定・ストック型</td>
-                  </tr>
-                  <tr>
-                    <td>②送客成果報酬</td>
-                    <td>送客が成功したときだけ課金</td>
-                    <td>変動・成果連動</td>
-                  </tr>
-                  <tr>
-                    <td>③送客オークション</td>
-                    <td>店の入札で送客枠を配分・入札額を課金</td>
-                    <td>スケール型（Google Ads 型）</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p>
-                ③送客オークションでは、需要が高いエリア・時間帯ほど入札単価が上がる。ここが中長期の伸びしろになる。
-              </p>
-
-              <h3>1送客あたりの採算</h3>
-              <p>
-                ②送客成果報酬の単価は、店に残る利益から逆算する。カフェの客単価を700円、原価率を3割とすると、空席がひとつ埋まったときの限界利益は約500円。
-                <strong>その1割にあたる50円</strong>
-                を送客単価に置く。店から見れば「1杯出して50円」で、現場の感覚として通る額。食べログ・ホットペッパーのネット予約送客がランチで50円/人なので、上限としても整合する。
-              </p>
-              <p>
-                送客が成功すれば +50円、空振りすればクーポン原価 −100円。1送客あたりの粗利は
-                <code>50r − 100(1−r)</code>（r は成功率）で表せる。
-              </p>
-              <ProfitLine />
-              <Callout icon="shield-check" type="info">
-                目標の8割は<strong>体験側から決めた線</strong>で、採算ラインより13ポイント高い。
-                この差が、精度が一時的に落ちても事業が壊れない余裕になる。
-              </Callout>
-
-              <h3>市場規模</h3>
-              <p>
-                カフェ市場そのもの（約1兆円）は分母にしない。SUWARO
-                の収益は飲食売上ではなく送客手数料なので、店舗数から積み上げる。1店あたりの送客手数料は、1日10送客・月300送客として
-                <strong>年18万円</strong>。
-              </p>
-              <MarketScope />
-              <Callout icon="flag" type="info">
-                いま割り当てにそのまま使えるのは、VACAN のカメラが入っているカフェ
-                <strong>約100店</strong>。ここが POC の起点で、SOM
-                の1,000店は展開ステップの先にある。
-              </Callout>
-
-              <h3>②送客成果報酬で儲けるのではない</h3>
-              <p>
-                100店で回しても②送客成果報酬の売上は年1,800万円（粗利720万円）で、これ単体は事業の柱にならない。その本当の役割は、収益そのものではなく
-                <strong>店にとっての ROI を数字で証明すること</strong>にある。
-              </p>
-              <p>
-                月300送客なら店の支払いは15,000円。対して、埋まった空席から店に残る限界利益は約15万円で、10倍になって返ってくる。①カメラ
-                SaaS 月額（8,250円）を含めても投資回収は明確——
-                <strong>
-                  この計算が成り立つこと自体が月額契約の解約を止め、新規導入を通しやすくする
-                </strong>
-                。そして中長期の伸びは③送客オークションが担う。
+                大学ではプラットフォームビジネスを研究していた。入社から3年、混雑状況を配信する基盤 vCore
+                を開発し、配信の全体像を見てきた。防災チームでは AI
+                活用をリードしてきた。プラットフォームの設計、配信の基盤、予測の AI。SUWARO に必要な3つを、すべて経験してきた。
               </p>
             </Section>
 
-            {/* 9. 展開ステップ */}
-            <Section id="rollout" icon="rocket" label="ROLLOUT" title="展開ステップ" alt>
+            {/* 付録：競合とポジショニング */}
+            <Section
+              id="positioning"
+              icon="crosshair"
+              label="APPENDIX · POSITIONING"
+              title="競合とポジショニング"
+            >
               <p>
-                割り当ては在庫密度が命なので、小さな範囲の価値検証から始める。商業施設で VACAN
-                カメラ設置済みの店舗が密集している場所は、最初の検証に最適。
+                「座る場所を探す」サービスは多いが、<strong>空いている席を一人ずつに割り当てる</strong>
+                プレイヤーはいない。横軸は情報の配り方（全員に同じものを見せる「表示」か、人ごとに渡す「割り当て」か）、縦軸はユーザーの目的（特定の店か、座れればどこでもいいか）。
               </p>
-              <div className="roadmap">
-                {[
-                  {
-                    num: '0',
-                    title: 'POC',
-                    desc: '1施設でカメラ起点の割り当て検証',
-                  },
-                  { num: '1', title: 'MVP', desc: '1駅でカフェ割り当て MVP' },
-                  {
-                    num: '2',
-                    title: '拡大',
-                    desc: '他エリアの既存導入先に展開',
-                  },
-                  {
-                    num: '3',
-                    title: '他業態',
-                    desc: '飲食店・ラウンジ等へ拡張',
-                  },
-                ].map((step, i) => (
-                  <div className="roadmap-step" key={i}>
-                    <div className="roadmap-dot">{step.num}</div>
-                    <h4>{step.title}</h4>
-                    <p>{step.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <Callout icon="compass" type="info">
-                横展開の余地は広い。飲食店・ラウンジ・シェアオフィスなど「空席＝腐る在庫」を抱える業態は、どれも同じ仕組みで狙える。カメラ導入先が広がるほど割り当て対象も広がる。
-              </Callout>
+
+              <PositionMap />
+
+              <h3>なぜ右下が空いているのか</h3>
+              <p>
+                予約サービスは席を押さえられるが、滞在が短く客単価も低いカフェでは、1件ずつ管理するコストが見合わない。予約ほど重くなく、表示より確実な手段が、まだない。
+              </p>
             </Section>
 
-            {/* 10. リスクと検証 */}
-            <Section icon="shield-alert" label="RISKS" title="リスクと検証">
-              <p>
-                この企画が転ぶとしたら、需要・供給・収益・技術のどこかで詰まったとき。想定できるものを先に並べて、それぞれ何で受けるかを決めておく。
-              </p>
+            {/* 付録：リスクと検証 */}
+            <Section icon="shield-alert" label="APPENDIX · RISKS" title="リスクと検証" alt>
               <table className="styled-table">
                 <thead>
                   <tr>
                     <th>リスク</th>
-                    <th>種別</th>
                     <th>対策</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
                     {
-                      risk: 'ユーザーに習慣化されず需要が根付かない',
-                      type: 'demand',
-                      label: '需要',
-                      action:
-                        '「探す・迷う・外れる」の3コストを一括で消す一点特化で差別化。土地勘のない「今すぐ座りたい」シーンに絞り、POC で再利用率を主要指標にする',
+                      risk: '習慣にならず、需要が根付かない',
+                      action: 'POC で再利用率を主要指標にする',
                     },
                     {
-                      risk: '在庫密度が足りず割り当てが成立しない',
-                      type: 'supply',
-                      label: '供給',
-                      action: 'VACAN カメラ設置済みの店舗が密集する1施設に集中して検証する',
+                      risk: '割り当ての精度が出ない',
+                      action: '目標8割・採算ラインは67%。外れた分は補償で吸収し、結果データで精度を上げる',
                     },
                     {
-                      risk: 'SUWARO 経由の送客効果が見えにくい',
-                      type: 'rev',
-                      label: '収益',
-                      action: 'カメラ設置店の空席率の変化を計測し、導入前後で比較する',
-                    },
-                    {
-                      risk: 'カメラの粗さで割り当て精度が出ない',
-                      type: 'tech',
-                      label: '技術',
-                      action:
-                        '精度100%は前提にしない（目標8割・採算ラインは67%）。外れた分は空振り保険で吸収し、結果データの蓄積で当たる確率を上げていく',
-                    },
-                    {
-                      risk: '空振り保険の不正利用・補償コストが膨らむ',
-                      type: 'rev',
-                      label: '収益',
-                      action:
-                        'QR 来店証明で不正を排除。補償は原価100円の割引クーポンとし、ユーザー単位に上限を設ける。精度向上とともに発生率が下がる自己収束構造にする',
+                      risk: '補償コストが膨らむ',
+                      action: 'QR 来店証明とユーザー単位の上限で抑える',
                     },
                   ].map((r, i) => (
                     <tr key={i}>
                       <td>{r.risk}</td>
-                      <td>
-                        <span className={'risk-badge risk-badge--' + r.type}>{r.label}</span>
-                      </td>
                       <td>{r.action}</td>
                     </tr>
                   ))}
@@ -1103,14 +973,10 @@
                 <h3>
                   <i data-lucide="flask-conical" /> POC：本当に座れるかを確かめる
                 </h3>
-                <p style={{ marginTop: '1rem' }}>
-                  「既存カメラの空き情報で割り当てたとき、実際に座れるか」を測る。
-                </p>
                 <ul className="check-list">
                   {[
-                    'VACAN カメラ設置済みの1施設・10〜20店舗、2週間',
-                    'カメラが「空き」を示す店へ案内し、割り当て成功率・空振り率・再利用率を記録',
-                    '既存インフラだけで始められるので、追加の設備投資は不要',
+                    'VACAN カメラ設置済みの1施設・10〜20店舗で2週間。追加の設備投資は不要',
+                    '割り当て成功率・再利用率を記録する',
                   ].map((item, i) => (
                     <li key={i}>
                       <i data-lucide="check" />

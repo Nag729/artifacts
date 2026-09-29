@@ -9,25 +9,6 @@
   border: 1px solid var(--border);
 }
 
-/* ========== Quote / Blockquote ========== */
-.experience-quote {
-  background: var(--cream);
-  border-left: 4px solid var(--gold);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 1.5rem 2rem;
-  font-size: 0.95rem;
-  color: var(--text);
-  line-height: 2;
-  margin-bottom: 1.5rem;
-}
-.experience-result {
-  font-size: 0.95rem;
-  color: var(--text-light);
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--border);
-  margin-bottom: 2rem;
-}
-
 /* ========== Tables ========== */
 .styled-table {
   width: 100%;
@@ -60,32 +41,6 @@
 }
 .styled-table tbody tr:nth-child(even) {
   background: var(--cream);
-}
-
-.risk-badge {
-  display: inline-block;
-  white-space: nowrap;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  letter-spacing: 0.03em;
-}
-.risk-badge--tech {
-  background: #e3f0ff;
-  color: #1a5fb4;
-}
-.risk-badge--supply {
-  background: #e2f1ea;
-  color: #1c7a54;
-}
-.risk-badge--demand {
-  background: #f3e8f9;
-  color: #813d9c;
-}
-.risk-badge--rev {
-  background: #fff3e0;
-  color: #c66900;
 }
 
 /* ========== Callout ========== */

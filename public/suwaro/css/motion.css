@@ -15,16 +15,12 @@
 }
 
 /* カードのやわらかいホバー */
-.principle,
-.insurance-item,
-.admin-item {
+.principle {
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
-.principle:hover,
-.insurance-item:hover,
-.admin-item:hover {
+.principle:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
