@@ -28,605 +28,14 @@
   <body>
     <div id="root"></div>
 
+    <script type="text/babel" src="js/layout.jsx"></script>
+    <script type="text/babel" src="js/content.jsx"></script>
+    <script type="text/babel" src="js/diagram.jsx"></script>
+    <script type="text/babel" src="js/prototype.jsx"></script>
     <script type="text/babel">
-      const { useState, useEffect, useRef, useCallback } = React
-
-      /* ===== Lucide hydration hook ===== */
-      const useLucide = () => {
-        useEffect(() => {
-          if (typeof lucide !== 'undefined') lucide.createIcons()
-        })
-      }
-
-      /* ===== Scroll reveal hook（控えめなフェードアップ） ===== */
-      const useScrollReveal = () => {
-        useEffect(() => {
-          const els = document.querySelectorAll('.reveal:not(.is-visible)')
-          const reduce =
-            window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          if (reduce || typeof IntersectionObserver === 'undefined') {
-            els.forEach((el) => el.classList.add('is-visible'))
-            return
-          }
-          const io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((e) => {
-                if (e.isIntersecting) {
-                  e.target.classList.add('is-visible')
-                  io.unobserve(e.target)
-                }
-              })
-            },
-            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-          )
-          els.forEach((el) => io.observe(el))
-          return () => io.disconnect()
-        }, [])
-      }
-
-      /* ===== Figure（イラスト） ===== */
-      const Figure = ({ src, alt, caption }) => (
-        <figure className="figure">
-          <img src={src} alt={alt || ''} loading="lazy" />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
-      )
-
-      /* ===== ConceptMovieButton（コンセプトムービーを全画面で流す） =====
-         ページ内に動画を置くとヒーローや本文の流れが途切れるので、動画は隠しておき、押したときだけ全画面で再生する */
-      const ConceptMovieButton = () => {
-        const videoRef = useRef(null)
-
-        useEffect(() => {
-          const video = videoRef.current
-          const rewindOnExit = () => {
-            if (document.fullscreenElement === video) return
-            video.pause()
-            video.currentTime = 0
-          }
-          const exitOnEnd = () => {
-            if (document.fullscreenElement === video) document.exitFullscreen()
-          }
-          document.addEventListener('fullscreenchange', rewindOnExit)
-          video.addEventListener('ended', exitOnEnd)
-          return () => {
-            document.removeEventListener('fullscreenchange', rewindOnExit)
-            video.removeEventListener('ended', exitOnEnd)
-          }
-        }, [])
-
-        const play = () => {
-          const video = videoRef.current
-          // iOS Safari は要素の全画面 API を持たず、動画専用の webkitEnterFullscreen だけがある
-          if (video.requestFullscreen) video.requestFullscreen()
-          else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen()
-          video.play()
-        }
-
-        return (
-          <>
-            <button type="button" className="hero-movie" onClick={play}>
-              <i data-lucide="play" /> コンセプトムービー
-            </button>
-            <video
-              ref={videoRef}
-              className="hero-movie-video"
-              src="videos/intro.mp4"
-              controls
-              preload="metadata"
-            />
-          </>
-        )
-      }
-
-      /* ===== CycleDiagram（悪循環 / 好循環）縦フロー＋戻り線 ===== */
-      const CycleDiagram = ({ steps, loop, tone }) => (
-        <div className={'cycle cycle--' + tone}>
-          <div className="cycle-track">
-            <div className="cycle-rail" />
-            <div className="cycle-list">
-              {steps.map((s, i) => (
-                <React.Fragment key={i}>
-                  <div className="cycle-node">{s}</div>
-                  {i < steps.length - 1 && (
-                    <div className="cycle-down">
-                      <i data-lucide="chevron-down" />
-                    </div>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-          <div className="cycle-caption">
-            <i data-lucide={tone === 'good' ? 'rotate-cw' : 'rotate-ccw'} />
-            {loop}
-          </div>
-        </div>
-      )
-
-      /* ===== BizDiagram（VACAN × 施設・店舗） =====
-         上段は VACAN → 施設・店舗への提供価値、下段は逆向きの対価。SUWARO で増える分を hl で示す。 */
-      const BizDiagram = () => (
-        <div className="biz">
-          <div className="biz-side">
-            <div className="biz-ic">V</div>
-            <span>VACAN</span>
-          </div>
-          <div className="biz-arrows">
-            <div className="biz-flow">
-              <span className="biz-flow-title">提供価値 →</span>
-              <div className="biz-arrow to-right">
-                <span className="lbl">混雑を見える化（従来）</span>
-              </div>
-              <div className="biz-arrow to-right hl">
-                <span className="lbl">空席に送客（SUWARO で追加）</span>
-              </div>
-            </div>
-            <div className="biz-flow biz-flow--pay">
-              <span className="biz-flow-title">← 対価</span>
-              <div className="biz-arrow to-left">
-                <span className="lbl">月額 SaaS（従来）</span>
-              </div>
-              <div className="biz-arrow to-left hl">
-                <span className="lbl">送客の成果報酬（SUWARO で追加）</span>
-              </div>
-            </div>
-          </div>
-          <div className="biz-side">
-            <div className="biz-ic">☕</div>
-            <span>施設・店舗</span>
-          </div>
-        </div>
-      )
-
-      /* ===== PositionMap（競合ポジショニング 2軸） ===== */
-      const QUADRANTS = [
-        { axis: '店が目的 × 表示', players: ['食べログ / Google Maps'] },
-        { axis: '店が目的 × 割り当て', players: ['予約サービス（食べログ / ホットペッパー）'] },
-        {
-          axis: '席が目的 × 表示',
-          players: ['VACAN Maps / Pages', 'いいオフィス / BizSPOT'],
-          self: true,
-        },
-        { axis: '席が目的 × 割り当て', players: ['SUWARO'], target: true },
-      ]
-
-      const PositionMap = () => (
-        <div className="posmap">
-          <div className="posmap-yaxis">
-            <span>店が目的</span>
-            <i data-lucide="arrow-down" />
-            <span>席が目的</span>
-          </div>
-          <div className="posmap-main">
-            <div className="posmap-quads">
-              {QUADRANTS.map((q, i) => (
-                <div
-                  className={
-                    'posmap-quad' +
-                    (q.target ? ' posmap-quad--target' : '') +
-                    (q.self ? ' posmap-quad--self' : '')
-                  }
-                  key={i}
-                >
-                  <h4>{q.axis}</h4>
-                  {q.players.map((name, j) => (
-                    <span className="posmap-player" key={j}>
-                      {name}
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="posmap-xaxis">
-              <span>表示（全員に同じ情報）</span>
-              <i data-lucide="arrow-right" />
-              <span>割り当て（人ごとに違う席）</span>
-            </div>
-          </div>
-        </div>
-      )
-
-      /* ===== ProfitLine（成功率と1送客あたりの粗利） =====
-         数直線の左端を50%、右端を100%に取る。採算ライン67%を境に損益が反転する。 */
-      const RATE_MIN = 50
-      const RATE_MAX = 100
-      const ratePos = (rate) => ((rate - RATE_MIN) / (RATE_MAX - RATE_MIN)) * 100
-
-      const PROFIT_MARKS = [
-        { rate: 67, profit: '±0円', note: '採算ライン', kind: 'even' },
-        { rate: 80, profit: '+20円', note: '目標', kind: 'goal' },
-        { rate: 90, profit: '+35円', note: '学習が進んだ状態', kind: 'good' },
-      ]
-
-      const ProfitLine = () => (
-        <div className="pline-scroll">
-          <div className="pline">
-            <div
-              className="pline-gap"
-              style={{
-                left: ratePos(67) + '%',
-                width: ratePos(80) - ratePos(67) + '%',
-              }}
-            >
-              <span>13ポイントの余裕</span>
-            </div>
-            <div className="pline-track">
-              <div className="pline-zone pline-zone--loss" style={{ width: ratePos(67) + '%' }}>
-                赤字
-              </div>
-              <div className="pline-zone pline-zone--gain">黒字</div>
-            </div>
-            {PROFIT_MARKS.map((m) => (
-              <div
-                className={'pline-mark pline-mark--' + m.kind}
-                style={{ left: ratePos(m.rate) + '%' }}
-                key={m.rate}
-              >
-                <span className="pline-profit">{m.profit}</span>
-                <span className="pline-rate">{m.rate}%</span>
-                <span className="pline-note">{m.note}</span>
-              </div>
-            ))}
-            <div className="pline-ends">
-              <span>成功率 {RATE_MIN}%</span>
-              <span>{RATE_MAX}%</span>
-            </div>
-          </div>
-        </div>
-      )
-
-      /* ===== MarketScope（TAM / SAM / SOM） =====
-         円は包含関係を示すためのもので、面積比は金額に比例していない。 */
-      const MARKET = [
-        {
-          key: 'TAM',
-          amount: '約131億円',
-          target: '全国の喫茶店・ハンバーガー店・ファミレス・コワーキング',
-          count: '約73,000店',
-        },
-        {
-          key: 'SAM',
-          amount: '約27億円',
-          target: '駅ナカ・駅周辺・商業施設など都市部',
-          count: '約15,000店',
-        },
-        { key: 'SOM', amount: '約5.4億円', target: '5年で到達する', count: '3,000店' },
-      ]
-
-      const MarketScope = () => (
-        <div className="scope">
-          <div className="scope-circles">
-            {MARKET.map((m) => (
-              <div className={'scope-circle scope-circle--' + m.key.toLowerCase()} key={m.key}>
-                <span className="scope-key">{m.key}</span>
-                <span className="scope-amount">{m.amount}</span>
-              </div>
-            ))}
-          </div>
-          <ul className="scope-legend">
-            {MARKET.map((m) => (
-              <li key={m.key}>
-                <span className={'scope-dot scope-dot--' + m.key.toLowerCase()} />
-                <div>
-                  <h4>{m.key}</h4>
-                  <p>
-                    {m.target}
-                    <strong>{m.count}</strong>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-
-      /* ===== Section =====
-         collapsible: 本編の8分では触れず、質疑で聞かれたときだけ開く付録に使う */
-      const Section = ({ id, icon, label, title, alt, wide, collapsible, children }) => (
-        <section className={'section' + (alt ? ' section--alt' : '')} id={id}>
-          <div className={(wide ? 'section-wide' : 'section-inner') + ' reveal'}>
-            {label && (
-              <div className="section-label">
-                <i data-lucide={icon} /> {label}
-              </div>
-            )}
-            {collapsible ? (
-              <details className="section-fold">
-                <summary>
-                  <h2>
-                    {title}
-                    <i data-lucide="chevron-down" />
-                  </h2>
-                </summary>
-                <div className="section-fold-body">{children}</div>
-              </details>
-            ) : (
-              <>
-                {title && <h2>{title}</h2>}
-                {children}
-              </>
-            )}
-          </div>
-        </section>
-      )
-
-      /* ===== Callout ===== */
-      const Callout = ({ icon, type, children }) => (
-        <div className={'callout callout--' + type}>
-          <i data-lucide={icon} />
-          <div>{children}</div>
-        </div>
-      )
-
-      /* ===== InsightBox ===== */
-      const InsightBox = ({ icon, children, style }) => (
-        <div className="insight-box">
-          {icon && <i data-lucide={icon} className="insight-box-icon" />}
-          <p
-            style={{
-              fontSize: '1.05rem',
-              fontWeight: 500,
-              color: 'var(--white)',
-              marginBottom: 0,
-              ...style,
-            }}
-          >
-            {children}
-          </p>
-        </div>
-      )
-
-      /* ===== Prototype ===== */
-      const PHOTOS = [
-        { img: 'images/cafe-1.jpg' },
-        { img: 'images/cafe-2.jpg' },
-        { img: 'images/cafe-3.jpg' },
-      ]
-
-      const Prototype = () => {
-        const [screen, setScreen] = useState('home')
-        const [selected, setSelected] = useState(2)
-        const timerRef = useRef(null)
-
-        const go = useCallback((s) => {
-          if (timerRef.current) {
-            clearTimeout(timerRef.current)
-            timerRef.current = null
-          }
-          setScreen(s)
-        }, [])
-
-        const startSearch = useCallback(() => {
-          go('search')
-          timerRef.current = setTimeout(() => go('select'), 2500)
-        }, [go])
-
-        useEffect(
-          () => () => {
-            if (timerRef.current) clearTimeout(timerRef.current)
-          },
-          []
-        )
-
-        useLucide()
-
-        const screenClass = (name) =>
-          'proto-screen screen-' + name + (screen === name ? ' active' : '')
-
-        return (
-          <div className="proto-section">
-            <div className="proto-text">
-              <h3>体験してみてください</h3>
-              <p>
-                入力するのは<strong>人数だけ</strong>
-                。届いた写真（最大3枚）から気になる1枚を選ぶと、お店までの案内が始まります。
-              </p>
-              <p>
-                着いたら「座れましたか？」に答えて終わり。座れなかったときは、割引クーポンが出ます。
-              </p>
-              <div className="proto-hint">
-                <i data-lucide="pointer" /> 画面をタップして操作できます
-              </div>
-            </div>
-
-            <div className="phone">
-              <div className="phone-dynamic-island" />
-              <div className="phone-screen">
-                <div className="phone-status">
-                  <span>9:41</span>
-                  <div className="phone-status-icons">
-                    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
-                      <rect x="0" y="3" width="3" height="9" rx="1" opacity="0.3" />
-                      <rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.5" />
-                      <rect x="9" y="1" width="3" height="11" rx="1" opacity="0.7" />
-                      <rect x="13.5" y="0" width="3" height="12" rx="1" />
-                    </svg>
-                    <svg width="16" height="12" viewBox="0 0 24 12" fill="currentColor">
-                      <rect
-                        x="0"
-                        y="0"
-                        width="22"
-                        height="12"
-                        rx="3"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        fill="none"
-                        opacity="0.4"
-                      />
-                      <rect x="23" y="3.5" width="2" height="5" rx="1" opacity="0.4" />
-                      <rect x="2" y="2" width="16" height="8" rx="1.5" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="phone-home-indicator" />
-
-                {/* Home */}
-                <div className={screenClass('home')}>
-                  <div className="logo-mark">S</div>
-                  <h2>SUWARO</h2>
-                  <p className="tagline">座りたい場所を見つけよう</p>
-                  <div className="location">
-                    <i data-lucide="map-pin" /> 新宿駅付近
-                  </div>
-                  <button className="btn-proto" onClick={() => go('count')}>
-                    <i data-lucide="search" /> 空席を探す
-                  </button>
-                </div>
-
-                {/* Count */}
-                <div className={screenClass('count')}>
-                  <h2>何名ですか？</h2>
-                  <div className="count-grid">
-                    {[1, 2, 3, '4+'].map((n, i) => (
-                      <button
-                        key={i}
-                        className={'count-btn' + (selected === i + 1 ? ' selected' : '')}
-                        onClick={() => setSelected(i + 1)}
-                      >
-                        {n}
-                      </button>
-                    ))}
-                  </div>
-                  <button className="btn-proto" onClick={startSearch}>
-                    この人数で探す
-                  </button>
-                </div>
-
-                {/* Searching */}
-                <div className={screenClass('search')}>
-                  <div className="search-pulse">
-                    <i data-lucide="search" />
-                  </div>
-                  <p>空いている席を探しています...</p>
-                  <p className="search-sub">周辺の空き状況を分析中</p>
-                </div>
-
-                {/* Select — 写真だけ・最大3件（店名/地図/評価なし） */}
-                <div className={screenClass('select')}>
-                  <div className="select-badge">
-                    <i data-lucide="sparkles" /> 近くで空いてる3つ
-                  </div>
-                  <p className="select-hint">気になる雰囲気を、ひとつ選んでください</p>
-                  <div className="photo-stack">
-                    {PHOTOS.map((p, i) => (
-                      <button
-                        key={i}
-                        className="photo-card"
-                        style={{ backgroundImage: `url(${p.img})` }}
-                        onClick={() => go('nav')}
-                        aria-label={'候補 ' + (i + 1)}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Nav — 経路案内（選んだ後に店名を開示） */}
-                <div className={screenClass('nav')}>
-                  <div className="nav-map">
-                    <svg className="nav-svg" viewBox="0 0 300 210" preserveAspectRatio="none">
-                      <path
-                        className="nav-path-bg"
-                        d="M38 182 C 90 182, 92 96, 152 96 S 232 44, 264 32"
-                      />
-                      <path
-                        className="nav-path-fg"
-                        d="M38 182 C 90 182, 92 96, 152 96 S 232 44, 264 32"
-                      />
-                    </svg>
-                    <div className="nav-pin nav-pin--start" />
-                    <div className="nav-pin nav-pin--end">
-                      <i data-lucide="coffee" />
-                    </div>
-                  </div>
-                  <div className="nav-card">
-                    <div className="nav-eta">
-                      <span className="nav-eta-num">4</span>
-                      <span className="nav-eta-unit">分</span>
-                    </div>
-                    <div className="nav-dest-info">
-                      <span className="nav-reveal-tag">
-                        <i data-lucide="eye" /> 選んだので店名を開示
-                      </span>
-                      <h3>CAFÉ MORINO</h3>
-                      <p>
-                        <i data-lucide="navigation-2" /> 280m 先・まっすぐ進んで右
-                      </p>
-                    </div>
-                  </div>
-                  <button className="btn-proto" onClick={() => go('feedback')}>
-                    <i data-lucide="flag" /> 到着した
-                  </button>
-                </div>
-
-                {/* Feedback */}
-                <div className={screenClass('feedback')}>
-                  <h2>座れましたか？</h2>
-                  <p className="sub">CAFÉ MORINO での結果を教えてください</p>
-                  <div className="feedback-btns">
-                    <button
-                      className="feedback-btn feedback-btn--yes"
-                      onClick={() => go('success')}
-                    >
-                      ✓ 座れた
-                    </button>
-                    <button className="feedback-btn feedback-btn--no" onClick={() => go('qr')}>
-                      ✗ 座れなかった
-                    </button>
-                  </div>
-                </div>
-
-                {/* Success */}
-                <div className={screenClass('success')}>
-                  <div className="success-check">
-                    <i data-lucide="check" />
-                  </div>
-                  <h2>ありがとうございます！</h2>
-                  <p>このデータが次の改善に活きます</p>
-                  <button className="btn-proto--ghost" onClick={() => go('home')}>
-                    ホームに戻る
-                  </button>
-                </div>
-
-                {/* QR Scan */}
-                <div className={screenClass('qr')}>
-                  <h2>来店証明</h2>
-                  <p>
-                    店舗に設置された QR コードを
-                    <br />
-                    スキャンしてください
-                  </p>
-                  <div className="qr-viewfinder">
-                    <i data-lucide="scan" />
-                    <div className="qr-scanning-line" />
-                  </div>
-                  <button className="btn-proto" onClick={() => go('coupon')}>
-                    <i data-lucide="check" /> スキャン完了
-                  </button>
-                </div>
-
-                {/* Coupon */}
-                <div className={screenClass('coupon')}>
-                  <h2>申し訳ありません</h2>
-                  <p>お詫びにクーポンをお送りします</p>
-                  <div className="coupon-card">
-                    <i data-lucide="gift" />
-                    <h3>次回 100円 割引クーポン</h3>
-                    <p>SUWARO が次に案内するお店で使えます</p>
-                  </div>
-                  <button className="btn-proto--ghost" onClick={() => go('home')}>
-                    ホームに戻る
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      }
-
       /* ===== App ===== */
       const App = () => {
-        useLucide()
+        useLucideIcons()
         useScrollReveal()
 
         return (
@@ -744,8 +153,8 @@
               />
 
               <h3>3つの原則</h3>
-              <div className="principles">
-                {[
+              <Principles
+                items={[
                   {
                     title: '見せるのは写真だけ',
                     desc: '店名・評価・地図・距離などの"比較材料"を隠す。「どこにする？」が直感で決まる',
@@ -758,14 +167,8 @@
                     title: '外したら補償する',
                     desc: '予約ではないので席は押さえられない。座れなかったら、来店を確認して割引クーポンを出す',
                   },
-                ].map((p, i) => (
-                  <div className="principle" key={i}>
-                    <div className="principle-num">{i + 1}</div>
-                    <h4>{p.title}</h4>
-                    <p>{p.desc}</p>
-                  </div>
-                ))}
-              </div>
+                ]}
+              />
 
               <Callout icon="hand" type="info">
                 肝は
@@ -896,21 +299,16 @@
               <p>割り当てモデルは、店とユーザーが増えるほど予測が当たり、座れる確率が上がる。</p>
 
               <h3>AI が担うのは2つ</h3>
-              <ul className="check-list">
-                {[
+              <CheckList
+                items={[
                   '5〜10分後の空席予測：「今の空き」ではなく、着いたときの空きを当てる',
                   '割り当ての最適化：誰にどの3件を渡せば、全員が座れる確率が最も高くなるか',
-                ].map((item, i) => (
-                  <li key={i}>
-                    <i data-lucide="check" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                ]}
+              />
 
               <h3>強くなる仕組みは3層</h3>
-              <div className="principles">
-                {[
+              <Principles
+                items={[
                   {
                     title: 'カメラ網',
                     desc: '駅・商業施設にすでにある在庫センサー。後発がすぐには作れない、最初の優位',
@@ -923,14 +321,8 @@
                     title: 'ネットワーク効果（店・ユーザー）',
                     desc: '店が増えるほど選択肢が増えて当たりやすくなり、ユーザーが増え、さらに店が増える',
                   },
-                ].map((p, i) => (
-                  <div className="principle" key={i}>
-                    <div className="principle-num">{i + 1}</div>
-                    <h4>{p.title}</h4>
-                    <p>{p.desc}</p>
-                  </div>
-                ))}
-              </div>
+                ]}
+              />
 
               <CycleDiagram
                 tone="good"
@@ -947,29 +339,17 @@
 
             {/* 7. なぜ自分か */}
             <Section icon="user" label="WHY ME" title="なぜ自分がやるのか" alt>
-              <InsightBox
-                icon="send"
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  textAlign: 'center',
-                }}
-              >
+              <InsightBox icon="send">
                 混雑情報というアウトプットを作ってきた。次は、「座れる」というアウトカムを届けたい。
               </InsightBox>
               <p>SUWARO に必要な3つを、すべて経験してきた。</p>
-              <ul className="check-list">
-                {[
+              <CheckList
+                items={[
                   'プラットフォーム：大学でプラットフォームビジネスを研究していた',
                   '混雑状況の基盤：入社から3年、vCore を開発してきた',
                   'AI 時代のプロダクト開発：直近の2年、防災チームで AI 活用をリードしてきた',
-                ].map((item, i) => (
-                  <li key={i}>
-                    <i data-lucide="check" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                ]}
+              />
             </Section>
 
             {/* 付録：競合とポジショニング */}
@@ -1037,17 +417,12 @@
                 <h3>
                   <i data-lucide="flask-conical" /> POC：本当に座れるかを確かめる
                 </h3>
-                <ul className="check-list">
-                  {[
+                <CheckList
+                  items={[
                     'VACAN カメラ設置済みの1施設・10〜20店舗で2週間。追加の設備投資は不要',
                     '割り当て成功率・利用率を記録する',
-                  ].map((item, i) => (
-                    <li key={i}>
-                      <i data-lucide="check" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                  ]}
+                />
               </div>
             </Section>
 

@@ -1,13 +1,4 @@
-/* content — 本文要素（カード・引用・表・コールアウト・リスト・図版） */
-
-/* ========== Cards ========== */
-.card {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
-}
+/* content — 本文要素（表・コールアウト・リスト・検証ボックス・図版） */
 
 /* ========== Tables ========== */
 .styled-table {
