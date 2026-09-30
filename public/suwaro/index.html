@@ -321,8 +321,9 @@
         </div>
       )
 
-      /* ===== Section ===== */
-      const Section = ({ id, icon, label, title, alt, wide, children }) => (
+      /* ===== Section =====
+         collapsible: 本編の8分では触れず、質疑で聞かれたときだけ開く付録に使う */
+      const Section = ({ id, icon, label, title, alt, wide, collapsible, children }) => (
         <section className={'section' + (alt ? ' section--alt' : '')} id={id}>
           <div className={(wide ? 'section-wide' : 'section-inner') + ' reveal'}>
             {label && (
@@ -330,8 +331,22 @@
                 <i data-lucide={icon} /> {label}
               </div>
             )}
-            {title && <h2>{title}</h2>}
-            {children}
+            {collapsible ? (
+              <details className="section-fold">
+                <summary>
+                  <h2>
+                    {title}
+                    <i data-lucide="chevron-down" />
+                  </h2>
+                </summary>
+                <div className="section-fold-body">{children}</div>
+              </details>
+            ) : (
+              <>
+                {title && <h2>{title}</h2>}
+                {children}
+              </>
+            )}
           </div>
         </section>
       )
@@ -963,6 +978,7 @@
               icon="crosshair"
               label="APPENDIX · POSITIONING"
               title="競合とポジショニング"
+              collapsible
             >
               <p>
                 「座る場所を探す」サービスは多いが、
@@ -979,7 +995,7 @@
             </Section>
 
             {/* 付録：リスクと検証 */}
-            <Section icon="shield-alert" label="APPENDIX · RISKS" title="リスクと検証" alt>
+            <Section icon="shield-alert" label="APPENDIX · RISKS" title="リスクと検証" alt collapsible>
               <table className="styled-table">
                 <thead>
                   <tr>
