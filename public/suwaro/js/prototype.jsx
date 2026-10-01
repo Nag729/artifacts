@@ -1,6 +1,21 @@
 /* prototype — スマホ実機モック（画面の遷移。見た目は prototype.css） */
 
-const PHOTOS = ['images/cafe-1.jpg', 'images/cafe-2.jpg', 'images/cafe-3.jpg']
+/* 写真に添えるのは価格帯と閉店の近さだけ。どちらも数字のままは出さず、段階と短い知らせにする */
+const CANDIDATES = [
+  { photo: 'images/cafe-1.jpg', price: 2, closesInMinutes: 420 },
+  { photo: 'images/cafe-2.jpg', price: 1, closesInMinutes: 100 },
+  { photo: 'images/cafe-3.jpg', price: 3, closesInMinutes: 300 },
+]
+
+const PRICE_LEVELS = 3
+
+// 閉店はゆっくり座れない店だけに知らせる。余裕のある店にまで出すと、時間を比べる材料が増えるだけになる
+const CLOSING_NOTICE_MINUTES = 180
+const closingNotice = (minutes) => {
+  if (minutes >= CLOSING_NOTICE_MINUTES) return null
+  if (minutes < 60) return 'まもなく閉店'
+  return `あと${Math.floor(minutes / 60)}時間で閉店`
+}
 
 const PARTY_SIZES = [1, 2, 3, '4+']
 
@@ -23,7 +38,7 @@ const Prototype = () => {
         <h3>体験してみてください</h3>
         <p>
           入力するのは<strong>人数だけ</strong>
-          。届いた写真（最大3枚）から気になる1枚を選ぶと、お店までの案内が始まります。
+          。届いた写真（最大3枚）から気になる1枚を選ぶと、お店までの案内が始まります。写真には価格帯と、閉店が近いお店ならその知らせが添えてあります。
         </p>
         <p>着いたら「座れましたか？」に答えて終わり。座れなかったときは、割引クーポンが出ます。</p>
         <div className="proto-hint">
@@ -103,22 +118,42 @@ const Prototype = () => {
             <p className="search-sub">周辺の空き状況を分析中</p>
           </div>
 
-          {/* Select — 写真だけ・最大3件（店名/地図/評価なし） */}
+          {/* Select — 写真＋価格帯・閉店の知らせ・最大3件（店名/地図/評価なし） */}
           <div className={screenClass('select')}>
             <div className="select-badge">
               <i data-lucide="sparkles" /> 近くで空いてる3つ
             </div>
             <p className="select-hint">気になる雰囲気を、ひとつ選んでください</p>
             <div className="photo-stack">
-              {PHOTOS.map((src, i) => (
-                <button
-                  key={src}
-                  className="photo-card"
-                  style={{ backgroundImage: `url(${src})` }}
-                  onClick={() => setScreen('nav')}
-                  aria-label={'候補 ' + (i + 1)}
-                />
-              ))}
+              {CANDIDATES.map((c, i) => {
+                const closing = closingNotice(c.closesInMinutes)
+                return (
+                  <button
+                    key={c.photo}
+                    className="photo-card"
+                    style={{ backgroundImage: `url(${c.photo})` }}
+                    onClick={() => setScreen('nav')}
+                    aria-label={`候補 ${i + 1}・価格帯 ${c.price}/${PRICE_LEVELS}${closing ? '・' + closing : ''}`}
+                  >
+                    <div className="photo-meta">
+                      <span className="photo-chip photo-price">
+                        {Array.from({ length: PRICE_LEVELS }, (_, level) => (
+                          <i
+                            data-lucide="japanese-yen"
+                            className={level < c.price ? 'is-filled' : ''}
+                            key={level}
+                          />
+                        ))}
+                      </span>
+                      {closing && (
+                        <span className="photo-chip photo-closing">
+                          <i data-lucide="clock" /> {closing}
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                )
+              })}
             </div>
           </div>
 

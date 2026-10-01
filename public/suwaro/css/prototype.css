@@ -591,6 +591,46 @@
   transform: translateY(-2px) scale(1.012);
   box-shadow: var(--shadow-md);
 }
+.photo-meta {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* 写真の明るさに左右されず読めるよう、白い札にして載せる */
+.photo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--green-900);
+  font-size: 11px;
+  font-weight: 700;
+}
+.photo-chip svg {
+  width: 12px;
+  height: 12px;
+}
+.photo-price {
+  gap: 0;
+}
+.photo-price svg {
+  stroke-width: 2.5;
+  opacity: 0.25;
+}
+.photo-price svg.is-filled {
+  opacity: 1;
+}
+/* 価格帯は左、閉店の知らせは右に寄せる。知らせがない店でも価格帯の位置は動かさない */
+.photo-closing {
+  margin-left: auto;
+}
 /* ========== Prototype: 経路案内 ========== */
 .screen-nav {
   background: var(--green-50);
