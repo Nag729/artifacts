@@ -627,8 +627,8 @@
 .photo-price svg.is-filled {
   opacity: 1;
 }
-/* 価格帯は左、閉店の知らせは右に寄せる。知らせがない店でも価格帯の位置は動かさない */
-.photo-closing {
+/* 価格帯は左、注意の知らせは右に寄せる。知らせがない店でも価格帯の位置は動かさない */
+.photo-caution {
   margin-left: auto;
 }
 /* ========== Prototype: 経路案内 ========== */

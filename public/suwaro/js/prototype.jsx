@@ -1,20 +1,24 @@
 /* prototype — スマホ実機モック（画面の遷移。見た目は prototype.css） */
 
-/* 写真に添えるのは価格帯と閉店の近さだけ。どちらも数字のままは出さず、段階と短い知らせにする */
+/* 写真に添えるのは価格帯だけ。閉店までの時間や距離は数字のまま並べず、気をつけてほしい店にだけ知らせる */
 const CANDIDATES = [
-  { photo: 'images/cafe-1.jpg', price: 2, closesInMinutes: 420 },
-  { photo: 'images/cafe-2.jpg', price: 1, closesInMinutes: 100 },
-  { photo: 'images/cafe-3.jpg', price: 3, closesInMinutes: 300 },
+  { photo: 'images/cafe-1.jpg', price: 2, closesInMinutes: 420, walkMinutes: 3 },
+  { photo: 'images/cafe-2.jpg', price: 1, closesInMinutes: 100, walkMinutes: 2 },
+  { photo: 'images/cafe-3.jpg', price: 3, closesInMinutes: 300, walkMinutes: 4 },
 ]
 
 const PRICE_LEVELS = 3
 
-// 閉店はゆっくり座れない店だけに知らせる。余裕のある店にまで出すと、時間を比べる材料が増えるだけになる
+/* 割り当ては近く、ゆっくり座れる店から優先するので、閉店間際や遠い店が候補に入るのは例外。そのときだけ知らせる。
+   重なったときは、座っていられる時間に響く閉店を優先する */
 const CLOSING_NOTICE_MINUTES = 180
-const closingNotice = (minutes) => {
-  if (minutes >= CLOSING_NOTICE_MINUTES) return null
-  if (minutes < 60) return 'まもなく閉店'
-  return `あと${Math.floor(minutes / 60)}時間で閉店`
+const FAR_WALK_MINUTES = 6
+const cautionOf = ({ closesInMinutes, walkMinutes }) => {
+  if (closesInMinutes < 60) return { icon: 'clock', text: 'まもなく閉店' }
+  if (closesInMinutes < CLOSING_NOTICE_MINUTES)
+    return { icon: 'clock', text: `あと${Math.floor(closesInMinutes / 60)}時間で閉店` }
+  if (walkMinutes >= FAR_WALK_MINUTES) return { icon: 'footprints', text: `歩いて${walkMinutes}分` }
+  return null
 }
 
 const PARTY_SIZES = [1, 2, 3, '4+']
@@ -38,7 +42,7 @@ const Prototype = () => {
         <h3>体験してみてください</h3>
         <p>
           入力するのは<strong>人数だけ</strong>
-          。届いた写真（最大3枚）から気になる1枚を選ぶと、お店までの案内が始まります。写真には価格帯と、閉店が近いお店ならその知らせが添えてあります。
+          。届いた写真（最大3枚）から1枚選ぶと、お店までの案内が始まります。
         </p>
         <p>着いたら「座れましたか？」に答えて終わり。座れなかったときは、割引クーポンが出ます。</p>
         <div className="proto-hint">
@@ -118,7 +122,7 @@ const Prototype = () => {
             <p className="search-sub">周辺の空き状況を分析中</p>
           </div>
 
-          {/* Select — 写真＋価格帯・閉店の知らせ・最大3件（店名/地図/評価なし） */}
+          {/* Select — 写真＋価格帯・注意の知らせ・最大3件（店名/地図/評価なし） */}
           <div className={screenClass('select')}>
             <div className="select-badge">
               <i data-lucide="sparkles" /> 近くで空いてる3つ
@@ -126,14 +130,14 @@ const Prototype = () => {
             <p className="select-hint">気になる雰囲気を、ひとつ選んでください</p>
             <div className="photo-stack">
               {CANDIDATES.map((c, i) => {
-                const closing = closingNotice(c.closesInMinutes)
+                const caution = cautionOf(c)
                 return (
                   <button
                     key={c.photo}
                     className="photo-card"
                     style={{ backgroundImage: `url(${c.photo})` }}
                     onClick={() => setScreen('nav')}
-                    aria-label={`候補 ${i + 1}・価格帯 ${c.price}/${PRICE_LEVELS}${closing ? '・' + closing : ''}`}
+                    aria-label={`候補 ${i + 1}・価格帯 ${c.price}/${PRICE_LEVELS}${caution ? '・' + caution.text : ''}`}
                   >
                     <div className="photo-meta">
                       <span className="photo-chip photo-price">
@@ -145,9 +149,9 @@ const Prototype = () => {
                           />
                         ))}
                       </span>
-                      {closing && (
-                        <span className="photo-chip photo-closing">
-                          <i data-lucide="clock" /> {closing}
+                      {caution && (
+                        <span className="photo-chip photo-caution">
+                          <i data-lucide={caution.icon} /> {caution.text}
                         </span>
                       )}
                     </div>
