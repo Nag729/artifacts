@@ -118,7 +118,7 @@ const Prototype = () => {
             <div className="search-pulse">
               <i data-lucide="search" />
             </div>
-            <p>空いている席を探しています...</p>
+            <p>空いている席を探しています…</p>
             <p className="search-sub">周辺の空き状況を分析中</p>
           </div>
 
@@ -186,11 +186,11 @@ const Prototype = () => {
               </div>
               <div className="nav-dest-info">
                 <span className="nav-reveal-tag">
-                  <i data-lucide="eye" /> 選んだので店名を開示
+                  <i data-lucide="eye" /> 店名を表示
                 </span>
                 <h3>CAFÉ MORINO</h3>
                 <p>
-                  <i data-lucide="navigation-2" /> 280m 先・まっすぐ進んで右
+                  <i data-lucide="navigation-2" /> 50m 先を右折
                 </p>
               </div>
             </div>
@@ -216,13 +216,13 @@ const Prototype = () => {
             </div>
           </div>
 
-          {/* Success */}
+          {/* Success — 座れた結果が次の割り当ての学習に戻ることを、体験の中でも見せる */}
           <div className={screenClass('success')}>
             <div className="success-check">
               <i data-lucide="check" />
             </div>
             <h2>ありがとうございます！</h2>
-            <p>このデータが次の改善に活きます</p>
+            <p>この結果が次の案内に役立てられます</p>
             <button className="btn-proto--ghost" onClick={() => setScreen('home')}>
               ホームに戻る
             </button>
